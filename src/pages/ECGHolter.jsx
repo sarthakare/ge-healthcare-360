@@ -14,7 +14,7 @@ import {
   Html,
 } from "@react-three/drei";
 import * as THREE from "three";
-import ECGHolterModel from "../assets/ecg-holter/model/ECG Holter.glb";
+import ECGHolterModel from "../assets/ecg-holter/model/ECG holter.glb";
 import ECGHolterVideo from "../assets/ecg-holter/videos/01-Modes_of_Ventilation.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 

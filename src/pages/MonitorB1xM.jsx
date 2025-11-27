@@ -14,7 +14,7 @@ import {
   Html,
 } from "@react-three/drei";
 import * as THREE from "three";
-import MonitorB1xMModel from "../assets/monitors-b1xm/model/Monitor Combined.glb";
+import MonitorB1xMModel from "../assets/monitors-b1xm/model/monitor combined.glb";
 import MonitorsVideo from "../assets/monitors-b1xm/videos/01-Modes_of_Ventilation.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
