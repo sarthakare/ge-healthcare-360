@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <filter id="Path_771" x="0" y="0" width="50" height="50" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.251"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="loupe" transform="translate(9 6)">
+    <path id="Path_770" data-name="Path 770" d="M13.333,13.333V8h3.556v5.333h5.333v3.556H16.889v5.333H13.333V16.889H8V13.333Z" transform="translate(0.889 0.889)" fill="#fff"/>
+    <g transform="matrix(1, 0, 0, 1, -9, -6)" filter="url(#Path_771)">
+      <path id="Path_771-2" data-name="Path 771" d="M3,19A16,16,0,0,0,19,35H29.667A5.333,5.333,0,0,0,35,29.667V19A16,16,0,0,0,3,19ZM19,6.556A12.444,12.444,0,1,1,6.556,19,12.444,12.444,0,0,1,19,6.556Z" transform="translate(6 3)" fill="#fff" fill-rule="evenodd"/>
+    </g>
+  </g>
+</svg>
