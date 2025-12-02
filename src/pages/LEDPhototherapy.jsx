@@ -15,7 +15,13 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import LEDPhototherapyModel from "../assets/led-phototherapy/model/LED Phototherapy.glb";
-import LEDPhototherapyVideo from "../assets/led-phototherapy/videos/01-Modes_of_Ventilation.mp4";
+import LEDPhototherapyVideo1 from "../assets/led-phototherapy/videos/10 LED.mp4";
+import LEDPhototherapyVideo2 from "../assets/led-phototherapy/videos/22 and 45 microwat.mp4";
+import LEDPhototherapyVideo3 from "../assets/led-phototherapy/videos/Optimal wavelength of 458 NM.mp4";
+import LEDPhototherapyVideo4 from "../assets/led-phototherapy/videos/4.mp4";
+import LEDPhototherapyVideo5 from "../assets/led-phototherapy/videos/5.mp4";
+import LEDPhototherapyVideo6 from "../assets/led-phototherapy/videos/6.mp4";
+import LEDPhototherapyVideo7 from "../assets/led-phototherapy/videos/7.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -397,14 +403,84 @@ const LEDPhototherapy = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "Radiance Panel", position: [0, 0, 0] },
-    { id: 2, name: "Height Adjustment", position: [0, 1, 0] },
-    { id: 3, name: "Control Console", position: [0, 2.3, 0.75] }
+    { id: 1, name: "10 LED's", position: [0, 0, 0] },
+    { id: 2, name: "22 and 45 Microwatt", position: [0, 1, 0] },
+    { id: 3, name: "Optimal Wavelength 458 NM", position: [0, 2.3, 0.75] },
+    { id: 4, name: "Radiance Panel", position: [0, -1, 0] },
+    { id: 5, name: "Height Adjustment", position: [0, 0.5, 1] },
+    { id: 6, name: "Control Console", position: [0, 1.5, -0.5] },
+    { id: 7, name: "Stable Bassinet Platform", position: [0, -1.5, 0] },
   ];
 
   const hotspotsConfig = {
     1: {
-      videoSrc: LEDPhototherapyVideo,
+      videoSrc: LEDPhototherapyVideo1,
+      title: "10 LED's",
+      overview:
+        "Advanced LED array configuration featuring 10 high-performance LEDs designed for optimal phototherapy treatment.",
+      features: [
+        "10 high-intensity LEDs",
+        "Uniform light distribution",
+        "Long-lasting performance",
+        "Energy-efficient design",
+      ],
+      specifications: {
+        LEDs: "10 units",
+        Configuration: "Optimized array",
+        Performance: "High efficiency",
+        Design: "Advanced layout",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    2: {
+      videoSrc: LEDPhototherapyVideo2,
+      title: "22 and 45 Microwatt",
+      overview:
+        "Dual power output settings at 22 and 45 microwatts providing flexible irradiance control for different treatment requirements.",
+      features: [
+        "22 µW power setting",
+        "45 µW power setting",
+        "Flexible power control",
+        "Precise irradiance management",
+      ],
+      specifications: {
+        Power1: "22 µW",
+        Power2: "45 µW",
+        Control: "Dual settings",
+        Precision: "Accurate output",
+      },
+      rotation: {
+        azimuthal: -Math.PI / 2,
+        polar: Math.PI / 2,
+      },
+    },
+    3: {
+      videoSrc: LEDPhototherapyVideo3,
+      title: "Optimal Wavelength 458 NM",
+      overview:
+        "Precisely tuned LED wavelength at 458 nanometers, optimized for effective bilirubin breakdown in neonatal phototherapy.",
+      features: [
+        "458 nm wavelength",
+        "Optimal bilirubin absorption",
+        "Precise wavelength control",
+        "Effective treatment spectrum",
+      ],
+      specifications: {
+        Wavelength: "458 nm",
+        Spectrum: "Narrow-band",
+        Effectiveness: "Optimized",
+        Control: "Precise tuning",
+      },
+      rotation: {
+        azimuthal: Math.PI / 2,
+        polar: Math.PI / 2,
+      },
+    },
+    4: {
+      videoSrc: LEDPhototherapyVideo4,
       title: "Full-Spectrum Radiance Panel",
       overview:
         "High-intensity blue LED array delivers uniform therapeutic irradiance with minimal heat transfer to the infant.",
@@ -421,12 +497,12 @@ const LEDPhototherapy = () => {
         HeatOutput: "< 2 °C surface rise",
       },
       rotation: {
-        azimuthal: 0,
+        azimuthal: Math.PI,
         polar: Math.PI / 2,
       },
     },
-    2: {
-      videoSrc: LEDPhototherapyVideo,
+    5: {
+      videoSrc: LEDPhototherapyVideo5,
       title: "Smooth Height Adjustment",
       overview:
         "Gas-spring assisted column provides one-handed height changes to maintain optimal therapy distance.",
@@ -443,12 +519,12 @@ const LEDPhototherapy = () => {
         Materials: "Anodized aluminum",
       },
       rotation: {
-        azimuthal: -Math.PI / 2,
+        azimuthal: -Math.PI / 4,
         polar: Math.PI / 2,
       },
     },
-    3: {
-      videoSrc: LEDPhototherapyVideo,
+    6: {
+      videoSrc: LEDPhototherapyVideo6,
       title: "Intuitive Control Console",
       overview:
         "Capacitive touch control surface with treatment timers, audio alarms, and LED life indicators.",
@@ -465,12 +541,12 @@ const LEDPhototherapy = () => {
         Connectivity: "USB-A / service port",
       },
       rotation: {
-        azimuthal: Math.PI / 2,
+        azimuthal: Math.PI / 4,
         polar: Math.PI / 2,
       },
     },
-    4: {
-      videoSrc: LEDPhototherapyVideo,
+    7: {
+      videoSrc: LEDPhototherapyVideo7,
       title: "Stable Bassinet Platform",
       overview:
         "Anti-vibration base with locking castors keeps the infant secure while permitting rapid relocation.",

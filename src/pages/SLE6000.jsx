@@ -15,7 +15,10 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import SLE6000Model from "../assets/sle6000/model/SLE6000.glb";
-import SLE6000Video from "../assets/sle6000/videos/01-Modes_of_Ventilation.mp4";
+import SLE6000Video1 from "../assets/sle6000/videos/Conventional Modes, HFO  & NIV.mp4";
+import SLE6000Video2 from "../assets/sle6000/videos/Future ready and upgradeable to Oxygenie-.mp4";
+import SLE6000Video3 from "../assets/sle6000/videos/NCPAP, NIPPV & NIPPV Tr.mp4";
+import SLE6000Video4 from "../assets/sle6000/videos/Powerful HFO & Conventional Ventilator.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -397,28 +400,29 @@ const SLE6000 = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "Touch Display", position: [0, 2, 0.25] },
-    { id: 2, name: "Ports", position: [0, 2, -1.25] },
-    { id: 3, name: "Integrated Cart", position: [0, -1.25, 0] },
+    { id: 1, name: "Conventional Modes, HFO & NIV", position: [0, 2, 0.25] },
+    { id: 2, name: "Future Ready & Upgradeable", position: [0, 2, -1.25] },
+    { id: 3, name: "NCPAP, NIPPV & NIPPV Tr", position: [0, -1.25, 0] },
+    { id: 4, name: "HFO & Conventional Ventilator", position: [0, 1, 1.5] },
   ];
 
   const hotspotsConfig = {
     1: {
-      videoSrc: SLE6000Video,
-      title: "Intelligent Touch Display",
+      videoSrc: SLE6000Video1,
+      title: "Conventional Modes, HFO & NIV",
       overview:
-        "Large touchscreen with adaptive ventilation workflows, lung graphics, and alarm insights for neonatal to adult care.",
+        "Comprehensive ventilation modes including conventional modes, High-Frequency Oscillation (HFO), and Non-Invasive Ventilation (NIV) for versatile patient care.",
       features: [
-        "12.1\" multi-touch UI",
-        "Adaptive ventilation presets",
-        "Trending and lung graphics",
-        "Guided alarm resolution",
+        "Conventional ventilation modes",
+        "High-Frequency Oscillation (HFO)",
+        "Non-Invasive Ventilation (NIV)",
+        "Adaptive mode selection",
       ],
       specifications: {
-        Display: '12.1" WXGA IPS',
-        Modes: "AC, SIMV, PSV, HFO",
-        Storage: "64 GB internal",
-        Connectivity: "USB, Ethernet",
+        Modes: "AC, SIMV, PSV, HFO, NIV",
+        Frequency: "3–15 Hz (HFO)",
+        Pressure: "5–100 cmH2O",
+        Flow: "2–200 L/min",
       },
       rotation: {
         azimuthal: Math.PI / 2,
@@ -426,21 +430,21 @@ const SLE6000 = () => {
       },
     },
     2: {
-      videoSrc: SLE6000Video,
-      title: "Heated Breathing Ports",
+      videoSrc: SLE6000Video2,
+      title: "Future Ready & Upgradeable to Oxygenie",
       overview:
-        "Dual-limb patient circuit ports with humidity control and integrated flow sensors for precise measurement.",
+        "The SLE6000 is designed with future-ready technology, allowing seamless upgrades to Oxygenie for enhanced oxygenation capabilities.",
       features: [
-        "Heated inspiratory limb",
-        "Removable flow sensor",
-        "Color-coded connectors",
-        "Automatic leak compensation",
+        "Modular upgrade architecture",
+        "Oxygenie compatibility",
+        "Future-proof design",
+        "Easy system integration",
       ],
       specifications: {
-        PortSize: "22 mm ISO",
-        FlowRange: "0–200 L/min",
-        Sensors: "Dual hot-wire",
-        Cleaning: "Autoclave compatible",
+        Upgrade: "Oxygenie compatible",
+        Architecture: "Modular design",
+        Integration: "Seamless upgrade path",
+        Compatibility: "Backward compatible",
       },
       rotation: {
         azimuthal: -Math.PI / 2,
@@ -448,24 +452,46 @@ const SLE6000 = () => {
       },
     },
     3: {
-      videoSrc: SLE6000Video,
-      title: "Balanced Mobile Cart",
+      videoSrc: SLE6000Video3,
+      title: "NCPAP, NIPPV & NIPPV Tr",
       overview:
-        "Low-profile chassis with cable management, oxygen cylinder bracket, and hot-swappable batteries.",
+        "Advanced non-invasive respiratory support modes including Nasal Continuous Positive Airway Pressure (NCPAP), Non-Invasive Positive Pressure Ventilation (NIPPV), and NIPPV Transition modes.",
       features: [
-        "Four locking castors",
-        "Integrated cable trays",
-        "Cylinder holder with straps",
-        "Dual battery module",
+        "Nasal CPAP support",
+        "Non-Invasive Positive Pressure Ventilation",
+        "NIPPV Transition modes",
+        "Gentle respiratory assistance",
       ],
       specifications: {
-        Footprint: "60 × 70 cm",
-        Weight: "55 kg",
-        Batteries: "2× 300 Wh",
-        Mobility: "360° swivel castors",
+        CPAP: "2–20 cmH2O",
+        NIPPV: "Pressure support modes",
+        Transition: "Smooth mode switching",
+        Interface: "Nasal/prong compatible",
       },
       rotation: {
         azimuthal: Math.PI,
+        polar: Math.PI / 2,
+      },
+    },
+    4: {
+      videoSrc: SLE6000Video4,
+      title: "Powerful HFO & Conventional Ventilator",
+      overview:
+        "Combines powerful High-Frequency Oscillation capabilities with conventional ventilation modes, providing comprehensive respiratory support from neonatal to adult patients.",
+      features: [
+        "High-Frequency Oscillation",
+        "Conventional ventilation modes",
+        "Dual-mode operation",
+        "Advanced pressure control",
+      ],
+      specifications: {
+        HFO: "3–15 Hz frequency",
+        Conventional: "AC, SIMV, PSV",
+        Pressure: "5–100 cmH2O",
+        PatientRange: "Neonatal to adult",
+      },
+      rotation: {
+        azimuthal: 0,
         polar: Math.PI / 2,
       },
     },

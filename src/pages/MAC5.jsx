@@ -15,7 +15,13 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import MAC5Model from "../assets/mac-5/model/MAC 5.glb";
-import MAC5Video from "../assets/mac-5/videos/01-Modes_of_Ventilation.mp4";
+import MAC5Video1 from "../assets/mac-5/videos/Auto ECG function.mp4";
+import MAC5Video2 from "../assets/mac-5/videos/Critical values are highlighted on ECG reports.mp4";
+import MAC5Video3 from "../assets/mac-5/videos/ECG based on filters.mp4";
+import MAC5Video4 from "../assets/mac-5/videos/Enhanced Hookup Advisor.mp4";
+import MAC5Video5 from "../assets/mac-5/videos/Internal storage.mp4";
+import MAC5Video6 from "../assets/mac-5/videos/PDF-XML transfer via USB, SFTP.mp4";
+import MAC5Video7 from "../assets/mac-5/videos/Print preview displays.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -397,28 +403,32 @@ const MAC5 = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "Breathing Circuit", position: [1.5, -0.5, 1] },
-    { id: 2, name: "Touch Console", position: [1.3, 0, 0] },
-    { id: 3, name: "Ventilator Cart", position: [-2, -0.5, 0] },
+    { id: 1, name: "Auto ECG Function", position: [1.5, -0.5, 1] },
+    { id: 2, name: "Critical Values Highlight", position: [1.3, 0, 0] },
+    { id: 3, name: "ECG Based on Filters", position: [-2, -0.5, 0] },
+    { id: 4, name: "Enhanced Hookup Advisor", position: [0, 1, 1.5] },
+    { id: 5, name: "Internal Storage", position: [0, -1, 1] },
+    { id: 6, name: "PDF-XML Transfer", position: [-1.5, 0.5, 1] },
+    { id: 7, name: "Print Preview", position: [1, 1, -1] },
   ];
 
   const hotspotsConfig = {
     1: {
-      videoSrc: MAC5Video,
-      title: "Dual-Limb Breathing Circuit",
+      videoSrc: MAC5Video1,
+      title: "Auto ECG Function",
       overview:
-        "Integrated heated wire breathing circuit keeps humidity stable and minimizes condensation for neonatal to adult ventilation.",
+        "Automated ECG analysis function that provides intelligent waveform interpretation and automatic rhythm detection for enhanced diagnostic capabilities.",
       features: [
-        "Dual-limb configuration with inspiratory heaters",
-        "Quick-release wye connector",
-        "Color-coded compliance cuffs",
-        "Autoclavable components",
+        "Automatic rhythm detection",
+        "Intelligent waveform analysis",
+        "Real-time ECG interpretation",
+        "Automated measurement calculations",
       ],
       specifications: {
-        Diameter: "22 mm ISO",
-        Heater: "37 °C closed-loop",
-        FlowRange: "2–200 L/min",
-        Cleaning: "Autoclave + EO",
+        Analysis: "Automatic ECG interpretation",
+        Detection: "Multi-lead rhythm analysis",
+        Speed: "Real-time processing",
+        Accuracy: "High-precision algorithms",
       },
       rotation: {
         azimuthal: -Math.PI / 2,
@@ -426,21 +436,21 @@ const MAC5 = () => {
       },
     },
     2: {
-      videoSrc: MAC5Video,
-      title: "Capacitive Touch Console",
+      videoSrc: MAC5Video2,
+      title: "Critical Values Highlight on ECG Reports",
       overview:
-        "15-inch touchscreen with multi-mode ventilation presets, lung graphics, and guided workflows for rapid configuration.",
+        "Advanced reporting feature that automatically highlights critical values and abnormal findings on ECG reports for quick clinical review.",
       features: [
-        "Adaptive ventilation modes (AC, SIMV, APRV)",
-        "3D lung compliance visualization",
-        "Contextual help overlays",
-        "USB + network export",
+        "Automatic critical value detection",
+        "Visual highlighting on reports",
+        "Abnormal finding alerts",
+        "Enhanced report readability",
       ],
       specifications: {
-        Display: '15.6" FHD capacitive',
-        Processor: "Quad-core ARM",
-        Storage: "128 GB SSD",
-        Interfaces: "USB-A, USB-C, Ethernet",
+        Highlighting: "Automatic critical markers",
+        Reports: "Enhanced visual indicators",
+        Alerts: "Abnormal value notifications",
+        Review: "Quick clinical assessment",
       },
       rotation: {
         azimuthal: Math.PI / 2,
@@ -448,24 +458,112 @@ const MAC5 = () => {
       },
     },
     3: {
-      videoSrc: MAC5Video,
-      title: "Stable Mobile Cart",
+      videoSrc: MAC5Video3,
+      title: "ECG Based on Filters",
       overview:
-        "Low center-of-gravity trolley with cable management and hot-swappable batteries keeps the ventilator ready for transport.",
+        "Flexible ECG filtering system that allows clinicians to adjust waveform display based on different filter settings for optimal signal clarity.",
       features: [
-        "Four locking castors",
-        "Rear oxygen bottle bracket",
-        "Integrated cable channels",
-        "Dual battery bays (8 hr)",
+        "Multiple filter options",
+        "Customizable filter settings",
+        "Signal optimization",
+        "Noise reduction capabilities",
       ],
       specifications: {
-        Footprint: "70 × 80 cm",
-        Weight: "65 kg",
-        Batteries: "2× 400 Wh packs",
-        Mobility: "360° castors",
+        Filters: "Multiple filter modes",
+        Customization: "Adjustable parameters",
+        Signal: "Optimized clarity",
+        Noise: "Advanced reduction",
       },
       rotation: {
         azimuthal: Math.PI,
+        polar: Math.PI / 2,
+      },
+    },
+    4: {
+      videoSrc: MAC5Video4,
+      title: "Enhanced Hookup Advisor",
+      overview:
+        "Intelligent hookup guidance system that provides step-by-step instructions and visual aids for proper lead placement and patient connection.",
+      features: [
+        "Step-by-step guidance",
+        "Visual connection diagrams",
+        "Lead placement assistance",
+        "Error prevention alerts",
+      ],
+      specifications: {
+        Guidance: "Interactive instructions",
+        Diagrams: "Visual connection aids",
+        Assistance: "Real-time help",
+        Prevention: "Error detection",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    5: {
+      videoSrc: MAC5Video5,
+      title: "Internal Storage",
+      overview:
+        "Comprehensive internal storage system for ECG data, reports, and patient information with efficient data management capabilities.",
+      features: [
+        "High-capacity storage",
+        "Organized data management",
+        "Patient record storage",
+        "Quick data retrieval",
+      ],
+      specifications: {
+        Capacity: "Large internal storage",
+        Management: "Organized data system",
+        Records: "Patient data storage",
+        Retrieval: "Fast access",
+      },
+      rotation: {
+        azimuthal: -Math.PI / 4,
+        polar: Math.PI / 2,
+      },
+    },
+    6: {
+      videoSrc: MAC5Video6,
+      title: "PDF-XML Transfer via USB, SFTP",
+      overview:
+        "Flexible data transfer system supporting multiple formats (PDF, XML) through USB and secure SFTP protocols for seamless data sharing.",
+      features: [
+        "Multiple format support (PDF, XML)",
+        "USB transfer capability",
+        "Secure SFTP protocol",
+        "Flexible data export",
+      ],
+      specifications: {
+        Formats: "PDF, XML support",
+        USB: "Direct USB transfer",
+        SFTP: "Secure file transfer",
+        Export: "Multiple options",
+      },
+      rotation: {
+        azimuthal: Math.PI / 4,
+        polar: Math.PI / 2,
+      },
+    },
+    7: {
+      videoSrc: MAC5Video7,
+      title: "Print Preview Displays",
+      overview:
+        "Advanced print preview functionality that allows clinicians to review and adjust ECG reports before printing for optimal documentation quality.",
+      features: [
+        "Preview before printing",
+        "Report customization",
+        "Print quality optimization",
+        "Layout adjustment options",
+      ],
+      specifications: {
+        Preview: "Full report preview",
+        Customization: "Adjustable settings",
+        Quality: "Optimized printing",
+        Layout: "Flexible formatting",
+      },
+      rotation: {
+        azimuthal: Math.PI / 3,
         polar: Math.PI / 2,
       },
     },

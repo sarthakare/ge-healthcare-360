@@ -1,15 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import MonitorImage from "../assets/monitor/images/Monitor.png";
 import Image9100NXT from "../assets/9100nxt/images/9100nxt.png";
-import ImageECGHolter from "../assets/ecg-holter/images/ecg-holter.png";
-import ImageLEDPhototherapy from "../assets/led-phototherapy/images/led-phototherapy.png";
-import ImageMAC5 from "../assets/mac-5/images/mac-5.png";
-import ImageSLE6000 from "../assets/sle6000/images/sle6000.png";
-import ImageMonitorB1xM from "../assets/monitors-b1xm/images/A.png";
-import ImageWarmer from "../assets/warmer/images/warmer.png";
 import ImageCS750 from "../assets/cs750/images/cs750.png";
+import ImageSLE6000 from "../assets/sle6000/images/sle6000.png";
+import ImageMAC5 from "../assets/mac-5/images/mac-5.png";
+import ImageWarmer from "../assets/lubby-warmer/images/warmer.png";
 import ImageGiraffeOmnibedCarestation from "../assets/giraffe-omnibed-carestation/images/giraffe-omnibed-carestation.png";
+import ImageLEDPhototherapy from "../assets/led-phototherapy/images/led-phototherapy.png";
+import ImageECGHolter from "../assets/ecg-holter/images/ecg-holter.png";
+import ImageMonitorB1xM from "../assets/monitors-b1xm/images/A.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -35,16 +34,15 @@ const Home = () => {
   };
 
   const cards = [
-    { name: "Monitor", path: "/monitor", image: MonitorImage, isBig: true },
-    { name: "9100NXT", path: "/9100nxt", image: Image9100NXT, isBig: true },
-    { name: "ECG Holter", path: "/ecg-holter", image: ImageECGHolter, isBig: true },
-    { name: "LED Phototherapy", path: "/led-phototherapy", image: ImageLEDPhototherapy, isBig: true },
-    { name: "MAC 5", path: "/mac-5", image: ImageMAC5, isBig: true },
-    { name: "SLE6000", path: "/sle6000", image: ImageSLE6000, isBig: true },
-    { name: "Monitors B1xM", path: "/monitors-b1xm", image: ImageMonitorB1xM, isBig: true },
-    { name: "Warmer", path: "/warmer", image: ImageWarmer, isBig: true },
+    { name: "9100c NXT", path: "/9100nxt", image: Image9100NXT, isBig: true },
     { name: "CS750", path: "/cs750", image: ImageCS750, isBig: true },
+    { name: "SLE6000", path: "/sle6000", image: ImageSLE6000, isBig: true },
+    { name: "MAC 5", path: "/mac-5", image: ImageMAC5, isBig: true },
+    { name: "Lullaby Warmer", path: "/warmer", image: ImageWarmer, isBig: true },
     { name: "Giraffe Omnibed Carestation", path: "/giraffe-omnibed-carestation", image: ImageGiraffeOmnibedCarestation, isBig: true },
+    { name: "LED Phototherapy", path: "/led-phototherapy", image: ImageLEDPhototherapy, isBig: true },
+    { name: "ECG Holter", path: "/ecg-holter", image: ImageECGHolter, isBig: true },
+    { name: "B1xM Monitors", path: "/monitors-b1xm", image: ImageMonitorB1xM, isBig: true },
   ];
 
   return (

@@ -10,7 +10,17 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import Model9100NXTModel from "../assets/9100nxt/model/9100NXT.glb";
-import Model9100NXTVideo from "../assets/9100nxt/videos/01-Modes_of_Ventilation.mp4";
+import VideoVentilationModes from "../assets/9100nxt/videos/Ventilation Modes.mp4";
+import VideoAutoclavableBreathingCircuit from "../assets/9100nxt/videos/Autoclavable breathing circuit, bellows and canister.mp4";
+import VideoPreUseGuidedCheck from "../assets/9100nxt/videos/Pre-use guided check.mp4";
+import VideoPSVProAlgorithm from "../assets/9100nxt/videos/PSVPro algorithm.mp4";
+import VideoCO2Bypass from "../assets/9100nxt/videos/CO₂ bypass.mp4";
+import VideoFlowValveTechnology from "../assets/9100nxt/videos/flow-valve technology.mp4";
+import VideoHypoxiaGuardApnea from "../assets/9100nxt/videos/Hypoxia Guard Apnea back-up.mp4";
+import VideoIntegratedACGO from "../assets/9100nxt/videos/Integrated Auxiliary Common Gas Outlet (ACGO).mp4";
+import VideoThreeGasCapability from "../assets/9100nxt/videos/Three-gas capability.mp4";
+import VideoTwoFlowSensors from "../assets/9100nxt/videos/Two flow sensors (inspiratory + expiratory).mp4";
+import VideoOneDeviceHospital from "../assets/9100nxt/videos/one device for the whole hospital.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -419,87 +429,217 @@ const Model9100NXT = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "Touch Display", position: [0.5, 1.75, 0.05] },
-    { id: 2, name: "Breathing Circuit", position: [-1.4, 0.2, 0.3] },
-    { id: 3, name: "Ventilation Controls", position: [-0.3, 0.3, -1.2] },
+    { id: 1, name: "Ventilation Modes", position: [0.5, 1.75, 0.05] },
+    { id: 2, name: "Autoclavable Breathing Circuit", position: [-1.4, 0.2, 0.3] },
+    { id: 3, name: "Pre-use Guided Check", position: [0.5, 1.6, 0.1] },
+    { id: 4, name: "PSVPro Algorithm", position: [-0.3, 0.3, -1.2] },
+    { id: 5, name: "CO₂ Bypass", position: [-1.3, 0.1, 0.4] },
+    { id: 6, name: "Flow-Valve Technology", position: [-0.2, 0.4, -1.1] },
+    { id: 7, name: "Hypoxia Guard Apnea Back-up", position: [0.4, 1.5, 0.15] },
+    { id: 8, name: "Integrated ACGO", position: [1.2, 0.5, 0.2] },
+    { id: 9, name: "Three-Gas Capability", position: [1.1, 0.6, 0.1] },
+    { id: 10, name: "Two Flow Sensors", position: [-1.5, 0.3, 0.2] },
+    { id: 11, name: "One Device for the Whole Hospital", position: [0, 1.2, 0] },
   ];
 
   const hotspotsConfig = {
     1: {
-      videoSrc: Model9100NXTVideo,
-      title: "Touch Display – Guided Ventilation",
+      videoSrc: VideoVentilationModes,
+      title: "Ventilation Modes",
       overview:
-        "The 9100 NXT 15-inch responsive touchscreen provides guided workflows, alarm management, and predictive ventilation analytics for OR teams.",
+        "The 9100 NXT offers comprehensive ventilation modes designed for various clinical scenarios, providing flexibility and precision in patient care.",
       features: [
-        "Adaptive user interface with context-aware controls",
-        "Live real-time waveforms and gas readings",
-        "Integrated checklists for rapid case setup",
-        "Multi-language support with glove-friendly sensitivity",
+        "Multiple ventilation modes including AC, SIMV, and CPAP",
+        "Adaptive ventilation algorithms",
+        "Real-time mode switching capabilities",
+        "Patient-specific mode optimization",
       ],
       specifications: {
-        Display: '15" IPS 1080p',
-        Brightness: "700 nits",
-        Connectivity: "Dual Gigabit Ethernet",
-        Storage: "256 GB SSD",
+        "Modes Available": "AC, SIMV, CPAP, PSV",
+        "Mode Switching": "Real-time",
+        "Algorithm": "Advanced adaptive",
       },
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     2: {
-      videoSrc: Model9100NXTVideo,
-      title: "Breathing Circuit – Digital Flow Control",
+      videoSrc: VideoAutoclavableBreathingCircuit,
+      title: "Autoclavable Breathing Circuit, Bellows and Canister",
       overview:
-        "Modular breathing circuit with integrated sensors ensures low resistance flow and precise agent delivery even during low-flow anesthesia.",
+        "Fully autoclavable breathing circuit components ensure maximum infection control and patient safety with easy sterilization processes.",
       features: [
-        "Tool-free disassembly and auto-leak checks",
-        "Heated inspiratory limb to prevent condensation",
-        "Integrated flow and pressure monitoring",
-        "Color-coded pathways for quick troubleshooting",
+        "Complete autoclavable system",
+        "Tool-free disassembly",
+        "Durable bellows design",
+        "Integrated canister system",
       ],
       specifications: {
-        Compliance: "1.5 ml/mbar",
-        Resistance: "< 1.4 cmH₂O at 60 L/min",
-        "CO₂ Absorber": "2 kg capacity",
-        "Fresh Gas Range": "0.2 – 15 L/min",
+        "Autoclave Temperature": "Up to 134°C",
+        "Sterilization Time": "Standard cycle",
+        "Material": "Medical-grade autoclavable",
       },
       rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
     3: {
-      videoSrc: Model9100NXTVideo,
-      title: "Vaporizer Bank – Dual Agent Ready",
+      videoSrc: VideoPreUseGuidedCheck,
+      title: "Pre-use Guided Check",
       overview:
-        "Dual-lock vaporizer manifold supports side-by-side agent cartridges with automatic recognition and safety interlocks.",
+        "Intelligent pre-use check system guides clinicians through comprehensive safety verification before each procedure.",
       features: [
-        "Auto-ID for Sevoflurane, Isoflurane, Desflurane",
-        "Hot-swap capability without power-down",
-        "Interlock prevents simultaneous activation",
-        "LED indicators for fill level and status",
+        "Step-by-step guided workflow",
+        "Automated system diagnostics",
+        "Visual and audio prompts",
+        "Checklist completion tracking",
       ],
       specifications: {
-        "Agent Capacity": "410 ml per vaporizer",
-        Accuracy: "±2% of set value",
-        "Refill Time": "< 30 seconds",
-        "Warm-up": "< 2 minutes",
+        "Check Duration": "< 2 minutes",
+        "Automated Tests": "System-wide",
+        "Documentation": "Automatic logging",
+      },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    4: {
+      videoSrc: VideoPSVProAlgorithm,
+      title: "PSVPro Algorithm",
+      overview:
+        "Advanced PSVPro algorithm provides intelligent pressure support ventilation with adaptive response to patient needs.",
+      features: [
+        "Adaptive pressure support",
+        "Patient-triggered ventilation",
+        "Real-time algorithm adjustment",
+        "Enhanced patient comfort",
+      ],
+      specifications: {
+        "Algorithm Type": "Adaptive PSV",
+        "Response Time": "< 100ms",
+        "Trigger Sensitivity": "Adjustable",
+      },
+      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
+    },
+    5: {
+      videoSrc: VideoCO2Bypass,
+      title: "CO₂ Bypass",
+      overview:
+        "Integrated CO₂ bypass system provides efficient gas management and monitoring capabilities.",
+      features: [
+        "Automatic CO₂ monitoring",
+        "Bypass valve control",
+        "Real-time CO₂ level display",
+        "Safety alarm integration",
+      ],
+      specifications: {
+        "CO₂ Measurement": "Capnography",
+        "Bypass Control": "Automatic/Manual",
+        "Alarm Threshold": "Configurable",
+      },
+      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
+    },
+    6: {
+      videoSrc: VideoFlowValveTechnology,
+      title: "Flow-Valve Technology",
+      overview:
+        "Advanced flow-valve technology ensures precise gas delivery and optimal flow control throughout the ventilation system.",
+      features: [
+        "Precise flow control",
+        "Low resistance design",
+        "Rapid response valves",
+        "Digital flow monitoring",
+      ],
+      specifications: {
+        "Flow Range": "0.2 - 15 L/min",
+        "Response Time": "< 50ms",
+        "Accuracy": "±2%",
+      },
+      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
+    },
+    7: {
+      videoSrc: VideoHypoxiaGuardApnea,
+      title: "Hypoxia Guard Apnea Back-up",
+      overview:
+        "Advanced safety system that automatically detects and responds to apnea events and hypoxia conditions to ensure patient safety.",
+      features: [
+        "Automatic apnea detection",
+        "Hypoxia monitoring",
+        "Back-up ventilation activation",
+        "Real-time alarm system",
+      ],
+      specifications: {
+        "Detection Time": "< 20 seconds",
+        "Back-up Mode": "Automatic",
+        "Alarm Levels": "Configurable",
+      },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    8: {
+      videoSrc: VideoIntegratedACGO,
+      title: "Integrated Auxiliary Common Gas Outlet (ACGO)",
+      overview:
+        "Integrated ACGO provides flexible gas delivery options for additional equipment and accessories.",
+      features: [
+        "Standard ACGO connection",
+        "Multiple gas support",
+        "Easy accessory integration",
+        "Flow monitoring",
+      ],
+      specifications: {
+        "Connection Type": "Standard ACGO",
+        "Gas Support": "Multiple",
+        "Flow Capacity": "Up to 15 L/min",
       },
       rotation: { azimuthal: Math.PI / 2, polar: Math.PI / 2 },
     },
-    4: {
-      videoSrc: Model9100NXTVideo,
-      title: "Ventilation Controls – Precision Tuning",
+    9: {
+      videoSrc: VideoThreeGasCapability,
+      title: "Three-Gas Capability",
       overview:
-        "Rotary encoders and context-lit keys give tactile redundancy for clinicians who prefer physical controls during critical events.",
+        "Comprehensive three-gas system supporting oxygen, air, and nitrous oxide for complete anesthesia delivery.",
       features: [
-        "Tri-color feedback rings for parameter status",
-        "Haptic detents aligned with clinical increments",
-        "Dedicated quick-set knobs for tidal volume & rate",
-        "Programmable soft keys for custom workflows",
+        "Three-gas support (O₂, Air, N₂O)",
+        "Individual gas flow control",
+        "Gas mixture monitoring",
+        "Safety interlocks",
       ],
       specifications: {
-        "Encoder Resolution": "1° per step",
-        "Button Life": "5 million actuations",
-        "Emergency O₂ Flush": "75 L/min",
-        "System Latency": "< 40 ms",
+        "Gases Supported": "O₂, Air, N₂O",
+        "Flow Range": "0.2 - 15 L/min each",
+        "Mixture Control": "Precise",
       },
-      rotation: { azimuthal: -Math.PI, polar: Math.PI / 2 },
+      rotation: { azimuthal: Math.PI / 2, polar: Math.PI / 2 },
+    },
+    10: {
+      videoSrc: VideoTwoFlowSensors,
+      title: "Two Flow Sensors (Inspiratory + Expiratory)",
+      overview:
+        "Dual flow sensor system provides comprehensive monitoring of both inspiratory and expiratory flows for accurate ventilation management.",
+      features: [
+        "Inspiratory flow monitoring",
+        "Expiratory flow monitoring",
+        "Real-time flow measurement",
+        "Accurate volume calculation",
+      ],
+      specifications: {
+        "Sensor Type": "Dual flow sensors",
+        "Measurement Range": "0 - 120 L/min",
+        "Accuracy": "±2%",
+      },
+      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
+    },
+    11: {
+      videoSrc: VideoOneDeviceHospital,
+      title: "One Device for the Whole Hospital",
+      overview:
+        "The 9100 NXT is designed as a versatile solution that can serve multiple departments and clinical needs throughout the hospital.",
+      features: [
+        "Multi-department compatibility",
+        "Versatile clinical applications",
+        "Unified platform",
+        "Cost-effective solution",
+      ],
+      specifications: {
+        "Applications": "OR, ICU, Emergency",
+        "Versatility": "Multi-purpose",
+        "Compatibility": "Hospital-wide",
+      },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
   };
 
