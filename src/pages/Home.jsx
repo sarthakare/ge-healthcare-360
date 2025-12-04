@@ -33,16 +33,75 @@ const Home = () => {
     }
   };
 
-  const cards = [
-    { name: "9100c NXT", path: "/9100nxt", image: Image9100NXT, isBig: true },
-    { name: "CS750", path: "/cs750", image: ImageCS750, isBig: true },
-    { name: "SLE6000", path: "/sle6000", image: ImageSLE6000, isBig: true },
-    { name: "MAC 5", path: "/mac-5", image: ImageMAC5, isBig: true },
-    { name: "Lullaby Warmer", path: "/warmer", image: ImageWarmer, isBig: true },
-    { name: "Giraffe Omnibed Carestation", path: "/giraffe-omnibed-carestation", image: ImageGiraffeOmnibedCarestation, isBig: true },
-    { name: "LED Phototherapy", path: "/led-phototherapy", image: ImageLEDPhototherapy, isBig: true },
-    { name: "ECG Holter", path: "/ecg-holter", image: ImageECGHolter, isBig: true },
-    { name: "B1xM Monitors", path: "/monitors-b1xm", image: ImageMonitorB1xM, isBig: true },
+  const categories = [
+    {
+      name: "Diagnostic Cardiology",
+      products: [
+        {
+          name: "MAC 5 – Resting ECG System",
+          path: "/mac-5",
+          image: ImageMAC5,
+          intro: "Experience MAC 5 in 3D and discover how its streamlined workflow, touchscreen interface and clinical algorithms enable fast, accurate ECG acquisition.",
+        },
+        {
+          name: "CardioSoft Diagnostic System – Stress + Holter + ECG platform",
+          path: "/ecg-holter",
+          image: ImageECGHolter,
+          intro: "Explore the CardioSoft ecosystem and see how its multi-modality design unifies stress, Holter and ECG diagnostics in one connected workflow.",
+        },
+      ],
+    },
+    {
+      name: "Maternal & Infant Care",
+      products: [
+        {
+          name: "SLE6000 Ventilator – Neonatal/Pediatric ventilator",
+          path: "/sle6000",
+          image: ImageSLE6000,
+          intro: "View the SLE6000 in 3D to understand its modular ventilation modes, gentle neonatal mechanics and intuitive Lunar™ interface.",
+        },
+        {
+          name: "Lullaby Warmer – Infant warming system",
+          path: "/warmer",
+          image: ImageWarmer,
+          intro: "Interact with the Lullaby Warmer and see how its simple controls and stable thermal environment support safer newborn care.",
+        },
+        {
+          name: "Giraffe OmniBed Carestation – Incubator + warmer integrated neonatal carestation",
+          path: "/giraffe-omnibed-carestation",
+          image: ImageGiraffeOmnibedCarestation,
+          intro: "Step inside the 3D model to explore the controlled micro-environment, access doors, and caregiver-friendly design that support fragile neonates.",
+        },
+      ],
+    },
+    {
+      name: "Anesthesia",
+      products: [
+        {
+          name: "9100c NXT – Anaesthesia delivery workstation",
+          path: "/9100nxt",
+          image: Image9100NXT,
+          intro: "Go inside the 3D demonstration of the 9100c NXT and explore its dependable anesthesia delivery system, ergonomic layout and core ventilation features.",
+        },
+        {
+          name: "Carestation 750 – Advanced anesthesia workstation with lung-protective ventilation",
+          path: "/cs750",
+          image: ImageCS750,
+          intro: "Interact with the Carestation 750 to see its advanced anesthesia tools, lung-protective ventilation modes and precision control interface.",
+        },
+      ],
+    },
+    {
+      name: "Monitoring",
+      products: [
+        {
+          name: "B1x5M Patient Monitors – Modular, scalable vital signs and advanced parameter monitoring",
+          path: "/monitors-b1xm",
+          image: ImageMonitorB1xM,
+          intro: "Rotate and inspect the B1x5M platform to understand its modular monitoring capabilities and scalable parameters for multiple care areas.",
+        },
+      ],
+    },
   ];
 
   return (
@@ -385,215 +444,272 @@ const Home = () => {
           <div
             style={{
               textAlign: "center",
-              marginBottom: isMobile ? "40px" : "60px",
+              marginBottom: isMobile ? "50px" : "80px",
+              maxWidth: "1000px",
+              marginLeft: "auto",
+              marginRight: "auto",
+              padding: isMobile ? "0 16px" : "0 24px",
+              position: "relative",
             }}
           >
+            {/* Decorative accent line */}
+            <div
+              style={{
+                width: "60px",
+                height: "4px",
+                background: "linear-gradient(90deg, #6022A6 0%, #8B5CF6 100%)",
+                margin: "0 auto 32px",
+                borderRadius: "2px",
+              }}
+            />
+            
             <h1
               className="main-heading"
               style={{
-                fontSize: isMobile ? "27px" : "45px",
-                color: "#1e293b",
-                marginBottom: "16px",
-                fontWeight: "700",
-                letterSpacing: "-1px",
-                lineHeight: "1.1",
+                fontSize: isMobile ? "32px" : "52px",
+                background: "linear-gradient(135deg, #1e293b 0%, #334155 50%, #6022A6 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                marginBottom: "28px",
+                fontWeight: "800",
+                letterSpacing: "-1.5px",
+                lineHeight: "1.15",
                 padding: isMobile ? "0 8px" : "0",
+                textShadow: "0 2px 20px rgba(96, 34, 166, 0.1)",
               }}
             >
-              Explore our innovative healthcare solutions
+              Step into GE HealthCare's interactive 3D Experience Centre
             </h1>
-          </div>
-
-          <div
-            className="cards-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: isMobile
-                ? "1fr"
-                : "repeat(auto-fill, minmax(280px, 1fr))",
-              gap: isMobile ? "20px" : "30px",
-              maxWidth: "1400px",
-              margin: "0 auto",
-            }}
-          >
-          {cards.map((card, index) => (
-            <div
-              key={index}
-              onClick={() => handleCardClick(card.path)}
+            
+            <p
               style={{
-                width: "100%",
-                minHeight: card.isBig
-                  ? isMobile
-                    ? "270px"
-                    : "270px"
-                  : isMobile
-                  ? "270px"
-                  : "270px",
-                backgroundColor: "#000",
-                borderRadius: "12px",
-                boxShadow: card.path
-                  ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
-                  : "0 2px 4px rgba(0, 0, 0, 0.05)",
-                border: card.path ? "1px solid #e5e7eb" : "1px solid #f3f4f6",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: card.image ? "space-between" : "center",
-                alignItems: "center",
-                cursor: card.path ? "pointer" : "not-allowed",
-                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                opacity: card.path ? 1 : 0.4,
-                padding: isMobile ? "15px 15px" : "20px 20px",
-                position: "relative",
-                overflow: "hidden",
-              }}
-              onMouseEnter={(e) => {
-                if (card.path) {
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 12px 24px rgba(30, 64, 175, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08)";
-                  e.currentTarget.style.borderColor = "#6022A6";
-                  const gradientEl = e.currentTarget.querySelector(
-                    ".card-hover-gradient"
-                  );
-                  if (gradientEl) gradientEl.style.opacity = 1;
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (card.path) {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow =
-                    "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)";
-                  e.currentTarget.style.borderColor = "#e5e7eb";
-                  const gradientEl = e.currentTarget.querySelector(
-                    ".card-hover-gradient"
-                  );
-                  if (gradientEl) gradientEl.style.opacity = 0;
-                }
+                fontSize: isMobile ? "17px" : "20px",
+                color: "#475569",
+                lineHeight: "1.75",
+                margin: 0,
+                padding: isMobile ? "0 8px" : "0 20px",
+                fontWeight: "400",
+                maxWidth: "880px",
+                marginLeft: "auto",
+                marginRight: "auto",
               }}
             >
-              {/* Hover gradient effect */}
-              {card.path && (
-                <div
-                  className="card-hover-gradient"
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background:
-                      "linear-gradient(135deg, rgba(30, 64, 175, 0.02) 0%, rgba(59, 130, 246, 0.02) 100%)",
-                    opacity: 0,
-                    transition: "opacity 0.3s ease",
-                    pointerEvents: "none",
-                    borderRadius: "12px",
-                  }}
-                />
-              )}
-
-              <div
+              <span
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  width: "100%",
-                  zIndex: 1,
+                  fontSize: isMobile ? "24px" : "28px",
+                  color: "#6022A6",
+                  fontWeight: "600",
+                  marginRight: "8px",
+                  lineHeight: "1",
+                  verticalAlign: "middle",
                 }}
               >
-                {card.image && (
+                —
+              </span>
+              A digital space where you can explore our clinical technologies as if they were right in front of you. Navigate through <strong style={{ color: "#1e293b", fontWeight: "600" }}>Diagnostic Cardiology</strong>, <strong style={{ color: "#1e293b", fontWeight: "600" }}>Maternal & Infant Care</strong>, <strong style={{ color: "#1e293b", fontWeight: "600" }}>Anesthesia</strong> and <strong style={{ color: "#1e293b", fontWeight: "600" }}>Patient Monitoring</strong>, and dive into detailed 3D models, feature callouts, and guided walkthroughs. Each product has been brought to life to help clinicians, biomedical teams and decision-makers understand its capabilities, workflow advantages and real-world clinical impact.
+            </p>
+          </div>
+
+          {categories.map((category, categoryIndex) => (
+            <div
+              key={categoryIndex}
+              style={{
+                marginBottom: isMobile ? "50px" : "80px",
+              }}
+            >
+              <h2
+                style={{
+                  fontSize: isMobile ? "24px" : "32px",
+                  color: "#1e293b",
+                  marginBottom: isMobile ? "24px" : "32px",
+                  fontWeight: "600",
+                  letterSpacing: "-0.5px",
+                  textAlign: "left",
+                  paddingLeft: isMobile ? "8px" : "0",
+                }}
+              >
+                Category - {category.name}
+              </h2>
+              <div
+                className="cards-grid"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: isMobile
+                    ? "1fr"
+                    : "repeat(auto-fill, minmax(320px, 1fr))",
+                  gap: isMobile ? "24px" : "30px",
+                  maxWidth: "1400px",
+                  margin: "0 auto",
+                }}
+              >
+                {category.products.map((product, productIndex) => (
                   <div
-                    className={
-                      card.isBig ? "card-image-size" : "card-image-size-small"
-                    }
+                    key={productIndex}
+                    onClick={() => handleCardClick(product.path)}
                     style={{
-                      width: card.isBig
-                        ? isMobile
-                          ? "180px"
-                          : "220px"
-                        : isMobile
-                        ? "120px"
-                        : "150px",
-                      height: card.isBig
-                        ? isMobile
-                          ? "180px"
-                          : "220px"
-                        : isMobile
-                        ? "120px"
-                        : "150px",
-                      marginBottom: isMobile ? "15px" : "15px",
+                      width: "100%",
+                      minHeight: isMobile ? "auto" : "420px",
+                      backgroundColor: "#000",
+                      borderRadius: "12px",
+                      boxShadow: product.path
+                        ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
+                        : "0 2px 4px rgba(0, 0, 0, 0.05)",
+                      border: product.path ? "1px solid #e5e7eb" : "1px solid #f3f4f6",
                       display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
                       alignItems: "center",
-                      justifyContent: "center",
-                      transition: "transform 0.3s ease",
+                      cursor: product.path ? "pointer" : "not-allowed",
+                      transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                      opacity: product.path ? 1 : 0.4,
+                      padding: isMobile ? "20px 16px" : "24px 24px",
+                      position: "relative",
+                      overflow: "hidden",
                     }}
                     onMouseEnter={(e) => {
-                      if (card.path && !isMobile) {
-                        e.currentTarget.style.transform = "scale(1.1)";
+                      if (product.path) {
+                        e.currentTarget.style.transform = "translateY(-4px)";
+                        e.currentTarget.style.boxShadow =
+                          "0 12px 24px rgba(30, 64, 175, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08)";
+                        e.currentTarget.style.borderColor = "#6022A6";
+                        const gradientEl = e.currentTarget.querySelector(
+                          ".card-hover-gradient"
+                        );
+                        if (gradientEl) gradientEl.style.opacity = 1;
                       }
                     }}
                     onMouseLeave={(e) => {
-                      if (!isMobile) {
-                        e.currentTarget.style.transform = "scale(1)";
+                      if (product.path) {
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow =
+                          "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)";
+                        e.currentTarget.style.borderColor = "#e5e7eb";
+                        const gradientEl = e.currentTarget.querySelector(
+                          ".card-hover-gradient"
+                        );
+                        if (gradientEl) gradientEl.style.opacity = 0;
                       }
                     }}
                   >
-                    <img
-                      src={card.image}
-                      alt={card.name}
+                    {/* Hover gradient effect */}
+                    {product.path && (
+                      <div
+                        className="card-hover-gradient"
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          background:
+                            "linear-gradient(135deg, rgba(30, 64, 175, 0.02) 0%, rgba(59, 130, 246, 0.02) 100%)",
+                          opacity: 0,
+                          transition: "opacity 0.3s ease",
+                          pointerEvents: "none",
+                          borderRadius: "12px",
+                        }}
+                      />
+                    )}
+
+                    <div
                       style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
                         width: "100%",
-                        height: "100%",
-                        objectFit: "contain",
-                        filter: card.path
-                          ? "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))"
-                          : "none",
+                        zIndex: 1,
                       }}
-                    />
-                  </div>
-                )}
+                    >
+                      {product.image && (
+                        <div
+                          style={{
+                            width: isMobile ? "180px" : "200px",
+                            height: isMobile ? "180px" : "200px",
+                            marginBottom: isMobile ? "16px" : "20px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            transition: "transform 0.3s ease",
+                          }}
+                          onMouseEnter={(e) => {
+                            if (product.path && !isMobile) {
+                              e.currentTarget.style.transform = "scale(1.1)";
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            if (!isMobile) {
+                              e.currentTarget.style.transform = "scale(1)";
+                            }
+                          }}
+                        >
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "contain",
+                              filter: product.path
+                                ? "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))"
+                                : "none",
+                            }}
+                          />
+                        </div>
+                      )}
 
-                <h2
-                  style={{
-                    fontSize: card.isBig
-                      ? isMobile
-                        ? "20px"
-                        : "24px"
-                      : isMobile
-                      ? "18px"
-                      : "20px",
-                    color: "#fff",
-                    textAlign: "center",
-                    margin: 0,
-                    fontWeight: "600",
-                    letterSpacing: "-0.2px",
-                  }}
-                >
-                  {card.name}
-                </h2>
+                      <h3
+                        style={{
+                          fontSize: isMobile ? "18px" : "20px",
+                          color: "#fff",
+                          textAlign: "center",
+                          margin: "0 0 12px 0",
+                          fontWeight: "600",
+                          letterSpacing: "-0.2px",
+                          lineHeight: "1.3",
+                        }}
+                      >
+                        {product.name}
+                      </h3>
 
-                {!card.path && (
-                  <div
-                    style={{
-                      marginTop: "12px",
-                      padding: "6px 16px",
-                      backgroundColor: "#f1f5f9",
-                      borderRadius: "6px",
-                      fontSize: "12px",
-                      color: "#222222",
-                      fontWeight: "500",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.5px",
-                    }}
-                  >
-                    Coming Soon
+                      <p
+                        style={{
+                          fontSize: isMobile ? "14px" : "15px",
+                          color: "#cbd5e1",
+                          textAlign: "center",
+                          margin: 0,
+                          lineHeight: "1.5",
+                          fontWeight: "400",
+                        }}
+                      >
+                        {product.intro}
+                      </p>
+
+                      {!product.path && (
+                        <div
+                          style={{
+                            marginTop: "16px",
+                            padding: "6px 16px",
+                            backgroundColor: "#f1f5f9",
+                            borderRadius: "6px",
+                            fontSize: "12px",
+                            color: "#222222",
+                            fontWeight: "500",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.5px",
+                          }}
+                        >
+                          Coming Soon
+                        </div>
+                      )}
+                    </div>
                   </div>
-                )}
+                ))}
               </div>
             </div>
           ))}
         </div>
       </div>
-    </div>
     </>
   );
 };
