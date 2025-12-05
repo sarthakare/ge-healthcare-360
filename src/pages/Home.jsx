@@ -666,7 +666,7 @@ const Home = () => {
               <div
                 className={`accordion-body ${openAccordion === "DiagnosticCardiology" ? "open" : ""}`}
                 style={{
-                  maxHeight: openAccordion === "DiagnosticCardiology" ? "1000px" : "0",
+                  maxHeight: openAccordion === "DiagnosticCardiology" ? "2000px" : "0",
                   overflow: "hidden",
                   transition: "max-height 0.3s ease-out, padding 0.3s ease-out",
                   padding: openAccordion === "DiagnosticCardiology" ? "24px" : "0 24px",
@@ -674,7 +674,176 @@ const Home = () => {
                 }}
               >
                 <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
-                  Lorem ipsum..1
+                  <div
+                    className="cards-grid"
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: isMobile
+                        ? "1fr"
+                        : "repeat(auto-fill, minmax(320px, 1fr))",
+                      gap: isMobile ? "24px" : "30px",
+                      maxWidth: "1400px",
+                      margin: "0 auto",
+                    }}
+                  >
+                    {categories[0].products.map((product, productIndex) => (
+                      <div
+                        key={productIndex}
+                        onClick={() => handleCardClick(product.path)}
+                        style={{
+                          width: "100%",
+                          minHeight: isMobile ? "auto" : "420px",
+                          backgroundColor: "#000",
+                          borderRadius: "12px",
+                          boxShadow: product.path
+                            ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
+                            : "0 2px 4px rgba(0, 0, 0, 0.05)",
+                          border: product.path ? "1px solid #e5e7eb" : "1px solid #f3f4f6",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          cursor: product.path ? "pointer" : "not-allowed",
+                          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                          opacity: product.path ? 1 : 0.4,
+                          padding: isMobile ? "20px 16px" : "24px 24px",
+                          position: "relative",
+                          overflow: "hidden",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (product.path) {
+                            e.currentTarget.style.transform = "translateY(-4px)";
+                            e.currentTarget.style.boxShadow =
+                              "0 12px 24px rgba(30, 64, 175, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08)";
+                            e.currentTarget.style.borderColor = "#6022A6";
+                            const gradientEl = e.currentTarget.querySelector(
+                              ".card-hover-gradient"
+                            );
+                            if (gradientEl) gradientEl.style.opacity = 1;
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (product.path) {
+                            e.currentTarget.style.transform = "translateY(0)";
+                            e.currentTarget.style.boxShadow =
+                              "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)";
+                            e.currentTarget.style.borderColor = "#e5e7eb";
+                            const gradientEl = e.currentTarget.querySelector(
+                              ".card-hover-gradient"
+                            );
+                            if (gradientEl) gradientEl.style.opacity = 0;
+                          }
+                        }}
+                      >
+                        {product.path && (
+                          <div
+                            className="card-hover-gradient"
+                            style={{
+                              position: "absolute",
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                              background:
+                                "linear-gradient(135deg, rgba(30, 64, 175, 0.02) 0%, rgba(59, 130, 246, 0.02) 100%)",
+                              opacity: 0,
+                              transition: "opacity 0.3s ease",
+                              pointerEvents: "none",
+                              borderRadius: "12px",
+                            }}
+                          />
+                        )}
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            width: "100%",
+                            zIndex: 1,
+                          }}
+                        >
+                          {product.image && (
+                            <div
+                              style={{
+                                width: isMobile ? "180px" : "200px",
+                                height: isMobile ? "180px" : "200px",
+                                marginBottom: isMobile ? "16px" : "20px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                transition: "transform 0.3s ease",
+                              }}
+                              onMouseEnter={(e) => {
+                                if (product.path && !isMobile) {
+                                  e.currentTarget.style.transform = "scale(1.1)";
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                if (!isMobile) {
+                                  e.currentTarget.style.transform = "scale(1)";
+                                }
+                              }}
+                            >
+                              <img
+                                src={product.image}
+                                alt={product.name}
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "contain",
+                                  filter: product.path
+                                    ? "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))"
+                                    : "none",
+                                }}
+                              />
+                            </div>
+                          )}
+                          <h3
+                            style={{
+                              fontSize: isMobile ? "18px" : "20px",
+                              color: "#fff",
+                              textAlign: "center",
+                              margin: "0 0 12px 0",
+                              fontWeight: "600",
+                              letterSpacing: "-0.2px",
+                              lineHeight: "1.3",
+                            }}
+                          >
+                            {product.name}
+                          </h3>
+                          <p
+                            style={{
+                              fontSize: isMobile ? "14px" : "15px",
+                              color: "#cbd5e1",
+                              textAlign: "center",
+                              margin: 0,
+                              lineHeight: "1.5",
+                              fontWeight: "400",
+                            }}
+                          >
+                            {product.intro}
+                          </p>
+                          {!product.path && (
+                            <div
+                              style={{
+                                marginTop: "16px",
+                                padding: "6px 16px",
+                                backgroundColor: "#f1f5f9",
+                                borderRadius: "6px",
+                                fontSize: "12px",
+                                color: "#222222",
+                                fontWeight: "500",
+                                textTransform: "uppercase",
+                                letterSpacing: "0.5px",
+                              }}
+                            >
+                              Coming Soon
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -742,7 +911,7 @@ const Home = () => {
               <div
                 className={`accordion-body ${openAccordion === "MaternalInfantCare" ? "open" : ""}`}
                 style={{
-                  maxHeight: openAccordion === "MaternalInfantCare" ? "1000px" : "0",
+                  maxHeight: openAccordion === "MaternalInfantCare" ? "2000px" : "0",
                   overflow: "hidden",
                   transition: "max-height 0.3s ease-out, padding 0.3s ease-out",
                   padding: openAccordion === "MaternalInfantCare" ? "24px" : "0 24px",
@@ -750,7 +919,176 @@ const Home = () => {
                 }}
               >
                 <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
-                  Lorem ipsum..2
+                  <div
+                    className="cards-grid"
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: isMobile
+                        ? "1fr"
+                        : "repeat(auto-fill, minmax(320px, 1fr))",
+                      gap: isMobile ? "24px" : "30px",
+                      maxWidth: "1400px",
+                      margin: "0 auto",
+                    }}
+                  >
+                    {categories[1].products.map((product, productIndex) => (
+                      <div
+                        key={productIndex}
+                        onClick={() => handleCardClick(product.path)}
+                        style={{
+                          width: "100%",
+                          minHeight: isMobile ? "auto" : "420px",
+                          backgroundColor: "#000",
+                          borderRadius: "12px",
+                          boxShadow: product.path
+                            ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
+                            : "0 2px 4px rgba(0, 0, 0, 0.05)",
+                          border: product.path ? "1px solid #e5e7eb" : "1px solid #f3f4f6",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          cursor: product.path ? "pointer" : "not-allowed",
+                          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                          opacity: product.path ? 1 : 0.4,
+                          padding: isMobile ? "20px 16px" : "24px 24px",
+                          position: "relative",
+                          overflow: "hidden",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (product.path) {
+                            e.currentTarget.style.transform = "translateY(-4px)";
+                            e.currentTarget.style.boxShadow =
+                              "0 12px 24px rgba(30, 64, 175, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08)";
+                            e.currentTarget.style.borderColor = "#6022A6";
+                            const gradientEl = e.currentTarget.querySelector(
+                              ".card-hover-gradient"
+                            );
+                            if (gradientEl) gradientEl.style.opacity = 1;
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (product.path) {
+                            e.currentTarget.style.transform = "translateY(0)";
+                            e.currentTarget.style.boxShadow =
+                              "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)";
+                            e.currentTarget.style.borderColor = "#e5e7eb";
+                            const gradientEl = e.currentTarget.querySelector(
+                              ".card-hover-gradient"
+                            );
+                            if (gradientEl) gradientEl.style.opacity = 0;
+                          }
+                        }}
+                      >
+                        {product.path && (
+                          <div
+                            className="card-hover-gradient"
+                            style={{
+                              position: "absolute",
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                              background:
+                                "linear-gradient(135deg, rgba(30, 64, 175, 0.02) 0%, rgba(59, 130, 246, 0.02) 100%)",
+                              opacity: 0,
+                              transition: "opacity 0.3s ease",
+                              pointerEvents: "none",
+                              borderRadius: "12px",
+                            }}
+                          />
+                        )}
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            width: "100%",
+                            zIndex: 1,
+                          }}
+                        >
+                          {product.image && (
+                            <div
+                              style={{
+                                width: isMobile ? "180px" : "200px",
+                                height: isMobile ? "180px" : "200px",
+                                marginBottom: isMobile ? "16px" : "20px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                transition: "transform 0.3s ease",
+                              }}
+                              onMouseEnter={(e) => {
+                                if (product.path && !isMobile) {
+                                  e.currentTarget.style.transform = "scale(1.1)";
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                if (!isMobile) {
+                                  e.currentTarget.style.transform = "scale(1)";
+                                }
+                              }}
+                            >
+                              <img
+                                src={product.image}
+                                alt={product.name}
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "contain",
+                                  filter: product.path
+                                    ? "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))"
+                                    : "none",
+                                }}
+                              />
+                            </div>
+                          )}
+                          <h3
+                            style={{
+                              fontSize: isMobile ? "18px" : "20px",
+                              color: "#fff",
+                              textAlign: "center",
+                              margin: "0 0 12px 0",
+                              fontWeight: "600",
+                              letterSpacing: "-0.2px",
+                              lineHeight: "1.3",
+                            }}
+                          >
+                            {product.name}
+                          </h3>
+                          <p
+                            style={{
+                              fontSize: isMobile ? "14px" : "15px",
+                              color: "#cbd5e1",
+                              textAlign: "center",
+                              margin: 0,
+                              lineHeight: "1.5",
+                              fontWeight: "400",
+                            }}
+                          >
+                            {product.intro}
+                          </p>
+                          {!product.path && (
+                            <div
+                              style={{
+                                marginTop: "16px",
+                                padding: "6px 16px",
+                                backgroundColor: "#f1f5f9",
+                                borderRadius: "6px",
+                                fontSize: "12px",
+                                color: "#222222",
+                                fontWeight: "500",
+                                textTransform: "uppercase",
+                                letterSpacing: "0.5px",
+                              }}
+                            >
+                              Coming Soon
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -818,7 +1156,7 @@ const Home = () => {
               <div
                 className={`accordion-body ${openAccordion === "Anesthesia" ? "open" : ""}`}
                 style={{
-                  maxHeight: openAccordion === "Anesthesia" ? "1000px" : "0",
+                  maxHeight: openAccordion === "Anesthesia" ? "2000px" : "0",
                   overflow: "hidden",
                   transition: "max-height 0.3s ease-out, padding 0.3s ease-out",
                   padding: openAccordion === "Anesthesia" ? "24px" : "0 24px",
@@ -826,7 +1164,176 @@ const Home = () => {
                 }}
               >
                 <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
-                  Lorem ipsum..3
+                  <div
+                    className="cards-grid"
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: isMobile
+                        ? "1fr"
+                        : "repeat(auto-fill, minmax(320px, 1fr))",
+                      gap: isMobile ? "24px" : "30px",
+                      maxWidth: "1400px",
+                      margin: "0 auto",
+                    }}
+                  >
+                    {categories[2].products.map((product, productIndex) => (
+                      <div
+                        key={productIndex}
+                        onClick={() => handleCardClick(product.path)}
+                        style={{
+                          width: "100%",
+                          minHeight: isMobile ? "auto" : "420px",
+                          backgroundColor: "#000",
+                          borderRadius: "12px",
+                          boxShadow: product.path
+                            ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
+                            : "0 2px 4px rgba(0, 0, 0, 0.05)",
+                          border: product.path ? "1px solid #e5e7eb" : "1px solid #f3f4f6",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          cursor: product.path ? "pointer" : "not-allowed",
+                          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                          opacity: product.path ? 1 : 0.4,
+                          padding: isMobile ? "20px 16px" : "24px 24px",
+                          position: "relative",
+                          overflow: "hidden",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (product.path) {
+                            e.currentTarget.style.transform = "translateY(-4px)";
+                            e.currentTarget.style.boxShadow =
+                              "0 12px 24px rgba(30, 64, 175, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08)";
+                            e.currentTarget.style.borderColor = "#6022A6";
+                            const gradientEl = e.currentTarget.querySelector(
+                              ".card-hover-gradient"
+                            );
+                            if (gradientEl) gradientEl.style.opacity = 1;
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (product.path) {
+                            e.currentTarget.style.transform = "translateY(0)";
+                            e.currentTarget.style.boxShadow =
+                              "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)";
+                            e.currentTarget.style.borderColor = "#e5e7eb";
+                            const gradientEl = e.currentTarget.querySelector(
+                              ".card-hover-gradient"
+                            );
+                            if (gradientEl) gradientEl.style.opacity = 0;
+                          }
+                        }}
+                      >
+                        {product.path && (
+                          <div
+                            className="card-hover-gradient"
+                            style={{
+                              position: "absolute",
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                              background:
+                                "linear-gradient(135deg, rgba(30, 64, 175, 0.02) 0%, rgba(59, 130, 246, 0.02) 100%)",
+                              opacity: 0,
+                              transition: "opacity 0.3s ease",
+                              pointerEvents: "none",
+                              borderRadius: "12px",
+                            }}
+                          />
+                        )}
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            width: "100%",
+                            zIndex: 1,
+                          }}
+                        >
+                          {product.image && (
+                            <div
+                              style={{
+                                width: isMobile ? "180px" : "200px",
+                                height: isMobile ? "180px" : "200px",
+                                marginBottom: isMobile ? "16px" : "20px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                transition: "transform 0.3s ease",
+                              }}
+                              onMouseEnter={(e) => {
+                                if (product.path && !isMobile) {
+                                  e.currentTarget.style.transform = "scale(1.1)";
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                if (!isMobile) {
+                                  e.currentTarget.style.transform = "scale(1)";
+                                }
+                              }}
+                            >
+                              <img
+                                src={product.image}
+                                alt={product.name}
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "contain",
+                                  filter: product.path
+                                    ? "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))"
+                                    : "none",
+                                }}
+                              />
+                            </div>
+                          )}
+                          <h3
+                            style={{
+                              fontSize: isMobile ? "18px" : "20px",
+                              color: "#fff",
+                              textAlign: "center",
+                              margin: "0 0 12px 0",
+                              fontWeight: "600",
+                              letterSpacing: "-0.2px",
+                              lineHeight: "1.3",
+                            }}
+                          >
+                            {product.name}
+                          </h3>
+                          <p
+                            style={{
+                              fontSize: isMobile ? "14px" : "15px",
+                              color: "#cbd5e1",
+                              textAlign: "center",
+                              margin: 0,
+                              lineHeight: "1.5",
+                              fontWeight: "400",
+                            }}
+                          >
+                            {product.intro}
+                          </p>
+                          {!product.path && (
+                            <div
+                              style={{
+                                marginTop: "16px",
+                                padding: "6px 16px",
+                                backgroundColor: "#f1f5f9",
+                                borderRadius: "6px",
+                                fontSize: "12px",
+                                color: "#222222",
+                                fontWeight: "500",
+                                textTransform: "uppercase",
+                                letterSpacing: "0.5px",
+                              }}
+                            >
+                              Coming Soon
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -894,7 +1401,7 @@ const Home = () => {
               <div
                 className={`accordion-body ${openAccordion === "Monitoring" ? "open" : ""}`}
                 style={{
-                  maxHeight: openAccordion === "Monitoring" ? "1000px" : "0",
+                  maxHeight: openAccordion === "Monitoring" ? "2000px" : "0",
                   overflow: "hidden",
                   transition: "max-height 0.3s ease-out, padding 0.3s ease-out",
                   padding: openAccordion === "Monitoring" ? "24px" : "0 24px",
@@ -902,210 +1409,180 @@ const Home = () => {
                 }}
               >
                 <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
-                  Lorem ipsum..4
+                  <div
+                    className="cards-grid"
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: isMobile
+                        ? "1fr"
+                        : "repeat(auto-fill, minmax(320px, 1fr))",
+                      gap: isMobile ? "24px" : "30px",
+                      maxWidth: "1400px",
+                      margin: "0 auto",
+                    }}
+                  >
+                    {categories[3].products.map((product, productIndex) => (
+                      <div
+                        key={productIndex}
+                        onClick={() => handleCardClick(product.path)}
+                        style={{
+                          width: "100%",
+                          minHeight: isMobile ? "auto" : "420px",
+                          backgroundColor: "#000",
+                          borderRadius: "12px",
+                          boxShadow: product.path
+                            ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
+                            : "0 2px 4px rgba(0, 0, 0, 0.05)",
+                          border: product.path ? "1px solid #e5e7eb" : "1px solid #f3f4f6",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          cursor: product.path ? "pointer" : "not-allowed",
+                          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                          opacity: product.path ? 1 : 0.4,
+                          padding: isMobile ? "20px 16px" : "24px 24px",
+                          position: "relative",
+                          overflow: "hidden",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (product.path) {
+                            e.currentTarget.style.transform = "translateY(-4px)";
+                            e.currentTarget.style.boxShadow =
+                              "0 12px 24px rgba(30, 64, 175, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08)";
+                            e.currentTarget.style.borderColor = "#6022A6";
+                            const gradientEl = e.currentTarget.querySelector(
+                              ".card-hover-gradient"
+                            );
+                            if (gradientEl) gradientEl.style.opacity = 1;
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (product.path) {
+                            e.currentTarget.style.transform = "translateY(0)";
+                            e.currentTarget.style.boxShadow =
+                              "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)";
+                            e.currentTarget.style.borderColor = "#e5e7eb";
+                            const gradientEl = e.currentTarget.querySelector(
+                              ".card-hover-gradient"
+                            );
+                            if (gradientEl) gradientEl.style.opacity = 0;
+                          }
+                        }}
+                      >
+                        {product.path && (
+                          <div
+                            className="card-hover-gradient"
+                            style={{
+                              position: "absolute",
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                              background:
+                                "linear-gradient(135deg, rgba(30, 64, 175, 0.02) 0%, rgba(59, 130, 246, 0.02) 100%)",
+                              opacity: 0,
+                              transition: "opacity 0.3s ease",
+                              pointerEvents: "none",
+                              borderRadius: "12px",
+                            }}
+                          />
+                        )}
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            width: "100%",
+                            zIndex: 1,
+                          }}
+                        >
+                          {product.image && (
+                            <div
+                              style={{
+                                width: isMobile ? "180px" : "200px",
+                                height: isMobile ? "180px" : "200px",
+                                marginBottom: isMobile ? "16px" : "20px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                transition: "transform 0.3s ease",
+                              }}
+                              onMouseEnter={(e) => {
+                                if (product.path && !isMobile) {
+                                  e.currentTarget.style.transform = "scale(1.1)";
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                if (!isMobile) {
+                                  e.currentTarget.style.transform = "scale(1)";
+                                }
+                              }}
+                            >
+                              <img
+                                src={product.image}
+                                alt={product.name}
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "contain",
+                                  filter: product.path
+                                    ? "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))"
+                                    : "none",
+                                }}
+                              />
+                            </div>
+                          )}
+                          <h3
+                            style={{
+                              fontSize: isMobile ? "18px" : "20px",
+                              color: "#fff",
+                              textAlign: "center",
+                              margin: "0 0 12px 0",
+                              fontWeight: "600",
+                              letterSpacing: "-0.2px",
+                              lineHeight: "1.3",
+                            }}
+                          >
+                            {product.name}
+                          </h3>
+                          <p
+                            style={{
+                              fontSize: isMobile ? "14px" : "15px",
+                              color: "#cbd5e1",
+                              textAlign: "center",
+                              margin: 0,
+                              lineHeight: "1.5",
+                              fontWeight: "400",
+                            }}
+                          >
+                            {product.intro}
+                          </p>
+                          {!product.path && (
+                            <div
+                              style={{
+                                marginTop: "16px",
+                                padding: "6px 16px",
+                                backgroundColor: "#f1f5f9",
+                                borderRadius: "6px",
+                                fontSize: "12px",
+                                color: "#222222",
+                                fontWeight: "500",
+                                textTransform: "uppercase",
+                                letterSpacing: "0.5px",
+                              }}
+                            >
+                              Coming Soon
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-         
-          {categories.map((category, categoryIndex) => (
-            <div
-              key={categoryIndex}
-              style={{
-                marginBottom: isMobile ? "50px" : "80px",
-              }}
-            >
-              <h2
-                style={{
-                  fontSize: isMobile ? "24px" : "32px",
-                  color: "#6022A6",
-                  marginBottom: isMobile ? "24px" : "32px",
-                  fontWeight: "600",
-                  letterSpacing: "-0.5px",
-                  textAlign: "left",
-                  paddingLeft: isMobile ? "8px" : "0",
-                }}
-              >
-                {category.name}
-              </h2>
-              <div
-                className="cards-grid"
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: isMobile
-                    ? "1fr"
-                    : "repeat(auto-fill, minmax(320px, 1fr))",
-                  gap: isMobile ? "24px" : "30px",
-                  maxWidth: "1400px",
-                  margin: "0 auto",
-                }}
-              >
-                {category.products.map((product, productIndex) => (
-                  <div
-                    key={productIndex}
-                    onClick={() => handleCardClick(product.path)}
-                    style={{
-                      width: "100%",
-                      minHeight: isMobile ? "auto" : "420px",
-                      backgroundColor: "#000",
-                      borderRadius: "12px",
-                      boxShadow: product.path
-                        ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
-                        : "0 2px 4px rgba(0, 0, 0, 0.05)",
-                      border: product.path ? "1px solid #e5e7eb" : "1px solid #f3f4f6",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      cursor: product.path ? "pointer" : "not-allowed",
-                      transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                      opacity: product.path ? 1 : 0.4,
-                      padding: isMobile ? "20px 16px" : "24px 24px",
-                      position: "relative",
-                      overflow: "hidden",
-                    }}
-                    onMouseEnter={(e) => {
-                      if (product.path) {
-                        e.currentTarget.style.transform = "translateY(-4px)";
-                        e.currentTarget.style.boxShadow =
-                          "0 12px 24px rgba(30, 64, 175, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08)";
-                        e.currentTarget.style.borderColor = "#6022A6";
-                        const gradientEl = e.currentTarget.querySelector(
-                          ".card-hover-gradient"
-                        );
-                        if (gradientEl) gradientEl.style.opacity = 1;
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (product.path) {
-                        e.currentTarget.style.transform = "translateY(0)";
-                        e.currentTarget.style.boxShadow =
-                          "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)";
-                        e.currentTarget.style.borderColor = "#e5e7eb";
-                        const gradientEl = e.currentTarget.querySelector(
-                          ".card-hover-gradient"
-                        );
-                        if (gradientEl) gradientEl.style.opacity = 0;
-                      }
-                    }}
-                  >
-                    {/* Hover gradient effect */}
-                    {product.path && (
-                      <div
-                        className="card-hover-gradient"
-                        style={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          background:
-                            "linear-gradient(135deg, rgba(30, 64, 175, 0.02) 0%, rgba(59, 130, 246, 0.02) 100%)",
-                          opacity: 0,
-                          transition: "opacity 0.3s ease",
-                          pointerEvents: "none",
-                          borderRadius: "12px",
-                        }}
-                      />
-                    )}
-
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        width: "100%",
-                        zIndex: 1,
-                      }}
-                    >
-                      {product.image && (
-                        <div
-                          style={{
-                            width: isMobile ? "180px" : "200px",
-                            height: isMobile ? "180px" : "200px",
-                            marginBottom: isMobile ? "16px" : "20px",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            transition: "transform 0.3s ease",
-                          }}
-                          onMouseEnter={(e) => {
-                            if (product.path && !isMobile) {
-                              e.currentTarget.style.transform = "scale(1.1)";
-                            }
-                          }}
-                          onMouseLeave={(e) => {
-                            if (!isMobile) {
-                              e.currentTarget.style.transform = "scale(1)";
-                            }
-                          }}
-                        >
-                          <img
-                            src={product.image}
-                            alt={product.name}
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              objectFit: "contain",
-                              filter: product.path
-                                ? "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))"
-                                : "none",
-                            }}
-                          />
-                        </div>
-                      )}
-
-                      <h3
-                        style={{
-                          fontSize: isMobile ? "18px" : "20px",
-                          color: "#fff",
-                          textAlign: "center",
-                          margin: "0 0 12px 0",
-                          fontWeight: "600",
-                          letterSpacing: "-0.2px",
-                          lineHeight: "1.3",
-                        }}
-                      >
-                        {product.name}
-                      </h3>
-
-                      <p
-                        style={{
-                          fontSize: isMobile ? "14px" : "15px",
-                          color: "#cbd5e1",
-                          textAlign: "center",
-                          margin: 0,
-                          lineHeight: "1.5",
-                          fontWeight: "400",
-                        }}
-                      >
-                        {product.intro}
-                      </p>
-
-                      {!product.path && (
-                        <div
-                          style={{
-                            marginTop: "16px",
-                            padding: "6px 16px",
-                            backgroundColor: "#f1f5f9",
-                            borderRadius: "6px",
-                            fontSize: "12px",
-                            color: "#222222",
-                            fontWeight: "500",
-                            textTransform: "uppercase",
-                            letterSpacing: "0.5px",
-                          }}
-                        >
-                          Coming Soon
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </>
