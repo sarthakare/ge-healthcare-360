@@ -759,7 +759,9 @@ const Home = () => {
                             flexDirection: "column",
                             alignItems: "center",
                             width: "100%",
+                            height: "100%",
                             zIndex: 1,
+                            position: "relative",
                           }}
                         >
                           {product.image && (
@@ -816,13 +818,49 @@ const Home = () => {
                               fontSize: isMobile ? "14px" : "15px",
                               color: "#cbd5e1",
                               textAlign: "center",
-                              margin: 0,
+                              margin: "0 0 16px 0",
                               lineHeight: "1.5",
                               fontWeight: "400",
+                              flex: 1,
                             }}
                           >
                             {product.intro}
                           </p>
+                          {product.path && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleCardClick(product.path);
+                              }}
+                              style={{
+                                alignSelf: "flex-end",
+                                marginTop: "auto",
+                                padding: "8px 16px",
+                                backgroundColor: "#6022A6",
+                                color: "#ffffff",
+                                border: "none",
+                                borderRadius: "6px",
+                                fontSize: isMobile ? "13px" : "14px",
+                                fontWeight: "500",
+                                cursor: "pointer",
+                                transition: "all 0.3s ease",
+                                textTransform: "none",
+                                letterSpacing: "0.3px",
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = "#4a1a8a";
+                                e.currentTarget.style.transform = "translateY(-2px)";
+                                e.currentTarget.style.boxShadow = "0 4px 8px rgba(96, 34, 166, 0.3)";
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = "#6022A6";
+                                e.currentTarget.style.transform = "translateY(0)";
+                                e.currentTarget.style.boxShadow = "none";
+                              }}
+                            >
+                              Read more
+                            </button>
+                          )}
                           {!product.path && (
                             <div
                               style={{
@@ -1004,7 +1042,9 @@ const Home = () => {
                             flexDirection: "column",
                             alignItems: "center",
                             width: "100%",
+                            height: "100%",
                             zIndex: 1,
+                            position: "relative",
                           }}
                         >
                           {product.image && (
@@ -1061,13 +1101,49 @@ const Home = () => {
                               fontSize: isMobile ? "14px" : "15px",
                               color: "#cbd5e1",
                               textAlign: "center",
-                              margin: 0,
+                              margin: "0 0 16px 0",
                               lineHeight: "1.5",
                               fontWeight: "400",
+                              flex: 1,
                             }}
                           >
                             {product.intro}
                           </p>
+                          {product.path && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleCardClick(product.path);
+                              }}
+                              style={{
+                                alignSelf: "flex-end",
+                                marginTop: "auto",
+                                padding: "8px 16px",
+                                backgroundColor: "#6022A6",
+                                color: "#ffffff",
+                                border: "none",
+                                borderRadius: "6px",
+                                fontSize: isMobile ? "13px" : "14px",
+                                fontWeight: "500",
+                                cursor: "pointer",
+                                transition: "all 0.3s ease",
+                                textTransform: "none",
+                                letterSpacing: "0.3px",
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = "#4a1a8a";
+                                e.currentTarget.style.transform = "translateY(-2px)";
+                                e.currentTarget.style.boxShadow = "0 4px 8px rgba(96, 34, 166, 0.3)";
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = "#6022A6";
+                                e.currentTarget.style.transform = "translateY(0)";
+                                e.currentTarget.style.boxShadow = "none";
+                              }}
+                            >
+                              Read more
+                            </button>
+                          )}
                           {!product.path && (
                             <div
                               style={{
@@ -1249,7 +1325,9 @@ const Home = () => {
                             flexDirection: "column",
                             alignItems: "center",
                             width: "100%",
+                            height: "100%",
                             zIndex: 1,
+                            position: "relative",
                           }}
                         >
                           {product.image && (
@@ -1306,13 +1384,49 @@ const Home = () => {
                               fontSize: isMobile ? "14px" : "15px",
                               color: "#cbd5e1",
                               textAlign: "center",
-                              margin: 0,
+                              margin: "0 0 16px 0",
                               lineHeight: "1.5",
                               fontWeight: "400",
+                              flex: 1,
                             }}
                           >
                             {product.intro}
                           </p>
+                          {product.path && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleCardClick(product.path);
+                              }}
+                              style={{
+                                alignSelf: "flex-end",
+                                marginTop: "auto",
+                                padding: "8px 16px",
+                                backgroundColor: "#6022A6",
+                                color: "#ffffff",
+                                border: "none",
+                                borderRadius: "6px",
+                                fontSize: isMobile ? "13px" : "14px",
+                                fontWeight: "500",
+                                cursor: "pointer",
+                                transition: "all 0.3s ease",
+                                textTransform: "none",
+                                letterSpacing: "0.3px",
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = "#4a1a8a";
+                                e.currentTarget.style.transform = "translateY(-2px)";
+                                e.currentTarget.style.boxShadow = "0 4px 8px rgba(96, 34, 166, 0.3)";
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = "#6022A6";
+                                e.currentTarget.style.transform = "translateY(0)";
+                                e.currentTarget.style.boxShadow = "none";
+                              }}
+                            >
+                              Read more
+                            </button>
+                          )}
                           {!product.path && (
                             <div
                               style={{
@@ -1494,7 +1608,9 @@ const Home = () => {
                             flexDirection: "column",
                             alignItems: "center",
                             width: "100%",
+                            height: "100%",
                             zIndex: 1,
+                            position: "relative",
                           }}
                         >
                           {product.image && (
@@ -1551,13 +1667,49 @@ const Home = () => {
                               fontSize: isMobile ? "14px" : "15px",
                               color: "#cbd5e1",
                               textAlign: "center",
-                              margin: 0,
+                              margin: "0 0 16px 0",
                               lineHeight: "1.5",
                               fontWeight: "400",
+                              flex: 1,
                             }}
                           >
                             {product.intro}
                           </p>
+                          {product.path && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleCardClick(product.path);
+                              }}
+                              style={{
+                                alignSelf: "flex-end",
+                                marginTop: "auto",
+                                padding: "8px 16px",
+                                backgroundColor: "#6022A6",
+                                color: "#ffffff",
+                                border: "none",
+                                borderRadius: "6px",
+                                fontSize: isMobile ? "13px" : "14px",
+                                fontWeight: "500",
+                                cursor: "pointer",
+                                transition: "all 0.3s ease",
+                                textTransform: "none",
+                                letterSpacing: "0.3px",
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = "#4a1a8a";
+                                e.currentTarget.style.transform = "translateY(-2px)";
+                                e.currentTarget.style.boxShadow = "0 4px 8px rgba(96, 34, 166, 0.3)";
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = "#6022A6";
+                                e.currentTarget.style.transform = "translateY(0)";
+                                e.currentTarget.style.boxShadow = "none";
+                              }}
+                            >
+                              Read more
+                            </button>
+                          )}
                           {!product.path && (
                             <div
                               style={{
