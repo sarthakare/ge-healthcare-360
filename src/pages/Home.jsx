@@ -14,6 +14,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openAccordion, setOpenAccordion] = useState("DiagnosticCardiology");
 
   useEffect(() => {
     const handleResize = () => {
@@ -166,7 +167,7 @@ const Home = () => {
         }
         .mobile-menu-panel {
           position: fixed;
-          top: 0;
+          top: 58px;
           right: -100%;
           width: 280px;
           height: 100vh;
@@ -187,18 +188,84 @@ const Home = () => {
           cursor: pointer;
           padding: 8px;
           flex-direction: column;
-          gap: 4px;
+          gap: 6px;
         }
         .mobile-menu-button span {
           width: 24px;
           height: 2px;
-          background: #6022A6;
+          background: #fff;
           transition: all 0.3s;
         }
         @media (max-width: 767px) {
           .mobile-menu-button {
             display: flex !important;
           }
+        }
+        .accordion-container {
+          maxWidth: 1000px;
+          margin: 0 auto 60px;
+          border: 1px solid #e5e7eb;
+          borderRadius: 8px;
+          overflow: hidden;
+        }
+        .accordion-item {
+          borderBottom: 1px solid #e5e7eb;
+        }
+        .accordion-item:last-child {
+          borderBottom: none;
+        }
+        .accordion-header {
+          background: #f9fafb;
+          padding: 20px 24px;
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          transition: background 0.2s;
+        }
+        .accordion-header:hover {
+          background: #f3f4f6;
+        }
+        .accordion-title {
+          font-size: 20px;
+          font-weight: 600;
+          color: #6022A6;
+          margin: 0;
+        }
+        .accordion-icon {
+          width: 20px;
+          height: 20px;
+          transition: transform 0.3s;
+          color: #6022A6;
+        }
+        .accordion-icon.open {
+          transform: rotate(180deg);
+        }
+        .accordion-body {
+          maxHeight: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+          padding: 0 24px;
+          background: #ffffff;
+        }
+        .accordion-body.open {
+          maxHeight: 1000px;
+          padding: 24px;
+        }
+        .accordion-content {
+          color: #475569;
+          lineHeight: 1.6;
+        }
+        .accordion-title.collapsed:before {
+          float: right !important;
+          content:"\f067";
+        }
+        .card-header a{
+          color: #6022A6;
+          font-weight: 600;
+          font-style: normal;
+          font-display: swap;
+          font-size: 27px;
         }
       `}</style>
       <div
@@ -212,7 +279,7 @@ const Home = () => {
         {/* Header */}
         <header
           style={{
-            backgroundColor: "#ffffff",
+            backgroundColor: "#6022A6",
             borderBottom: "1px solid #e5e7eb",
             padding: isMobile ? "12px 16px" : "16px 24px",
             position: "sticky",
@@ -240,7 +307,7 @@ const Home = () => {
               onClick={() => navigate("/")}
             >
               <img
-                src="/logo.png"
+                src="/logo_GE.png"
                 alt="GE HealthCare Logo"
                 style={{
                   height: isMobile ? "32px" : "40px",
@@ -248,18 +315,6 @@ const Home = () => {
                   objectFit: "contain",
                 }}
               />
-              <h2
-                className="header-title"
-                style={{
-                  color: "#6022A6",
-                  padding: "0 0px",
-                  fontSize: isMobile ? "16px" : "20px",
-                  margin: 0,
-                  fontWeight: "600",
-                }}
-              >
-                GE HealthCare
-              </h2>
             </div>
             <button
               className="mobile-menu-button"
@@ -345,7 +400,7 @@ const Home = () => {
         {/* Mobile Menu Panel */}
         <div className={`mobile-menu-panel ${isMenuOpen ? "open" : ""}`}>
           <div style={{ marginBottom: "32px" }}>
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -374,7 +429,7 @@ const Home = () => {
               >
                 GE HealthCare
               </h2>
-            </div>
+            </div> */}
             <nav
               style={{
                 display: "flex",
@@ -395,7 +450,7 @@ const Home = () => {
                   fontWeight: "500",
                 }}
               >
-                Products
+                Home
               </a>
               <a
                 href="#"
@@ -410,7 +465,7 @@ const Home = () => {
                   fontWeight: "400",
                 }}
               >
-                About
+                Diagnostic Cardiology
               </a>
               <a
                 href="#"
@@ -425,8 +480,41 @@ const Home = () => {
                   fontWeight: "400",
                 }}
               >
-                Contact
+                Maternal & Infant Care
               </a>
+
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                }}
+                style={{
+                  color: "#222222",
+                  textDecoration: "none",
+                  fontSize: "18px",
+                  fontWeight: "400",
+                }}
+              >
+                Anesthesia
+              </a>
+
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMenuOpen(false);
+                }}
+                style={{
+                  color: "#222222",
+                  textDecoration: "none",
+                  fontSize: "18px",
+                  fontWeight: "400",
+                }}
+              >
+                Monitoring
+              </a>
+ 
             </nav>
           </div>
         </div>
@@ -453,7 +541,7 @@ const Home = () => {
             }}
           >
             {/* Decorative accent line */}
-            <div
+            {/* <div
               style={{
                 width: "60px",
                 height: "4px",
@@ -461,18 +549,21 @@ const Home = () => {
                 margin: "0 auto 32px",
                 borderRadius: "2px",
               }}
-            />
+            /> */}
             
             <h1
               className="main-heading"
               style={{
                 fontSize: isMobile ? "32px" : "52px",
-                background: "linear-gradient(135deg, #1e293b 0%, #334155 50%, #6022A6 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
+                // background: "linear-gradient(135deg, #1e293b 0%, #334155 50%, #6022A6 100%)",
+                // WebkitBackgroundClip: "text",
+                // WebkitTextFillColor: "transparent",
+                // backgroundClip: "text",
+                color:"#6022A6",
                 marginBottom: "28px",
-                fontWeight: "800",
+                fontWeight: "600",
+                fontStyle: "normal",
+                fontDisplay: "swap",
                 letterSpacing: "-1.5px",
                 lineHeight: "1.15",
                 padding: isMobile ? "0 8px" : "0",
@@ -511,6 +602,313 @@ const Home = () => {
             </p>
           </div>
 
+          <div className="accordion-container" style={{ maxWidth: "1000px", margin: "0 auto 60px", border: "1px solid #e5e7eb", borderRadius: "8px", overflow: "hidden" }}>
+            <div className="accordion-item" style={{ borderBottom: "1px solid #e5e7eb" }}>
+              <div
+                className="accordion-header"
+                style={{
+                  background: openAccordion === "DiagnosticCardiology" ? "#f3f4f6" : "#f9fafb",
+                  padding: "20px 24px",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  transition: "background 0.2s",
+                }}
+                onClick={() => setOpenAccordion(openAccordion === "DiagnosticCardiology" ? "" : "DiagnosticCardiology")}
+                onMouseEnter={(e) => {
+                  if (openAccordion !== "DiagnosticCardiology") {
+                    e.currentTarget.style.background = "#f3f4f6";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (openAccordion !== "DiagnosticCardiology") {
+                    e.currentTarget.style.background = "#f9fafb";
+                  }
+                }}
+              >
+                <h3 className="accordion-title" style={{ fontSize: "20px", fontWeight: "600", color: "#6022A6", margin: 0 }}>
+                  Diagnostic Cardiology
+                </h3>
+                {openAccordion === "DiagnosticCardiology" ? (
+                  <svg
+                    className="accordion-icon"
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      transition: "opacity 0.3s",
+                    }}
+                    fill="none"
+                    stroke="#6022A6"
+                    strokeWidth={2.5}
+                    viewBox="0 0 24 24"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
+                  </svg>
+                ) : (
+                  <svg
+                    className="accordion-icon"
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      transition: "opacity 0.3s",
+                    }}
+                    fill="none"
+                    stroke="#6022A6"
+                    strokeWidth={2.5}
+                    viewBox="0 0 24 24"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19" strokeLinecap="round" />
+                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
+                  </svg>
+                )}
+              </div>
+              <div
+                className={`accordion-body ${openAccordion === "DiagnosticCardiology" ? "open" : ""}`}
+                style={{
+                  maxHeight: openAccordion === "DiagnosticCardiology" ? "1000px" : "0",
+                  overflow: "hidden",
+                  transition: "max-height 0.3s ease-out, padding 0.3s ease-out",
+                  padding: openAccordion === "DiagnosticCardiology" ? "24px" : "0 24px",
+                  background: "#ffffff",
+                }}
+              >
+                <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
+                  Lorem ipsum..1
+                </div>
+              </div>
+            </div>
+
+            <div className="accordion-item" style={{ borderBottom: "1px solid #e5e7eb" }}>
+              <div
+                className="accordion-header"
+                style={{
+                  background: openAccordion === "MaternalInfantCare" ? "#f3f4f6" : "#f9fafb",
+                  padding: "20px 24px",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  transition: "background 0.2s",
+                }}
+                onClick={() => setOpenAccordion(openAccordion === "MaternalInfantCare" ? "" : "MaternalInfantCare")}
+                onMouseEnter={(e) => {
+                  if (openAccordion !== "MaternalInfantCare") {
+                    e.currentTarget.style.background = "#f3f4f6";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (openAccordion !== "MaternalInfantCare") {
+                    e.currentTarget.style.background = "#f9fafb";
+                  }
+                }}
+              >
+                <h3 className="accordion-title" style={{ fontSize: "20px", fontWeight: "600", color: "#6022A6", margin: 0 }}>
+                  Maternal & Infant Care
+                </h3>
+                {openAccordion === "MaternalInfantCare" ? (
+                  <svg
+                    className="accordion-icon"
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      transition: "opacity 0.3s",
+                    }}
+                    fill="none"
+                    stroke="#6022A6"
+                    strokeWidth={2.5}
+                    viewBox="0 0 24 24"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
+                  </svg>
+                ) : (
+                  <svg
+                    className="accordion-icon"
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      transition: "opacity 0.3s",
+                    }}
+                    fill="none"
+                    stroke="#6022A6"
+                    strokeWidth={2.5}
+                    viewBox="0 0 24 24"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19" strokeLinecap="round" />
+                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
+                  </svg>
+                )}
+              </div>
+              <div
+                className={`accordion-body ${openAccordion === "MaternalInfantCare" ? "open" : ""}`}
+                style={{
+                  maxHeight: openAccordion === "MaternalInfantCare" ? "1000px" : "0",
+                  overflow: "hidden",
+                  transition: "max-height 0.3s ease-out, padding 0.3s ease-out",
+                  padding: openAccordion === "MaternalInfantCare" ? "24px" : "0 24px",
+                  background: "#ffffff",
+                }}
+              >
+                <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
+                  Lorem ipsum..2
+                </div>
+              </div>
+            </div>
+
+            <div className="accordion-item" style={{ borderBottom: "1px solid #e5e7eb" }}>
+              <div
+                className="accordion-header"
+                style={{
+                  background: openAccordion === "Anesthesia" ? "#f3f4f6" : "#f9fafb",
+                  padding: "20px 24px",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  transition: "background 0.2s",
+                }}
+                onClick={() => setOpenAccordion(openAccordion === "Anesthesia" ? "" : "Anesthesia")}
+                onMouseEnter={(e) => {
+                  if (openAccordion !== "Anesthesia") {
+                    e.currentTarget.style.background = "#f3f4f6";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (openAccordion !== "Anesthesia") {
+                    e.currentTarget.style.background = "#f9fafb";
+                  }
+                }}
+              >
+                <h3 className="accordion-title" style={{ fontSize: "20px", fontWeight: "600", color: "#6022A6", margin: 0 }}>
+                  Anesthesia
+                </h3>
+                {openAccordion === "Anesthesia" ? (
+                  <svg
+                    className="accordion-icon"
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      transition: "opacity 0.3s",
+                    }}
+                    fill="none"
+                    stroke="#6022A6"
+                    strokeWidth={2.5}
+                    viewBox="0 0 24 24"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
+                  </svg>
+                ) : (
+                  <svg
+                    className="accordion-icon"
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      transition: "opacity 0.3s",
+                    }}
+                    fill="none"
+                    stroke="#6022A6"
+                    strokeWidth={2.5}
+                    viewBox="0 0 24 24"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19" strokeLinecap="round" />
+                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
+                  </svg>
+                )}
+              </div>
+              <div
+                className={`accordion-body ${openAccordion === "Anesthesia" ? "open" : ""}`}
+                style={{
+                  maxHeight: openAccordion === "Anesthesia" ? "1000px" : "0",
+                  overflow: "hidden",
+                  transition: "max-height 0.3s ease-out, padding 0.3s ease-out",
+                  padding: openAccordion === "Anesthesia" ? "24px" : "0 24px",
+                  background: "#ffffff",
+                }}
+              >
+                <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
+                  Lorem ipsum..3
+                </div>
+              </div>
+            </div>
+
+            <div className="accordion-item" style={{ borderBottom: "none" }}>
+              <div
+                className="accordion-header"
+                style={{
+                  background: openAccordion === "Monitoring" ? "#f3f4f6" : "#f9fafb",
+                  padding: "20px 24px",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  transition: "background 0.2s",
+                }}
+                onClick={() => setOpenAccordion(openAccordion === "Monitoring" ? "" : "Monitoring")}
+                onMouseEnter={(e) => {
+                  if (openAccordion !== "Monitoring") {
+                    e.currentTarget.style.background = "#f3f4f6";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (openAccordion !== "Monitoring") {
+                    e.currentTarget.style.background = "#f9fafb";
+                  }
+                }}
+              >
+                <h3 className="accordion-title" style={{ fontSize: "20px", fontWeight: "600", color: "#6022A6", margin: 0 }}>
+                  Monitoring
+                </h3>
+                {openAccordion === "Monitoring" ? (
+                  <svg
+                    className="accordion-icon"
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      transition: "opacity 0.3s",
+                    }}
+                    fill="none"
+                    stroke="#6022A6"
+                    strokeWidth={2.5}
+                    viewBox="0 0 24 24"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
+                  </svg>
+                ) : (
+                  <svg
+                    className="accordion-icon"
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      transition: "opacity 0.3s",
+                    }}
+                    fill="none"
+                    stroke="#6022A6"
+                    strokeWidth={2.5}
+                    viewBox="0 0 24 24"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19" strokeLinecap="round" />
+                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
+                  </svg>
+                )}
+              </div>
+              <div
+                className={`accordion-body ${openAccordion === "Monitoring" ? "open" : ""}`}
+                style={{
+                  maxHeight: openAccordion === "Monitoring" ? "1000px" : "0",
+                  overflow: "hidden",
+                  transition: "max-height 0.3s ease-out, padding 0.3s ease-out",
+                  padding: openAccordion === "Monitoring" ? "24px" : "0 24px",
+                  background: "#ffffff",
+                }}
+              >
+                <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
+                  Lorem ipsum..4
+                </div>
+              </div>
+            </div>
+          </div>
+
+         
           {categories.map((category, categoryIndex) => (
             <div
               key={categoryIndex}
@@ -521,7 +919,7 @@ const Home = () => {
               <h2
                 style={{
                   fontSize: isMobile ? "24px" : "32px",
-                  color: "#1e293b",
+                  color: "#6022A6",
                   marginBottom: isMobile ? "24px" : "32px",
                   fontWeight: "600",
                   letterSpacing: "-0.5px",
@@ -529,7 +927,7 @@ const Home = () => {
                   paddingLeft: isMobile ? "8px" : "0",
                 }}
               >
-                Category - {category.name}
+                {category.name}
               </h2>
               <div
                 className="cards-grid"
