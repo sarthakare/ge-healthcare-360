@@ -764,7 +764,7 @@ const Home = () => {
                           {product.image && (
                             <div
                               style={{
-                                width: isMobile ? "90px" : "90px", 
+                                width: isMobile ? "100%" : "100%", 
                                 height: isMobile ? "90px" : "90px", 
                                 background:"#000",  
                                 transition: "transform 0.3s ease",
@@ -1028,7 +1028,7 @@ const Home = () => {
                           {product.image && (
                             <div
                               style={{
-                                width: isMobile ? "90px" : "90px", 
+                                width: isMobile ? "100%" : "100%", 
                                 height: isMobile ? "90px" : "90px", 
                                 background:"#000", 
                                 transition: "transform 0.3s ease",
@@ -1292,7 +1292,7 @@ const Home = () => {
                           {product.image && (
                             <div
                               style={{
-                                width: isMobile ? "90px" : "90px", 
+                                width: isMobile ? "100%" : "100%", 
                                 height: isMobile ? "90px" : "90px", 
                                 background:"#000", 
                                 transition: "transform 0.3s ease",
@@ -1556,7 +1556,7 @@ const Home = () => {
                           {product.image && (
                             <div
                               style={{
-                                width: isMobile ? "90px" : "90px", 
+                                width: isMobile ? "100%" : "100%", 
                                 height: isMobile ? "90px" : "90px", 
                                 background:"rgb(60, 61, 64)", 
                                 transition: "transform 0.3s ease",
