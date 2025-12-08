@@ -702,7 +702,7 @@ const Home = () => {
                           cursor: product.path ? "pointer" : "not-allowed",
                           transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                           opacity: product.path ? 1 : 0.4,
-                          padding: isMobile ? "20px 16px" : "24px 24px",
+                          padding: isMobile ? "15px 20px" : "15px 20px",
                           position: "relative",
                           overflow: "hidden",
                         }}
@@ -764,8 +764,8 @@ const Home = () => {
                           {product.image && (
                             <div
                               style={{
-                                width: isMobile ? "150px" : "180px", 
-                                height: isMobile ? "150px" : "180px", 
+                                width: isMobile ? "90px" : "90px", 
+                                height: isMobile ? "90px" : "90px", 
                                 background:"#000",  
                                 transition: "transform 0.3s ease",
                               }} 
@@ -814,9 +814,7 @@ const Home = () => {
                                 e.stopPropagation();
                                 handleCardClick(product.path);
                               }}
-                              style={{
-                                alignSelf: "flex-end",
-                                marginTop: "auto",
+                              style={{ 
                                 padding: "8px 16px",
                                 backgroundColor: "#6022A6",
                                 color: "#ffffff",
@@ -968,7 +966,7 @@ const Home = () => {
                           cursor: product.path ? "pointer" : "not-allowed",
                           transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                           opacity: product.path ? 1 : 0.4,
-                          padding: isMobile ? "20px 16px" : "24px 24px",
+                          padding: isMobile ? "15px 20px" : "15px 20px",
                           position: "relative",
                           overflow: "hidden",
                         }}
@@ -1030,8 +1028,8 @@ const Home = () => {
                           {product.image && (
                             <div
                               style={{
-                                width: isMobile ? "150px" : "180px", 
-                                height: isMobile ? "150px" : "180px", 
+                                width: isMobile ? "90px" : "90px", 
+                                height: isMobile ? "90px" : "90px", 
                                 background:"#000", 
                                 transition: "transform 0.3s ease",
                               }} 
@@ -1081,8 +1079,6 @@ const Home = () => {
                                 handleCardClick(product.path);
                               }}
                               style={{
-                                alignSelf: "flex-end",
-                                marginTop: "auto",
                                 padding: "8px 16px",
                                 backgroundColor: "#6022A6",
                                 color: "#ffffff",
@@ -1220,7 +1216,7 @@ const Home = () => {
                         onClick={() => handleCardClick(product.path)}
                         style={{
                           width: "100%",
-                          minHeight: isMobile ? "auto" : "auto",
+                          minHeight: isMobile ? "auto" : "aauto",
                           backgroundColor: "#fff",
                           borderRadius: "12px",
                           boxShadow: product.path
@@ -1234,7 +1230,7 @@ const Home = () => {
                           cursor: product.path ? "pointer" : "not-allowed",
                           transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                           opacity: product.path ? 1 : 0.4,
-                          padding: isMobile ? "20px 16px" : "24px 24px",
+                          padding: isMobile ? "15px 20px" : "15px 20px",
                           position: "relative",
                           overflow: "hidden",
                         }}
@@ -1296,8 +1292,8 @@ const Home = () => {
                           {product.image && (
                             <div
                               style={{
-                                width: isMobile ? "150px" : "180px", 
-                                height: isMobile ? "150px" : "180px", 
+                                width: isMobile ? "90px" : "90px", 
+                                height: isMobile ? "90px" : "90px", 
                                 background:"#000", 
                                 transition: "transform 0.3s ease",
                               }}
@@ -1347,8 +1343,6 @@ const Home = () => {
                                 handleCardClick(product.path);
                               }}
                               style={{
-                                alignSelf: "flex-end",
-                                marginTop: "auto",
                                 padding: "8px 16px",
                                 backgroundColor: "#6022A6",
                                 color: "#ffffff",
@@ -1500,7 +1494,7 @@ const Home = () => {
                           cursor: product.path ? "pointer" : "not-allowed",
                           transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                           opacity: product.path ? 1 : 0.4,
-                          padding: isMobile ? "20px 16px" : "24px 24px",
+                          padding: isMobile ? "15px 20px" : "15px 20px",
                           position: "relative",
                           overflow: "hidden",
                         }}
@@ -1562,8 +1556,8 @@ const Home = () => {
                           {product.image && (
                             <div
                               style={{
-                                width: isMobile ? "150px" : "180px", 
-                                height: isMobile ? "150px" : "180px", 
+                                width: isMobile ? "90px" : "90px", 
+                                height: isMobile ? "90px" : "90px", 
                                 background:"rgb(60, 61, 64)", 
                                 transition: "transform 0.3s ease",
                               }} 
@@ -1613,8 +1607,6 @@ const Home = () => {
                                 handleCardClick(product.path);
                               }}
                               style={{
-                                alignSelf: "flex-end",
-                                marginTop: "auto",
                                 padding: "8px 16px",
                                 backgroundColor: "#6022A6",
                                 color: "#ffffff",
