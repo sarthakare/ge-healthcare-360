@@ -677,23 +677,20 @@ const Home = () => {
                   <div
                     className="cards-grid"
                     style={{
-                      display: "grid",
-                      gridTemplateColumns: isMobile
-                        ? "1fr"
-                        : "repeat(auto-fill, minmax(320px, 1fr))",
-                      gap: isMobile ? "24px" : "30px",
+                      display: "grid", 
+                      gap: isMobile ? "20px" : "20px",
                       maxWidth: "1400px",
                       margin: "0 auto",
                     }}
-                  >
+                    >
                     {categories[0].products.map((product, productIndex) => (
                       <div
                         key={productIndex}
                         onClick={() => handleCardClick(product.path)}
                         style={{
                           width: "100%",
-                          minHeight: isMobile ? "auto" : "420px",
-                          backgroundColor: "#000",
+                          minHeight: isMobile ? "auto" : "auto",
+                          backgroundColor: "#fff",
                           borderRadius: "12px",
                           boxShadow: product.path
                             ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
@@ -701,8 +698,7 @@ const Home = () => {
                           border: product.path ? "1px solid #e5e7eb" : "1px solid #f3f4f6",
                           display: "flex",
                           flexDirection: "column",
-                          justifyContent: "space-between",
-                          alignItems: "center",
+                          justifyContent: "space-between", 
                           cursor: product.path ? "pointer" : "not-allowed",
                           transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                           opacity: product.path ? 1 : 0.4,
@@ -754,37 +750,25 @@ const Home = () => {
                           />
                         )}
                         <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
+                          style={{ 
+                            display: "grid",
+                            gridTemplateColumns: "repeat(4, 1fr)",
+                            gap:"20px",
                             width: "100%",
                             height: "100%",
                             zIndex: 1,
                             position: "relative",
+                            alignItems: "center",
                           }}
                         >
                           {product.image && (
                             <div
                               style={{
-                                width: isMobile ? "180px" : "200px",
-                                height: isMobile ? "180px" : "200px",
-                                marginBottom: isMobile ? "16px" : "20px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
+                                width: isMobile ? "150px" : "180px", 
+                                height: isMobile ? "150px" : "180px", 
+                                background:"#000",  
                                 transition: "transform 0.3s ease",
-                              }}
-                              onMouseEnter={(e) => {
-                                if (product.path && !isMobile) {
-                                  e.currentTarget.style.transform = "scale(1.1)";
-                                }
-                              }}
-                              onMouseLeave={(e) => {
-                                if (!isMobile) {
-                                  e.currentTarget.style.transform = "scale(1)";
-                                }
-                              }}
+                              }} 
                             >
                               <img
                                 src={product.image}
@@ -803,9 +787,8 @@ const Home = () => {
                           <h3
                             style={{
                               fontSize: isMobile ? "18px" : "20px",
-                              color: "#fff",
-                              textAlign: "center",
-                              margin: "0 0 12px 0",
+                              color: "#000",
+                              textAlign: "left", 
                               fontWeight: "600",
                               letterSpacing: "-0.2px",
                               lineHeight: "1.3",
@@ -816,9 +799,8 @@ const Home = () => {
                           <p
                             style={{
                               fontSize: isMobile ? "14px" : "15px",
-                              color: "#cbd5e1",
-                              textAlign: "center",
-                              margin: "0 0 16px 0",
+                              color: "#000",
+                              textAlign: "left", 
                               lineHeight: "1.5",
                               fontWeight: "400",
                               flex: 1,
@@ -960,11 +942,8 @@ const Home = () => {
                   <div
                     className="cards-grid"
                     style={{
-                      display: "grid",
-                      gridTemplateColumns: isMobile
-                        ? "1fr"
-                        : "repeat(auto-fill, minmax(320px, 1fr))",
-                      gap: isMobile ? "24px" : "30px",
+                      display: "grid", 
+                      gap: isMobile ? "20px" : "20px",
                       maxWidth: "1400px",
                       margin: "0 auto",
                     }}
@@ -975,8 +954,8 @@ const Home = () => {
                         onClick={() => handleCardClick(product.path)}
                         style={{
                           width: "100%",
-                          minHeight: isMobile ? "auto" : "420px",
-                          backgroundColor: "#000",
+                          minHeight: isMobile ? "auto" : "auto",
+                          backgroundColor: "#fff",
                           borderRadius: "12px",
                           boxShadow: product.path
                             ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
@@ -1038,36 +1017,24 @@ const Home = () => {
                         )}
                         <div
                           style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
+                            display: "grid",
+                            gridTemplateColumns: "repeat(4, 1fr)",
+                            gap:"20px",
                             width: "100%",
                             height: "100%",
                             zIndex: 1,
                             position: "relative",
+                            alignItems: "center",
                           }}
                         >
                           {product.image && (
                             <div
                               style={{
-                                width: isMobile ? "180px" : "200px",
-                                height: isMobile ? "180px" : "200px",
-                                marginBottom: isMobile ? "16px" : "20px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
+                                width: isMobile ? "150px" : "180px", 
+                                height: isMobile ? "150px" : "180px", 
+                                background:"#000", 
                                 transition: "transform 0.3s ease",
-                              }}
-                              onMouseEnter={(e) => {
-                                if (product.path && !isMobile) {
-                                  e.currentTarget.style.transform = "scale(1.1)";
-                                }
-                              }}
-                              onMouseLeave={(e) => {
-                                if (!isMobile) {
-                                  e.currentTarget.style.transform = "scale(1)";
-                                }
-                              }}
+                              }} 
                             >
                               <img
                                 src={product.image}
@@ -1086,9 +1053,8 @@ const Home = () => {
                           <h3
                             style={{
                               fontSize: isMobile ? "18px" : "20px",
-                              color: "#fff",
-                              textAlign: "center",
-                              margin: "0 0 12px 0",
+                              color: "#000",
+                              textAlign: "left", 
                               fontWeight: "600",
                               letterSpacing: "-0.2px",
                               lineHeight: "1.3",
@@ -1099,9 +1065,8 @@ const Home = () => {
                           <p
                             style={{
                               fontSize: isMobile ? "14px" : "15px",
-                              color: "#cbd5e1",
-                              textAlign: "center",
-                              margin: "0 0 16px 0",
+                              color: "#000",
+                              textAlign: "left", 
                               lineHeight: "1.5",
                               fontWeight: "400",
                               flex: 1,
@@ -1242,12 +1207,9 @@ const Home = () => {
                 <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
                   <div
                     className="cards-grid"
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: isMobile
-                        ? "1fr"
-                        : "repeat(auto-fill, minmax(320px, 1fr))",
-                      gap: isMobile ? "24px" : "30px",
+                   style={{
+                      display: "grid", 
+                      gap: isMobile ? "20px" : "20px",
                       maxWidth: "1400px",
                       margin: "0 auto",
                     }}
@@ -1258,8 +1220,8 @@ const Home = () => {
                         onClick={() => handleCardClick(product.path)}
                         style={{
                           width: "100%",
-                          minHeight: isMobile ? "auto" : "420px",
-                          backgroundColor: "#000",
+                          minHeight: isMobile ? "auto" : "auto",
+                          backgroundColor: "#fff",
                           borderRadius: "12px",
                           boxShadow: product.path
                             ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
@@ -1321,35 +1283,23 @@ const Home = () => {
                         )}
                         <div
                           style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
+                            display: "grid",
+                            gridTemplateColumns: "repeat(4, 1fr)",
+                            gap:"20px",
                             width: "100%",
                             height: "100%",
                             zIndex: 1,
                             position: "relative",
+                            alignItems: "center",
                           }}
                         >
                           {product.image && (
                             <div
                               style={{
-                                width: isMobile ? "180px" : "200px",
-                                height: isMobile ? "180px" : "200px",
-                                marginBottom: isMobile ? "16px" : "20px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
+                                width: isMobile ? "150px" : "180px", 
+                                height: isMobile ? "150px" : "180px", 
+                                background:"#000", 
                                 transition: "transform 0.3s ease",
-                              }}
-                              onMouseEnter={(e) => {
-                                if (product.path && !isMobile) {
-                                  e.currentTarget.style.transform = "scale(1.1)";
-                                }
-                              }}
-                              onMouseLeave={(e) => {
-                                if (!isMobile) {
-                                  e.currentTarget.style.transform = "scale(1)";
-                                }
                               }}
                             >
                               <img
@@ -1369,9 +1319,8 @@ const Home = () => {
                           <h3
                             style={{
                               fontSize: isMobile ? "18px" : "20px",
-                              color: "#fff",
-                              textAlign: "center",
-                              margin: "0 0 12px 0",
+                              color: "#000",
+                              textAlign: "left", 
                               fontWeight: "600",
                               letterSpacing: "-0.2px",
                               lineHeight: "1.3",
@@ -1382,9 +1331,8 @@ const Home = () => {
                           <p
                             style={{
                               fontSize: isMobile ? "14px" : "15px",
-                              color: "#cbd5e1",
-                              textAlign: "center",
-                              margin: "0 0 16px 0",
+                              color: "#000",
+                              textAlign: "left", 
                               lineHeight: "1.5",
                               fontWeight: "400",
                               flex: 1,
@@ -1526,11 +1474,8 @@ const Home = () => {
                   <div
                     className="cards-grid"
                     style={{
-                      display: "grid",
-                      gridTemplateColumns: isMobile
-                        ? "1fr"
-                        : "repeat(auto-fill, minmax(320px, 1fr))",
-                      gap: isMobile ? "24px" : "30px",
+                      display: "grid", 
+                      gap: isMobile ? "20px" : "20px",
                       maxWidth: "1400px",
                       margin: "0 auto",
                     }}
@@ -1541,8 +1486,8 @@ const Home = () => {
                         onClick={() => handleCardClick(product.path)}
                         style={{
                           width: "100%",
-                          minHeight: isMobile ? "auto" : "420px",
-                          backgroundColor: "#000",
+                          minHeight: isMobile ? "auto" : "auto",
+                          backgroundColor: "#fff",
                           borderRadius: "12px",
                           boxShadow: product.path
                             ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
@@ -1604,36 +1549,24 @@ const Home = () => {
                         )}
                         <div
                           style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
+                            display: "grid",
+                            gridTemplateColumns: "repeat(4, 1fr)",
+                            gap:"20px",
                             width: "100%",
                             height: "100%",
                             zIndex: 1,
                             position: "relative",
+                            alignItems: "center",
                           }}
                         >
                           {product.image && (
                             <div
                               style={{
-                                width: isMobile ? "180px" : "200px",
-                                height: isMobile ? "180px" : "200px",
-                                marginBottom: isMobile ? "16px" : "20px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
+                                width: isMobile ? "150px" : "180px", 
+                                height: isMobile ? "150px" : "180px", 
+                                background:"rgb(60, 61, 64)", 
                                 transition: "transform 0.3s ease",
-                              }}
-                              onMouseEnter={(e) => {
-                                if (product.path && !isMobile) {
-                                  e.currentTarget.style.transform = "scale(1.1)";
-                                }
-                              }}
-                              onMouseLeave={(e) => {
-                                if (!isMobile) {
-                                  e.currentTarget.style.transform = "scale(1)";
-                                }
-                              }}
+                              }} 
                             >
                               <img
                                 src={product.image}
@@ -1652,9 +1585,8 @@ const Home = () => {
                           <h3
                             style={{
                               fontSize: isMobile ? "18px" : "20px",
-                              color: "#fff",
-                              textAlign: "center",
-                              margin: "0 0 12px 0",
+                              color: "#000",
+                              textAlign: "left", 
                               fontWeight: "600",
                               letterSpacing: "-0.2px",
                               lineHeight: "1.3",
@@ -1665,9 +1597,8 @@ const Home = () => {
                           <p
                             style={{
                               fontSize: isMobile ? "14px" : "15px",
-                              color: "#cbd5e1",
-                              textAlign: "center",
-                              margin: "0 0 16px 0",
+                              color: "#000",
+                              textAlign: "left", 
                               lineHeight: "1.5",
                               fontWeight: "400",
                               flex: 1,
