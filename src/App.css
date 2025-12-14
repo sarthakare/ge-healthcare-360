@@ -167,3 +167,42 @@
       font-display: swap;
   }
   
+  .nav-menu{
+      text-align: right;
+    width: 100%;
+    padding-right: 10px;
+  }
+  
+  .nav-menu ul{
+      display: block;
+  }
+  
+  .nav-menu ul li{
+      display: inline-block;
+      margin: 0 7px;
+  }
+  
+  .nav-menu ul li img{
+      width: 100%;
+    height: 20px;
+    position: relative;
+    top: 5px;
+    z-index: 1;
+  }
+  
+  .nav-menu ul li a.btn-primary{
+      background: #6022A6;
+    color: #fff;
+    border: 0;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 20px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .accordion-body.open{
+      border-top: 5px solid #F37F63;
+  }
