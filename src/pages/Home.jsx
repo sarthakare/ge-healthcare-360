@@ -10,6 +10,296 @@ import ImageLEDPhototherapy from "../assets/led-phototherapy/images/led-photothe
 import ImageECGHolter from "../assets/ecg-holter/images/ecg-holter.png";
 import ImageMonitorB1xM from "../assets/monitors-b1xm/images/A.png";
 
+// Reusable Accordion Icon Component
+const AccordionIcon = ({ isOpen }) => (
+  <svg
+    className="accordion-icon"
+    style={{
+      width: "20px",
+      height: "20px",
+      transition: "opacity 0.3s",
+    }}
+    fill="none"
+    stroke="#6022A6"
+    strokeWidth={2.5}
+    viewBox="0 0 24 24"
+  >
+    {isOpen ? (
+      <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
+    ) : (
+      <>
+        <line x1="12" y1="5" x2="12" y2="19" strokeLinecap="round" />
+        <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
+      </>
+    )}
+  </svg>
+);
+
+// Reusable Product Card Component
+const ProductCard = ({ product, isMobile, onCardClick }) => {
+  const handleCardClick = () => {
+    if (product.path) {
+      onCardClick(product.path);
+    }
+  };
+
+  return (
+    <div
+      onClick={handleCardClick}
+      style={{
+        width: "100%",
+        minHeight: isMobile ? "auto" : "auto",
+        backgroundColor: "#fff",
+        borderRadius: "12px",
+        boxShadow: product.path
+          ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
+          : "0 2px 4px rgba(0, 0, 0, 0.05)",
+        border: product.path ? "1px solid #e5e7eb" : "1px solid #f3f4f6",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        cursor: product.path ? "pointer" : "not-allowed",
+        transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+        opacity: product.path ? 1 : 0.4,
+        padding: isMobile ? "15px 20px" : "15px 20px",
+        position: "relative",
+        overflow: "hidden",
+      }}
+      onMouseEnter={(e) => {
+        if (product.path) {
+          e.currentTarget.style.transform = "translateY(-4px)";
+          e.currentTarget.style.boxShadow =
+            "0 12px 24px rgba(30, 64, 175, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08)";
+          e.currentTarget.style.borderColor = "#e5e7eb";
+          const gradientEl = e.currentTarget.querySelector(".card-hover-gradient");
+          if (gradientEl) gradientEl.style.opacity = 1;
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (product.path) {
+          e.currentTarget.style.transform = "translateY(0)";
+          e.currentTarget.style.boxShadow =
+            "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)";
+          e.currentTarget.style.borderColor = "#e5e7eb";
+          const gradientEl = e.currentTarget.querySelector(".card-hover-gradient");
+          if (gradientEl) gradientEl.style.opacity = 0;
+        }
+      }}
+    >
+      {product.path && (
+        <div
+          className="card-hover-gradient"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background:
+              "linear-gradient(135deg, rgba(30, 64, 175, 0.02) 0%, rgba(59, 130, 246, 0.02) 100%)",
+            opacity: 0,
+            transition: "opacity 0.3s ease",
+            pointerEvents: "none",
+            borderRadius: "12px",
+          }}
+        />
+      )}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: isMobile ? "repeat(1, 1fr)" : "repeat(4, 1fr)",
+          gap: "20px",
+          width: "100%",
+          height: "100%",
+          zIndex: 1,
+          position: "relative",
+          alignItems: "center",
+        }}
+      >
+        {product.image && (
+          <div
+            style={{
+              width: isMobile ? "100%" : "100%",
+              height: isMobile ? "90px" : "90px",
+              background: "#000",
+              transition: "transform 0.3s ease",
+            }}
+          >
+            <img
+              src={product.image}
+              alt={product.name}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                filter: product.path
+                  ? "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))"
+                  : "none",
+              }}
+            />
+          </div>
+        )}
+        <h3
+          style={{
+            fontSize: isMobile ? "18px" : "20px",
+            color: "#000",
+            textAlign: "left",
+            fontWeight: "600",
+            letterSpacing: "-0.2px",
+            lineHeight: "1.3",
+          }}
+        >
+          {product.name}
+        </h3>
+        <p
+          style={{
+            fontSize: isMobile ? "14px" : "15px",
+            color: "#000",
+            textAlign: "left",
+            lineHeight: "1.5",
+            fontWeight: "400",
+            flex: 1,
+          }}
+        >
+          {product.intro}
+        </p>
+        {product.path && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleCardClick();
+            }}
+            style={{
+              padding: "8px 0px",
+              backgroundColor: "#F37F63",
+              color: "#000",
+              border: "none",
+              fontSize: isMobile ? "13px" : "14px",
+              fontWeight: "600",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              textTransform: "none",
+              width: "108px",
+              margin: isMobile ? "0 0" : "0 auto",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "#F37F63";
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow = "0 4px 8px rgba(96, 34, 166, 0.3)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "#F37F63";
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "none";
+            }}
+          >
+            Read more
+          </button>
+        )}
+        {!product.path && (
+          <div
+            style={{
+              marginTop: "16px",
+              padding: "6px 16px",
+              backgroundColor: "#f1f5f9",
+              borderRadius: "6px",
+              fontSize: "12px",
+              color: "#222222",
+              fontWeight: "500",
+              textTransform: "uppercase",
+              letterSpacing: "0.5px",
+            }}
+          >
+            Coming Soon
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+// Reusable Accordion Item Component
+const AccordionItem = ({
+  categoryKey,
+  title,
+  products,
+  isOpen,
+  onToggle,
+  isMobile,
+  onCardClick,
+  isLast = false,
+}) => {
+  return (
+    <div
+      className="accordion-item"
+      style={{ borderBottom: isLast ? "none" : "1px solid #e5e7eb" }}
+    >
+      <div
+        className="accordion-header"
+        style={{
+          background: isOpen ? "#f3f4f6" : "#f9fafb",
+          padding: "20px 24px",
+          cursor: "pointer",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          transition: "background 0.2s",
+        }}
+        onClick={() => onToggle(categoryKey)}
+        onMouseEnter={(e) => {
+          if (!isOpen) {
+            e.currentTarget.style.background = "#f3f4f6";
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!isOpen) {
+            e.currentTarget.style.background = "#f9fafb";
+          }
+        }}
+      >
+        <h3
+          className="accordion-title"
+          style={{ fontSize: "20px", fontWeight: "600", color: "#6022A6", margin: 0 }}
+        >
+          {title}
+        </h3>
+        <AccordionIcon isOpen={isOpen} />
+      </div>
+      <div
+        className={`accordion-body ${isOpen ? "open" : ""}`}
+        style={{
+          maxHeight: isOpen ? "2000px" : "0",
+          overflow: "hidden",
+          transition: "max-height 0.3s ease-out, padding 0.3s ease-out",
+          padding: isOpen ? "24px" : "0 24px",
+          background: "#ffffff",
+        }}
+      >
+        <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
+          <div
+            className="cards-grid"
+            style={{
+              display: "grid",
+              gap: isMobile ? "20px" : "20px",
+              maxWidth: "1400px",
+              margin: "0 auto",
+            }}
+          >
+            {products.map((product, productIndex) => (
+              <ProductCard
+                key={productIndex}
+                product={product}
+                isMobile={isMobile}
+                onCardClick={onCardClick}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Home = () => {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -34,8 +324,13 @@ const Home = () => {
     }
   };
 
+  const handleAccordionToggle = (categoryKey) => {
+    setOpenAccordion(openAccordion === categoryKey ? "" : categoryKey);
+  };
+
   const categories = [
     {
+      key: "DiagnosticCardiology",
       name: "Diagnostic Cardiology",
       products: [
         {
@@ -53,6 +348,7 @@ const Home = () => {
       ],
     },
     {
+      key: "MaternalInfantCare",
       name: "Maternal & Infant Care",
       products: [
         {
@@ -76,6 +372,7 @@ const Home = () => {
       ],
     },
     {
+      key: "Anesthesia",
       name: "Anesthesia",
       products: [
         {
@@ -93,6 +390,7 @@ const Home = () => {
       ],
     },
     {
+      key: "Monitoring",
       name: "Monitoring",
       products: [
         {
@@ -123,7 +421,7 @@ const Home = () => {
             line-height: 1.2 !important;
           }
           .main-content {
-            padding: 40px 16px 40px !important;
+            padding: 0px 16px 40px !important;
           }
           .cards-grid {
             grid-template-columns: 1fr !important;
@@ -193,7 +491,7 @@ const Home = () => {
         .mobile-menu-button span {
           width: 24px;
           height: 2px;
-          background: #fff;
+          background: #6022A6;
           transition: all 0.3s;
         }
         @media (max-width: 767px) {
@@ -251,6 +549,7 @@ const Home = () => {
         .accordion-body.open {
           maxHeight: 1000px;
           padding: 24px;
+          border-top: 5px solid #F37F63;
         }
         .accordion-content {
           color: #475569;
@@ -267,6 +566,37 @@ const Home = () => {
           font-display: swap;
           font-size: 27px;
         }
+        .nav-menu {
+          text-align: right;
+          width: 100%;
+          padding-right: 10px;
+        }
+        .nav-menu ul {
+          display: block;
+        }
+        .nav-menu ul li {
+          display: inline-block;
+          margin: 0 7px;
+        }
+        .nav-menu ul li img {
+          width: 100%;
+          height: 20px;
+          position: relative;
+          top: 5px;
+          z-index: 1;
+        }
+        .nav-menu ul li a.btn-primary {
+          background: #6022A6;
+          color: #fff;
+          border: 0;
+          padding: 10px 15px;
+          border-radius: 5px;
+          font-size: 14px;
+          font-weight: 600;
+          margin-left: 20px;
+          cursor: pointer;
+          text-decoration: none;
+        } 
       `}</style>
       <div
         style={{
@@ -279,7 +609,7 @@ const Home = () => {
         {/* Header */}
         <header
           style={{
-            backgroundColor: "#6022A6",
+            backgroundColor: "#fff",
             borderBottom: "1px solid #e5e7eb",
             padding: isMobile ? "12px 16px" : "16px 24px",
             position: "sticky",
@@ -316,6 +646,17 @@ const Home = () => {
                 }}
               />
             </div>
+
+<div className="nav-menu"> 
+  <ul>
+    <li><a href="#"> <img src="/ico_1.png" alt="" /> </a></li>
+    <li><a href="#"> <img src="/ico_2.png" alt="" /> </a></li>  
+    <li><a href="#"> <img src="/ico_3.png" alt="" /> </a></li>  
+    <li><a href="#"> <img src="/ico_4.png" alt="" /> </a></li>
+    <li><a href="#" className="btn-primary">Contact Us</a></li>
+  </ul> 
+</div>
+
             <button
               className="mobile-menu-button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -522,21 +863,24 @@ const Home = () => {
         {/* Main Content */}
         <div
           className="main-content"
-          style={{
-            padding: isMobile ? "40px 16px 40px" : "60px 20px",
+          style={{ 
             position: "relative",
             maxWidth: "1400px",
-            margin: "0 auto",
+            margin: "0 auto", 
           }}
         >
           <div
             style={{
-              textAlign: "center",
-              marginBottom: isMobile ? "50px" : "80px",
-              maxWidth: "1000px",
+               backgroundImage: "url('./img-hero1.png'), url('./img-hero2.png')",
+              backgroundRepeat: "no-repeat, no-repeat",
+              backgroundPosition: "bottom left, top right",
+              backgroundSize: "auto, auto",
+              backgroundColor: "#6022A6",
+              marginBottom: isMobile ? "30px" : "40px",
+              maxWidth: "1400px",
               marginLeft: "auto",
               marginRight: "auto",
-              padding: isMobile ? "0 16px" : "0 24px",
+              padding: isMobile ? "45px 15px" : "63px 27px",
               position: "relative",
             }}
           >
@@ -559,7 +903,7 @@ const Home = () => {
                 // WebkitBackgroundClip: "text",
                 // WebkitTextFillColor: "transparent",
                 // backgroundClip: "text",
-                color:"#6022A6",
+                color:"#fff",
                 marginBottom: "28px",
                 fontWeight: "600",
                 fontStyle: "normal",
@@ -567,7 +911,7 @@ const Home = () => {
                 letterSpacing: "-1.5px",
                 lineHeight: "1.15",
                 padding: isMobile ? "0 8px" : "0",
-                textShadow: "0 2px 20px rgba(96, 34, 166, 0.1)",
+                maxWidth: "700px", 
               }}
             >
               Step into GE HealthCare's interactive 3D Experience Centre
@@ -576,17 +920,14 @@ const Home = () => {
             <p
               style={{
                 fontSize: isMobile ? "17px" : "20px",
-                color: "#475569",
+                color: "#fff",
                 lineHeight: "1.75",
-                margin: 0,
-                padding: isMobile ? "0 8px" : "0 20px",
+                margin: 0, 
                 fontWeight: "400",
-                maxWidth: "880px",
-                marginLeft: "auto",
-                marginRight: "auto",
+                maxWidth: "700px", 
               }}
             >
-              <span
+              {/* <span
                 style={{
                   fontSize: isMobile ? "24px" : "28px",
                   color: "#6022A6",
@@ -597,1066 +938,25 @@ const Home = () => {
                 }}
               >
                 —
-              </span>
-              A digital space where you can explore our clinical technologies as if they were right in front of you. Navigate through <strong style={{ color: "#1e293b", fontWeight: "600" }}>Diagnostic Cardiology</strong>, <strong style={{ color: "#1e293b", fontWeight: "600" }}>Maternal & Infant Care</strong>, <strong style={{ color: "#1e293b", fontWeight: "600" }}>Anesthesia</strong> and <strong style={{ color: "#1e293b", fontWeight: "600" }}>Patient Monitoring</strong>, and dive into detailed 3D models, feature callouts, and guided walkthroughs. Each product has been brought to life to help clinicians, biomedical teams and decision-makers understand its capabilities, workflow advantages and real-world clinical impact.
+              </span> */}
+              A digital space where you can explore our clinical technologies as if they were right in front of you. Navigate through <strong style={{ color: "#fff", fontWeight: "600" }}>Diagnostic Cardiology</strong>, <strong style={{ color: "#fff", fontWeight: "600" }}>Maternal & Infant Care</strong>, <strong style={{ color: "#fff", fontWeight: "600" }}>Anesthesia</strong> and <strong style={{ color: "#fff", fontWeight: "600" }}>Patient Monitoring</strong>, and dive into detailed 3D models, feature callouts, and guided walkthroughs. Each product has been brought to life to help clinicians, biomedical teams and decision-makers understand its capabilities, workflow advantages and real-world clinical impact.
             </p>
           </div>
 
-          <div className="accordion-container" style={{ maxWidth: "1000px", margin: "0 auto 60px", border: "1px solid #e5e7eb", borderRadius: "8px", overflow: "hidden" }}>
-            <div className="accordion-item" style={{ borderBottom: "1px solid #e5e7eb" }}>
-              <div
-                className="accordion-header"
-                style={{
-                  background: openAccordion === "DiagnosticCardiology" ? "#f3f4f6" : "#f9fafb",
-                  padding: "20px 24px",
-                  cursor: "pointer",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  transition: "background 0.2s",
-                }}
-                onClick={() => setOpenAccordion(openAccordion === "DiagnosticCardiology" ? "" : "DiagnosticCardiology")}
-                onMouseEnter={(e) => {
-                  if (openAccordion !== "DiagnosticCardiology") {
-                    e.currentTarget.style.background = "#f3f4f6";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (openAccordion !== "DiagnosticCardiology") {
-                    e.currentTarget.style.background = "#f9fafb";
-                  }
-                }}
-              >
-                <h3 className="accordion-title" style={{ fontSize: "20px", fontWeight: "600", color: "#6022A6", margin: 0 }}>
-                  Diagnostic Cardiology
-                </h3>
-                {openAccordion === "DiagnosticCardiology" ? (
-                  <svg
-                    className="accordion-icon"
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      transition: "opacity 0.3s",
-                    }}
-                    fill="none"
-                    stroke="#6022A6"
-                    strokeWidth={2.5}
-                    viewBox="0 0 24 24"
-                  >
-                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
-                  </svg>
-                ) : (
-                  <svg
-                    className="accordion-icon"
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      transition: "opacity 0.3s",
-                    }}
-                    fill="none"
-                    stroke="#6022A6"
-                    strokeWidth={2.5}
-                    viewBox="0 0 24 24"
-                  >
-                    <line x1="12" y1="5" x2="12" y2="19" strokeLinecap="round" />
-                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
-                  </svg>
-                )}
-              </div>
-              <div
-                className={`accordion-body ${openAccordion === "DiagnosticCardiology" ? "open" : ""}`}
-                style={{
-                  maxHeight: openAccordion === "DiagnosticCardiology" ? "2000px" : "0",
-                  overflow: "hidden",
-                  transition: "max-height 0.3s ease-out, padding 0.3s ease-out",
-                  padding: openAccordion === "DiagnosticCardiology" ? "24px" : "0 24px",
-                  background: "#ffffff",
-                }}
-              >
-                <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
-                  <div
-                    className="cards-grid"
-                    style={{
-                      display: "grid", 
-                      gap: isMobile ? "20px" : "20px",
-                      maxWidth: "1400px",
-                      margin: "0 auto",
-                    }}
-                    >
-                    {categories[0].products.map((product, productIndex) => (
-                      <div
-                        key={productIndex}
-                        onClick={() => handleCardClick(product.path)}
-                        style={{
-                          width: "100%",
-                          minHeight: isMobile ? "auto" : "auto",
-                          backgroundColor: "#fff",
-                          borderRadius: "12px",
-                          boxShadow: product.path
-                            ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
-                            : "0 2px 4px rgba(0, 0, 0, 0.05)",
-                          border: product.path ? "1px solid #e5e7eb" : "1px solid #f3f4f6",
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "space-between", 
-                          cursor: product.path ? "pointer" : "not-allowed",
-                          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                          opacity: product.path ? 1 : 0.4,
-                          padding: isMobile ? "15px 20px" : "15px 20px",
-                          position: "relative",
-                          overflow: "hidden",
-                        }}
-                        onMouseEnter={(e) => {
-                          if (product.path) {
-                            e.currentTarget.style.transform = "translateY(-4px)";
-                            e.currentTarget.style.boxShadow =
-                              "0 12px 24px rgba(30, 64, 175, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08)";
-                            e.currentTarget.style.borderColor = "#6022A6";
-                            const gradientEl = e.currentTarget.querySelector(
-                              ".card-hover-gradient"
-                            );
-                            if (gradientEl) gradientEl.style.opacity = 1;
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (product.path) {
-                            e.currentTarget.style.transform = "translateY(0)";
-                            e.currentTarget.style.boxShadow =
-                              "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)";
-                            e.currentTarget.style.borderColor = "#e5e7eb";
-                            const gradientEl = e.currentTarget.querySelector(
-                              ".card-hover-gradient"
-                            );
-                            if (gradientEl) gradientEl.style.opacity = 0;
-                          }
-                        }}
-                      >
-                        {product.path && (
-                          <div
-                            className="card-hover-gradient"
-                            style={{
-                              position: "absolute",
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                              background:
-                                "linear-gradient(135deg, rgba(30, 64, 175, 0.02) 0%, rgba(59, 130, 246, 0.02) 100%)",
-                              opacity: 0,
-                              transition: "opacity 0.3s ease",
-                              pointerEvents: "none",
-                              borderRadius: "12px",
-                            }}
-                          />
-                        )}
-                        <div
-                          style={{ 
-                            display: "grid",
-                            gridTemplateColumns: "repeat(4, 1fr)",
-                            gap:"20px",
-                            width: "100%",
-                            height: "100%",
-                            zIndex: 1,
-                            position: "relative",
-                            alignItems: "center",
-                          }}
-                        >
-                          {product.image && (
-                            <div
-                              style={{
-                                width: isMobile ? "100%" : "100%", 
-                                height: isMobile ? "90px" : "90px", 
-                                background:"#000",  
-                                transition: "transform 0.3s ease",
-                              }} 
-                            >
-                              <img
-                                src={product.image}
-                                alt={product.name}
-                                style={{
-                                  width: "100%",
-                                  height: "100%",
-                                  objectFit: "contain",
-                                  filter: product.path
-                                    ? "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))"
-                                    : "none",
-                                }}
-                              />
-                            </div>
-                          )}
-                          <h3
-                            style={{
-                              fontSize: isMobile ? "18px" : "20px",
-                              color: "#000",
-                              textAlign: "left", 
-                              fontWeight: "600",
-                              letterSpacing: "-0.2px",
-                              lineHeight: "1.3",
-                            }}
-                          >
-                            {product.name}
-                          </h3>
-                          <p
-                            style={{
-                              fontSize: isMobile ? "14px" : "15px",
-                              color: "#000",
-                              textAlign: "left", 
-                              lineHeight: "1.5",
-                              fontWeight: "400",
-                              flex: 1,
-                            }}
-                          >
-                            {product.intro}
-                          </p>
-                          {product.path && (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleCardClick(product.path);
-                              }}
-                              style={{ 
-                                padding: "8px 16px",
-                                backgroundColor: "#6022A6",
-                                color: "#ffffff",
-                                border: "none",
-                                borderRadius: "6px",
-                                fontSize: isMobile ? "13px" : "14px",
-                                fontWeight: "500",
-                                cursor: "pointer",
-                                transition: "all 0.3s ease",
-                                textTransform: "none",
-                                letterSpacing: "0.3px",
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = "#4a1a8a";
-                                e.currentTarget.style.transform = "translateY(-2px)";
-                                e.currentTarget.style.boxShadow = "0 4px 8px rgba(96, 34, 166, 0.3)";
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = "#6022A6";
-                                e.currentTarget.style.transform = "translateY(0)";
-                                e.currentTarget.style.boxShadow = "none";
-                              }}
-                            >
-                              Read more
-                            </button>
-                          )}
-                          {!product.path && (
-                            <div
-                              style={{
-                                marginTop: "16px",
-                                padding: "6px 16px",
-                                backgroundColor: "#f1f5f9",
-                                borderRadius: "6px",
-                                fontSize: "12px",
-                                color: "#222222",
-                                fontWeight: "500",
-                                textTransform: "uppercase",
-                                letterSpacing: "0.5px",
-                              }}
-                            >
-                              Coming Soon
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="accordion-item" style={{ borderBottom: "1px solid #e5e7eb" }}>
-              <div
-                className="accordion-header"
-                style={{
-                  background: openAccordion === "MaternalInfantCare" ? "#f3f4f6" : "#f9fafb",
-                  padding: "20px 24px",
-                  cursor: "pointer",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  transition: "background 0.2s",
-                }}
-                onClick={() => setOpenAccordion(openAccordion === "MaternalInfantCare" ? "" : "MaternalInfantCare")}
-                onMouseEnter={(e) => {
-                  if (openAccordion !== "MaternalInfantCare") {
-                    e.currentTarget.style.background = "#f3f4f6";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (openAccordion !== "MaternalInfantCare") {
-                    e.currentTarget.style.background = "#f9fafb";
-                  }
-                }}
-              >
-                <h3 className="accordion-title" style={{ fontSize: "20px", fontWeight: "600", color: "#6022A6", margin: 0 }}>
-                  Maternal & Infant Care
-                </h3>
-                {openAccordion === "MaternalInfantCare" ? (
-                  <svg
-                    className="accordion-icon"
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      transition: "opacity 0.3s",
-                    }}
-                    fill="none"
-                    stroke="#6022A6"
-                    strokeWidth={2.5}
-                    viewBox="0 0 24 24"
-                  >
-                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
-                  </svg>
-                ) : (
-                  <svg
-                    className="accordion-icon"
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      transition: "opacity 0.3s",
-                    }}
-                    fill="none"
-                    stroke="#6022A6"
-                    strokeWidth={2.5}
-                    viewBox="0 0 24 24"
-                  >
-                    <line x1="12" y1="5" x2="12" y2="19" strokeLinecap="round" />
-                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
-                  </svg>
-                )}
-              </div>
-              <div
-                className={`accordion-body ${openAccordion === "MaternalInfantCare" ? "open" : ""}`}
-                style={{
-                  maxHeight: openAccordion === "MaternalInfantCare" ? "2000px" : "0",
-                  overflow: "hidden",
-                  transition: "max-height 0.3s ease-out, padding 0.3s ease-out",
-                  padding: openAccordion === "MaternalInfantCare" ? "24px" : "0 24px",
-                  background: "#ffffff",
-                }}
-              >
-                <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
-                  <div
-                    className="cards-grid"
-                    style={{
-                      display: "grid", 
-                      gap: isMobile ? "20px" : "20px",
-                      maxWidth: "1400px",
-                      margin: "0 auto",
-                    }}
-                  >
-                    {categories[1].products.map((product, productIndex) => (
-                      <div
-                        key={productIndex}
-                        onClick={() => handleCardClick(product.path)}
-                        style={{
-                          width: "100%",
-                          minHeight: isMobile ? "auto" : "auto",
-                          backgroundColor: "#fff",
-                          borderRadius: "12px",
-                          boxShadow: product.path
-                            ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
-                            : "0 2px 4px rgba(0, 0, 0, 0.05)",
-                          border: product.path ? "1px solid #e5e7eb" : "1px solid #f3f4f6",
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          cursor: product.path ? "pointer" : "not-allowed",
-                          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                          opacity: product.path ? 1 : 0.4,
-                          padding: isMobile ? "15px 20px" : "15px 20px",
-                          position: "relative",
-                          overflow: "hidden",
-                        }}
-                        onMouseEnter={(e) => {
-                          if (product.path) {
-                            e.currentTarget.style.transform = "translateY(-4px)";
-                            e.currentTarget.style.boxShadow =
-                              "0 12px 24px rgba(30, 64, 175, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08)";
-                            e.currentTarget.style.borderColor = "#6022A6";
-                            const gradientEl = e.currentTarget.querySelector(
-                              ".card-hover-gradient"
-                            );
-                            if (gradientEl) gradientEl.style.opacity = 1;
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (product.path) {
-                            e.currentTarget.style.transform = "translateY(0)";
-                            e.currentTarget.style.boxShadow =
-                              "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)";
-                            e.currentTarget.style.borderColor = "#e5e7eb";
-                            const gradientEl = e.currentTarget.querySelector(
-                              ".card-hover-gradient"
-                            );
-                            if (gradientEl) gradientEl.style.opacity = 0;
-                          }
-                        }}
-                      >
-                        {product.path && (
-                          <div
-                            className="card-hover-gradient"
-                            style={{
-                              position: "absolute",
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                              background:
-                                "linear-gradient(135deg, rgba(30, 64, 175, 0.02) 0%, rgba(59, 130, 246, 0.02) 100%)",
-                              opacity: 0,
-                              transition: "opacity 0.3s ease",
-                              pointerEvents: "none",
-                              borderRadius: "12px",
-                            }}
-                          />
-                        )}
-                        <div
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(4, 1fr)",
-                            gap:"20px",
-                            width: "100%",
-                            height: "100%",
-                            zIndex: 1,
-                            position: "relative",
-                            alignItems: "center",
-                          }}
-                        >
-                          {product.image && (
-                            <div
-                              style={{
-                                width: isMobile ? "100%" : "100%", 
-                                height: isMobile ? "90px" : "90px", 
-                                background:"#000", 
-                                transition: "transform 0.3s ease",
-                              }} 
-                            >
-                              <img
-                                src={product.image}
-                                alt={product.name}
-                                style={{
-                                  width: "100%",
-                                  height: "100%",
-                                  objectFit: "contain",
-                                  filter: product.path
-                                    ? "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))"
-                                    : "none",
-                                }}
-                              />
-                            </div>
-                          )}
-                          <h3
-                            style={{
-                              fontSize: isMobile ? "18px" : "20px",
-                              color: "#000",
-                              textAlign: "left", 
-                              fontWeight: "600",
-                              letterSpacing: "-0.2px",
-                              lineHeight: "1.3",
-                            }}
-                          >
-                            {product.name}
-                          </h3>
-                          <p
-                            style={{
-                              fontSize: isMobile ? "14px" : "15px",
-                              color: "#000",
-                              textAlign: "left", 
-                              lineHeight: "1.5",
-                              fontWeight: "400",
-                              flex: 1,
-                            }}
-                          >
-                            {product.intro}
-                          </p>
-                          {product.path && (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleCardClick(product.path);
-                              }}
-                              style={{
-                                padding: "8px 16px",
-                                backgroundColor: "#6022A6",
-                                color: "#ffffff",
-                                border: "none",
-                                borderRadius: "6px",
-                                fontSize: isMobile ? "13px" : "14px",
-                                fontWeight: "500",
-                                cursor: "pointer",
-                                transition: "all 0.3s ease",
-                                textTransform: "none",
-                                letterSpacing: "0.3px",
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = "#4a1a8a";
-                                e.currentTarget.style.transform = "translateY(-2px)";
-                                e.currentTarget.style.boxShadow = "0 4px 8px rgba(96, 34, 166, 0.3)";
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = "#6022A6";
-                                e.currentTarget.style.transform = "translateY(0)";
-                                e.currentTarget.style.boxShadow = "none";
-                              }}
-                            >
-                              Read more
-                            </button>
-                          )}
-                          {!product.path && (
-                            <div
-                              style={{
-                                marginTop: "16px",
-                                padding: "6px 16px",
-                                backgroundColor: "#f1f5f9",
-                                borderRadius: "6px",
-                                fontSize: "12px",
-                                color: "#222222",
-                                fontWeight: "500",
-                                textTransform: "uppercase",
-                                letterSpacing: "0.5px",
-                              }}
-                            >
-                              Coming Soon
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="accordion-item" style={{ borderBottom: "1px solid #e5e7eb" }}>
-              <div
-                className="accordion-header"
-                style={{
-                  background: openAccordion === "Anesthesia" ? "#f3f4f6" : "#f9fafb",
-                  padding: "20px 24px",
-                  cursor: "pointer",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  transition: "background 0.2s",
-                }}
-                onClick={() => setOpenAccordion(openAccordion === "Anesthesia" ? "" : "Anesthesia")}
-                onMouseEnter={(e) => {
-                  if (openAccordion !== "Anesthesia") {
-                    e.currentTarget.style.background = "#f3f4f6";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (openAccordion !== "Anesthesia") {
-                    e.currentTarget.style.background = "#f9fafb";
-                  }
-                }}
-              >
-                <h3 className="accordion-title" style={{ fontSize: "20px", fontWeight: "600", color: "#6022A6", margin: 0 }}>
-                  Anesthesia
-                </h3>
-                {openAccordion === "Anesthesia" ? (
-                  <svg
-                    className="accordion-icon"
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      transition: "opacity 0.3s",
-                    }}
-                    fill="none"
-                    stroke="#6022A6"
-                    strokeWidth={2.5}
-                    viewBox="0 0 24 24"
-                  >
-                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
-                  </svg>
-                ) : (
-                  <svg
-                    className="accordion-icon"
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      transition: "opacity 0.3s",
-                    }}
-                    fill="none"
-                    stroke="#6022A6"
-                    strokeWidth={2.5}
-                    viewBox="0 0 24 24"
-                  >
-                    <line x1="12" y1="5" x2="12" y2="19" strokeLinecap="round" />
-                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
-                  </svg>
-                )}
-              </div>
-              <div
-                className={`accordion-body ${openAccordion === "Anesthesia" ? "open" : ""}`}
-                style={{
-                  maxHeight: openAccordion === "Anesthesia" ? "2000px" : "0",
-                  overflow: "hidden",
-                  transition: "max-height 0.3s ease-out, padding 0.3s ease-out",
-                  padding: openAccordion === "Anesthesia" ? "24px" : "0 24px",
-                  background: "#ffffff",
-                }}
-              >
-                <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
-                  <div
-                    className="cards-grid"
-                   style={{
-                      display: "grid", 
-                      gap: isMobile ? "20px" : "20px",
-                      maxWidth: "1400px",
-                      margin: "0 auto",
-                    }}
-                  >
-                    {categories[2].products.map((product, productIndex) => (
-                      <div
-                        key={productIndex}
-                        onClick={() => handleCardClick(product.path)}
-                        style={{
-                          width: "100%",
-                          minHeight: isMobile ? "auto" : "aauto",
-                          backgroundColor: "#fff",
-                          borderRadius: "12px",
-                          boxShadow: product.path
-                            ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
-                            : "0 2px 4px rgba(0, 0, 0, 0.05)",
-                          border: product.path ? "1px solid #e5e7eb" : "1px solid #f3f4f6",
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          cursor: product.path ? "pointer" : "not-allowed",
-                          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                          opacity: product.path ? 1 : 0.4,
-                          padding: isMobile ? "15px 20px" : "15px 20px",
-                          position: "relative",
-                          overflow: "hidden",
-                        }}
-                        onMouseEnter={(e) => {
-                          if (product.path) {
-                            e.currentTarget.style.transform = "translateY(-4px)";
-                            e.currentTarget.style.boxShadow =
-                              "0 12px 24px rgba(30, 64, 175, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08)";
-                            e.currentTarget.style.borderColor = "#6022A6";
-                            const gradientEl = e.currentTarget.querySelector(
-                              ".card-hover-gradient"
-                            );
-                            if (gradientEl) gradientEl.style.opacity = 1;
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (product.path) {
-                            e.currentTarget.style.transform = "translateY(0)";
-                            e.currentTarget.style.boxShadow =
-                              "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)";
-                            e.currentTarget.style.borderColor = "#e5e7eb";
-                            const gradientEl = e.currentTarget.querySelector(
-                              ".card-hover-gradient"
-                            );
-                            if (gradientEl) gradientEl.style.opacity = 0;
-                          }
-                        }}
-                      >
-                        {product.path && (
-                          <div
-                            className="card-hover-gradient"
-                            style={{
-                              position: "absolute",
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                              background:
-                                "linear-gradient(135deg, rgba(30, 64, 175, 0.02) 0%, rgba(59, 130, 246, 0.02) 100%)",
-                              opacity: 0,
-                              transition: "opacity 0.3s ease",
-                              pointerEvents: "none",
-                              borderRadius: "12px",
-                            }}
-                          />
-                        )}
-                        <div
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(4, 1fr)",
-                            gap:"20px",
-                            width: "100%",
-                            height: "100%",
-                            zIndex: 1,
-                            position: "relative",
-                            alignItems: "center",
-                          }}
-                        >
-                          {product.image && (
-                            <div
-                              style={{
-                                width: isMobile ? "100%" : "100%", 
-                                height: isMobile ? "90px" : "90px", 
-                                background:"#000", 
-                                transition: "transform 0.3s ease",
-                              }}
-                            >
-                              <img
-                                src={product.image}
-                                alt={product.name}
-                                style={{
-                                  width: "100%",
-                                  height: "100%",
-                                  objectFit: "contain",
-                                  filter: product.path
-                                    ? "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))"
-                                    : "none",
-                                }}
-                              />
-                            </div>
-                          )}
-                          <h3
-                            style={{
-                              fontSize: isMobile ? "18px" : "20px",
-                              color: "#000",
-                              textAlign: "left", 
-                              fontWeight: "600",
-                              letterSpacing: "-0.2px",
-                              lineHeight: "1.3",
-                            }}
-                          >
-                            {product.name}
-                          </h3>
-                          <p
-                            style={{
-                              fontSize: isMobile ? "14px" : "15px",
-                              color: "#000",
-                              textAlign: "left", 
-                              lineHeight: "1.5",
-                              fontWeight: "400",
-                              flex: 1,
-                            }}
-                          >
-                            {product.intro}
-                          </p>
-                          {product.path && (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleCardClick(product.path);
-                              }}
-                              style={{
-                                padding: "8px 16px",
-                                backgroundColor: "#6022A6",
-                                color: "#ffffff",
-                                border: "none",
-                                borderRadius: "6px",
-                                fontSize: isMobile ? "13px" : "14px",
-                                fontWeight: "500",
-                                cursor: "pointer",
-                                transition: "all 0.3s ease",
-                                textTransform: "none",
-                                letterSpacing: "0.3px",
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = "#4a1a8a";
-                                e.currentTarget.style.transform = "translateY(-2px)";
-                                e.currentTarget.style.boxShadow = "0 4px 8px rgba(96, 34, 166, 0.3)";
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = "#6022A6";
-                                e.currentTarget.style.transform = "translateY(0)";
-                                e.currentTarget.style.boxShadow = "none";
-                              }}
-                            >
-                              Read more
-                            </button>
-                          )}
-                          {!product.path && (
-                            <div
-                              style={{
-                                marginTop: "16px",
-                                padding: "6px 16px",
-                                backgroundColor: "#f1f5f9",
-                                borderRadius: "6px",
-                                fontSize: "12px",
-                                color: "#222222",
-                                fontWeight: "500",
-                                textTransform: "uppercase",
-                                letterSpacing: "0.5px",
-                              }}
-                            >
-                              Coming Soon
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="accordion-item" style={{ borderBottom: "none" }}>
-              <div
-                className="accordion-header"
-                style={{
-                  background: openAccordion === "Monitoring" ? "#f3f4f6" : "#f9fafb",
-                  padding: "20px 24px",
-                  cursor: "pointer",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  transition: "background 0.2s",
-                }}
-                onClick={() => setOpenAccordion(openAccordion === "Monitoring" ? "" : "Monitoring")}
-                onMouseEnter={(e) => {
-                  if (openAccordion !== "Monitoring") {
-                    e.currentTarget.style.background = "#f3f4f6";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (openAccordion !== "Monitoring") {
-                    e.currentTarget.style.background = "#f9fafb";
-                  }
-                }}
-              >
-                <h3 className="accordion-title" style={{ fontSize: "20px", fontWeight: "600", color: "#6022A6", margin: 0 }}>
-                  Monitoring
-                </h3>
-                {openAccordion === "Monitoring" ? (
-                  <svg
-                    className="accordion-icon"
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      transition: "opacity 0.3s",
-                    }}
-                    fill="none"
-                    stroke="#6022A6"
-                    strokeWidth={2.5}
-                    viewBox="0 0 24 24"
-                  >
-                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
-                  </svg>
-                ) : (
-                  <svg
-                    className="accordion-icon"
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      transition: "opacity 0.3s",
-                    }}
-                    fill="none"
-                    stroke="#6022A6"
-                    strokeWidth={2.5}
-                    viewBox="0 0 24 24"
-                  >
-                    <line x1="12" y1="5" x2="12" y2="19" strokeLinecap="round" />
-                    <line x1="5" y1="12" x2="19" y2="12" strokeLinecap="round" />
-                  </svg>
-                )}
-              </div>
-              <div
-                className={`accordion-body ${openAccordion === "Monitoring" ? "open" : ""}`}
-                style={{
-                  maxHeight: openAccordion === "Monitoring" ? "2000px" : "0",
-                  overflow: "hidden",
-                  transition: "max-height 0.3s ease-out, padding 0.3s ease-out",
-                  padding: openAccordion === "Monitoring" ? "24px" : "0 24px",
-                  background: "#ffffff",
-                }}
-              >
-                <div className="accordion-content" style={{ color: "#475569", lineHeight: "1.6" }}>
-                  <div
-                    className="cards-grid"
-                    style={{
-                      display: "grid", 
-                      gap: isMobile ? "20px" : "20px",
-                      maxWidth: "1400px",
-                      margin: "0 auto",
-                    }}
-                  >
-                    {categories[3].products.map((product, productIndex) => (
-                      <div
-                        key={productIndex}
-                        onClick={() => handleCardClick(product.path)}
-                        style={{
-                          width: "100%",
-                          minHeight: isMobile ? "auto" : "auto",
-                          backgroundColor: "#fff",
-                          borderRadius: "12px",
-                          boxShadow: product.path
-                            ? "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)"
-                            : "0 2px 4px rgba(0, 0, 0, 0.05)",
-                          border: product.path ? "1px solid #e5e7eb" : "1px solid #f3f4f6",
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          cursor: product.path ? "pointer" : "not-allowed",
-                          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                          opacity: product.path ? 1 : 0.4,
-                          padding: isMobile ? "15px 20px" : "15px 20px",
-                          position: "relative",
-                          overflow: "hidden",
-                        }}
-                        onMouseEnter={(e) => {
-                          if (product.path) {
-                            e.currentTarget.style.transform = "translateY(-4px)";
-                            e.currentTarget.style.boxShadow =
-                              "0 12px 24px rgba(30, 64, 175, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08)";
-                            e.currentTarget.style.borderColor = "#6022A6";
-                            const gradientEl = e.currentTarget.querySelector(
-                              ".card-hover-gradient"
-                            );
-                            if (gradientEl) gradientEl.style.opacity = 1;
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (product.path) {
-                            e.currentTarget.style.transform = "translateY(0)";
-                            e.currentTarget.style.boxShadow =
-                              "0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06)";
-                            e.currentTarget.style.borderColor = "#e5e7eb";
-                            const gradientEl = e.currentTarget.querySelector(
-                              ".card-hover-gradient"
-                            );
-                            if (gradientEl) gradientEl.style.opacity = 0;
-                          }
-                        }}
-                      >
-                        {product.path && (
-                          <div
-                            className="card-hover-gradient"
-                            style={{
-                              position: "absolute",
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                              background:
-                                "linear-gradient(135deg, rgba(30, 64, 175, 0.02) 0%, rgba(59, 130, 246, 0.02) 100%)",
-                              opacity: 0,
-                              transition: "opacity 0.3s ease",
-                              pointerEvents: "none",
-                              borderRadius: "12px",
-                            }}
-                          />
-                        )}
-                        <div
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(4, 1fr)",
-                            gap:"20px",
-                            width: "100%",
-                            height: "100%",
-                            zIndex: 1,
-                            position: "relative",
-                            alignItems: "center",
-                          }}
-                        >
-                          {product.image && (
-                            <div
-                              style={{
-                                width: isMobile ? "100%" : "100%", 
-                                height: isMobile ? "90px" : "90px", 
-                                background:"rgb(60, 61, 64)", 
-                                transition: "transform 0.3s ease",
-                              }} 
-                            >
-                              <img
-                                src={product.image}
-                                alt={product.name}
-                                style={{
-                                  width: "100%",
-                                  height: "100%",
-                                  objectFit: "contain",
-                                  filter: product.path
-                                    ? "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))"
-                                    : "none",
-                                }}
-                              />
-                            </div>
-                          )}
-                          <h3
-                            style={{
-                              fontSize: isMobile ? "18px" : "20px",
-                              color: "#000",
-                              textAlign: "left", 
-                              fontWeight: "600",
-                              letterSpacing: "-0.2px",
-                              lineHeight: "1.3",
-                            }}
-                          >
-                            {product.name}
-                          </h3>
-                          <p
-                            style={{
-                              fontSize: isMobile ? "14px" : "15px",
-                              color: "#000",
-                              textAlign: "left", 
-                              lineHeight: "1.5",
-                              fontWeight: "400",
-                              flex: 1,
-                            }}
-                          >
-                            {product.intro}
-                          </p>
-                          {product.path && (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleCardClick(product.path);
-                              }}
-                              style={{
-                                padding: "8px 16px",
-                                backgroundColor: "#6022A6",
-                                color: "#ffffff",
-                                border: "none",
-                                borderRadius: "6px",
-                                fontSize: isMobile ? "13px" : "14px",
-                                fontWeight: "500",
-                                cursor: "pointer",
-                                transition: "all 0.3s ease",
-                                textTransform: "none",
-                                letterSpacing: "0.3px",
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = "#4a1a8a";
-                                e.currentTarget.style.transform = "translateY(-2px)";
-                                e.currentTarget.style.boxShadow = "0 4px 8px rgba(96, 34, 166, 0.3)";
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = "#6022A6";
-                                e.currentTarget.style.transform = "translateY(0)";
-                                e.currentTarget.style.boxShadow = "none";
-                              }}
-                            >
-                              Read more
-                            </button>
-                          )}
-                          {!product.path && (
-                            <div
-                              style={{
-                                marginTop: "16px",
-                                padding: "6px 16px",
-                                backgroundColor: "#f1f5f9",
-                                borderRadius: "6px",
-                                fontSize: "12px",
-                                color: "#222222",
-                                fontWeight: "500",
-                                textTransform: "uppercase",
-                                letterSpacing: "0.5px",
-                              }}
-                            >
-                              Coming Soon
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="accordion-container" style={{ maxWidth: "1300px", margin: "0 auto", border: "1px solid #e5e7eb", borderRadius: "8px", overflow: "hidden" }}>
+            {categories.map((category, index) => (
+              <AccordionItem
+                key={category.key}
+                categoryKey={category.key}
+                title={category.name}
+                products={category.products}
+                isOpen={openAccordion === category.key}
+                onToggle={handleAccordionToggle}
+                isMobile={isMobile}
+                onCardClick={handleCardClick}
+                isLast={index === categories.length - 1}
+              />
+            ))}
           </div>
         </div>
       </div>
