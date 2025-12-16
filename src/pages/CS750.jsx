@@ -683,7 +683,6 @@ const CS750 = () => {
         onClick={() => navigate("/")}
         style={{
           position: "absolute",
-          position: "absolute",
           top: "20px",
           left: "35%",
           zIndex: 10,
@@ -824,8 +823,8 @@ const CS750 = () => {
 
       <Canvas>
         <PerspectiveCamera makeDefault position={[-15, 0, 10]} />
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={0.75} />
+        {/* <ambientLight intensity={0.5} />
+        <directionalLight position={[5, 5, 5]} intensity={0.75} /> */}
         <OrbitControls
           ref={orbitControlsRef}
           enableZoom={true}

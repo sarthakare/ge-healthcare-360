@@ -886,8 +886,8 @@ const VideoPopup = ({
 
       <Canvas>
         <PerspectiveCamera makeDefault position={[-10, 10, 20]} />
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
+        {/* <ambientLight intensity={0.5} />
+        <directionalLight position={[5, 5, 5]} intensity={0.75} /> */}
         <OrbitControls
           ref={orbitControlsRef}
           enableZoom={true}

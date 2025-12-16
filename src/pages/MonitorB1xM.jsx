@@ -790,8 +790,8 @@ const MonitorB1xM = () => {
 
       <Canvas>
         <PerspectiveCamera makeDefault position={[-10, 3 , 10]} />
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
+        {/* <ambientLight intensity={0.5} />
+        <directionalLight position={[5, 5, 5]} intensity={1} /> */}
         <OrbitControls
           ref={orbitControlsRef}
           enableZoom={true}
@@ -886,7 +886,6 @@ const MonitorB1xM = () => {
               borderWidth: "2px",
               borderStyle: "solid",
               borderImage:"linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
-              borderRadius:"6px", 
               padding:"0px 15px 10px",
             }}
           >

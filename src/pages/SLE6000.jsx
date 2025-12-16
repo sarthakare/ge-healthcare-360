@@ -814,8 +814,8 @@ const SLE6000 = () => {
 
       <Canvas>
         <PerspectiveCamera makeDefault position={[-15, 0, 10]} />
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
+        {/* <ambientLight intensity={0.5} />
+        <directionalLight position={[5, 5, 5]} intensity={1} /> */}
         <OrbitControls
           ref={orbitControlsRef}
           enableZoom={true}
