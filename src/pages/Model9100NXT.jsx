@@ -974,7 +974,7 @@ const Model9100NXT = () => {
           maxDistance={10}
           target={[0, 0, 0]}
         />
-        <Environment preset="warehouse" />
+        <Environment preset="apartment" />
         <Model
           glbPath={Model9100NXTModel}
           onLoad={handleModelLoad}

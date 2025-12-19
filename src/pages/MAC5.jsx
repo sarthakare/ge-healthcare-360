@@ -886,8 +886,8 @@ const VideoPopup = ({
 
       <Canvas>
         <PerspectiveCamera makeDefault position={[-10, 10, 20]} />
-        {/* <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={0.75} /> */}
+        <ambientLight intensity={0.35} />
+        <directionalLight position={[5, 5, 5]} intensity={0.75} />
         <OrbitControls
           ref={orbitControlsRef}
           enableZoom={true}
@@ -897,7 +897,7 @@ const VideoPopup = ({
           maxDistance={10}
           target={[0, 0, 0]}
         />
-        <Environment preset="warehouse" />
+        {/* <Environment preset="apartment" /> */}
         <Model
           glbPath={MAC5Model}
           onLoad={handleModelLoad}

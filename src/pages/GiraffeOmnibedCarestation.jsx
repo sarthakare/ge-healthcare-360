@@ -834,7 +834,7 @@ const GiraffeOmnibedCarestation = () => {
           maxDistance={10}
           target={[0, 0, 0]}
         />
-        <Environment preset="warehouse" />
+        <Environment preset="city"  />
         <Model
           glbPath={GiraffeOmnibedCarestationModel}
           onLoad={handleModelLoad}

@@ -825,7 +825,7 @@ const SLE6000 = () => {
           maxDistance={10}
           target={[0, 0, 0]}
         />
-        <Environment preset="warehouse" />
+        <Environment preset="apartment" />
         <Model
           glbPath={SLE6000Model}
           onLoad={handleModelLoad}

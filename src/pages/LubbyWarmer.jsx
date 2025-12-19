@@ -911,7 +911,7 @@ import {
             maxDistance={10}
             target={[0, 0, 0]}
           />
-          <Environment preset="warehouse" />
+          <Environment preset="apartment" />
           <Model
             glbPath={WarmerModel}
             onLoad={handleModelLoad}
