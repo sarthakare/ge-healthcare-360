@@ -16,14 +16,14 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/9100nxt" element={<Model9100NXT />} />
+        <Route path="/9100c-nxt" element={<Model9100NXT />} />
         <Route path="/ecg-holter" element={<ECGHolter />} />
         <Route path="/led-phototherapy" element={<LEDPhototherapy />} />
         <Route path="/mac-5" element={<MAC5 />} />
         <Route path="/sle6000" element={<SLE6000 />} />
-        <Route path="/monitors-b1xm" element={<MonitorB1xM />} />
-        <Route path="/warmer" element={<LubbyWarmer />} />
-        <Route path="/cs750" element={<CS750 />} />
+        <Route path="/b1x5m-patient-monitors" element={<MonitorB1xM />} />
+        <Route path="/lullaby-warmer" element={<LubbyWarmer />} />
+        <Route path="/carestation-750" element={<CS750 />} />
         <Route path="/giraffe-omnibed-carestation" element={<GiraffeOmnibedCarestation />} />
       </Routes>
     </BrowserRouter>

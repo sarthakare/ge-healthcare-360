@@ -9,7 +9,7 @@ import {
   Html,
 } from "@react-three/drei";
 import * as THREE from "three";
-import GiraffeOmnibedCarestationModel from "../assets/giraffe-omnibed-carestation/model/Giraffe Omnibed Carestation.glb";
+import GiraffeOmnibedCarestationModel from "../assets/giraffe-omnibed-carestation/model/Omnibed Giraffe.glb";
 import GiraffeOmnibedCarestationVideo from "../assets/giraffe-omnibed-carestation/videos/01-Modes_of_Ventilation.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 

@@ -63,7 +63,7 @@ const Home = () => {
         },
         {
           name: "Lullaby Warmer – Infant warming system",
-          path: "/warmer",
+          path: "/lullaby-warmer",
           image: ImageWarmer,
           intro: "Interact with the Lullaby Warmer and see how its simple controls and stable thermal environment support safer newborn care.",
         },
@@ -73,6 +73,12 @@ const Home = () => {
           image: ImageGiraffeOmnibedCarestation,
           intro: "Step inside the 3D model to explore the controlled micro-environment, access doors, and caregiver-friendly design that support fragile neonates.",
         },
+        {
+          name: "LED Phototherapy – Neonatal jaundice treatment system",
+          path: "/led-phototherapy",
+          image: ImageLEDPhototherapy,
+          intro: "Explore the LED Phototherapy system in 3D to discover its advanced LED technology, optimal wavelength delivery and effective jaundice treatment capabilities for newborns.",
+        },
       ],
     },
     {
@@ -80,13 +86,13 @@ const Home = () => {
       products: [
         {
           name: "9100c NXT – Anaesthesia delivery workstation",
-          path: "/9100nxt",
+          path: "/9100c-nxt",
           image: Image9100NXT,
           intro: "Go inside the 3D demonstration of the 9100c NXT and explore its dependable anesthesia delivery system, ergonomic layout and core ventilation features.",
         },
         {
           name: "Carestation 750 – Advanced anesthesia workstation with lung-protective ventilation",
-          path: "/cs750",
+          path: "/carestation-750",
           image: ImageCS750,
           intro: "Interact with the Carestation 750 to see its advanced anesthesia tools, lung-protective ventilation modes and precision control interface.",
         },
@@ -97,7 +103,7 @@ const Home = () => {
       products: [
         {
           name: "B1x5M Patient Monitors – Modular, scalable vital signs and advanced parameter monitoring",
-          path: "/monitors-b1xm",
+          path: "/b1x5m-patient-monitors",
           image: ImageMonitorB1xM,
           intro: "Rotate and inspect the B1x5M platform to understand its modular monitoring capabilities and scalable parameters for multiple care areas.",
         },
