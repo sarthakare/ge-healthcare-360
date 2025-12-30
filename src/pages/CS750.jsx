@@ -10,7 +10,18 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import CS750Model from "../assets/cs750/model/CS750.glb";
-import CS750Video from "../assets/cs750/videos/01-Modes_of_Ventilation.mp4";
+import CS750Video1 from "../assets/cs750/videos/01-Modes_of_Ventilation.mp4";
+import CS750Video2 from "../assets/cs750/videos/02-EcoFlow.mp4";
+import CS750Video3 from "../assets/cs750/videos/03-Lung_Recruitment_Procedures.mp4";
+import CS750Video4 from "../assets/cs750/videos/04-Customisable_Case_profiles.mp4";
+import CS750Video5 from "../assets/cs750/videos/05-ICU_Quality_Ventilation.mp4";
+import CS750Video6 from "../assets/cs750/videos/06-Compact_Breathing_System.mp4";
+import CS750Video7 from "../assets/cs750/videos/07-Intelligent_Lighting.mp4";
+import CS750Video8 from "../assets/cs750/videos/08-Integrated_Anaesthesia_Gas.mp4";
+import CS750Video9 from "../assets/cs750/videos/09-checkout.mp4";
+import CS750Video10 from "../assets/cs750/videos/10-Cable_Management.mp4";
+import CS750Video11 from "../assets/cs750/videos/11-Premium_Arm.mp4";
+import CS750Video12 from "../assets/cs750/videos/12-Flow_rates_Fio2.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -419,87 +430,248 @@ const CS750 = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "Touch Display", position: [0.5, 1.75, 0.05] },
-    { id: 2, name: "Breathing Circuit", position: [-1.4, 0.2, 0.3] },
-    { id: 3, name: "Ventilation Controls", position: [-0.3, 0.3, -1.2] },
+    { id: 1, name: "Modes of ventilation", position: [-1.5, 1.75, 0.65] },
+    { id: 2, name: "Flow rates & FiO2", position: [-1.825, 2, 0.65] },
+    { id: 3, name: "ecoFLOW", position: [-1.825, 1.75, 0.65] },
+    { id: 4, name: "Customisable Case Profiles", position: [-1.825, 2.25, 0.65] },
+    { id: 5, name: "Recruitment Manoeuvre", position: [-0.9, 2.05, 0.65] },
+    { id: 6, name: "ICU Quality Ventilation", position: [0, 0.95, 0.75] },
+    { id: 7, name: "Compact Breathing System", position: [-1.15, 0.6, 1.1] },
+    { id: 8, name: "Intelligent Lighting", position: [-0.5, 1.5, 0.35] },
+    { id: 9, name: "Integrated Gas Module", position: [-0.75, 1.4, -0.35] },
+    { id: 10, name: "Checkout", position:  [-0.9, 1.85, 0.65] },
+    { id: 11, name: "Cable Management", position: [0.85, 0, -0.5] },
+    { id: 12, name: "360° Arm (optional)", position: [-1, 2.35, 0.1] },
   ];
 
   const hotspotsConfig = {
     1: {
-      videoSrc: CS750Video,
-      title: "Touch Display – Guided Ventilation",
+      videoSrc: CS750Video1,
+      title: "Modes of ventilation",
       overview:
-        "The CS750 15-inch responsive touchscreen provides guided workflows, alarm management, and predictive ventilation analytics for OR teams.",
+        "Comprehensive ventilation modes designed for diverse patient needs, from basic support to advanced lung-protective strategies.",
       features: [
-        "Adaptive user interface with context-aware controls",
-        "Live real-time waveforms and gas readings",
-        "Integrated checklists for rapid case setup",
-        "Multi-language support with glove-friendly sensitivity",
+        "Multiple ventilation modes including Volume Control, Pressure Control, and SIMV",
+        "Adaptive pressure support for patient-triggered breaths",
+        "Lung-protective ventilation strategies",
+        "Real-time mode switching without interruption",
       ],
       specifications: {
-        Display: '15" IPS 1080p',
-        Brightness: "700 nits",
-        Connectivity: "Dual Gigabit Ethernet",
-        Storage: "256 GB SSD",
+        "Modes Available": "Volume, Pressure, SIMV, CPAP",
+        "Tidal Volume Range": "50-2000 ml",
+        "Respiratory Rate": "5-150 bpm",
+        "Pressure Support": "0-60 cmH₂O",
       },
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     2: {
-      videoSrc: CS750Video,
-      title: "Breathing Circuit – Digital Flow Control",
+      videoSrc: CS750Video12,
+      title: "Flow rates & FiO2",
       overview:
-        "Modular breathing circuit with integrated sensors ensures low resistance flow and precise agent delivery even during low-flow anesthesia.",
+        "Precise control and monitoring of fresh gas flow rates and inspired oxygen concentration for optimal patient ventilation.",
       features: [
-        "Tool-free disassembly and auto-leak checks",
-        "Heated inspiratory limb to prevent condensation",
-        "Integrated flow and pressure monitoring",
-        "Color-coded pathways for quick troubleshooting",
+        "Precise flow rate control",
+        "Accurate FiO2 delivery",
+        "Real-time flow monitoring",
+        "Automatic flow adjustment",
       ],
       specifications: {
-        Compliance: "1.5 ml/mbar",
-        Resistance: "< 1.4 cmH₂O at 60 L/min",
-        "CO₂ Absorber": "2 kg capacity",
-        "Fresh Gas Range": "0.2 – 15 L/min",
+        "Flow Range": "0.2-15 L/min",
+        "FiO2 Range": "21-100%",
+        "Accuracy": "±2% of set value",
+        "Response Time": "< 1 second",
+      },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    3: {
+      videoSrc: CS750Video2,
+      title: "ecoFLOW",
+      overview:
+        "Advanced flow management system that optimizes gas consumption while maintaining precise ventilation delivery.",
+      features: [
+        "Intelligent fresh gas flow optimization",
+        "Reduced agent consumption up to 50%",
+        "Automatic flow adjustment based on patient needs",
+        "Real-time consumption monitoring",
+      ],
+      specifications: {
+        "Flow Range": "0.2-15 L/min",
+        "Savings": "Up to 50% agent reduction",
+        "Response Time": "< 2 seconds",
+        "Accuracy": "±5% of set value",
+      },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    4: {
+      videoSrc: CS750Video4,
+      title: "Customisable Case Profiles",
+      overview:
+        "Pre-configured and customizable patient profiles that streamline workflow and ensure consistent ventilation parameters across cases.",
+      features: [
+        "Pre-loaded profiles for common procedures",
+        "User-defined custom profiles",
+        "Quick profile switching",
+        "Profile sharing across workstations",
+      ],
+      specifications: {
+        "Profile Storage": "Unlimited custom profiles",
+        "Quick Access": "One-touch profile selection",
+        "Export/Import": "USB and network support",
+        "Categories": "Surgical, ICU, Pediatric, Neonatal",
+      },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    5: {
+      videoSrc: CS750Video3,
+      title: "Recruitment Manoeuvre",
+      overview:
+        "Specialized protocols and automated maneuvers to optimize lung recruitment and prevent atelectasis in critical care settings.",
+      features: [
+        "Automated recruitment maneuver protocols",
+        "Sustained inflation capabilities",
+        "PEEP titration guidance",
+        "Pressure-volume loop monitoring",
+      ],
+      specifications: {
+        "Recruitment Pressure": "Up to 60 cmH₂O",
+        "Hold Time": "Adjustable 0-60 seconds",
+        "PEEP Range": "0-30 cmH₂O",
+        "Monitoring": "Real-time compliance curves",
+      },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    6: {
+      videoSrc: CS750Video5,
+      title: "ICU Quality Ventilation",
+      overview:
+        "Advanced ventilation capabilities that bring ICU-quality respiratory support to the operating room environment.",
+      features: [
+        "ICU-grade monitoring and alarms",
+        "Advanced waveform analysis",
+        "Comprehensive gas monitoring",
+        "Integrated capnography",
+      ],
+      specifications: {
+        "Monitoring": "Full ICU parameter set",
+        "Alarm System": "Multi-level priority alarms",
+        "Data Logging": "Continuous 24-hour recording",
+        "Connectivity": "HL7 and network integration",
+      },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    7: {
+      videoSrc: CS750Video6,
+      title: "Compact Breathing System",
+      overview:
+        "Space-efficient breathing circuit design that reduces setup time and maintains low dead space for optimal ventilation efficiency.",
+      features: [
+        "Compact circuit footprint",
+        "Low dead space design",
+        "Quick-connect components",
+        "Integrated safety features",
+      ],
+      specifications: {
+        "Dead Space": "< 50 ml",
+        "Compliance": "1.5 ml/mbar",
+        "Setup Time": "< 2 minutes",
+        "Weight": "Lightweight design",
+      },
+      rotation: { azimuthal: -Math.PI / 3, polar: Math.PI / 2 },
+    },
+    8: {
+      videoSrc: CS750Video7,
+      title: "Intelligent Lighting",
+      overview:
+        "Adaptive lighting system that provides optimal illumination for procedures while reducing eye strain and maintaining ambient conditions.",
+      features: [
+        "Automatic brightness adjustment",
+        "Color temperature control",
+        "Shadow-free illumination",
+        "Energy-efficient LED technology",
+      ],
+      specifications: {
+        "Brightness": "Adjustable 0-100%",
+        "Color Temperature": "3000-6500K",
+        "Coverage": "Wide-angle illumination",
+        "Power Consumption": "Low energy LED",
+      },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    9: {
+      videoSrc: CS750Video8,
+      title: "Integrated Gas Module",
+      overview:
+        "Seamlessly integrated anesthesia gas delivery system with precise agent control and comprehensive monitoring capabilities.",
+      features: [
+        "Integrated vaporizer system",
+        "Multi-agent support",
+        "Precise agent delivery",
+        "Real-time agent monitoring",
+      ],
+      specifications: {
+        "Agents Supported": "Sevoflurane, Isoflurane, Desflurane",
+        "Delivery Accuracy": "±2% of set value",
+        "Agent Capacity": "410 ml per vaporizer",
+        "Monitoring": "Real-time agent concentration",
       },
       rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
-    3: {
-      videoSrc: CS750Video,
-      title: "Vaporizer Bank – Dual Agent Ready",
+    10: {
+      videoSrc: CS750Video9,
+      title: "Checkout",
       overview:
-        "Dual-lock vaporizer manifold supports side-by-side agent cartridges with automatic recognition and safety interlocks.",
+        "Comprehensive automated checkout system that verifies system integrity and ensures all components are functioning correctly before use.",
       features: [
-        "Auto-ID for Sevoflurane, Isoflurane, Desflurane",
-        "Hot-swap capability without power-down",
-        "Interlock prevents simultaneous activation",
-        "LED indicators for fill level and status",
+        "Automated system checks",
+        "Leak detection and testing",
+        "Component verification",
+        "Checkout report generation",
       ],
       specifications: {
-        "Agent Capacity": "410 ml per vaporizer",
-        Accuracy: "±2% of set value",
-        "Refill Time": "< 30 seconds",
-        "Warm-up": "< 2 minutes",
+        "Checkout Time": "< 3 minutes",
+        "Tests Performed": "20+ system checks",
+        "Report Format": "Digital and print",
+        "Compliance": "Meets regulatory standards",
       },
-      rotation: { azimuthal: Math.PI / 2, polar: Math.PI / 2 },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
-    4: {
-      videoSrc: CS750Video,
-      title: "Ventilation Controls – Precision Tuning",
+    11: {
+      videoSrc: CS750Video10,
+      title: "Cable Management",
       overview:
-        "Rotary encoders and context-lit keys give tactile redundancy for clinicians who prefer physical controls during critical events.",
+        "Organized cable routing system that keeps the workspace clean, reduces clutter, and prevents cable damage during procedures.",
       features: [
-        "Tri-color feedback rings for parameter status",
-        "Haptic detents aligned with clinical increments",
-        "Dedicated quick-set knobs for tidal volume & rate",
-        "Programmable soft keys for custom workflows",
+        "Integrated cable channels",
+        "Quick-release cable management",
+        "Strain relief protection",
+        "Easy access for maintenance",
       ],
       specifications: {
-        "Encoder Resolution": "1° per step",
-        "Button Life": "5 million actuations",
-        "Emergency O₂ Flush": "75 L/min",
-        "System Latency": "< 40 ms",
+        "Cable Capacity": "Multiple cable support",
+        "Organization": "Color-coded routing",
+        "Access": "Tool-free access",
+        "Protection": "Strain relief built-in",
       },
-      rotation: { azimuthal: -Math.PI, polar: Math.PI / 2 },
+      rotation: { azimuthal: Math.PI /1.5, polar: Math.PI / 2 },
+    },
+    12: {
+      videoSrc: CS750Video11,
+      title: "360° Arm (optional)",
+      overview:
+        "Advanced articulating arm system that provides flexible positioning of monitors and accessories while maintaining stability and ease of use.",
+      features: [
+        "Multi-axis articulation",
+        "Counterbalanced design",
+        "Locking mechanisms",
+        "Smooth positioning",
+      ],
+      specifications: {
+        "Range of Motion": "360° rotation",
+        "Load Capacity": "Up to 15 kg",
+        "Locking": "Multiple position locks",
+        "Materials": "Premium construction",
+      },
+      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
   };
 
