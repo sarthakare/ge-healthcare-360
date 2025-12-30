@@ -105,8 +105,8 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
           src="/hotspot.svg"
           alt="hotspot"
           style={{
-            width: "100%",
-            height: "100%",
+            width: "30px",
+            height: "30px",
           }}
         />
         <div
@@ -735,8 +735,12 @@ const LEDPhototherapy = () => {
     <div
       style={{
         height: "100vh",
-        backgroundColor: "#202438",
         position: "relative",
+        backgroundImage:
+          "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
+        backgroundRepeat: "no-repeat, no-repeat",
+        backgroundPosition: "bottom center, center",
+        backgroundSize: "auto, cover",
       }}
     >
       <button
@@ -744,25 +748,25 @@ const LEDPhototherapy = () => {
         style={{
           position: "absolute",
           top: "20px",
-          left: "20px",
+          left: "35%",
           zIndex: 10,
           padding: "10px 15px",
-          backgroundColor: "#6022A6",
-          color: "white",
+          backgroundColor: "#F37F63",
+          color: "#000",
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "14px",
-          transition: "background-color 0.2s",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = "rgb(65, 23, 113)";
+          e.currentTarget.style.backgroundColor = "#F37F63";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = "#6022A6";
+          e.currentTarget.style.backgroundColor = "#F37F63";
         }}
       >
-        ← Back to Home
+        Back to Home
       </button>
 
       <button
@@ -770,22 +774,22 @@ const LEDPhototherapy = () => {
         style={{
           position: "absolute",
           top: "20px",
-          right: "180px",
+          right: "47.8%",
           zIndex: 10,
           padding: "10px 20px",
-          backgroundColor: "rgba(255, 0, 0, 0.9)",
-          color: "white",
+          backgroundColor: "#F37F63",
+          color: "#000",
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "16px",
-          transition: "background-color 0.2s",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = "rgba(255, 0, 0, 1)";
+          e.currentTarget.style.backgroundColor = "#F37F63";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = "rgba(255, 0, 0, 0.9)";
+          e.currentTarget.style.backgroundColor = "#F37F63";
         }}
       >
         Reset
@@ -796,28 +800,28 @@ const LEDPhototherapy = () => {
         style={{
           position: "absolute",
           top: "20px",
-          right: "20px",
+          right: "36%",
           zIndex: 10,
           padding: "10px 20px",
           backgroundColor: hotspotsVisible
-            ? "rgba(255, 255, 255, 0.9)"
-            : "rgba(180, 180, 180, 0.9)",
-          color: "#6022A6",
+            ? "#F37F63"
+            : "#F37F63",
+          color: "#000",
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "16px",
-          transition: "background-color 0.2s",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = hotspotsVisible
-            ? "rgba(255, 255, 255, 1)"
-            : "rgba(180, 180, 180, 1)";
+            ? "#F37F63"
+            : "#F37F63";
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.backgroundColor = hotspotsVisible
-            ? "rgba(255, 255, 255, 0.9)"
-            : "rgba(180, 180, 180, 0.9)";
+            ? "#F37F63"
+            : "#F37F63";
         }}
       >
         {hotspotsVisible ? "Hide Hotspots" : "Show Hotspots"}
@@ -942,23 +946,18 @@ const LEDPhototherapy = () => {
           onClick={() => setHotspotMenuOpen((v) => !v)}
           style={{
             padding: "10px 14px",
-            backgroundColor: "#fff",
-            color: "#6022A6",
+            backgroundColor: "#F37F63",
+            color: "#000",
             border: "none",
             borderRadius: "8px",
             cursor: "pointer",
-            fontSize: "14px",
+            fontSize: "15px",
             boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
             width: "240px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.filter = "brightness(1.1)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.filter = "brightness(1)";
+            fontWeight: "600",
           }}
         >
           <span>Features</span>
@@ -967,14 +966,16 @@ const LEDPhototherapy = () => {
         {hotspotMenuOpen && (
           <div
             style={{
-              marginBottom: "8px",
-              background: "#ffffff",
-              borderRadius: "8px",
-              boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+              marginBottom: "-9px",
               minWidth: "240px",
               overflow: "hidden",
               display: "flex",
               flexDirection: "column",
+              borderWidth: "2px",
+              borderStyle: "solid",
+              borderImage: "linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
+              borderRadius: "6px",
+              padding: "0px 15px 10px",
             }}
           >
             {hotspots.map((h, index) => (
@@ -984,18 +985,17 @@ const LEDPhototherapy = () => {
                 style={{
                   padding: "12px 16px",
                   cursor: "pointer",
-                  fontSize: "14px",
-                  color: "#111827",
+                  fontSize: "15px",
+                  color: "#fff",
                   borderBottom:
                     index < hotspots.length - 1 ? "1px solid #f1f5f9" : "none",
-                  background: "#ffffff",
-                  transition: "background-color 0.2s ease",
+                  transition: "background-color 0.01s ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#f8fafc";
+                  e.currentTarget.style.color = "#F37F63";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "#ffffff";
+                  e.currentTarget.style.color = "#fff";
                 }}
               >
                 {h.name}
