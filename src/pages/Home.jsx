@@ -74,7 +74,7 @@ const Home = () => {
           intro: "Step inside the 3D model to explore the controlled micro-environment, access doors, and caregiver-friendly design that support fragile neonates.",
         },
         {
-          name: "LED Phototherapy",
+          name: "LED Phototherapy - Neonatal jaundice treatment system",
           path: "/led-phototherapy",
           image: ImageLEDPhototherapy,
           intro: "Explore the Lullaby™ LED Phototherapy system in 3D and see how high-intensity, targeted LED light is delivered efficiently to treat neonatal jaundice. Designed for quiet operation, consistent irradiance and long LED life, the system supports faster bilirubin reduction while ensuring infant comfort and caregiver convenience in NICU and well-baby care settings.",
