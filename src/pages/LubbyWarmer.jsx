@@ -404,14 +404,14 @@ import {
     };
   
     const hotspots = [
-      { id: 1, name: "±90 Heater Head Rotation", position: [0, 1.5, 0.5] },
-      { id: 2, name: "Baby Mode and Manual Mode", position: [0, -2, 0.75] },
-      { id: 3, name: "Calrod Far-Infrared Heater", position: [0, 1.2, 0.6] },
-      { id: 4, name: "Intuitive Control Panel", position: [0, -1.8, 0.8] },
-      { id: 5, name: "Smooth Bed Tilting ±15°", position: [-0.5, -0.25, 0] },
-      { id: 6, name: "Specialized Reflector & Heating Element", position: [0, 1.0, 0.7] },
-      { id: 7, name: "Walls of Warmth", position: [0.5, 0.5, 0.3] },
-      { id: 8, name: "X-ray Tray with Marks", position: [0.3, -1.0, 0.2] },
+      { id: 1, name: "±90 Heater Head Rotation", position: [0, 1.65, -0.7] },
+      { id: 2, name: "Baby Mode and Manual Mode", position: [0, 0.75, -0.7] },
+      { id: 3, name: "Calrod Far-Infrared Heater", position: [0, 1.75, 0.6] },
+      { id: 4, name: "Intuitive Control Panel", position: [0, 1, -0.7] },
+      { id: 5, name: "Smooth Bed Tilting ±15°", position: [-0.5, -1, 0.1] },
+      { id: 6, name: "Specialized Reflector & Heating Element", position: [0, 0, 0] },
+      { id: 7, name: "Walls of Warmth", position: [0.5, -0.25, 0] },
+      { id: 8, name: "X-ray Tray with Marks", position: [0, -0.5, 0.8] },
     ];
   
     const hotspotsConfig = {
@@ -579,7 +579,7 @@ import {
           "Standard": "Included as standard",
         },
         rotation: {
-          azimuthal: -Math.PI / 2,
+          azimuthal: 0,
           polar: Math.PI / 2,
         },
       },
