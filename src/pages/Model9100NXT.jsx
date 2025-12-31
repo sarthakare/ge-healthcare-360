@@ -430,15 +430,15 @@ const Model9100NXT = () => {
 
   const hotspots = [
     { id: 1, name: "Ventilation Modes", position: [0.5, 1.75, 0.05] },
-    { id: 2, name: "Autoclavable Breathing Circuit", position: [-1.4, 0.2, 0.3] },
-    { id: 3, name: "Pre-use Guided Check", position: [0.5, 1.6, 0.1] },
-    { id: 4, name: "PSVPro Algorithm", position: [-0.3, 0.3, -1.2] },
-    { id: 5, name: "CO₂ Bypass", position: [-1.3, 0.1, 0.4] },
-    { id: 6, name: "Flow-Valve Technology", position: [-0.2, 0.4, -1.1] },
-    { id: 7, name: "Hypoxia Guard Apnea Back-up", position: [0.4, 1.5, 0.15] },
-    { id: 8, name: "Integrated ACGO", position: [1.2, 0.5, 0.2] },
-    { id: 9, name: "Three-Gas Capability", position: [1.1, 0.6, 0.1] },
-    { id: 10, name: "Two Flow Sensors", position: [-1.5, 0.3, 0.2] },
+    { id: 2, name: "Autoclavable Breathing Circuit", position: [-1.4, -0.05, 0.5] },
+    { id: 3, name: "Pre-use Guided Check", position: [0.25, 0.75, 0.15] },
+    { id: 4, name: "PSVPro Algorithm", position: [-1.75, 0.5, -0.25] },
+    { id: 5, name: "CO₂ Bypass", position: [-1.5, -0.5, 0.4] },
+    { id: 6, name: "Flow-Valve Technology", position: [0.75, 1.5, 0.05] },
+    { id: 7, name: "Hypoxia Guard Apnea Back-up", position: [-0.5, 1.5, 0.15] },
+    { id: 8, name: "Integrated ACGO", position: [-0.35, -0.05, 1] },
+    { id: 9, name: "Three-Gas Capability", position: [-0.5, 1, 0.15] },
+    { id: 10, name: "Two Flow Sensors", position: [-1.4, 0.05, 0.5] },
     { id: 11, name: "One Device for the Whole Hospital", position: [0, 1.2, 0] },
   ];
 
@@ -549,7 +549,7 @@ const Model9100NXT = () => {
         "Response Time": "< 50ms",
         "Accuracy": "±2%",
       },
-      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     7: {
       videoSrc: VideoHypoxiaGuardApnea,
@@ -585,7 +585,7 @@ const Model9100NXT = () => {
         "Gas Support": "Multiple",
         "Flow Capacity": "Up to 15 L/min",
       },
-      rotation: { azimuthal: Math.PI / 2, polar: Math.PI / 2 },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     9: {
       videoSrc: VideoThreeGasCapability,
@@ -603,7 +603,7 @@ const Model9100NXT = () => {
         "Flow Range": "0.2 - 15 L/min each",
         "Mixture Control": "Precise",
       },
-      rotation: { azimuthal: Math.PI / 2, polar: Math.PI / 2 },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     10: {
       videoSrc: VideoTwoFlowSensors,
