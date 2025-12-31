@@ -1,9 +1,4 @@
-import {
-  useState,
-  useCallback,
-  useRef,
-  useEffect,
-} from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
@@ -15,7 +10,15 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import MonitorB1xMModel from "../assets/monitors-b1xm/model/Monitor Combined File.glb";
-import MonitorsVideo from "../assets/monitors-b1xm/videos/01-Modes_of_Ventilation.mp4";
+import ConnectedVideo from "../assets/monitors-b1xm/videos/Connected.mp4";
+import DINAMAPVideo from "../assets/monitors-b1xm/videos/DINAMAP.mp4";
+import EKProArrhythmiaAlgorithmVideo from "../assets/monitors-b1xm/videos/EK-Pro Arrhythmia algorithm.mp4";
+import EntropyVideo from "../assets/monitors-b1xm/videos/Entropy.mp4";
+import IntuitiveVideo from "../assets/monitors-b1xm/videos/Intuitive.mp4";
+import ScalableAcrossCareAreasVideo from "../assets/monitors-b1xm/videos/Scalable Across Care Areas.mp4";
+import ScalableVideo from "../assets/monitors-b1xm/videos/Scalable.mp4";
+import SpirometryVideo from "../assets/monitors-b1xm/videos/Spirometry.mp4";
+import TestedForPerformanceVideo from "../assets/monitors-b1xm/videos/Tested for Performance.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -78,7 +81,7 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
   if (!isVisible) return null;
 
   return (
-    <Html position={position} center zIndexRange={[50, 60]}>
+    <Html position={position} center zIndexRange={showAnnotation || isVideoPlaying ? [70, 80] : [50, 60]}>
       <div
         style={{
           width: "50px",
@@ -120,6 +123,7 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
             pointerEvents: "none",
             opacity: showAnnotation || isVideoPlaying ? 1 : 0,
             transition: "opacity 0.3s ease",
+            zIndex: 9999,
           }}
         >
           {annotation}
@@ -399,28 +403,47 @@ const MonitorB1xM = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "Modular Monitor", position: [-1.25, 1, 1.75] },
-    { id: 2, name: "Connector Panel", position: [-1.75, 0.25, 0.5] },
-    { id: 3, name: "Mounting Arm", position: [2, 1, 2] },
+    {
+      id: 1,
+      name: "Scalable Across Care Areas",
+      position: [-1.25, 0.75, 1.65],
+    },
+    { id: 2, name: "Entropy", position: [-0.5, 0.5, 1.65] },
+    { id: 3, name: "Connectivity", position: [-1.25, 1.25, 1.65] },
+    { id: 4, name: "Intuitive", position: [-1.25, 0.25, 1.65] },
+    { id: 5, name: "DINAMAP", position: [-2, 0.75, 1.65] },
+    {
+      id: 6,
+      name: "EK-Pro Arrhythmia Algorithm",
+      position: [-2, 0.25, 1.65],
+    },
+    { id: 7, name: "Spirometry", position: [-0.5, 0.25, 1.65] },
+    {
+      id: 8,
+      name: "Tested for Performance",
+      position: [-0.5, 0, 1.65],
+    },
+    { id: 9, name: "Multi-Module Scalability", position: [-0.5, 0.75, 1.65] },
+    { id: 10, name: "Monitor Ports (Video soon)", position: [-1.5, 0.2, 0.65] },
   ];
 
   const hotspotsConfig = {
     1: {
-      videoSrc: MonitorsVideo,
-      title: "Modular Monitor Display",
+      videoSrc: ScalableAcrossCareAreasVideo,
+      title: "Scalable Across Care Areas",
       overview:
-        "High-resolution bedside display with configurable parameter tiles for B105M/B125M/B155M monitors.",
+        "Common platform that scales from ICU to OR to step-down with consistent workflows and monitoring tools.",
       features: [
-        "12.1\" ultra-bright screen",
-        "Configurable waveform layout",
-        "Touch + rotary encoder control",
-        "Ambient light compensation",
+        "Consistent UI across units",
+        "Hot-swappable parameter modules",
+        "Central station connectivity",
+        "Suitable bedside through transport",
       ],
       specifications: {
-        Display: '12.1" IPS',
-        Brightness: "500 nits",
-        Power: "AC/DC auto-sensing",
-        Interfaces: "USB, LAN, HDMI",
+        CareAreas: "ICU/OR/ward ready",
+        Modules: "Hot-swappable bays",
+        Central: "Central station ready",
+        Transport: "Battery bridging capable",
       },
       rotation: {
         azimuthal: 0,
@@ -428,10 +451,186 @@ const MonitorB1xM = () => {
       },
     },
     2: {
-      videoSrc: MonitorsVideo,
-      title: "Comprehensive Connector Panel",
+      videoSrc: EntropyVideo,
+      title: "Entropy Monitoring",
       overview:
-        "Rear I/O panel covering ECG, IBP, SpO2, CO2, and auxiliary ports with color coding for rapid setup.",
+        "Entropy monitoring provides insight into anesthesia depth with State and Response Entropy values.",
+      features: [
+        "State and Response Entropy",
+        "Supports anesthetic titration",
+        "Helps reduce awareness risk",
+        "Integrates with bedside trends",
+      ],
+      specifications: {
+        Parameters: "State/Response Entropy",
+        Range: "0-91",
+        Interface: "Module integrated",
+        Refresh: "Fast response",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    3: {
+      videoSrc: ConnectedVideo,
+      title: "Connectivity",
+      overview:
+        "Network-ready bedside monitor that keeps patient data connected across care areas for uninterrupted visibility.",
+      features: [
+        "Bed-to-bed data continuity",
+        "Remote viewing and review",
+        "Secure data transport",
+        "Alarm forwarding ready",
+      ],
+      specifications: {
+        Connectivity: "LAN/Wi-Fi capable",
+        Protocols: "Hospital network ready",
+        Sync: "Bedside data share",
+        Security: "Encrypted transport",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    4: {
+      videoSrc: IntuitiveVideo,
+      title: "Intuitive User Experience",
+      overview:
+        "Streamlined, intuitive user experience with gesture-friendly controls and quick access to patient data.",
+      features: [
+        "Touch-friendly layouts",
+        "Customizable parameter tiles",
+        "Fast access to trends",
+        "Contextual on-screen help",
+      ],
+      specifications: {
+        Display: '12.1" touchscreen',
+        Layouts: "Configurable tiles",
+        Navigation: "Rotary plus touch",
+        Shortcuts: "User definable",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    5: {
+      videoSrc: DINAMAPVideo,
+      title: "DINAMAP Blood Pressure",
+      overview:
+        "Trusted DINAMAP non-invasive blood pressure technology integrated for accurate, repeatable measurements.",
+      features: [
+        "Clinically validated DINAMAP algorithm",
+        "Adaptive inflation control",
+        "Auto and interval BP cycles",
+        "Arrhythmia rejection support",
+      ],
+      specifications: {
+        Measurement: "DINAMAP NIBP",
+        Modes: "Manual/stat/auto",
+        Interval: "1-120 minute auto cycle",
+        Safety: "Overpressure protection",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    6: {
+      videoSrc: EKProArrhythmiaAlgorithmVideo,
+      title: "EK-Pro Arrhythmia Algorithm",
+      overview:
+        "EK-Pro multi-lead analysis delivers advanced arrhythmia detection and beat-to-beat insight at the bedside.",
+      features: [
+        "Advanced arrhythmia detection",
+        "Beat-to-beat analysis",
+        "Multi-lead redundancy",
+        "Realtime notifications",
+      ],
+      specifications: {
+        Algorithm: "EK-Pro arrhythmia",
+        Leads: "Multi-lead correlation",
+        Analysis: "Beat-to-beat",
+        Alerts: "Configurable thresholds",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    7: {
+      videoSrc: SpirometryVideo,
+      title: "Bedside Spirometry",
+      overview:
+        "Integrated spirometry provides real-time flow and volume loops to assess ventilatory performance.",
+      features: [
+        "Real-time flow-volume loops",
+        "Tidal volume monitoring",
+        "Leak and resistance insight",
+        "Trend reporting at bedside",
+      ],
+      specifications: {
+        Parameters: "Flow and volume loops",
+        Accuracy: "Clinical-grade sensors",
+        Display: "Loop and numeric view",
+        Trending: "Bedside trend capture",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    8: {
+      videoSrc: TestedForPerformanceVideo,
+      title: "Tested for Performance",
+      overview:
+        "Reliability you can trust—environmentally stressed, ingress protected, and ready for continuous use.",
+      features: [
+        "Thermal and vibration tested",
+        "Ingress-protected connectors",
+        "Fanless silent cooling",
+        "Designed for 24/7 duty",
+      ],
+      specifications: {
+        Testing: "Thermal and vibration",
+        Protection: "Ingress protected I/O",
+        Cooling: "Fanless design",
+        DutyCycle: "Continuous operation",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    9: {
+      videoSrc: ScalableVideo,
+      title: "Multi-Module Scalability",
+      overview:
+        "Modular monitoring platform that grows with patient acuity, protecting investment as needs change.",
+      features: [
+        "Expandable parameter slots",
+        "Flexible mounting options",
+        "Upgrade-ready software",
+        "Shared accessory ecosystem",
+      ],
+      specifications: {
+        Slots: "Multiple parameter bays",
+        Mounting: "Arm or roll-stand",
+        Upgrades: "Software expandable",
+        Accessories: "Shared ecosystem",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    10: {
+      videoSrc: ConnectedVideo,
+      title: "Monitor Ports",
+      overview:
+        "Rear I/O panel covering ECG, IBP, SpO2, CO2, and auxiliary ports with color coding for rapid setup. (Video placeholder until final upload.)",
       features: [
         "Eight parameter module slots",
         "Hot-swappable module bay",
@@ -445,29 +644,7 @@ const MonitorB1xM = () => {
         Cooling: "Fanless design",
       },
       rotation: {
-        azimuthal: Math.PI,
-        polar: Math.PI / 2,
-      },
-    },
-    3: {
-      videoSrc: MonitorsVideo,
-      title: "Articulated Mounting Arm",
-      overview:
-        "Height-adjustable arm provides flexible positioning for cramped critical-care environments.",
-      features: [
-        "270° swivel range",
-        "Gas-spring assisted height",
-        "Cable routing channel",
-        "Bed rail clamp compatibility",
-      ],
-      specifications: {
-        Range: "600 mm horizontal",
-        MaxLoad: "15 kg",
-        Materials: "Powder-coated steel",
-        Adjustment: "Tool-free knobs",
-      },
-      rotation: {
-        azimuthal: 0,
+        azimuthal: -Math.PI,
         polar: Math.PI / 2,
       },
     },
@@ -501,7 +678,9 @@ const MonitorB1xM = () => {
       while (azimuthalDelta < -Math.PI) azimuthalDelta += 2 * Math.PI;
       if (Math.abs(azimuthalDelta) > Math.PI / 2) {
         azimuthalDelta =
-          azimuthalDelta > 0 ? azimuthalDelta - 2 * Math.PI : azimuthalDelta + 2 * Math.PI;
+          azimuthalDelta > 0
+            ? azimuthalDelta - 2 * Math.PI
+            : azimuthalDelta + 2 * Math.PI;
       }
 
       const startTime = performance.now();
@@ -511,13 +690,16 @@ const MonitorB1xM = () => {
         const progress = Math.min(elapsed / duration, 1);
         const easedProgress = 1 - Math.pow(1 - progress, 3);
 
-        const currentAzimuthal = startAzimuthal + azimuthalDelta * easedProgress;
+        const currentAzimuthal =
+          startAzimuthal + azimuthalDelta * easedProgress;
         const currentPolar =
           startPolar + (targetPolar - startPolar) * easedProgress;
 
-        const x = currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
+        const x =
+          currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
         const y = currentDistance * Math.cos(currentPolar);
-        const z = currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
+        const z =
+          currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
 
         camera.position.set(target.x + x, target.y + y, target.z + z);
         camera.lookAt(target);
@@ -561,9 +743,11 @@ const MonitorB1xM = () => {
         const currentAzimuthal = startAzimuthal + oscillation * rotationRange;
         const currentPolar = startPolar;
 
-        const x = currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
+        const x =
+          currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
         const y = currentDistance * Math.cos(currentPolar);
-        const z = currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
+        const z =
+          currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
 
         camera.position.set(target.x + x, target.y + y, target.z + z);
         camera.lookAt(target);
@@ -638,12 +822,12 @@ const MonitorB1xM = () => {
     <div
       style={{
         height: "100vh",
-          position: "relative",
-          backgroundImage:
-  "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
-          backgroundRepeat: "no-repeat, no-repeat",
-          backgroundPosition: "bottom center, center",
-          backgroundSize: "auto, cover",
+        position: "relative",
+        backgroundImage:
+          "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
+        backgroundRepeat: "no-repeat, no-repeat",
+        backgroundPosition: "bottom center, center",
+        backgroundSize: "auto, cover",
       }}
     >
       <button
@@ -659,8 +843,8 @@ const MonitorB1xM = () => {
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -685,8 +869,8 @@ const MonitorB1xM = () => {
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -706,15 +890,13 @@ const MonitorB1xM = () => {
           right: "36%",
           zIndex: 10,
           padding: "10px 20px",
-          backgroundColor: hotspotsVisible
-            ? "#F37F63"
-            : "#F37F63",
+          backgroundColor: hotspotsVisible ? "#F37F63" : "#F37F63",
           color: "#000",
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
           fontSize: "15px",
-          fontWeight:"600",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = hotspotsVisible
@@ -789,7 +971,7 @@ const MonitorB1xM = () => {
       />
 
       <Canvas>
-        <PerspectiveCamera makeDefault position={[-10, 3 , 10]} />
+        <PerspectiveCamera makeDefault position={[-10, 3, 10]} />
         {/* <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1} /> */}
         <OrbitControls
@@ -802,10 +984,7 @@ const MonitorB1xM = () => {
           target={[0, 0, 0]}
         />
         <Environment preset="apartment" />
-        <Model
-          glbPath={MonitorB1xMModel}
-          onLoad={handleModelLoad}
-        />
+        <Model glbPath={MonitorB1xMModel} onLoad={handleModelLoad} />
         {hotspotsVisible &&
           hotspots.map((h) => (
             <Hotspot
@@ -813,7 +992,9 @@ const MonitorB1xM = () => {
               position={h.position}
               annotation={h.name}
               onHotspotClick={() => handleHotspotClick(h.id)}
-              isVideoPlaying={popupData !== null && popupData.hotspotId === h.id}
+              isVideoPlaying={
+                popupData !== null && popupData.hotspotId === h.id
+              }
             />
           ))}
       </Canvas>
@@ -860,7 +1041,7 @@ const MonitorB1xM = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            fontWeight:"600",
+            fontWeight: "600",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.filter = "brightness(1.1)";
@@ -885,8 +1066,9 @@ const MonitorB1xM = () => {
               flexDirection: "column",
               borderWidth: "2px",
               borderStyle: "solid",
-              borderImage:"linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
-              padding:"0px 15px 10px",
+              borderImage:
+                "linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
+              padding: "0px 15px 10px",
             }}
           >
             {hotspots.map((h, index) => (
@@ -908,7 +1090,7 @@ const MonitorB1xM = () => {
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.color = "#fff";
-                }}			 
+                }}
               >
                 {h.name}
               </div>
@@ -921,4 +1103,3 @@ const MonitorB1xM = () => {
 };
 
 export default MonitorB1xM;
-
