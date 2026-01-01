@@ -103,7 +103,7 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
         <div
           style={{
             position: "absolute",
-            top: "calc(100% + 5px)",
+            top: "calc(75%)",
             left: "50%",
             transform: "translateX(-50%)",
             background: "white",
