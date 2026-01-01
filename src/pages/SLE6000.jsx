@@ -1,9 +1,4 @@
-import {
-  useState,
-  useCallback,
-  useRef,
-  useEffect,
-} from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
@@ -19,6 +14,15 @@ import SLE6000Video1 from "../assets/sle6000/videos/Conventional Modes, HFO  & N
 import SLE6000Video2 from "../assets/sle6000/videos/Future ready and upgradeable to Oxygenie-.mp4";
 import SLE6000Video3 from "../assets/sle6000/videos/NCPAP, NIPPV & NIPPV Tr.mp4";
 import SLE6000Video4 from "../assets/sle6000/videos/Powerful HFO & Conventional Ventilator.mp4";
+import SLE6000Video5 from "../assets/sle6000/videos/0SIMV Mode.mp4";
+import SLE6000Video6 from "../assets/sle6000/videos/lunar display capacitive touch screen.mp4";
+import SLE6000Video7 from "../assets/sle6000/videos/Additional Parmeters video.mp4";
+import SLE6000Video8 from "../assets/sle6000/videos/Alarm settings.mp4";
+import SLE6000Video9 from "../assets/sle6000/videos/CPAP Mode.mp4";
+import SLE6000Video10 from "../assets/sle6000/videos/Manual Breath.mp4";
+import SLE6000Video11 from "../assets/sle6000/videos/The mode panel is the users.mp4";
+import SLE6000Video12 from "../assets/sle6000/videos/top-mounted alarm light ensures.mp4";
+import SLE6000Video13 from "../assets/sle6000/videos/Volume Targeted Ventilation.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -109,7 +113,7 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
         <div
           style={{
             position: "absolute",
-            top: "calc(100% + 5px)",
+            top: "calc(75%)",
             left: "50%",
             transform: "translateX(-50%)",
             background: "white",
@@ -400,10 +404,27 @@ const SLE6000 = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "Conventional Modes, HFO & NIV", position: [0, 2, 0.25] },
-    { id: 2, name: "Future Ready & Upgradeable", position: [0, 2, -1.25] },
-    { id: 3, name: "NCPAP, NIPPV & NIPPV Tr", position: [0, -1.25, 0] },
-    { id: 4, name: "HFO & Conventional Ventilator", position: [0, 1, 1.5] },
+    { id: 1, name: "Conventional Modes, HFO & NIV", position: [-0.35, 2.2, 0] },
+    {
+      id: 2,
+      name: "Dual limb, NCPAP, NIPPV & NIPPV Tr",
+      position: [-0.15, 2.2, 0],
+    },
+    {
+      id: 3,
+      name: "Future ready and upgradeable to Oxygenie",
+      position: [0.05, 2.2, 0],
+    },
+    { id: 4, name: "Volume Targeted Ventilation", position: [0.05, 1.85, 0.1] },
+    { id: 5, name: "Alarm Settings", position: [-0.35, 2, 0] },
+    { id: 6, name: "Alarm Light", position: [0.05, 2.35, -0.25]},
+    { id: 7, name: '12.1" Lunar Display', position:  [0.35, 2, 0.05] },
+    { id: 8, name: "Powerful HFO Mode", position: [0.25, 1.85, 0.05] },
+    { id: 9, name: "Layouts", position: [-0.35, 1.9, 0]  },
+    { id: 10, name: "Additional Parameters", position: [-0.35, 1.8, 0] },
+    { id: 11, name: "SIMV Mode", position: [-0.15, 2, 0] },
+    { id: 12, name: "CPAP Mode", position: [-0.15, 1.85, 0] },
+    { id: 13, name: "Manual Breath", position: [0.25, 1.75, 0.05] },
   ];
 
   const hotspotsConfig = {
@@ -425,13 +446,37 @@ const SLE6000 = () => {
         Flow: "2–200 L/min",
       },
       rotation: {
-        azimuthal: Math.PI / 2,
+        azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     2: {
+      videoSrc: SLE6000Video3,
+      title: "Dual limb, NCPAP, NIPPV & NIPPV Tr",
+      overview:
+        "Advanced non-invasive respiratory support modes including Dual limb configuration, Nasal Continuous Positive Airway Pressure (NCPAP), Non-Invasive Positive Pressure Ventilation (NIPPV), and NIPPV Transition modes.",
+      features: [
+        "Dual limb configuration",
+        "Nasal CPAP support",
+        "Non-Invasive Positive Pressure Ventilation",
+        "NIPPV Transition modes",
+        "Gentle respiratory assistance",
+      ],
+      specifications: {
+        Configuration: "Dual limb",
+        CPAP: "2–20 cmH2O",
+        NIPPV: "Pressure support modes",
+        Transition: "Smooth mode switching",
+        Interface: "Nasal/prong compatible",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    3: {
       videoSrc: SLE6000Video2,
-      title: "Future Ready & Upgradeable to Oxygenie",
+      title: "Future ready and upgradeable to Oxygenie",
       overview:
         "The SLE6000 is designed with future-ready technology, allowing seamless upgrades to Oxygenie for enhanced oxygenation capabilities.",
       features: [
@@ -447,35 +492,101 @@ const SLE6000 = () => {
         Compatibility: "Backward compatible",
       },
       rotation: {
-        azimuthal: -Math.PI / 2,
-        polar: Math.PI / 2,
-      },
-    },
-    3: {
-      videoSrc: SLE6000Video3,
-      title: "NCPAP, NIPPV & NIPPV Tr",
-      overview:
-        "Advanced non-invasive respiratory support modes including Nasal Continuous Positive Airway Pressure (NCPAP), Non-Invasive Positive Pressure Ventilation (NIPPV), and NIPPV Transition modes.",
-      features: [
-        "Nasal CPAP support",
-        "Non-Invasive Positive Pressure Ventilation",
-        "NIPPV Transition modes",
-        "Gentle respiratory assistance",
-      ],
-      specifications: {
-        CPAP: "2–20 cmH2O",
-        NIPPV: "Pressure support modes",
-        Transition: "Smooth mode switching",
-        Interface: "Nasal/prong compatible",
-      },
-      rotation: {
-        azimuthal: Math.PI,
+        azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     4: {
+      videoSrc: SLE6000Video13,
+      title: "Volume Targeted Ventilation",
+      overview:
+        "Volume targeted ventilation mode ensures precise delivery of set tidal volumes, providing consistent and controlled respiratory support.",
+      features: [
+        "Precise volume delivery",
+        "Targeted tidal volumes",
+        "Consistent ventilation",
+        "Controlled respiratory support",
+      ],
+      specifications: {
+        Mode: "Volume targeted",
+        Delivery: "Precise volumes",
+        Control: "Consistent",
+        Support: "Targeted ventilation",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    5: {
+      videoSrc: SLE6000Video8,
+      title: "Alarm Settings",
+      overview:
+        "Configurable alarm system with customizable settings to ensure patient safety and alert healthcare providers to critical conditions.",
+      features: [
+        "Configurable alarm parameters",
+        "Customizable thresholds",
+        "Visual and audible alerts",
+        "Priority-based notifications",
+      ],
+      specifications: {
+        Alarms: "Configurable",
+        Thresholds: "Customizable",
+        Alerts: "Visual & audible",
+        Priority: "Multi-level",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    6: {
+      videoSrc: SLE6000Video12,
+      title: "Alarm Light",
+      overview:
+        "Prominent top-mounted alarm light ensures visibility of alarm conditions from any angle, enhancing patient safety and staff awareness.",
+      features: [
+        "Top-mounted positioning",
+        "360-degree visibility",
+        "Enhanced alarm awareness",
+        "Patient safety focus",
+      ],
+      specifications: {
+        Position: "Top-mounted",
+        Visibility: "360-degree",
+        Awareness: "Enhanced",
+        Safety: "Patient-focused",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    7: {
+      videoSrc: SLE6000Video6,
+      title: '12.1" Lunar Display',
+      overview:
+        "Large 12.1-inch high-resolution lunar display with capacitive touch screen technology for intuitive operation and clear visualization of patient parameters.",
+      features: [
+        "12.1-inch high-resolution display",
+        "Capacitive touch screen",
+        "Intuitive user interface",
+        "Clear parameter visualization",
+      ],
+      specifications: {
+        Display: '12.1" capacitive touch',
+        Resolution: "High-resolution",
+        Interface: "Touch-enabled",
+        Visibility: "Enhanced clarity",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    8: {
       videoSrc: SLE6000Video4,
-      title: "Powerful HFO & Conventional Ventilator",
+      title: "Powerful HFO Mode",
       overview:
         "Combines powerful High-Frequency Oscillation capabilities with conventional ventilation modes, providing comprehensive respiratory support from neonatal to adult patients.",
       features: [
@@ -489,6 +600,118 @@ const SLE6000 = () => {
         Conventional: "AC, SIMV, PSV",
         Pressure: "5–100 cmH2O",
         PatientRange: "Neonatal to adult",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    9: {
+      videoSrc: SLE6000Video11,
+      title: "Layouts",
+      overview:
+        "Intuitive mode panel interface and customizable layouts designed for the user, providing easy access to ventilation modes and settings with clear visual feedback.",
+      features: [
+        "User-friendly interface",
+        "Customizable layouts",
+        "Easy mode selection",
+        "Clear visual feedback",
+        "Intuitive navigation",
+      ],
+      specifications: {
+        Interface: "User-focused",
+        Layouts: "Customizable",
+        Navigation: "Intuitive",
+        Feedback: "Visual",
+        Access: "Easy mode selection",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    10: {
+      videoSrc: SLE6000Video7,
+      title: "Additional Parameters",
+      overview:
+        "Comprehensive monitoring and display of additional respiratory parameters for enhanced patient care and clinical decision-making.",
+      features: [
+        "Extended parameter monitoring",
+        "Real-time data display",
+        "Comprehensive patient metrics",
+        "Advanced monitoring capabilities",
+      ],
+      specifications: {
+        Parameters: "Extended set",
+        Display: "Real-time",
+        Monitoring: "Comprehensive",
+        Metrics: "Advanced",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    11: {
+      videoSrc: SLE6000Video5,
+      title: "SIMV Mode",
+      overview:
+        "Synchronized Intermittent Mandatory Ventilation (SIMV) mode provides synchronized breaths with the patient's own respiratory efforts, allowing for natural breathing patterns.",
+      features: [
+        "Synchronized mandatory breaths",
+        "Spontaneous breathing support",
+        "Patient-triggered ventilation",
+        "Flexible breath delivery",
+      ],
+      specifications: {
+        Mode: "SIMV",
+        Trigger: "Flow or pressure",
+        Synchronization: "Patient synchronized",
+        Support: "Mandatory + spontaneous",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    12: {
+      videoSrc: SLE6000Video9,
+      title: "CPAP Mode",
+      overview:
+        "Continuous Positive Airway Pressure (CPAP) mode provides constant positive pressure to maintain airway patency and support spontaneous breathing.",
+      features: [
+        "Continuous positive pressure",
+        "Spontaneous breathing support",
+        "Airway patency maintenance",
+        "Non-invasive support",
+      ],
+      specifications: {
+        Mode: "CPAP",
+        Pressure: "2–20 cmH2O",
+        Support: "Spontaneous breathing",
+        Interface: "Non-invasive",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    13: {
+      videoSrc: SLE6000Video10,
+      title: "Manual Breath",
+      overview:
+        "Manual breath function allows clinicians to deliver manual breaths on demand, providing immediate respiratory support when needed.",
+      features: [
+        "On-demand manual breaths",
+        "Immediate respiratory support",
+        "Clinician-controlled delivery",
+        "Emergency response capability",
+      ],
+      specifications: {
+        Function: "Manual breath",
+        Control: "Clinician-activated",
+        Delivery: "On-demand",
+        Response: "Immediate",
       },
       rotation: {
         azimuthal: 0,
@@ -525,7 +748,9 @@ const SLE6000 = () => {
       while (azimuthalDelta < -Math.PI) azimuthalDelta += 2 * Math.PI;
       if (Math.abs(azimuthalDelta) > Math.PI / 2) {
         azimuthalDelta =
-          azimuthalDelta > 0 ? azimuthalDelta - 2 * Math.PI : azimuthalDelta + 2 * Math.PI;
+          azimuthalDelta > 0
+            ? azimuthalDelta - 2 * Math.PI
+            : azimuthalDelta + 2 * Math.PI;
       }
 
       const startTime = performance.now();
@@ -535,13 +760,16 @@ const SLE6000 = () => {
         const progress = Math.min(elapsed / duration, 1);
         const easedProgress = 1 - Math.pow(1 - progress, 3);
 
-        const currentAzimuthal = startAzimuthal + azimuthalDelta * easedProgress;
+        const currentAzimuthal =
+          startAzimuthal + azimuthalDelta * easedProgress;
         const currentPolar =
           startPolar + (targetPolar - startPolar) * easedProgress;
 
-        const x = currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
+        const x =
+          currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
         const y = currentDistance * Math.cos(currentPolar);
-        const z = currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
+        const z =
+          currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
 
         camera.position.set(target.x + x, target.y + y, target.z + z);
         camera.lookAt(target);
@@ -585,9 +813,11 @@ const SLE6000 = () => {
         const currentAzimuthal = startAzimuthal + oscillation * rotationRange;
         const currentPolar = startPolar;
 
-        const x = currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
+        const x =
+          currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
         const y = currentDistance * Math.cos(currentPolar);
-        const z = currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
+        const z =
+          currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
 
         camera.position.set(target.x + x, target.y + y, target.z + z);
         camera.lookAt(target);
@@ -661,13 +891,13 @@ const SLE6000 = () => {
   return (
     <div
       style={{
-          height: "100vh",
-          position: "relative",
-          backgroundImage:
-  "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
-          backgroundRepeat: "no-repeat, no-repeat",
-          backgroundPosition: "bottom center, center",
-          backgroundSize: "auto, cover",
+        height: "100vh",
+        position: "relative",
+        backgroundImage:
+          "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
+        backgroundRepeat: "no-repeat, no-repeat",
+        backgroundPosition: "bottom center, center",
+        backgroundSize: "auto, cover",
       }}
     >
       <button
@@ -683,8 +913,8 @@ const SLE6000 = () => {
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -709,8 +939,8 @@ const SLE6000 = () => {
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -730,15 +960,13 @@ const SLE6000 = () => {
           right: "36%",
           zIndex: 10,
           padding: "10px 20px",
-          backgroundColor: hotspotsVisible
-            ? "#F37F63"
-            : "#F37F63",
+          backgroundColor: hotspotsVisible ? "#F37F63" : "#F37F63",
           color: "#000",
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
           fontSize: "15px",
-          fontWeight:"600",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = hotspotsVisible
@@ -826,10 +1054,7 @@ const SLE6000 = () => {
           target={[0, 0, 0]}
         />
         <Environment preset="apartment" />
-        <Model
-          glbPath={SLE6000Model}
-          onLoad={handleModelLoad}
-        />
+        <Model glbPath={SLE6000Model} onLoad={handleModelLoad} />
         {hotspotsVisible &&
           hotspots.map((h) => (
             <Hotspot
@@ -837,7 +1062,9 @@ const SLE6000 = () => {
               position={h.position}
               annotation={h.name}
               onHotspotClick={() => handleHotspotClick(h.id)}
-              isVideoPlaying={popupData !== null && popupData.hotspotId === h.id}
+              isVideoPlaying={
+                popupData !== null && popupData.hotspotId === h.id
+              }
             />
           ))}
       </Canvas>
@@ -884,7 +1111,7 @@ const SLE6000 = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            fontWeight:"600",
+            fontWeight: "600",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.filter = "brightness(1.1)";
@@ -908,9 +1135,10 @@ const SLE6000 = () => {
               flexDirection: "column",
               borderWidth: "2px",
               borderStyle: "solid",
-              borderImage:"linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
-              borderRadius:"6px", 
-              padding:"0px 15px 10px",
+              borderImage:
+                "linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
+              borderRadius: "6px",
+              padding: "0px 15px 10px",
             }}
           >
             {hotspots.map((h, index) => (
@@ -918,7 +1146,7 @@ const SLE6000 = () => {
                 key={h.id}
                 onClick={() => handleSelectHotspot(h)}
                 style={{
-                   padding: "12px 16px",
+                  padding: "12px 16px",
                   cursor: "pointer",
                   fontSize: "15px",
                   color: "#fff",
@@ -932,7 +1160,7 @@ const SLE6000 = () => {
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.color = "#fff";
-                }}			  
+                }}
               >
                 {h.name}
               </div>
@@ -945,4 +1173,3 @@ const SLE6000 = () => {
 };
 
 export default SLE6000;
-
