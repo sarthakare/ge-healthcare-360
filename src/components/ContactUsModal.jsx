@@ -1,10 +1,13 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const ContactUsModal = ({ isOpen, onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [showPhoneNumbers, setShowPhoneNumbers] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Price Quote");
   const [message, setMessage] = useState("");
+  const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const countryDropdownRef = useRef(null);
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -89,6 +92,19 @@ const ContactUsModal = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        countryDropdownRef.current &&
+        !countryDropdownRef.current.contains(event.target)
+      ) {
+        setIsCountryOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   if (!isOpen) return null;
 
   const options = [
@@ -101,24 +117,12 @@ const ContactUsModal = ({ isOpen, onClose }) => {
   const countries = [
     "India",
     "United States",
-    "United Kingdom",
     "Canada",
-    "Australia",
-    "Germany",
-    "France",
-    "Italy",
-    "Spain",
-    "Japan",
+    "United Kingdom",
+    "US Virgin Islands",
+    "US Military Overseas",
     "China",
-    "Brazil",
-    "Mexico",
-    "South Korea",
-    "Netherlands",
-    "Belgium",
-    "Switzerland",
-    "Sweden",
-    "Norway",
-    "Denmark",
+    "France",
   ];
 
   return (
@@ -431,6 +435,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
               borderRadius: "4px",
               resize: "vertical",
               boxSizing: "border-box",
+              backgroundColor: "#f5f0ff",
             }}
           />
         </div>
@@ -511,7 +516,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                     border: "1px solid #ccc",
                     borderRadius: "4px",
                     boxSizing: "border-box",
-                    backgroundColor: "#fff",
+                    backgroundColor: "#f5f0ff",
                   }}
                 />
               </div>
@@ -541,7 +546,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                     border: "1px solid #ccc",
                     borderRadius: "4px",
                     boxSizing: "border-box",
-                    backgroundColor: "#fff",
+                    backgroundColor: "#f5f0ff",
                   }}
                 />
               </div>
@@ -579,7 +584,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                     border: "1px solid #ccc",
                     borderRadius: "4px",
                     boxSizing: "border-box",
-                    backgroundColor: "#fff",
+                    backgroundColor: "#f5f0ff",
                   }}
                 />
               </div>
@@ -608,7 +613,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                     border: "1px solid #ccc",
                     borderRadius: "4px",
                     boxSizing: "border-box",
-                    backgroundColor: "#fff",
+                    backgroundColor: "#f5f0ff",
                   }}
                 />
               </div>
@@ -657,12 +662,13 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                 >
                   Country<span style={{ color: "#e53e3e" }}>*</span>
                 </label>
-                <div style={{ position: "relative" }}>
-                  <select
-                    name="country"
-                    value={formData.country}
-                    onChange={handleInputChange}
-                    required
+                <div style={{ position: "relative" }} ref={countryDropdownRef}>
+                  <input type="hidden" name="country" value={formData.country} />
+                  <button
+                    type="button"
+                    onClick={() => setIsCountryOpen((prev) => !prev)}
+                    aria-haspopup="listbox"
+                    aria-expanded={isCountryOpen}
                     style={{
                       width: "100%",
                       padding: "12px 40px 12px 12px",
@@ -671,30 +677,74 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                       border: "1px solid #ccc",
                       borderRadius: "4px",
                       boxSizing: "border-box",
-                      backgroundColor: "#fff",
-                      appearance: "none",
+                      backgroundColor: "#f5f0ff",
                       cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      textAlign: "left",
+                      color: "#333",
                     }}
                   >
-                    {countries.map((country) => (
-                      <option key={country} value={country}>
-                        {country}
-                      </option>
-                    ))}
-                  </select>
-                  <span
-                    style={{
-                      position: "absolute",
-                      right: "12px",
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      color: "#6022A6",
-                      pointerEvents: "none",
-                      fontSize: "18px",
-                    }}
-                  >
-                    ▼
-                  </span>
+                    <span>{formData.country}</span>
+                    <span
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#6022A6",
+                      }}
+                      aria-hidden="true"
+                    >
+                      {isCountryOpen ? (
+                        <ChevronUp size={18} color="#6022A6" />
+                      ) : (
+                        <ChevronDown size={18} color="#6022A6" />
+                      )}
+                    </span>
+                  </button>
+                  {isCountryOpen && (
+                    <div
+                      role="listbox"
+                      style={{
+                        position: "absolute",
+                        zIndex: 10,
+                        top: "calc(100% + 4px)",
+                        left: 0,
+                        width: "100%",
+                        maxHeight: "220px",
+                        overflowY: "auto",
+                        border: "1px solid #ccc",
+                        borderRadius: "6px",
+                        backgroundColor: "#f5f0ff",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                      }}
+                    >
+                      {countries.map((country) => (
+                        <div
+                          key={country}
+                          role="option"
+                          onClick={() => {
+                            setFormData((prev) => ({
+                              ...prev,
+                              country,
+                            }));
+                            setIsCountryOpen(false);
+                          }}
+                          style={{
+                            padding: "10px 12px",
+                            cursor: "pointer",
+                            backgroundColor:
+                              formData.country === country ? "#f5f0ff" : "#fff",
+                            color: "#333",
+                          }}
+                          onMouseDown={(e) => e.preventDefault()}
+                        >
+                          {country}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
               <div>
@@ -722,7 +772,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                     border: "1px solid #ccc",
                     borderRadius: "4px",
                     boxSizing: "border-box",
-                    backgroundColor: "#fff",
+                    backgroundColor: "#f5f0ff",
                   }}
                 />
               </div>
