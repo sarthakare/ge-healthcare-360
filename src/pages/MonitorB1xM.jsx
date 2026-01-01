@@ -109,7 +109,7 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
         <div
           style={{
             position: "absolute",
-            top: "calc(100% + 5px)",
+            top: "calc(75%)",
             left: "50%",
             transform: "translateX(-50%)",
             background: "white",
@@ -406,24 +406,24 @@ const MonitorB1xM = () => {
     {
       id: 1,
       name: "Scalable Across Care Areas",
-      position: [-1.25, 0.75, 1.65],
+      position: [-1.25, -0.15, 1.65],
     },
-    { id: 2, name: "Entropy", position: [-0.5, 0.5, 1.65] },
-    { id: 3, name: "Connectivity", position: [-1.25, 1.25, 1.65] },
-    { id: 4, name: "Intuitive", position: [-1.25, 0.25, 1.65] },
-    { id: 5, name: "DINAMAP", position: [-2, 0.75, 1.65] },
+    { id: 2, name: "Entropy", position: [-0.25, 0.5, 1.65] },
+    { id: 3, name: "Connectivity", position: [-2.35, 0.75, 1.65] },
+    { id: 4, name: "Intuitive", position: [-2.35, -0.15, 1.65] },
+    { id: 5, name: "DINAMAP", position: [-0.25, 1, 1.65] },
     {
       id: 6,
       name: "EK-Pro Arrhythmia Algorithm",
-      position: [-2, 0.25, 1.65],
+      position: [-0.75, 1.5, 1.65],
     },
-    { id: 7, name: "Spirometry", position: [-0.5, 0.25, 1.65] },
+    { id: 7, name: "Spirometry", position: [-2.25, 1.5, 1.65] },
     {
       id: 8,
       name: "Tested for Performance",
-      position: [-0.5, 0, 1.65],
+      position: [-1.25, 0.75, 1.65],
     },
-    { id: 9, name: "Multi-Module Scalability", position: [1.75, 0.35, 2.15] },
+    { id: 9, name: "Multi-Module Scalability", position: [1.35, 0.5, 2.65] },
     { id: 10, name: "Monitor Ports (Video soon)", position: [-1.5, 0.2, 0.65] },
   ];
 
