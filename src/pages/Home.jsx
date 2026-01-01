@@ -9,12 +9,14 @@ import ImageGiraffeOmnibedCarestation from "../assets/giraffe-omnibed-carestatio
 import ImageLEDPhototherapy from "../assets/led-phototherapy/images/led-phototherapy.png";
 import ImageECGHolter from "../assets/ecg-holter/images/ecg-holter.png";
 import ImageMonitorB1xM from "../assets/monitors-b1xm/images/A.png";
+import ContactUsModal from "../components/ContactUsModal";
 
 const Home = () => {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openAccordion, setOpenAccordion] = useState("DiagnosticCardiology");
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -330,12 +332,19 @@ const Home = () => {
 
 <div className="nav-menu"> 
   <ul>
-    <li><a href="#"> <img src="/ico_1.png" alt="" /> </a></li>
-    <li><a href="#"> <img src="/ico_2.png" alt="" /> </a></li>  
-    <li><a href="#"> <img src="/ico_3.png" alt="" /> </a></li>  
-    <li><a href="#"> <img src="/ico_4.png" alt="" /> </a></li>
-    <li><a href="#" className="btn-primary">Contact Us</a></li>
-  </ul> 
+    <li>
+      <a 
+        href="#" 
+        className="btn-primary"
+        onClick={(e) => {
+          e.preventDefault();
+          setIsContactModalOpen(true);
+        }}
+      >
+        Contact Us
+      </a>
+    </li>
+  </ul>
 </div>
 
             <button
@@ -860,7 +869,7 @@ const Home = () => {
                                 e.currentTarget.style.boxShadow = "none";
                               }}
                             >
-                              Read more
+                              Explore 3D
                             </button>
                           )}
                           {!product.path && (
@@ -1124,7 +1133,7 @@ const Home = () => {
                                 e.currentTarget.style.boxShadow = "none";
                               }}
                             >
-                              Read more
+                              Explore 3D
                             </button>
                           )}
                           {!product.path && (
@@ -1388,7 +1397,7 @@ const Home = () => {
                                 e.currentTarget.style.boxShadow = "none";
                               }}
                             >
-                              Read more
+                              Explore 3D
                             </button>
                           )}
                           {!product.path && (
@@ -1652,7 +1661,7 @@ const Home = () => {
                                 e.currentTarget.style.boxShadow = "none";
                               }}
                             >
-                              Read more
+                              Explore 3D
                             </button>
                           )}
                           {!product.path && (
@@ -1682,6 +1691,12 @@ const Home = () => {
           </div>
         </div>
       </div>
+      
+      {/* Contact Us Modal */}
+      <ContactUsModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+      />
     </>
   );
 };

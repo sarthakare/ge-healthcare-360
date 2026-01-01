@@ -423,7 +423,7 @@ const MonitorB1xM = () => {
       name: "Tested for Performance",
       position: [-0.5, 0, 1.65],
     },
-    { id: 9, name: "Multi-Module Scalability", position: [-0.5, 0.75, 1.65] },
+    { id: 9, name: "Multi-Module Scalability", position: [1.75, 0.35, 2.15] },
     { id: 10, name: "Monitor Ports (Video soon)", position: [-1.5, 0.2, 0.65] },
   ];
 
