@@ -22,6 +22,13 @@ import MAC5Video4 from "../assets/mac-5/videos/Enhanced Hookup Advisor.mp4";
 import MAC5Video5 from "../assets/mac-5/videos/Internal storage.mp4";
 import MAC5Video6 from "../assets/mac-5/videos/PDF-XML transfer via USB, SFTP.mp4";
 import MAC5Video7 from "../assets/mac-5/videos/Print preview displays.mp4";
+import MAC5Video8 from "../assets/mac-5/videos/Data security- All patient data is encrypted.mp4";
+import MAC5Video9 from "../assets/mac-5/videos/Gender-specific interpretations.mp4";
+import MAC5Video10 from "../assets/mac-5/videos/High-definition pacemaker detection and annotation.mp4";
+import MAC5Video11 from "../assets/mac-5/videos/Large 8.9-inch.mp4";
+import MAC5Video12 from "../assets/mac-5/videos/Multi-user access Battery Backup_01.mp4";
+import MAC5Video13 from "../assets/mac-5/videos/Order management, Network printing, Wireless data transfer.mp4";
+import MAC5Video14 from "../assets/mac-5/videos/Smart Lead Technology.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -403,13 +410,20 @@ const VideoPopup = ({
   };
 
   const hotspots = [
-    { id: 1, name: "Auto ECG Function", position: [1.5, -0.5, 1] },
-    { id: 2, name: "Critical Values Highlight", position: [1.3, 0, 0] },
-    { id: 3, name: "ECG Based on Filters", position: [-2, -0.5, 0] },
-    { id: 4, name: "Enhanced Hookup Advisor", position: [0, 1, 1.5] },
-    { id: 5, name: "Internal Storage", position: [0, -1, 1] },
-    { id: 6, name: "PDF-XML Transfer", position: [-1.5, 0.5, 1] },
-    { id: 7, name: "Print Preview", position: [1, 1, -1] },
+    { id: 1, name: "Auto ECG Function", position: [2, -0.25, 0.75] },
+    { id: 2, name: "Critical Values Highlight", position: [0.75, -0.25, 0.75] },
+    { id: 3, name: "ECG Based on Filters", position: [1.25, -0.25, 0.75] },
+    { id: 4, name: "Enhanced Hookup Advisor", position: [2.5, -0.25, 0.75] },
+    { id: 5, name: "Internal Storage", position:[2.5, 0, 0] },
+    { id: 6, name: "PDF-XML Transfer", position: [2.45, 0, -1.5] },
+    { id: 7, name: "Print Preview", position: [-0.75, -0.25, 0] },
+    { id: 8, name: "Data Security", position: [1, 0, -0.75] },
+    { id: 9, name: "Gender-Specific Interpretations", position:[1.5, 0, -0.75] },
+    { id: 10, name: "Pacemaker Detection", position: [2, 0, -0.75] },
+    { id: 11, name: "Large 8.9-inch Display", position: [1.5, 0, 0] },
+    { id: 12, name: "Multi-User Access & Battery Backup", position: [1, 0, 0] },
+    { id: 13, name: "Order Management & Network Printing", position: [2, 0, 0] },
+    { id: 14, name: "Smart Lead Technology", position: [1, 0, 0.5] },
   ];
 
   const hotspotsConfig = {
@@ -431,8 +445,8 @@ const VideoPopup = ({
         Accuracy: "High-precision algorithms",
       },
       rotation: {
-        azimuthal: -Math.PI / 2,
-        polar: Math.PI / 2,
+        azimuthal: 0,
+        polar: Math.PI / 4,
       },
     },
     2: {
@@ -453,8 +467,8 @@ const VideoPopup = ({
         Review: "Quick clinical assessment",
       },
       rotation: {
-        azimuthal: Math.PI / 2,
-        polar: Math.PI / 2,
+        azimuthal: 0,
+        polar: Math.PI / 4,
       },
     },
     3: {
@@ -475,8 +489,8 @@ const VideoPopup = ({
         Noise: "Advanced reduction",
       },
       rotation: {
-        azimuthal: Math.PI,
-        polar: Math.PI / 2,
+        azimuthal: 0,
+        polar: Math.PI / 4,
       },
     },
     4: {
@@ -498,7 +512,7 @@ const VideoPopup = ({
       },
       rotation: {
         azimuthal: 0,
-        polar: Math.PI / 2,
+        polar: Math.PI / 4,
       },
     },
     5: {
@@ -519,8 +533,8 @@ const VideoPopup = ({
         Retrieval: "Fast access",
       },
       rotation: {
-        azimuthal: -Math.PI / 4,
-        polar: Math.PI / 2,
+        azimuthal: 0,
+        polar: Math.PI / 4,
       },
     },
     6: {
@@ -541,7 +555,7 @@ const VideoPopup = ({
         Export: "Multiple options",
       },
       rotation: {
-        azimuthal: Math.PI / 4,
+        azimuthal: Math.PI ,
         polar: Math.PI / 2,
       },
     },
@@ -563,8 +577,162 @@ const VideoPopup = ({
         Layout: "Flexible formatting",
       },
       rotation: {
-        azimuthal: Math.PI / 3,
-        polar: Math.PI / 2,
+        azimuthal: 0,
+        polar: Math.PI / 4,
+      },
+    },
+    8: {
+      videoSrc: MAC5Video8,
+      title: "Data Security - All Patient Data is Encrypted",
+      overview:
+        "Comprehensive data security system that ensures all patient data is encrypted to protect sensitive medical information and maintain HIPAA compliance.",
+      features: [
+        "End-to-end encryption",
+        "HIPAA compliant security",
+        "Patient data protection",
+        "Secure data transmission",
+      ],
+      specifications: {
+        Encryption: "Advanced encryption standards",
+        Compliance: "HIPAA compliant",
+        Protection: "Patient data security",
+        Transmission: "Secure protocols",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 4,
+      },
+    },
+    9: {
+      videoSrc: MAC5Video9,
+      title: "Gender-Specific Interpretations",
+      overview:
+        "Advanced ECG interpretation system that provides gender-specific analysis and reference values for more accurate diagnostic results.",
+      features: [
+        "Gender-specific reference values",
+        "Accurate interpretation algorithms",
+        "Personalized analysis",
+        "Enhanced diagnostic accuracy",
+      ],
+      specifications: {
+        Analysis: "Gender-specific algorithms",
+        Accuracy: "Enhanced precision",
+        Reference: "Personalized values",
+        Interpretation: "Optimized results",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 4,
+      },
+    },
+    10: {
+      videoSrc: MAC5Video10,
+      title: "High-Definition Pacemaker Detection and Annotation",
+      overview:
+        "Advanced pacemaker detection system with high-definition analysis and automatic annotation capabilities for comprehensive cardiac monitoring.",
+      features: [
+        "High-definition pacemaker detection",
+        "Automatic annotation",
+        "Pacemaker spike identification",
+        "Comprehensive monitoring",
+      ],
+      specifications: {
+        Detection: "HD pacemaker analysis",
+        Annotation: "Automatic marking",
+        Identification: "Spike detection",
+        Monitoring: "Comprehensive tracking",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 4,
+      },
+    },
+    11: {
+      videoSrc: MAC5Video11,
+      title: "Large 8.9-inch Display",
+      overview:
+        "High-resolution 8.9-inch display screen that provides clear, detailed visualization of ECG waveforms and patient information for optimal clinical viewing.",
+      features: [
+        "Large 8.9-inch screen",
+        "High-resolution display",
+        "Clear waveform visualization",
+        "Enhanced readability",
+      ],
+      specifications: {
+        Size: "8.9-inch display",
+        Resolution: "High-definition",
+        Visualization: "Clear waveforms",
+        Readability: "Enhanced viewing",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 4,
+      },
+    },
+    12: {
+      videoSrc: MAC5Video12,
+      title: "Multi-User Access & Battery Backup",
+      overview:
+        "Flexible multi-user access system with battery backup capability ensuring continuous operation and secure user management for healthcare environments.",
+      features: [
+        "Multi-user access control",
+        "Battery backup system",
+        "Continuous operation",
+        "Secure user management",
+      ],
+      specifications: {
+        Access: "Multi-user support",
+        Backup: "Battery power",
+        Operation: "Uninterrupted service",
+        Management: "User authentication",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 4,
+      },
+    },
+    13: {
+      videoSrc: MAC5Video13,
+      title: "Order Management, Network Printing & Wireless Data Transfer",
+      overview:
+        "Comprehensive workflow management system featuring order management, network printing capabilities, and wireless data transfer for seamless integration into hospital systems.",
+      features: [
+        "Order management system",
+        "Network printing support",
+        "Wireless data transfer",
+        "Hospital system integration",
+      ],
+      specifications: {
+        Management: "Order workflow",
+        Printing: "Network enabled",
+        Transfer: "Wireless connectivity",
+        Integration: "Hospital systems",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 4,
+      },
+    },
+    14: {
+      videoSrc: MAC5Video14,
+      title: "Smart Lead Technology",
+      overview:
+        "Intelligent lead technology system that provides automatic lead detection, connection verification, and enhanced signal quality for reliable ECG acquisition.",
+      features: [
+        "Automatic lead detection",
+        "Connection verification",
+        "Enhanced signal quality",
+        "Intelligent monitoring",
+      ],
+      specifications: {
+        Detection: "Automatic lead recognition",
+        Verification: "Connection validation",
+        Quality: "Enhanced signals",
+        Monitoring: "Intelligent tracking",
+      },
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 4,
       },
     },
   };
