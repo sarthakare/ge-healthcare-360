@@ -15,17 +15,17 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import MAC5Model from "../assets/mac-5/model/MAC 5.glb";
-import MAC5Video1 from "../assets/mac-5/videos/MAC 5_AutoECG Function.mp4";
-import MAC5Video2 from "../assets/mac-5/videos/MAC 5 Enhanced Hook up Advisor.mp4";
-import MAC5Video3 from "../assets/mac-5/videos/MAC 5_Advanced ECG Filtering.mp4";
-import MAC5Video4 from "../assets/mac-5/videos/MAC 5_Critical Values Highlighting.mp4";
-import MAC5Video5 from "../assets/mac-5/videos/MAC 5_Internal ECG Storage.mp4";
-import MAC5Video6 from "../assets/mac-5/videos/MAC 5_PDF & XML Data Transfer.mp4";
-import MAC5Video7 from "../assets/mac-5/videos/MAC 5_Print Preview.mp4";
-import MAC5Video8 from "../assets/mac-5/videos/MAC 5_Trusted Clinical Interpretation.mp4";
-import MAC5Video9 from "../assets/mac-5/videos/MAC  5_Secure & Connected Workflow.mp4";
-import MAC5Video10 from "../assets/mac-5/videos/MAC 5_Smart Lead Technology.mp4";
-import MAC5Video11 from "../assets/mac-5/videos/MAC 5_8-9 Capacitive Touchscreen.mp4";
+import MAC5Video1 from "../assets/mac-5/videos/Mac 5 Autoecg Function.mp4";
+import MAC5Video2 from "../assets/mac-5/videos/Mac 5 Enhanced Hook Up Advisor.mp4";
+import MAC5Video3 from "../assets/mac-5/videos/Mac 5 Advanced Ecg Filtering.mp4";
+import MAC5Video4 from "../assets/mac-5/videos/Mac 5 Critical Values Highlighting.mp4";
+import MAC5Video5 from "../assets/mac-5/videos/Mac 5 Internal Ecg Storage.mp4";
+import MAC5Video6 from "../assets/mac-5/videos/Mac 5 Pdf & Xml Data Transfer.mp4";
+import MAC5Video7 from "../assets/mac-5/videos/Mac 5 Print Preview.mp4";
+import MAC5Video8 from "../assets/mac-5/videos/Mac 5 Trusted Clinical Interpretation.mp4";
+import MAC5Video9 from "../assets/mac-5/videos/Mac  5 Secure & Connected Workflow.mp4";
+import MAC5Video10 from "../assets/mac-5/videos/Mac 5 Smart Lead Technology.mp4";
+import MAC5Video11 from "../assets/mac-5/videos/Mac 5 8-9 Capacitive Touchscreen.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
