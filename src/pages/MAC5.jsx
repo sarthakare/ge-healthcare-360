@@ -15,17 +15,21 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import MAC5Model from "../assets/mac-5/model/MAC 5.glb";
-import MAC5Video1 from "../assets/mac-5/videos/Mac_5_Autoecg_Function.mp4";
-import MAC5Video2 from "../assets/mac-5/videos/Mac_5_Enhanced_Hook_Up_Advisor.mp4";
-import MAC5Video3 from "../assets/mac-5/videos/Mac_5_Advanced_Ecg_Filtering.mp4";
-import MAC5Video4 from "../assets/mac-5/videos/Mac_5_Critical_Values_Highlighting.mp4";
-import MAC5Video5 from "../assets/mac-5/videos/Mac_5_Internal_Ecg_Storage.mp4";
-import MAC5Video6 from "../assets/mac-5/videos/Mac_5_Pdf_&_Xml_Data_Transfer.mp4";
-import MAC5Video7 from "../assets/mac-5/videos/Mac_5_Print_Preview.mp4";
+// Video 1: Introduction to MAC 5 (placeholder - video file needs to be added)
+// import MAC5Video1 from "../assets/mac-5/videos/Mac_5_Introduction.mp4";
+import MAC5Video2 from "../assets/mac-5/videos/Mac_5_Autoecg_Function.mp4";
+import MAC5Video3 from "../assets/mac-5/videos/Mac_5_Smart_Lead_Technology.mp4";
+import MAC5Video4 from "../assets/mac-5/videos/Mac_5_Enhanced_Hook_Up_Advisor.mp4";
+import MAC5Video5 from "../assets/mac-5/videos/Mac_5_Advanced_Ecg_Filtering.mp4";
+import MAC5Video6 from "../assets/mac-5/videos/Mac_5_Critical_Values_Highlighting.mp4";
+// Video 7: High-Definition Pacemaker Detection (placeholder - video file needs to be added)
+// import MAC5Video7 from "../assets/mac-5/videos/Mac_5_High_Definition_Pacemaker_Detection.mp4";
 import MAC5Video8 from "../assets/mac-5/videos/Mac_5_Trusted_Clinical_Interpretation.mp4";
-import MAC5Video9 from "../assets/mac-5/videos/Mac_5_Secure_&_Connected_Workflow.mp4";
-import MAC5Video10 from "../assets/mac-5/videos/Mac_5_Smart_Lead_Technology.mp4";
-import MAC5Video11 from "../assets/mac-5/videos/Mac_5_8-9_Capacitive_Touchscreen.mp4";
+import MAC5Video9 from "../assets/mac-5/videos/Mac_5_Internal_Ecg_Storage.mp4";
+import MAC5Video10 from "../assets/mac-5/videos/Mac_5_Pdf_&_Xml_Data_Transfer.mp4";
+import MAC5Video11 from "../assets/mac-5/videos/Mac_5_Print_Preview.mp4";
+import MAC5Video12 from "../assets/mac-5/videos/Mac_5_8-9_Capacitive_Touchscreen.mp4";
+import MAC5Video13 from "../assets/mac-5/videos/Mac_5_Secure_&_Connected_Workflow.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -254,22 +258,43 @@ const VideoPopup = ({
               justifyContent: "center",
             }}
           >
-            <video
-              ref={videoRef}
-              src={videoSrc}
-              controls
-              autoPlay
-              style={{
-                width: "100%",
-                maxWidth: "500px",
-                height: "auto",
-                maxHeight: "300px",
-                borderRadius: "8px",
-                outline: "none",
-              }}
-            >
-              Your browser does not support the video tag.
-            </video>
+            {videoSrc ? (
+              <video
+                ref={videoRef}
+                src={videoSrc}
+                controls
+                autoPlay
+                style={{
+                  width: "100%",
+                  maxWidth: "500px",
+                  height: "auto",
+                  maxHeight: "300px",
+                  borderRadius: "8px",
+                  outline: "none",
+                }}
+              >
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <div
+                style={{
+                  width: "100%",
+                  maxWidth: "500px",
+                  height: "200px",
+                  borderRadius: "8px",
+                  backgroundColor: "#f0f0f0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#666",
+                  fontSize: "14px",
+                  textAlign: "center",
+                  padding: "20px",
+                }}
+              >
+                Video file not available. Please add the video file to the assets folder.
+              </div>
+            )}
           </div>
           <div style={{ color: "#000000" }}>
             <h2
@@ -407,25 +432,33 @@ const VideoPopup = ({
   };
 
   const hotspots = [
-    { id: 1, name: "Auto-ECG Function", position: [2, -0.25, 0.75] },
-    { id: 2, name: "Enhanced Hook-Up Advisor", position: [2.5, -0.25, 0.75] },
-    { id: 3, name: "Advanced ECG Filtering", position: [1.25, -0.25, 0.75] },
-    { id: 4, name: "Critical Values Highlighting", position: [0.75, -0.25, 0.75] },
-    { id: 5, name: "Internal ECG Storage", position:[2.5, 0, 0] },
-    { id: 6, name: "PDF & XML Data Transfer", position: [2.45, 0, -1.5] },
-    { id: 7, name: "Print Preview", position: [-0.75, -0.25, 0] },
-    { id: 8, name: "Trusted Clinical Interpretation", position: [1, 0, -0.75] },
-    { id: 9, name: "Secure & Connected Workflow", position:[1.5, 0, -0.75] },
-    { id: 10, name: "Smart Lead Technology", position: [2, 0, -0.75] },
-    { id: 11, name: "8.9\" Capacitive Touchscreen", position: [1.5, 0, 0] },
+    { id: 1, name: "Introduction to MAC 5", position: [1.75, 0.5, 0.5] },
+    { id: 2, name: "Auto ECG Function", position: [2, -0.25, 0.75] },
+    { id: 3, name: "Smart Lead Technology", position: [2, 0, -0.75] },
+    { id: 4, name: "Enhanced Hook-Up Advisor", position: [2.5, -0.25, 0.75] },
+    { id: 5, name: "Advanced ECG Filtering", position: [1.25, -0.25, 0.75] },
+    { id: 6, name: "Critical Values Highlighting", position: [0.75, -0.25, 0.75] },
+    { id: 7, name: "High-Definition Pacemaker Detection", position: [1, -0.5, 0.5] },
+    { id: 8, name: "Marquette™ 12SL Analysis Program", position: [1, 0, -0.75] },
+    { id: 9, name: "Internal ECG Storage", position: [2.5, 0, 0] },
+    { id: 10, name: "PDF & XML Data Transfer", position: [2.45, 0, -1.5] },
+    { id: 11, name: "Print Preview", position: [-0.75, -0.25, 0] },
+    { id: 12, name: "8.9\" Capacitive Touchscreen", position: [1.5, 0, 0] },
+    { id: 13, name: "Secure & Connected Workflow", position: [1.5, 0, -0.75] },
   ];
 
   const hotspotsConfig = {
     1: {
-      videoSrc: MAC5Video1,
-      title: "Auto-ECG Function",
+      videoSrc: null, // Placeholder - video file needs to be added: Mac_5_Introduction.mp4
+      title: "Introduction to MAC 5",
       overview:
-        "Once the leads are correctly connected, the MAC 5 automatically begins ECG acquisition — allowing you to capture a clean, high-quality ECG without extra steps.",
+        "The MAC 5 is a modern resting ECG system designed to simplify ECG acquisition while delivering high clinical accuracy in fast-paced care environments.",
+      features: [
+        "Modern resting ECG system",
+        "Designed for speed and accuracy",
+        "Supports high-throughput workflows",
+        "Clinically trusted performance",
+      ],
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 4,
@@ -433,9 +466,15 @@ const VideoPopup = ({
     },
     2: {
       videoSrc: MAC5Video2,
-      title: "Enhanced Hook-Up Advisor",
+      title: "Auto ECG Function",
       overview:
-        "As you place the electrodes, the Enhanced Hook-Up Advisor guides you in real time — alerting you to loose, misplaced or noisy leads to ensure signal quality before acquisition.",
+        "With Auto ECG functionality, the MAC 5 automatically begins acquisition once all leads are correctly connected, reducing manual steps and saving time.",
+      features: [
+        "Automatic ECG acquisition",
+        "Reduced operator steps",
+        "Faster exam completion",
+        "Consistent test quality",
+      ],
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 4,
@@ -443,9 +482,15 @@ const VideoPopup = ({
     },
     3: {
       videoSrc: MAC5Video3,
-      title: "Advanced ECG Filtering",
+      title: "Smart Lead Technology",
       overview:
-        "You can rely on intelligent ECG filters that reduce motion, muscle and electrical noise — helping you obtain clear waveforms even in challenging conditions.",
+        "Smart Lead Technology automatically detects when a new patient is connected, helping reduce the risk of patient mix-ups in busy clinical areas.",
+      features: [
+        "Automatic patient detection",
+        "Reduces ID mix-ups",
+        "Ideal for ER and ICU",
+        "Safer ECG workflow",
+      ],
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 4,
@@ -453,9 +498,15 @@ const VideoPopup = ({
     },
     4: {
       videoSrc: MAC5Video4,
-      title: "Critical Values Highlighting",
+      title: "Enhanced Hook-Up Advisor",
       overview:
-        "When critical findings such as STEMI, ischemia or arrhythmias are detected, they're clearly highlighted on the ECG — helping you prioritize urgent clinical action.",
+        "The Enhanced Hook-Up Advisor guides you in real time during electrode placement, alerting you to loose or misapplied leads before acquisition begins.",
+      features: [
+        "Real-time lead guidance",
+        "Alerts for poor connections",
+        "Improved signal quality",
+        "Supports new users",
+      ],
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 4,
@@ -463,9 +514,15 @@ const VideoPopup = ({
     },
     5: {
       videoSrc: MAC5Video5,
-      title: "Internal ECG Storage",
+      title: "Advanced ECG Filtering",
       overview:
-        "You can store up to 300 ECGs directly on the device, giving you quick access to previous studies without immediate network dependency.",
+        "Intelligent ECG filters help reduce motion, muscle, and electrical noise, delivering clearer waveforms even in challenging recording conditions.",
+      features: [
+        "Motion artifact reduction",
+        "Cleaner ECG waveforms",
+        "Reliable signal quality",
+        "Improved diagnostic clarity",
+      ],
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 4,
@@ -473,19 +530,31 @@ const VideoPopup = ({
     },
     6: {
       videoSrc: MAC5Video6,
-      title: "PDF & XML Data Transfer",
+      title: "Critical Values Highlighting",
       overview:
-        "ECG reports can be exported in PDF or XML format via USB, shared folders, SFTP or optional wireless connectivity — supporting flexible data sharing.",
+        "When critical findings such as STEMI, ischemia, or arrhythmias are detected, they are clearly highlighted to support rapid clinical action.",
+      features: [
+        "Critical findings flagged",
+        "STEMI and ischemia alerts",
+        "Faster clinical response",
+        "Decision support",
+      ],
       rotation: {
-        azimuthal: Math.PI,
-        polar: Math.PI / 2,
+        azimuthal: 0,
+        polar: Math.PI / 4,
       },
     },
     7: {
-      videoSrc: MAC5Video7,
-      title: "Print Preview",
+      videoSrc: null, // Placeholder - video file needs to be added: Mac_5_High_Definition_Pacemaker_Detection.mp4
+      title: "High-Definition Pacemaker Detection",
       overview:
-        "Before printing, you can preview exactly how the ECG will appear on paper — ensuring clarity, legibility and report quality every time.",
+        "High-definition pacemaker detection identifies and annotates pacing signals, even when they are not visually obvious on the ECG waveform.",
+      features: [
+        "Pacemaker spike detection",
+        "Clear annotation",
+        "Improved ECG interpretation",
+        "Supports paced patients",
+      ],
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 4,
@@ -493,9 +562,15 @@ const VideoPopup = ({
     },
     8: {
       videoSrc: MAC5Video8,
-      title: "Trusted Clinical Interpretation",
+      title: "Marquette™ 12SL Analysis Program",
       overview:
-        "The MAC 5 uses the proven Marquette™ 12SL analysis program to provide automated, clinically validated ECG interpretation — supporting confident decision-making.",
+        "The MAC 5 uses the proven Marquette™ 12SL analysis program to provide automated, clinically validated ECG interpretation.",
+      features: [
+        "Automated ECG interpretation",
+        "Clinically validated algorithm",
+        "Gender-specific analysis",
+        "Trusted diagnostic support",
+      ],
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 4,
@@ -503,9 +578,15 @@ const VideoPopup = ({
     },
     9: {
       videoSrc: MAC5Video9,
-      title: "Secure & Connected Workflow",
+      title: "Internal ECG Storage",
       overview:
-        "With user authentication, encrypted data handling and optional HIS/CIS integration, the MAC 5 fits seamlessly into modern, networked clinical environments.",
+        "With internal storage for up to 300 ECGs, the MAC 5 allows quick access to previous studies without immediate network dependency.",
+      features: [
+        "Stores up to 300 ECGs",
+        "On-device access",
+        "Supports offline workflow",
+        "Reliable data availability",
+      ],
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 4,
@@ -513,19 +594,63 @@ const VideoPopup = ({
     },
     10: {
       videoSrc: MAC5Video10,
-      title: "Smart Lead Technology",
+      title: "PDF & XML Data Transfer",
       overview:
-        "When you connect a new patient, Smart Lead Technology automatically detects the change — helping you avoid patient mix-ups and supporting safer ECG acquisition in high-throughput areas.",
+        "ECG reports can be exported in PDF or XML formats via USB, shared folders, SFTP, or optional wireless connectivity.",
+      features: [
+        "PDF and XML formats",
+        "Multiple transfer options",
+        "Easy data sharing",
+        "Supports digital workflows",
+      ],
+      rotation: {
+        azimuthal: Math.PI,
+        polar: Math.PI / 2,
+      },
+    },
+    11: {
+      videoSrc: MAC5Video11,
+      title: "Print Preview",
+      overview:
+        "Before printing, the print preview function shows exactly how the ECG will appear on paper, ensuring clarity and legibility.",
+      features: [
+        "Accurate print preview",
+        "Ensures report quality",
+        "Reduces reprints",
+        "Consistent output",
+      ],
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 4,
       },
     },
-    11: {
-      videoSrc: MAC5Video11,
+    12: {
+      videoSrc: MAC5Video12,
       title: "8.9\" Capacitive Touchscreen",
       overview:
-        "You interact through a large 8.9-inch capacitive touchscreen that remains responsive even when you're wearing gloves — allowing fast, intuitive navigation in clinical environments.",
+        "The large 8.9-inch capacitive touchscreen remains responsive even with gloves, enabling fast and intuitive navigation in clinical environments.",
+      features: [
+        "8.9-inch touchscreen",
+        "Glove-friendly operation",
+        "Intuitive navigation",
+        "Clinical-grade design",
+      ],
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 4,
+      },
+    },
+    13: {
+      videoSrc: MAC5Video13,
+      title: "Secure & Connected Workflow",
+      overview:
+        "The MAC 5 is designed for modern networked environments, supporting secure data handling, user authentication, and seamless system integration.",
+      features: [
+        "Secure data encryption",
+        "User authentication support",
+        "Network-ready design",
+        "HIS/CIS integration",
+      ],
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 4,
