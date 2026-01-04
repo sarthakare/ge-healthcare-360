@@ -259,22 +259,22 @@ const VideoPopup = ({
             }}
           >
             {videoSrc ? (
-              <video
-                ref={videoRef}
-                src={videoSrc}
-                controls
-                autoPlay
-                style={{
-                  width: "100%",
-                  maxWidth: "500px",
-                  height: "auto",
-                  maxHeight: "300px",
-                  borderRadius: "8px",
-                  outline: "none",
-                }}
-              >
-                Your browser does not support the video tag.
-              </video>
+            <video
+              ref={videoRef}
+              src={videoSrc}
+              controls
+              autoPlay
+              style={{
+                width: "100%",
+                maxWidth: "500px",
+                height: "auto",
+                maxHeight: "300px",
+                borderRadius: "8px",
+                outline: "none",
+              }}
+            >
+              Your browser does not support the video tag.
+            </video>
             ) : (
               <div
                 style={{

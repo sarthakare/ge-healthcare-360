@@ -10,19 +10,19 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import SLE6000Model from "../assets/sle6000/model/SLE6000.glb";
-import SLE6000Video1 from "../assets/sle6000/videos/Conventional Modes, HFO  & NIV.mp4";
-import SLE6000Video2 from "../assets/sle6000/videos/Future ready and upgradeable to Oxygenie-.mp4";
-import SLE6000Video3 from "../assets/sle6000/videos/NCPAP, NIPPV & NIPPV Tr.mp4";
-import SLE6000Video4 from "../assets/sle6000/videos/Powerful HFO & Conventional Ventilator.mp4";
-import SLE6000Video5 from "../assets/sle6000/videos/0SIMV Mode.mp4";
-import SLE6000Video6 from "../assets/sle6000/videos/lunar display capacitive touch screen.mp4";
-import SLE6000Video7 from "../assets/sle6000/videos/Additional Parmeters video.mp4";
-import SLE6000Video8 from "../assets/sle6000/videos/Alarm settings.mp4";
-import SLE6000Video9 from "../assets/sle6000/videos/CPAP Mode.mp4";
-import SLE6000Video10 from "../assets/sle6000/videos/Manual Breath.mp4";
-import SLE6000Video11 from "../assets/sle6000/videos/The mode panel is the users.mp4";
-import SLE6000Video12 from "../assets/sle6000/videos/top-mounted alarm light ensures.mp4";
-import SLE6000Video13 from "../assets/sle6000/videos/Volume Targeted Ventilation.mp4";
+import SLE6000Video1 from "../assets/sle6000/videos/Sle_6000_Introduction.mp4";
+import SLE6000Video2 from "../assets/sle6000/videos/Sle_6000_Comprehensive_Ventilation_Modes.mp4";
+import SLE6000Video3 from "../assets/sle6000/videos/Sle_6000_High_Performance_Hfo_Capability.mp4";
+import SLE6000Video4 from "../assets/sle6000/videos/Sle_6000_Broad_Patient_Weight_Range.mp4";
+import SLE6000Video5 from "../assets/sle6000/videos/Sle_6000_Advanced_Non_Invasive_Ventilation_For_Neonates.mp4";
+import SLE6000Video6 from "../assets/sle6000/videos/Sle_6000_Future_Ready_Upgradeable_Platform.mp4";
+import SLE6000Video7 from "../assets/sle6000/videos/Sle_6000_12_1_Lunar_Capacitive_Touchscreen.mp4";
+import SLE6000Video8 from "../assets/sle6000/videos/Sle_6000_Accurate_Volume_Targeted_Ventilation.mp4";
+import SLE6000Video9 from "../assets/sle6000/videos/Sle_6000_Seamless_Mode_Switching_Without_Disconnection.mp4";
+import SLE6000Video10 from "../assets/sle6000/videos/Sle_6000_Patented_Valve_Less_Technology.mp4";
+import SLE6000Video11 from "../assets/sle6000/videos/Sle_6000_Clear_Top_Mounted_Alarm_Visibility.mp4";
+import SLE6000Video12 from "../assets/sle6000/videos/Sle_6000_Real_Time_Lung_Mechanics_Monitoring.mp4";
+import SLE6000Video13 from "../assets/sle6000/videos/Sle_6000_Intuitive_Mode_Panel_Interface.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -251,22 +251,43 @@ const VideoPopup = ({
               justifyContent: "center",
             }}
           >
-            <video
-              ref={videoRef}
-              src={videoSrc}
-              controls
-              autoPlay
-              style={{
-                width: "100%",
-                maxWidth: "500px",
-                height: "auto",
-                maxHeight: "300px",
-                borderRadius: "8px",
-                outline: "none",
-              }}
-            >
-              Your browser does not support the video tag.
-            </video>
+            {videoSrc ? (
+              <video
+                ref={videoRef}
+                src={videoSrc}
+                controls
+                autoPlay
+                style={{
+                  width: "100%",
+                  maxWidth: "500px",
+                  height: "auto",
+                  maxHeight: "300px",
+                  borderRadius: "8px",
+                  outline: "none",
+                }}
+              >
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <div
+                style={{
+                  width: "100%",
+                  maxWidth: "500px",
+                  height: "200px",
+                  borderRadius: "8px",
+                  backgroundColor: "#f0f0f0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#666",
+                  fontSize: "14px",
+                  textAlign: "center",
+                  padding: "20px",
+                }}
+              >
+                Video file not available. Please add the video file to the assets folder.
+              </div>
+            )}
           </div>
           <div style={{ color: "#000000" }}>
             <h2
@@ -404,315 +425,222 @@ const SLE6000 = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "Conventional Modes, HFO & NIV", position: [-0.35, 2.2, 0] },
-    {
-      id: 2,
-      name: "Dual limb, NCPAP, NIPPV & NIPPV Tr",
-      position: [-0.15, 2.2, 0],
-    },
-    {
-      id: 3,
-      name: "Future ready and upgradeable to Oxygenie",
-      position: [0.05, 2.2, 0],
-    },
-    { id: 4, name: "Volume Targeted Ventilation", position: [0.05, 1.85, 0.1] },
-    { id: 5, name: "Alarm Settings", position: [-0.35, 2, 0] },
-    { id: 6, name: "Alarm Light", position: [0.05, 2.35, -0.25]},
-    { id: 7, name: '12.1" Lunar Display', position:  [0.35, 2, 0.05] },
-    { id: 8, name: "Powerful HFO Mode", position: [0.25, 1.85, 0.05] },
-    { id: 9, name: "Layouts", position: [-0.35, 1.9, 0]  },
-    { id: 10, name: "Additional Parameters", position: [-0.35, 1.8, 0] },
-    { id: 11, name: "SIMV Mode", position: [-0.15, 2, 0] },
-    { id: 12, name: "CPAP Mode", position: [-0.15, 1.85, 0] },
-    { id: 13, name: "Manual Breath", position: [0.25, 1.75, 0.05] },
+    { id: 1, name: "Introduction to SLE 6000", position: [0, 2, 0] },
+    { id: 2, name: "Comprehensive Ventilation Modes", position: [-0.35, 2.1, 0] },
+    { id: 3, name: "High-Performance HFO Capability", position: [0.35, 1.85, 0] },
+    { id: 4, name: "Broad Patient Weight Range", position: [0, 1.85, 0] },
+    { id: 5, name: "Advanced Non-Invasive Ventilation", position: [0, 2.2, 0] },
+    { id: 6, name: "Future-Ready & Upgradeable Platform", position: [0, 2.05, 0] },
+    { id: 7, name: '12.1" Lunar™ Capacitive Touchscreen', position: [0.35, 2.2, 0] },
+    { id: 8, name: "Accurate Volume-Targeted Ventilation", position: [0.20, 1.85, 0] },
+    { id: 9, name: "Seamless Mode Switching Without Disconnection", position: [-0.35, 1.85, 0] },
+    { id: 10, name: "Patented Valve-Less Technology", position: [-0.5, 1.3, -0.5] },
+    { id: 11, name: "Clear, Top-Mounted Alarm Visibility", position: [-0.35, 2.35, -0.25] },
+    { id: 12, name: "Real-Time Lung Mechanics Monitoring", position: [-0.35, 2, 0] },
+    { id: 13, name: "Intuitive Mode Panel Interface", position: [-0.35, 2.15, 0] },
   ];
 
   const hotspotsConfig = {
     1: {
       videoSrc: SLE6000Video1,
-      title: "Conventional Modes, HFO & NIV",
+      title: "Introduction to SLE 6000",
       overview:
-        "Comprehensive ventilation modes including conventional modes, High-Frequency Oscillation (HFO), and Non-Invasive Ventilation (NIV) for versatile patient care.",
+        "The SLE 6000 is GE HealthCare's most advanced neonatal ventilator, designed to deliver powerful respiratory performance while supporting gentle, neurodevelopmentally focused care for fragile newborns.",
       features: [
-        "Conventional ventilation modes",
-        "High-Frequency Oscillation (HFO)",
-        "Non-Invasive Ventilation (NIV)",
-        "Adaptive mode selection",
+        "Advanced neonatal ventilation platform",
+        "Designed for fragile lungs",
+        "Neurodevelopmentally focused care",
+        "Performance with precision",
       ],
-      specifications: {
-        Modes: "AC, SIMV, PSV, HFO, NIV",
-        Frequency: "3–15 Hz (HFO)",
-        Pressure: "5–100 cmH2O",
-        Flow: "2–200 L/min",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     2: {
-      videoSrc: SLE6000Video3,
-      title: "Dual limb, NCPAP, NIPPV & NIPPV Tr",
+      videoSrc: SLE6000Video2,
+      title: "Comprehensive Ventilation Modes",
       overview:
-        "Advanced non-invasive respiratory support modes including Dual limb configuration, Nasal Continuous Positive Airway Pressure (NCPAP), Non-Invasive Positive Pressure Ventilation (NIPPV), and NIPPV Transition modes.",
+        "The SLE 6000 supports conventional ventilation, high-frequency oscillation, and non-invasive ventilation — giving you multiple ventilation strategies in one integrated neonatal platform.",
       features: [
-        "Dual limb configuration",
-        "Nasal CPAP support",
-        "Non-Invasive Positive Pressure Ventilation",
-        "NIPPV Transition modes",
-        "Gentle respiratory assistance",
+        "Conventional ventilation",
+        "High-frequency oscillation (HFO)",
+        "Non-invasive ventilation (NIV)",
+        "One integrated system",
       ],
-      specifications: {
-        Configuration: "Dual limb",
-        CPAP: "2–20 cmH2O",
-        NIPPV: "Pressure support modes",
-        Transition: "Smooth mode switching",
-        Interface: "Nasal/prong compatible",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     3: {
-      videoSrc: SLE6000Video2,
-      title: "Future ready and upgradeable to Oxygenie",
+      videoSrc: SLE6000Video3,
+      title: "High-Performance HFO Capability",
       overview:
-        "The SLE6000 is designed with future-ready technology, allowing seamless upgrades to Oxygenie for enhanced oxygenation capabilities.",
+        "With powerful high-frequency oscillation and Delta-P amplitudes up to 180 mbar, the SLE 6000 delivers effective ventilation even for highly compliant neonatal lungs.",
       features: [
-        "Modular upgrade architecture",
-        "Oxygenie compatibility",
-        "Future-proof design",
-        "Easy system integration",
+        "Delta-P up to 180 mbar",
+        "High-performance HFO",
+        "Effective for compliant lungs",
+        "Designed for neonates",
       ],
-      specifications: {
-        Upgrade: "Oxygenie compatible",
-        Architecture: "Modular design",
-        Integration: "Seamless upgrade path",
-        Compatibility: "Backward compatible",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     4: {
-      videoSrc: SLE6000Video13,
-      title: "Volume Targeted Ventilation",
+      videoSrc: SLE6000Video4,
+      title: "Broad Patient Weight Range",
       overview:
-        "Volume targeted ventilation mode ensures precise delivery of set tidal volumes, providing consistent and controlled respiratory support.",
+        "Designed to support growing clinical needs, the SLE 6000 can ventilate neonates across a wide weight range — up to 20 kilograms.",
       features: [
-        "Precise volume delivery",
-        "Targeted tidal volumes",
-        "Consistent ventilation",
-        "Controlled respiratory support",
+        "Supports patients up to 20 kg",
+        "Neonatal to pediatric coverage",
+        "Reduces need for multiple ventilators",
       ],
-      specifications: {
-        Mode: "Volume targeted",
-        Delivery: "Precise volumes",
-        Control: "Consistent",
-        Support: "Targeted ventilation",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     5: {
-      videoSrc: SLE6000Video8,
-      title: "Alarm Settings",
+      videoSrc: SLE6000Video5,
+      title: "Advanced Non-Invasive Ventilation",
       overview:
-        "Configurable alarm system with customizable settings to ensure patient safety and alert healthcare providers to critical conditions.",
+        "The SLE 6000 offers neonatal-specific non-invasive ventilation modes with built-in leak compensation to help maintain stable and effective respiratory support.",
       features: [
-        "Configurable alarm parameters",
-        "Customizable thresholds",
-        "Visual and audible alerts",
-        "Priority-based notifications",
+        "Double-limb NCPAP",
+        "NIPPV & NIPPV-Triggered",
+        "Leak compensation technology",
+        "Neonatal-focused NIV",
       ],
-      specifications: {
-        Alarms: "Configurable",
-        Thresholds: "Customizable",
-        Alerts: "Visual & audible",
-        Priority: "Multi-level",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     6: {
-      videoSrc: SLE6000Video12,
-      title: "Alarm Light",
+      videoSrc: SLE6000Video6,
+      title: "Future-Ready & Upgradeable Platform",
       overview:
-        "Prominent top-mounted alarm light ensures visibility of alarm conditions from any angle, enhancing patient safety and staff awareness.",
+        "As clinical needs evolve, the SLE 6000 can be expanded through software upgrades, helping you stay future ready without replacing equipment.",
       features: [
-        "Top-mounted positioning",
-        "360-degree visibility",
-        "Enhanced alarm awareness",
-        "Patient safety focus",
+        "Upgradeable software platform",
+        "Oxygenie™ readiness",
+        "HFNC & single-limb CPAP options",
+        "EtCO₂ module support",
       ],
-      specifications: {
-        Position: "Top-mounted",
-        Visibility: "360-degree",
-        Awareness: "Enhanced",
-        Safety: "Patient-focused",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     7: {
-      videoSrc: SLE6000Video6,
-      title: '12.1" Lunar Display',
+      videoSrc: SLE6000Video7,
+      title: '12.1" Lunar™ Capacitive Touchscreen',
       overview:
-        "Large 12.1-inch high-resolution lunar display with capacitive touch screen technology for intuitive operation and clear visualization of patient parameters.",
+        "The large 12.1-inch Lunar™ capacitive touchscreen provides a clear, intuitive interface for quick adjustments and smooth clinical workflows.",
       features: [
-        "12.1-inch high-resolution display",
-        "Capacitive touch screen",
-        "Intuitive user interface",
-        "Clear parameter visualization",
+        "12.1-inch touchscreen",
+        "Capacitive, glove-friendly design",
+        "Logical UI flow",
+        "Fast, smooth adjustments",
       ],
-      specifications: {
-        Display: '12.1" capacitive touch',
-        Resolution: "High-resolution",
-        Interface: "Touch-enabled",
-        Visibility: "Enhanced clarity",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     8: {
-      videoSrc: SLE6000Video4,
-      title: "Powerful HFO Mode",
+      videoSrc: SLE6000Video8,
+      title: "Accurate Volume-Targeted Ventilation",
       overview:
-        "Combines powerful High-Frequency Oscillation capabilities with conventional ventilation modes, providing comprehensive respiratory support from neonatal to adult patients.",
+        "Volume-targeted ventilation on the SLE 6000 helps deliver precise tidal volumes, supporting lung protection and reducing the risk of ventilation-related complications.",
       features: [
-        "High-Frequency Oscillation",
-        "Conventional ventilation modes",
-        "Dual-mode operation",
-        "Advanced pressure control",
+        "Precise tidal volume delivery",
+        "Lung-protective ventilation",
+        "Reduced clinical complications",
+        "Consistent performance",
       ],
-      specifications: {
-        HFO: "3–15 Hz frequency",
-        Conventional: "AC, SIMV, PSV",
-        Pressure: "5–100 cmH2O",
-        PatientRange: "Neonatal to adult",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     9: {
-      videoSrc: SLE6000Video11,
-      title: "Layouts",
+      videoSrc: SLE6000Video9,
+      title: "Seamless Mode Switching Without Disconnection",
       overview:
-        "Intuitive mode panel interface and customizable layouts designed for the user, providing easy access to ventilation modes and settings with clear visual feedback.",
+        "The SLE 6000 allows seamless switching between HFO and conventional ventilation without disconnecting the patient, maintaining stability throughout care.",
       features: [
-        "User-friendly interface",
-        "Customizable layouts",
-        "Easy mode selection",
-        "Clear visual feedback",
-        "Intuitive navigation",
+        "One circuit for all modes",
+        "No patient disconnection",
+        "Maintains ventilation continuity",
+        "Reduced handling risk",
       ],
-      specifications: {
-        Interface: "User-focused",
-        Layouts: "Customizable",
-        Navigation: "Intuitive",
-        Feedback: "Visual",
-        Access: "Easy mode selection",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     10: {
-      videoSrc: SLE6000Video7,
-      title: "Additional Parameters",
+      videoSrc: SLE6000Video10,
+      title: "Patented Valve-Less Technology",
       overview:
-        "Comprehensive monitoring and display of additional respiratory parameters for enhanced patient care and clinical decision-making.",
+        "The patented valve-less design reduces resistance in the breathing circuit, helping lower work of breathing and minimize cross-contamination risk.",
       features: [
-        "Extended parameter monitoring",
-        "Real-time data display",
-        "Comprehensive patient metrics",
-        "Advanced monitoring capabilities",
+        "Valve-less ventilation design",
+        "Reduced work of breathing",
+        "Lower cross-contamination risk",
+        "Supports faster recovery",
       ],
-      specifications: {
-        Parameters: "Extended set",
-        Display: "Real-time",
-        Monitoring: "Comprehensive",
-        Metrics: "Advanced",
-      },
       rotation: {
-        azimuthal: 0,
+        azimuthal: -Math.PI / 2,
         polar: Math.PI / 2,
       },
     },
     11: {
-      videoSrc: SLE6000Video5,
-      title: "SIMV Mode",
+      videoSrc: SLE6000Video11,
+      title: "Clear, Top-Mounted Alarm Visibility",
       overview:
-        "Synchronized Intermittent Mandatory Ventilation (SIMV) mode provides synchronized breaths with the patient's own respiratory efforts, allowing for natural breathing patterns.",
+        "A top-mounted alarm light ensures alerts are clearly visible to caregivers, even from a distance, while maintaining a calm NICU environment.",
       features: [
-        "Synchronized mandatory breaths",
-        "Spontaneous breathing support",
-        "Patient-triggered ventilation",
-        "Flexible breath delivery",
+        "High-visibility alarm light",
+        "Easy caregiver awareness",
+        "Calm, controlled care setting",
       ],
-      specifications: {
-        Mode: "SIMV",
-        Trigger: "Flow or pressure",
-        Synchronization: "Patient synchronized",
-        Support: "Mandatory + spontaneous",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     12: {
-      videoSrc: SLE6000Video9,
-      title: "CPAP Mode",
+      videoSrc: SLE6000Video12,
+      title: "Real-Time Lung Mechanics Monitoring",
       overview:
-        "Continuous Positive Airway Pressure (CPAP) mode provides constant positive pressure to maintain airway patency and support spontaneous breathing.",
+        "Real-time lung mechanics monitoring provides continuous insight through waveforms, loops, and trends, supporting informed ventilation decisions.",
       features: [
-        "Continuous positive pressure",
-        "Spontaneous breathing support",
-        "Airway patency maintenance",
-        "Non-invasive support",
+        "Real-time waveforms",
+        "Lung loops & trends",
+        "Continuous ventilatory data",
+        "Clinical decision support",
       ],
-      specifications: {
-        Mode: "CPAP",
-        Pressure: "2–20 cmH2O",
-        Support: "Spontaneous breathing",
-        Interface: "Non-invasive",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     13: {
-      videoSrc: SLE6000Video10,
-      title: "Manual Breath",
+      videoSrc: SLE6000Video13,
+      title: "Intuitive Mode Panel Interface",
       overview:
-        "Manual breath function allows clinicians to deliver manual breaths on demand, providing immediate respiratory support when needed.",
+        "The mode panel serves as a central control interface, allowing fast access to mode-specific ventilation settings when every second matters.",
       features: [
-        "On-demand manual breaths",
-        "Immediate respiratory support",
-        "Clinician-controlled delivery",
-        "Emergency response capability",
+        "Centralized mode control",
+        "Quick access to settings",
+        "Optimized for high-acuity care",
       ],
-      specifications: {
-        Function: "Manual breath",
-        Control: "Clinician-activated",
-        Delivery: "On-demand",
-        Response: "Immediate",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
@@ -843,7 +771,7 @@ const SLE6000 = () => {
       title: config.title,
       overview: config.overview,
       features: config.features,
-      specifications: config.specifications,
+      specifications: config.specifications || null,
     });
 
     if (orbitControlsRef.current && config.rotation) {
