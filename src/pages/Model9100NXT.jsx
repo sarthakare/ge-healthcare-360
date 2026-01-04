@@ -10,17 +10,18 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import Model9100NXTModel from "../assets/9100nxt/model/9100NXT.glb";
-import VideoVentilationModes from "../assets/9100nxt/videos/Ventilation Modes.mp4";
-import VideoAutoclavableBreathingCircuit from "../assets/9100nxt/videos/Autoclavable breathing circuit, bellows and canister.mp4";
-import VideoPreUseGuidedCheck from "../assets/9100nxt/videos/Pre-use guided check.mp4";
-import VideoPSVProAlgorithm from "../assets/9100nxt/videos/PSVPro algorithm.mp4";
-import VideoCO2Bypass from "../assets/9100nxt/videos/CO₂ bypass.mp4";
-import VideoFlowValveTechnology from "../assets/9100nxt/videos/flow-valve technology.mp4";
-import VideoHypoxiaGuardApnea from "../assets/9100nxt/videos/Hypoxia Guard Apnea back-up.mp4";
-import VideoIntegratedACGO from "../assets/9100nxt/videos/Integrated Auxiliary Common Gas Outlet (ACGO).mp4";
-import VideoThreeGasCapability from "../assets/9100nxt/videos/Three-gas capability.mp4";
-import VideoTwoFlowSensors from "../assets/9100nxt/videos/Two flow sensors (inspiratory + expiratory).mp4";
-import VideoOneDeviceHospital from "../assets/9100nxt/videos/one device for the whole hospital.mp4";
+import VideoIntroduction from "../assets/9100nxt/videos/9100nxt_Introduction.mp4";
+import VideoVentilationModes from "../assets/9100nxt/videos/9100nxt_Ventilation_Modes.mp4";
+import VideoAutoclavableBreathingCircuit from "../assets/9100nxt/videos/9100nxt_Autoclavable_Breathing_System.mp4";
+import VideoCO2Bypass from "../assets/9100nxt/videos/9100nxt_CO2_Bypass_System.mp4";
+import VideoFlowValveTechnology from "../assets/9100nxt/videos/9100nxt_Flow_Valve_Technology.mp4";
+import VideoHypoxiaGuardApnea from "../assets/9100nxt/videos/9100nxt_Hypoxia_Guard_Apnea_Backup.mp4";
+import VideoIntegratedACGO from "../assets/9100nxt/videos/9100nxt_Integrated_Auxiliary_Common_Gas_Outlet.mp4";
+import VideoOneDeviceHospital from "../assets/9100nxt/videos/9100nxt_One_Device_For_The_Whole_Hospital.mp4";
+import VideoPreUseGuidedCheck from "../assets/9100nxt/videos/9100nxt_Pre_Use_Guided_System_Check.mp4";
+import VideoPSVProAlgorithm from "../assets/9100nxt/videos/9100nxt_PSVPro_Algorithm.mp4";
+import VideoThreeGasCapability from "../assets/9100nxt/videos/9100nxt_Three_Gas_Capability.mp4";
+import VideoTwoFlowSensors from "../assets/9100nxt/videos/9100nxt_Dual_Flow_Sensors.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -153,7 +154,6 @@ const VideoPopup = ({
   title,
   overview,
   features,
-  specifications,
 }) => {
   const videoRef = useRef(null);
 
@@ -359,36 +359,6 @@ const VideoPopup = ({
                   </ul>
                 </div>
               )}
-
-              {specifications && (
-                <div>
-                  <h3
-                    style={{
-                      margin: "0 0 8px 0",
-                      fontSize: "18px",
-                      fontWeight: "600",
-                      color: "#6022A6",
-                    }}
-                  >
-                    Technical Specifications
-                  </h3>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(2, 1fr)",
-                      gap: "10px",
-                      fontSize: "14px",
-                      color: "#000000",
-                    }}
-                  >
-                    {Object.entries(specifications).map(([key, value]) => (
-                      <div key={key}>
-                        <strong>{key}:</strong> {value}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -429,216 +399,178 @@ const Model9100NXT = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "Ventilation Modes", position: [0.5, 1.75, 0.05] },
-    { id: 2, name: "Autoclavable Breathing Circuit", position: [-1.4, -0.05, 0.5] },
-    { id: 3, name: "Pre-use Guided Check", position: [0.25, 0.75, 0.15] },
-    { id: 4, name: "PSVPro Algorithm", position: [-1.75, 0.5, -0.25] },
-    { id: 5, name: "CO₂ Bypass", position: [-1.5, -0.5, 0.4] },
-    { id: 6, name: "Flow-Valve Technology", position: [0.75, 1.5, 0.05] },
-    { id: 7, name: "Hypoxia Guard Apnea Back-up", position: [-0.5, 1.5, 0.15] },
-    { id: 8, name: "Integrated ACGO", position: [-0.35, -0.05, 1] },
-    { id: 9, name: "Three-Gas Capability", position: [-0.5, 1, 0.15] },
-    { id: 10, name: "Two Flow Sensors", position: [-1.4, 0.05, 0.5] },
-    { id: 11, name: "One Device for the Whole Hospital", position: [0, 1.2, 0] },
+    { id: 1, name: "Introduction to 9100NXT", position: [0, 1.25, 0] },
+    { id: 2, name: "Autoclavable Breathing System", position: [-1.4, 0, 0.5] },
+    { id: 3, name: "CO₂ Bypass System", position: [-1.5, -0.5, 0.4] },
+    { id: 4, name: "Flow-Valve Technology", position: [0.75, 1.5, 0.05] },
+    { id: 5, name: "Hypoxia Guard & Apnea Backup", position: [-0.5, 1, 0.15] },
+    { id: 6, name: "Integrated Auxiliary Common Gas Outlet", position: [-0.35, -0.05, 1] },
+    { id: 7, name: "One Device for the Whole Hospital", position: [0, -0.5, 1] },  
+    { id: 8, name: "Pre-Use Guided System Check", position: [0.5, 1.75, 0.05] },
+    { id: 9, name: "PSVPro™ Algorithm", position: [-1.75, 0.5, -0.25] },
+    { id: 10, name: "Three-Gas Capability", position: [-0.5, 1.25, 0.15] },
+    { id: 11, name: "Dual Flow Sensors", position: [-1.4, 0.15, 0.5] },
+    { id: 12, name: "Ventilation Modes", position: [0.5, 1.5, 0.05] },
   ];
 
   const hotspotsConfig = {
     1: {
-      videoSrc: VideoVentilationModes,
-      title: "Ventilation Modes",
+      videoSrc: VideoIntroduction,
+      title: "Introduction to 9100c NXT",
       overview:
-        "The 9100 NXT offers comprehensive ventilation modes designed for various clinical scenarios, providing flexibility and precision in patient care.",
+        "The 9100c NXT is a versatile anesthesia workstation designed to deliver safe, reliable anesthesia care across a wide range of patients and clinical settings.",
       features: [
-        "Multiple ventilation modes including AC, SIMV, and CPAP",
-        "Adaptive ventilation algorithms",
-        "Real-time mode switching capabilities",
-        "Patient-specific mode optimization",
+        "Versatile anesthesia workstation",
+        "Designed for safety and reliability",
+        "Supports multiple patient types",
+        "Trusted GE HealthCare legacy",
       ],
-      specifications: {
-        "Modes Available": "AC, SIMV, CPAP, PSV",
-        "Mode Switching": "Real-time",
-        "Algorithm": "Advanced adaptive",
-      },
+      specifications: {},
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     2: {
       videoSrc: VideoAutoclavableBreathingCircuit,
-      title: "Autoclavable Breathing Circuit, Bellows and Canister",
+      title: "Autoclavable Breathing System",
       overview:
-        "Fully autoclavable breathing circuit components ensure maximum infection control and patient safety with easy sterilization processes.",
+        "The breathing circuit, bellows, and canister are fully autoclavable, helping you maintain high infection control standards with ease.",
       features: [
-        "Complete autoclavable system",
-        "Tool-free disassembly",
-        "Durable bellows design",
-        "Integrated canister system",
+        "Autoclavable circuit",
+        "Autoclavable bellows & canister",
+        "Supports infection control",
+        "Easy reprocessing",
       ],
-      specifications: {
-        "Autoclave Temperature": "Up to 134°C",
-        "Sterilization Time": "Standard cycle",
-        "Material": "Medical-grade autoclavable",
-      },
+      specifications: {},
       rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
     3: {
-      videoSrc: VideoPreUseGuidedCheck,
-      title: "Pre-use Guided Check",
+      videoSrc: VideoCO2Bypass,
+      title: "CO₂ Bypass System",
       overview:
-        "Intelligent pre-use check system guides clinicians through comprehensive safety verification before each procedure.",
+        "The integrated CO₂ bypass allows absorbent replacement without interrupting ventilation, ensuring continuous anesthesia delivery.",
       features: [
-        "Step-by-step guided workflow",
-        "Automated system diagnostics",
-        "Visual and audio prompts",
-        "Checklist completion tracking",
+        "EZChange CO₂ bypass",
+        "No ventilation interruption",
+        "Supports long procedures",
+        "Improved workflow continuity",
       ],
-      specifications: {
-        "Check Duration": "< 2 minutes",
-        "Automated Tests": "System-wide",
-        "Documentation": "Automatic logging",
-      },
-      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+      specifications: {},
+      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
     4: {
-      videoSrc: VideoPSVProAlgorithm,
-      title: "PSVPro Algorithm",
-      overview:
-        "Advanced PSVPro algorithm provides intelligent pressure support ventilation with adaptive response to patient needs.",
-      features: [
-        "Adaptive pressure support",
-        "Patient-triggered ventilation",
-        "Real-time algorithm adjustment",
-        "Enhanced patient comfort",
-      ],
-      specifications: {
-        "Algorithm Type": "Adaptive PSV",
-        "Response Time": "< 100ms",
-        "Trigger Sensitivity": "Adjustable",
-      },
-      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
-    },
-    5: {
-      videoSrc: VideoCO2Bypass,
-      title: "CO₂ Bypass",
-      overview:
-        "Integrated CO₂ bypass system provides efficient gas management and monitoring capabilities.",
-      features: [
-        "Automatic CO₂ monitoring",
-        "Bypass valve control",
-        "Real-time CO₂ level display",
-        "Safety alarm integration",
-      ],
-      specifications: {
-        "CO₂ Measurement": "Capnography",
-        "Bypass Control": "Automatic/Manual",
-        "Alarm Threshold": "Configurable",
-      },
-      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
-    },
-    6: {
       videoSrc: VideoFlowValveTechnology,
       title: "Flow-Valve Technology",
       overview:
-        "Advanced flow-valve technology ensures precise gas delivery and optimal flow control throughout the ventilation system.",
+        "Flow-valve technology enables precise control of gas delivery, supporting stable ventilation and consistent anesthetic administration.",
       features: [
-        "Precise flow control",
-        "Low resistance design",
-        "Rapid response valves",
-        "Digital flow monitoring",
+        "Precise gas control",
+        "Stable ventilation delivery",
+        "Reliable anesthesia output",
       ],
-      specifications: {
-        "Flow Range": "0.2 - 15 L/min",
-        "Response Time": "< 50ms",
-        "Accuracy": "±2%",
-      },
+      specifications: {},
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    5: {
+      videoSrc: VideoHypoxiaGuardApnea,
+      title: "Hypoxia Guard & Apnea Backup",
+      overview:
+        "Built-in hypoxia guard and apnea backup ventilation add a critical layer of patient safety during unexpected events.",
+      features: [
+        "Hypoxia protection",
+        "Apnea backup ventilation",
+        "Enhanced patient safety",
+      ],
+      specifications: {},
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    6: {
+      videoSrc: VideoIntegratedACGO,
+      title: "Integrated Auxiliary Common Gas Outlet",
+      overview:
+        "The integrated auxiliary common gas outlet allows connection to external breathing systems when required.",
+      features: [
+        "Auxiliary common gas outlet",
+        "Expanded clinical flexibility",
+        "Supports external circuits",
+      ],
+      specifications: {},
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     7: {
-      videoSrc: VideoHypoxiaGuardApnea,
-      title: "Hypoxia Guard Apnea Back-up",
-      overview:
-        "Advanced safety system that automatically detects and responds to apnea events and hypoxia conditions to ensure patient safety.",
-      features: [
-        "Automatic apnea detection",
-        "Hypoxia monitoring",
-        "Back-up ventilation activation",
-        "Real-time alarm system",
-      ],
-      specifications: {
-        "Detection Time": "< 20 seconds",
-        "Back-up Mode": "Automatic",
-        "Alarm Levels": "Configurable",
-      },
-      rotation: { azimuthal: 0, polar: Math.PI / 2 },
-    },
-    8: {
-      videoSrc: VideoIntegratedACGO,
-      title: "Integrated Auxiliary Common Gas Outlet (ACGO)",
-      overview:
-        "Integrated ACGO provides flexible gas delivery options for additional equipment and accessories.",
-      features: [
-        "Standard ACGO connection",
-        "Multiple gas support",
-        "Easy accessory integration",
-        "Flow monitoring",
-      ],
-      specifications: {
-        "Connection Type": "Standard ACGO",
-        "Gas Support": "Multiple",
-        "Flow Capacity": "Up to 15 L/min",
-      },
-      rotation: { azimuthal: 0, polar: Math.PI / 2 },
-    },
-    9: {
-      videoSrc: VideoThreeGasCapability,
-      title: "Three-Gas Capability",
-      overview:
-        "Comprehensive three-gas system supporting oxygen, air, and nitrous oxide for complete anesthesia delivery.",
-      features: [
-        "Three-gas support (O₂, Air, N₂O)",
-        "Individual gas flow control",
-        "Gas mixture monitoring",
-        "Safety interlocks",
-      ],
-      specifications: {
-        "Gases Supported": "O₂, Air, N₂O",
-        "Flow Range": "0.2 - 15 L/min each",
-        "Mixture Control": "Precise",
-      },
-      rotation: { azimuthal: 0, polar: Math.PI / 2 },
-    },
-    10: {
-      videoSrc: VideoTwoFlowSensors,
-      title: "Two Flow Sensors (Inspiratory + Expiratory)",
-      overview:
-        "Dual flow sensor system provides comprehensive monitoring of both inspiratory and expiratory flows for accurate ventilation management.",
-      features: [
-        "Inspiratory flow monitoring",
-        "Expiratory flow monitoring",
-        "Real-time flow measurement",
-        "Accurate volume calculation",
-      ],
-      specifications: {
-        "Sensor Type": "Dual flow sensors",
-        "Measurement Range": "0 - 120 L/min",
-        "Accuracy": "±2%",
-      },
-      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
-    },
-    11: {
       videoSrc: VideoOneDeviceHospital,
       title: "One Device for the Whole Hospital",
       overview:
-        "The 9100 NXT is designed as a versatile solution that can serve multiple departments and clinical needs throughout the hospital.",
+        "The 9100c NXT can be used across operating rooms and patient types, reducing the need for multiple anesthesia platforms.",
       features: [
-        "Multi-department compatibility",
-        "Versatile clinical applications",
-        "Unified platform",
-        "Cost-effective solution",
+        "Neonates to adults",
+        "Multi-OR usability",
+        "Simplified equipment standardization",
       ],
-      specifications: {
-        "Applications": "OR, ICU, Emergency",
-        "Versatility": "Multi-purpose",
-        "Compatibility": "Hospital-wide",
-      },
+      specifications: {},
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    8: {
+      videoSrc: VideoPreUseGuidedCheck,
+      title: "Pre-Use Guided System Check",
+      overview:
+        "The system guides you through a pre-use check to ensure the workstation is ready and functioning correctly before each case.",
+      features: [
+        "Guided pre-use checks",
+        "Ensures system readiness",
+        "Improves confidence before cases",
+      ],
+      specifications: {},
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    9: {
+      videoSrc: VideoPSVProAlgorithm,
+      title: "PSVPro™ Algorithm",
+      overview:
+        "PSVPro™ supports spontaneous breathing with pressure support, improving patient comfort during emergence and recovery.",
+      features: [
+        "Pressure support ventilation",
+        "Supports spontaneous breathing",
+        "Improved patient comfort",
+      ],
+      specifications: {},
+      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
+    },
+    10: {
+      videoSrc: VideoThreeGasCapability,
+      title: "Three-Gas Capability",
+      overview:
+        "The workstation supports three anesthetic gases, offering flexibility for a wide range of anesthesia techniques.",
+      features: [
+        "Three-gas delivery",
+        "Flexible anesthesia options",
+        "Supports clinical preference",
+      ],
+      specifications: {},
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    11: {
+      videoSrc: VideoTwoFlowSensors,
+      title: "Dual Flow Sensors",
+      overview:
+        "Separate inspiratory and expiratory flow sensors continuously monitor delivered and returned volumes for accurate ventilation.",
+      features: [
+        "Inspiratory flow sensor",
+        "Expiratory flow sensor",
+        "Accurate volume monitoring",
+      ],
+      specifications: {},
+      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
+    },
+    12: {
+      videoSrc: VideoVentilationModes,
+      title: "Ventilation Modes",
+      overview:
+        "Multiple ventilation modes allow you to tailor respiratory support to patient condition and procedural needs.",
+      features: [
+        "Controlled ventilation",
+        "Supported spontaneous modes",
+        "Clinical flexibility",
+      ],
+      specifications: {},
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
   };
