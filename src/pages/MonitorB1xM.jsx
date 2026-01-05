@@ -10,15 +10,16 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import MonitorB1xMModel from "../assets/monitors-b1xm/model/Monitor Combined File.glb";
-import ConnectedVideo from "../assets/monitors-b1xm/videos/Connected.mp4";
-import DINAMAPVideo from "../assets/monitors-b1xm/videos/DINAMAP.mp4";
-import EKProArrhythmiaAlgorithmVideo from "../assets/monitors-b1xm/videos/EK-Pro Arrhythmia algorithm.mp4";
-import EntropyVideo from "../assets/monitors-b1xm/videos/Entropy.mp4";
-import IntuitiveVideo from "../assets/monitors-b1xm/videos/Intuitive.mp4";
-import ScalableAcrossCareAreasVideo from "../assets/monitors-b1xm/videos/Scalable Across Care Areas.mp4";
-import ScalableVideo from "../assets/monitors-b1xm/videos/Scalable.mp4";
-import SpirometryVideo from "../assets/monitors-b1xm/videos/Spirometry.mp4";
-import TestedForPerformanceVideo from "../assets/monitors-b1xm/videos/Tested for Performance.mp4";
+import ScalableAcrossCareAreasVideo from "../assets/monitors-b1xm/videos/01 Scalable Across Care Areas.mp4";
+import IntuitiveVideo from "../assets/monitors-b1xm/videos/02 Intuitive.mp4";
+import DINAMAPVideo from "../assets/monitors-b1xm/videos/04 Dinamap.mp4";
+import EKProArrhythmiaAlgorithmVideo from "../assets/monitors-b1xm/videos/05 Ek-Pro Arrhythmia Algorithm.mp4";
+import SpirometryVideo from "../assets/monitors-b1xm/videos/06 Spirometry.mp4";
+import TestedForPerformanceVideo from "../assets/monitors-b1xm/videos/07 Tested For Performance.mp4";
+import ScalableVideo from "../assets/monitors-b1xm/videos/08 Multi-Module Scalability.mp4";
+import MonitorPortsVideo from "../assets/monitors-b1xm/videos/09 Multiple Monitor Ports.mp4";
+import EntropyVideo from "../assets/monitors-b1xm/videos/10 Entropy™ Monitoring.mp4";
+import ConnectedVideo from "../assets/monitors-b1xm/videos/11 Advanced Connectivity.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -81,7 +82,11 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
   if (!isVisible) return null;
 
   return (
-    <Html position={position} center zIndexRange={showAnnotation || isVideoPlaying ? [70, 80] : [50, 60]}>
+    <Html
+      position={position}
+      center
+      zIndexRange={showAnnotation || isVideoPlaying ? [70, 80] : [50, 60]}
+    >
       <div
         style={{
           width: "50px",
@@ -140,7 +145,6 @@ const VideoPopup = ({
   title,
   overview,
   features,
-  specifications,
 }) => {
   const videoRef = useRef(null);
 
@@ -248,22 +252,43 @@ const VideoPopup = ({
               justifyContent: "center",
             }}
           >
-            <video
-              ref={videoRef}
-              src={videoSrc}
-              controls
-              autoPlay
-              style={{
-                width: "100%",
-                maxWidth: "500px",
-                height: "auto",
-                maxHeight: "300px",
-                borderRadius: "8px",
-                outline: "none",
-              }}
-            >
-              Your browser does not support the video tag.
-            </video>
+            {videoSrc ? (
+              <video
+                ref={videoRef}
+                src={videoSrc}
+                controls
+                autoPlay
+                style={{
+                  width: "100%",
+                  maxWidth: "500px",
+                  height: "auto",
+                  maxHeight: "300px",
+                  borderRadius: "8px",
+                  outline: "none",
+                }}
+              >
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <div
+                style={{
+                  width: "100%",
+                  maxWidth: "500px",
+                  height: "200px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "#f5f5f5",
+                  borderRadius: "8px",
+                  border: "2px dashed #ccc",
+                  color: "#666",
+                  fontSize: "16px",
+                  fontWeight: "500",
+                }}
+              >
+                No video is available
+              </div>
+            )}
           </div>
           <div style={{ color: "#000000" }}>
             <h2
@@ -310,6 +335,7 @@ const VideoPopup = ({
                   </p>
                 </div>
               )}
+
               {features && features.length > 0 && (
                 <div>
                   <h3
@@ -335,36 +361,6 @@ const VideoPopup = ({
                       <li key={index}>{feature}</li>
                     ))}
                   </ul>
-                </div>
-              )}
-              {specifications && (
-                <div>
-                  <h3
-                    style={{
-                      margin: "0 0 8px 0",
-                      fontSize: "18px",
-                      fontWeight: "600",
-                      color: "#6022A6",
-                    }}
-                  >
-                    Technical Specifications
-                  </h3>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(2, 1fr)",
-                      gap: "10px",
-                      fontSize: "14px",
-                      color: "#000000",
-                    }}
-                  >
-                    {specifications &&
-                      Object.entries(specifications).map(([key, value]) => (
-                        <div key={key}>
-                          <strong>{key}:</strong> {value}
-                        </div>
-                      ))}
-                  </div>
                 </div>
               )}
             </div>
@@ -405,112 +401,91 @@ const MonitorB1xM = () => {
   const hotspots = [
     {
       id: 1,
-      name: "Scalable Across Care Areas",
-      position: [-1.25, -0.15, 1.65],
+      name: "Introduction to B1x5M Patient Monitors",
+      position: [-1.25, 1, 1.5],
     },
-    { id: 2, name: "Entropy", position: [-0.25, 0.5, 1.65] },
-    { id: 3, name: "Connectivity", position: [-2.35, 0.75, 1.65] },
-    { id: 4, name: "Intuitive", position: [-2.35, -0.15, 1.65] },
-    { id: 5, name: "DINAMAP", position: [-0.25, 1, 1.65] },
+    {
+      id: 2,
+      name: "Scalable Across Care Areas",
+      position: [-1.25, -0.15, 1.5],
+    },
+    { id: 3, name: "Intuitive User Experience", position: [-2.25, -0.15, 1.5] },
+    { id: 4, name: "Modular & Scalable Platform", position: [-2.25, 1, 1.5] },
+    { id: 5, name: "DINAMAP™ Blood Pressure", position: [-0.25, 1, 1.5] },
     {
       id: 6,
       name: "EK-Pro Arrhythmia Algorithm",
-      position: [-0.75, 1.5, 1.65],
+      position: [-0.75, 1.5, 1.5],
     },
-    { id: 7, name: "Spirometry", position: [-2.25, 1.5, 1.65] },
+    { id: 7, name: "Spirometry Monitoring", position: [-2, 1.5, 1.5] },
     {
       id: 8,
       name: "Tested for Performance",
-      position: [-1.25, 0.75, 1.65],
+      position: [-1.25, 0.5, 1.5],
     },
-    { id: 9, name: "Multi-Module Scalability", position: [1.35, 0.5, 2.65] },
-    { id: 10, name: "Monitor Ports (Video soon)", position: [-1.5, 0.2, 0.65] },
+    { id: 9, name: "Multi-Module Scalability", position: [1.4, 0.75, 2.5] },
+    { id: 10, name: "Monitor Ports", position: [-1.5, 0.2, 0.5] },
+    { id: 11, name: "Entropy™ Monitoring", position: [-0.25, 0.5, 1.5] },
+    { id: 12, name: "Advanced Connectivity", position: [-2.25, 0.5, 1.5] },
   ];
 
   const hotspotsConfig = {
     1: {
-      videoSrc: ScalableAcrossCareAreasVideo,
-      title: "Scalable Across Care Areas",
+      videoSrc: null,
+      title: "Introduction to B1x5M Patient Monitors",
       overview:
-        "Common platform that scales from ICU to OR to step-down with consistent workflows and monitoring tools.",
+        "The B1x5M patient monitors are designed to adapt to your care environment, delivering reliable monitoring with the flexibility to scale as patient needs evolve.",
       features: [
-        "Consistent UI across units",
-        "Hot-swappable parameter modules",
-        "Central station connectivity",
-        "Suitable bedside through transport",
+        "Adaptable patient monitoring",
+        "Designed for multiple care areas",
+        "Reliable GE HealthCare technology",
+        "Scalable clinical platform",
       ],
-      specifications: {
-        CareAreas: "ICU/OR/ward ready",
-        Modules: "Hot-swappable bays",
-        Central: "Central station ready",
-        Transport: "Battery bridging capable",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     2: {
-      videoSrc: EntropyVideo,
-      title: "Entropy Monitoring",
+      videoSrc: ScalableAcrossCareAreasVideo,
+      title: "Scalable Across Care Areas",
       overview:
-        "Entropy monitoring provides insight into anesthesia depth with State and Response Entropy values.",
+        "The B1x5M monitors are built to move seamlessly across emergency, perioperative, ICU, and step-down care settings.",
       features: [
-        "State and Response Entropy",
-        "Supports anesthetic titration",
-        "Helps reduce awareness risk",
-        "Integrates with bedside trends",
+        "ER to ICU coverage",
+        "Continuity of monitoring",
+        "Flexible deployment",
       ],
-      specifications: {
-        Parameters: "State/Response Entropy",
-        Range: "0-91",
-        Interface: "Module integrated",
-        Refresh: "Fast response",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     3: {
-      videoSrc: ConnectedVideo,
-      title: "Connectivity",
+      videoSrc: IntuitiveVideo,
+      title: "Intuitive User Experience",
       overview:
-        "Network-ready bedside monitor that keeps patient data connected across care areas for uninterrupted visibility.",
+        "A clean, intuitive interface helps you access critical patient information quickly, reducing training time and cognitive load.",
       features: [
-        "Bed-to-bed data continuity",
-        "Remote viewing and review",
-        "Secure data transport",
-        "Alarm forwarding ready",
+        "Simple navigation",
+        "Touch-based interface",
+        "Faster clinical decisions",
       ],
-      specifications: {
-        Connectivity: "LAN/Wi-Fi capable",
-        Protocols: "Hospital network ready",
-        Sync: "Bedside data share",
-        Security: "Encrypted transport",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     4: {
-      videoSrc: IntuitiveVideo,
-      title: "Intuitive User Experience",
+      videoSrc: null,
+      title: "Modular & Scalable Platform",
       overview:
-        "Streamlined, intuitive user experience with gesture-friendly controls and quick access to patient data.",
+        "The modular design allows you to start with essential monitoring and expand capabilities as patient acuity increases.",
       features: [
-        "Touch-friendly layouts",
-        "Customizable parameter tiles",
-        "Fast access to trends",
-        "Contextual on-screen help",
+        "Modular architecture",
+        "Scalable parameters",
+        "Future-ready design",
       ],
-      specifications: {
-        Display: '12.1" touchscreen',
-        Layouts: "Configurable tiles",
-        Navigation: "Rotary plus touch",
-        Shortcuts: "User definable",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
@@ -518,21 +493,14 @@ const MonitorB1xM = () => {
     },
     5: {
       videoSrc: DINAMAPVideo,
-      title: "DINAMAP Blood Pressure",
+      title: "DINAMAP™ Blood Pressure with Early Warning Score",
       overview:
-        "Trusted DINAMAP non-invasive blood pressure technology integrated for accurate, repeatable measurements.",
+        "Proven DINAMAP™ technology delivers consistent blood pressure measurements that feed directly into Early Warning Scores.",
       features: [
-        "Clinically validated DINAMAP algorithm",
-        "Adaptive inflation control",
-        "Auto and interval BP cycles",
-        "Arrhythmia rejection support",
+        "DINAMAP™ NIBP",
+        "Early Warning Score support",
+        "Early detection of deterioration",
       ],
-      specifications: {
-        Measurement: "DINAMAP NIBP",
-        Modes: "Manual/stat/auto",
-        Interval: "1-120 minute auto cycle",
-        Safety: "Overpressure protection",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
@@ -542,19 +510,12 @@ const MonitorB1xM = () => {
       videoSrc: EKProArrhythmiaAlgorithmVideo,
       title: "EK-Pro Arrhythmia Algorithm",
       overview:
-        "EK-Pro multi-lead analysis delivers advanced arrhythmia detection and beat-to-beat insight at the bedside.",
+        "EK-Pro continuously analyzes ECG waveforms to help identify arrhythmias and support timely clinical intervention.",
       features: [
-        "Advanced arrhythmia detection",
-        "Beat-to-beat analysis",
-        "Multi-lead redundancy",
-        "Realtime notifications",
+        "Continuous ECG analysis",
+        "Arrhythmia detection",
+        "Patient safety support",
       ],
-      specifications: {
-        Algorithm: "EK-Pro arrhythmia",
-        Leads: "Multi-lead correlation",
-        Analysis: "Beat-to-beat",
-        Alerts: "Configurable thresholds",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
@@ -562,21 +523,14 @@ const MonitorB1xM = () => {
     },
     7: {
       videoSrc: SpirometryVideo,
-      title: "Bedside Spirometry",
+      title: "Spirometry Monitoring",
       overview:
-        "Integrated spirometry provides real-time flow and volume loops to assess ventilatory performance.",
+        "Integrated spirometry provides deeper insight into respiratory function, helping assess ventilation and breathing patterns.",
       features: [
-        "Real-time flow-volume loops",
-        "Tidal volume monitoring",
-        "Leak and resistance insight",
-        "Trend reporting at bedside",
+        "Respiratory assessment",
+        "Spirometry integration",
+        "Critical care support",
       ],
-      specifications: {
-        Parameters: "Flow and volume loops",
-        Accuracy: "Clinical-grade sensors",
-        Display: "Loop and numeric view",
-        Trending: "Bedside trend capture",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
@@ -586,19 +540,8 @@ const MonitorB1xM = () => {
       videoSrc: TestedForPerformanceVideo,
       title: "Tested for Performance",
       overview:
-        "Reliability you can trust—environmentally stressed, ingress protected, and ready for continuous use.",
-      features: [
-        "Thermal and vibration tested",
-        "Ingress-protected connectors",
-        "Fanless silent cooling",
-        "Designed for 24/7 duty",
-      ],
-      specifications: {
-        Testing: "Thermal and vibration",
-        Protection: "Ingress protected I/O",
-        Cooling: "Fanless design",
-        DutyCycle: "Continuous operation",
-      },
+        "Each monitor is rigorously tested to ensure accuracy, durability, and reliability in demanding clinical environments.",
+      features: ["Performance-tested", "Durable design", "Reliable monitoring"],
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
@@ -608,43 +551,59 @@ const MonitorB1xM = () => {
       videoSrc: ScalableVideo,
       title: "Multi-Module Scalability",
       overview:
-        "Modular monitoring platform that grows with patient acuity, protecting investment as needs change.",
+        "You can add or remove monitoring modules as clinical needs change, without disrupting workflow.",
       features: [
-        "Expandable parameter slots",
-        "Flexible mounting options",
-        "Upgrade-ready software",
-        "Shared accessory ecosystem",
+        "Flexible module configuration",
+        "Supports changing acuity",
+        "Workflow continuity",
       ],
-      specifications: {
-        Slots: "Multiple parameter bays",
-        Mounting: "Arm or roll-stand",
-        Upgrades: "Software expandable",
-        Accessories: "Shared ecosystem",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
     10: {
-      videoSrc: ConnectedVideo,
+      videoSrc: MonitorPortsVideo,
       title: "Monitor Ports",
       overview:
-        "Rear I/O panel covering ECG, IBP, SpO2, CO2, and auxiliary ports with color coding for rapid setup. (Video placeholder until final upload.)",
+        "Dedicated monitor ports simplify the connection of modules and accessories, enabling fast configuration.",
       features: [
-        "Eight parameter module slots",
-        "Hot-swappable module bay",
-        "Cable strain relief hooks",
-        "Ingress-protected connectors",
+        "Multiple ports",
+        "Easy accessory integration",
+        "Reduced setup time",
       ],
-      specifications: {
-        Modules: "ECG, IBP, SpO2, CO2, Temp",
-        IP: "IP32",
-        Material: "Die-cast aluminum",
-        Cooling: "Fanless design",
-      },
       rotation: {
         azimuthal: -Math.PI,
+        polar: Math.PI / 2,
+      },
+    },
+    11: {
+      videoSrc: EntropyVideo,
+      title: "Entropy™ Monitoring",
+      overview:
+        "Entropy™ monitoring provides real-time insight into patient response to anesthesia and sedation.",
+      features: [
+        "Depth of anesthesia monitoring",
+        "Real-time data",
+        "Supports optimal dosing",
+      ],
+      rotation: {
+        azimuthal: 0,
+        polar: Math.PI / 2,
+      },
+    },
+    12: {
+      videoSrc: ConnectedVideo,
+      title: "Advanced Connectivity",
+      overview:
+        "Designed for connected care environments, the B1x5M supports secure data sharing with hospital networks and central stations.",
+      features: [
+        "Network connectivity",
+        "Central station integration",
+        "Secure data flow",
+      ],
+      rotation: {
+        azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
@@ -773,7 +732,6 @@ const MonitorB1xM = () => {
       title: config.title,
       overview: config.overview,
       features: config.features,
-      specifications: config.specifications,
     });
 
     if (orbitControlsRef.current && config.rotation) {
@@ -956,7 +914,6 @@ const MonitorB1xM = () => {
         title={popupData?.title}
         overview={popupData?.overview}
         features={popupData?.features}
-        specifications={popupData?.specifications}
       />
 
       <ModelInteractionPopup

@@ -425,7 +425,6 @@ const Model9100NXT = () => {
         "Supports multiple patient types",
         "Trusted GE HealthCare legacy",
       ],
-      specifications: {},
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     2: {
@@ -439,7 +438,6 @@ const Model9100NXT = () => {
         "Supports infection control",
         "Easy reprocessing",
       ],
-      specifications: {},
       rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
     3: {
@@ -453,7 +451,6 @@ const Model9100NXT = () => {
         "Supports long procedures",
         "Improved workflow continuity",
       ],
-      specifications: {},
       rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
     4: {
@@ -466,7 +463,6 @@ const Model9100NXT = () => {
         "Stable ventilation delivery",
         "Reliable anesthesia output",
       ],
-      specifications: {},
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     5: {
@@ -479,7 +475,6 @@ const Model9100NXT = () => {
         "Apnea backup ventilation",
         "Enhanced patient safety",
       ],
-      specifications: {},
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     6: {
@@ -492,7 +487,6 @@ const Model9100NXT = () => {
         "Expanded clinical flexibility",
         "Supports external circuits",
       ],
-      specifications: {},
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     7: {
@@ -505,7 +499,6 @@ const Model9100NXT = () => {
         "Multi-OR usability",
         "Simplified equipment standardization",
       ],
-      specifications: {},
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     8: {
@@ -518,7 +511,6 @@ const Model9100NXT = () => {
         "Ensures system readiness",
         "Improves confidence before cases",
       ],
-      specifications: {},
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     9: {
@@ -531,7 +523,6 @@ const Model9100NXT = () => {
         "Supports spontaneous breathing",
         "Improved patient comfort",
       ],
-      specifications: {},
       rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
     10: {
@@ -544,7 +535,6 @@ const Model9100NXT = () => {
         "Flexible anesthesia options",
         "Supports clinical preference",
       ],
-      specifications: {},
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     11: {
@@ -557,7 +547,6 @@ const Model9100NXT = () => {
         "Expiratory flow sensor",
         "Accurate volume monitoring",
       ],
-      specifications: {},
       rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
     12: {
@@ -570,7 +559,6 @@ const Model9100NXT = () => {
         "Supported spontaneous modes",
         "Clinical flexibility",
       ],
-      specifications: {},
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
   };
@@ -694,7 +682,6 @@ const Model9100NXT = () => {
       title: config.title,
       overview: config.overview,
       features: config.features,
-      specifications: config.specifications,
     });
 
     if (orbitControlsRef.current && config.rotation) {
@@ -879,7 +866,6 @@ const Model9100NXT = () => {
         title={popupData?.title}
         overview={popupData?.overview}
         features={popupData?.features}
-        specifications={popupData?.specifications}
       />
 
       <ModelInteractionPopup

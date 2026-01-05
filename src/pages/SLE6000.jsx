@@ -143,7 +143,6 @@ const VideoPopup = ({
   title,
   overview,
   features,
-  specifications,
 }) => {
   const videoRef = useRef(null);
 
@@ -359,35 +358,6 @@ const VideoPopup = ({
                       <li key={index}>{feature}</li>
                     ))}
                   </ul>
-                </div>
-              )}
-              {specifications && (
-                <div>
-                  <h3
-                    style={{
-                      margin: "0 0 8px 0",
-                      fontSize: "18px",
-                      fontWeight: "600",
-                      color: "#6022A6",
-                    }}
-                  >
-                    Technical Specifications
-                  </h3>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(2, 1fr)",
-                      gap: "10px",
-                      fontSize: "14px",
-                      color: "#000000",
-                    }}
-                  >
-                    {Object.entries(specifications).map(([key, value]) => (
-                      <div key={key}>
-                        <strong>{key}:</strong> {value}
-                      </div>
-                    ))}
-                  </div>
                 </div>
               )}
             </div>
@@ -771,7 +741,6 @@ const SLE6000 = () => {
       title: config.title,
       overview: config.overview,
       features: config.features,
-      specifications: config.specifications || null,
     });
 
     if (orbitControlsRef.current && config.rotation) {
@@ -954,7 +923,6 @@ const SLE6000 = () => {
         title={popupData?.title}
         overview={popupData?.overview}
         features={popupData?.features}
-        specifications={popupData?.specifications}
       />
 
       <ModelInteractionPopup
