@@ -143,7 +143,6 @@ import {
     title,
     overview,
     features,
-    specifications,
   }) => {
     const videoRef = useRef(null);
   
@@ -336,40 +335,11 @@ import {
                     >
                       {features.map((feature, index) => (
                         <li key={index}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {specifications && (
-                  <div>
-                    <h3
-                      style={{
-                        margin: "0 0 8px 0",
-                        fontSize: "18px",
-                        fontWeight: "600",
-                        color: "#6022A6",
-                      }}
-                    >
-                      Technical Specifications
-                    </h3>
-                    <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(2, 1fr)",
-                        gap: "10px",
-                        fontSize: "14px",
-                        color: "#000000",
-                      }}
-                    >
-                      {Object.entries(specifications).map(([key, value]) => (
-                        <div key={key}>
-                          <strong>{key}:</strong> {value}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
             </div>
           </div>
         </div>
@@ -426,11 +396,6 @@ import {
           "Lock mechanism for secure placement",
           "Optimal heat distribution",
         ],
-        specifications: {
-          "Rotation Range": "±90 degrees",
-          "Control": "Manual adjustment",
-          "Locking": "Secure lock mechanism",
-        },
         rotation: {
           azimuthal: 0,
           polar: Math.PI / 2,
@@ -447,11 +412,6 @@ import {
           "Easy mode switching",
           "Temperature monitoring",
         ],
-        specifications: {
-          "Modes": "Baby Mode, Manual Mode",
-          "Control": "Automatic or Manual",
-          "Temperature Range": "Adjustable",
-        },
         rotation: {
           azimuthal: 0,
           polar: Math.PI / 2,
@@ -468,11 +428,6 @@ import {
           "Safe radiant warmth",
           "Energy efficient operation",
         ],
-        specifications: {
-          "Heating Type": "Far-infrared Calrod",
-          "Efficiency": "High efficiency",
-          "Safety": "Radiant heat technology",
-        },
         rotation: {
           azimuthal: 0,
           polar: Math.PI / 2,
@@ -489,11 +444,6 @@ import {
           "Temperature readout",
           "Mode selection",
         ],
-        specifications: {
-          "Display": "Digital LCD",
-          "Controls": "Touch buttons",
-          "Interface": "User-friendly",
-        },
         rotation: {
           azimuthal: 0,
           polar: Math.PI / 2,
@@ -510,11 +460,6 @@ import {
           "Easy adjustment",
           "Secure positioning",
         ],
-        specifications: {
-          "Tilt Range": "±15 degrees",
-          "Control": "Manual adjustment",
-          "Mechanism": "Smooth operation",
-        },
         rotation: {
           azimuthal: -Math.PI / 2,
           polar: Math.PI / 2,
@@ -531,11 +476,6 @@ import {
           "Advanced heating element",
           "Consistent temperature",
         ],
-        specifications: {
-          "Reflector": "Specialized design",
-          "Heating Element": "Advanced technology",
-          "Distribution": "Optimized",
-        },
         rotation: {
           azimuthal: 0,
           polar: Math.PI / 2,
@@ -552,11 +492,6 @@ import {
           "Optimal warmth retention",
           "Infant protection",
         ],
-        specifications: {
-          "Design": "Walls of Warmth",
-          "Function": "Thermal protection",
-          "Benefit": "Optimal care environment",
-        },
         rotation: {
           azimuthal: Math.PI / 2,
           polar: Math.PI / 2,
@@ -573,11 +508,6 @@ import {
           "Standard feature",
           "Radiographic compatibility",
         ],
-        specifications: {
-          "Tray": "X-ray compatible",
-          "Marks": "Positioning marks",
-          "Standard": "Included as standard",
-        },
         rotation: {
           azimuthal: 0,
           polar: Math.PI / 2,
@@ -699,7 +629,6 @@ import {
         title: config.title,
         overview: config.overview,
         features: config.features,
-        specifications: config.specifications,
       });
   
       if (orbitControlsRef.current && config.rotation) {
@@ -884,7 +813,6 @@ import {
           title={popupData?.title}
           overview={popupData?.overview}
           features={popupData?.features}
-          specifications={popupData?.specifications}
         />
   
         <ModelInteractionPopup

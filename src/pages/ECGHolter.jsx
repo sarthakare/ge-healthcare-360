@@ -136,7 +136,6 @@ const VideoPopup = ({
   title,
   overview,
   features,
-  specifications,
 }) => {
   const videoRef = useRef(null);
 
@@ -333,35 +332,6 @@ const VideoPopup = ({
                   </ul>
                 </div>
               )}
-              {specifications && (
-                <div>
-                  <h3
-                    style={{
-                      margin: "0 0 8px 0",
-                      fontSize: "18px",
-                      fontWeight: "600",
-                      color: "#6022A6",
-                    }}
-                  >
-                    Technical Specifications
-                  </h3>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(2, 1fr)",
-                      gap: "10px",
-                      fontSize: "14px",
-                      color: "#000000",
-                    }}
-                  >
-                    {Object.entries(specifications).map(([key, value]) => (
-                      <div key={key}>
-                        <strong>{key}:</strong> {value}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -414,12 +384,6 @@ const ECGHolter = () => {
         "Real-time arrhythmia alerts",
         "Night-friendly low-power mode",
       ],
-      specifications: {
-        Display: "2.8\" OLED, 400 nits",
-        Refresh: "120 Hz waveform update",
-        Storage: "4 GB internal",
-        Battery: "48 hrs continuous",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
@@ -436,12 +400,6 @@ const ECGHolter = () => {
         "Cable organizer clips",
         "Moisture-sealed contacts",
       ],
-      specifications: {
-        Leads: "3 / 5 / 12 lead options",
-        Material: "Biocompatible TPU",
-        Rating: "IP54 ingress protection",
-        Connector: "Mag-lock bayonet",
-      },
       rotation: {
         azimuthal: -Math.PI / 2,
         polar: Math.PI / 2,
@@ -458,12 +416,6 @@ const ECGHolter = () => {
         "USB-C PD fast charging",
         "Integrated charge diagnostics",
       ],
-      specifications: {
-        Capacity: "5200 mAh",
-        ChargeTime: "90 minutes to 80%",
-        Interface: "USB-C / pogo pins",
-        Weight: "120 grams",
-      },
       rotation: {
         azimuthal: Math.PI,
         polar: Math.PI / 2,
@@ -585,7 +537,6 @@ const ECGHolter = () => {
       title: config.title,
       overview: config.overview,
       features: config.features,
-      specifications: config.specifications,
     });
 
     if (orbitControlsRef.current && config.rotation) {
@@ -770,7 +721,6 @@ const ECGHolter = () => {
         title={popupData?.title}
         overview={popupData?.overview}
         features={popupData?.features}
-        specifications={popupData?.specifications}
       />
 
       <ModelInteractionPopup

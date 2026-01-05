@@ -143,7 +143,6 @@ const VideoPopup = ({
   title,
   overview,
   features,
-  specifications,
 }) => {
   const videoRef = useRef(null);
 
@@ -349,36 +348,6 @@ const VideoPopup = ({
                   </ul>
                 </div>
               )}
-
-              {specifications && (
-                <div>
-                  <h3
-                    style={{
-                      margin: "0 0 8px 0",
-                      fontSize: "18px",
-                      fontWeight: "600",
-                      color: "#6022A6",
-                    }}
-                  >
-                    Technical Specifications
-                  </h3>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(2, 1fr)",
-                      gap: "10px",
-                      fontSize: "14px",
-                      color: "#000000",
-                    }}
-                  >
-                    {Object.entries(specifications).map(([key, value]) => (
-                      <div key={key}>
-                        <strong>{key}:</strong> {value}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -436,12 +405,6 @@ const GiraffeOmnibedCarestation = () => {
         "Integrated checklists for rapid case setup",
         "Multi-language support with glove-friendly sensitivity",
       ],
-      specifications: {
-        Display: '15" IPS 1080p',
-        Brightness: "700 nits",
-        Connectivity: "Dual Gigabit Ethernet",
-        Storage: "256 GB SSD",
-      },
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     2: {
@@ -455,12 +418,6 @@ const GiraffeOmnibedCarestation = () => {
         "Integrated flow and pressure monitoring",
         "Color-coded pathways for quick troubleshooting",
       ],
-      specifications: {
-        Compliance: "1.5 ml/mbar",
-        Resistance: "< 1.4 cmH₂O at 60 L/min",
-        "CO₂ Absorber": "2 kg capacity",
-        "Fresh Gas Range": "0.2 – 15 L/min",
-      },
       rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
     3: {
@@ -474,12 +431,6 @@ const GiraffeOmnibedCarestation = () => {
         "Interlock prevents simultaneous activation",
         "LED indicators for fill level and status",
       ],
-      specifications: {
-        "Agent Capacity": "410 ml per vaporizer",
-        Accuracy: "±2% of set value",
-        "Refill Time": "< 30 seconds",
-        "Warm-up": "< 2 minutes",
-      },
       rotation: { azimuthal: Math.PI / 2, polar: Math.PI / 2 },
     },
     4: {
@@ -493,12 +444,6 @@ const GiraffeOmnibedCarestation = () => {
         "Dedicated quick-set knobs for tidal volume & rate",
         "Programmable soft keys for custom workflows",
       ],
-      specifications: {
-        "Encoder Resolution": "1° per step",
-        "Button Life": "5 million actuations",
-        "Emergency O₂ Flush": "75 L/min",
-        "System Latency": "< 40 ms",
-      },
       rotation: { azimuthal: -Math.PI, polar: Math.PI / 2 },
     },
   };
@@ -622,7 +567,6 @@ const GiraffeOmnibedCarestation = () => {
       title: config.title,
       overview: config.overview,
       features: config.features,
-      specifications: config.specifications,
     });
 
     if (orbitControlsRef.current && config.rotation) {
@@ -807,7 +751,6 @@ const GiraffeOmnibedCarestation = () => {
         title={popupData?.title}
         overview={popupData?.overview}
         features={popupData?.features}
-        specifications={popupData?.specifications}
       />
 
       <ModelInteractionPopup

@@ -154,7 +154,6 @@ const VideoPopup = ({
   title,
   overview,
   features,
-  specifications,
 }) => {
   const videoRef = useRef(null);
 
@@ -360,36 +359,6 @@ const VideoPopup = ({
                   </ul>
                 </div>
               )}
-
-              {specifications && (
-                <div>
-                  <h3
-                    style={{
-                      margin: "0 0 8px 0",
-                      fontSize: "18px",
-                      fontWeight: "600",
-                      color: "#6022A6",
-                    }}
-                  >
-                    Technical Specifications
-                  </h3>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(2, 1fr)",
-                      gap: "10px",
-                      fontSize: "14px",
-                      color: "#000000",
-                    }}
-                  >
-                    {Object.entries(specifications).map(([key, value]) => (
-                      <div key={key}>
-                        <strong>{key}:</strong> {value}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -456,12 +425,6 @@ const CS750 = () => {
         "Lung-protective ventilation strategies",
         "Real-time mode switching without interruption",
       ],
-      specifications: {
-        "Modes Available": "Volume, Pressure, SIMV, CPAP",
-        "Tidal Volume Range": "50-2000 ml",
-        "Respiratory Rate": "5-150 bpm",
-        "Pressure Support": "0-60 cmH₂O",
-      },
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     2: {
@@ -475,12 +438,6 @@ const CS750 = () => {
         "Real-time flow monitoring",
         "Automatic flow adjustment",
       ],
-      specifications: {
-        "Flow Range": "0.2-15 L/min",
-        "FiO2 Range": "21-100%",
-        "Accuracy": "±2% of set value",
-        "Response Time": "< 1 second",
-      },
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     3: {
@@ -494,12 +451,6 @@ const CS750 = () => {
         "Automatic flow adjustment based on patient needs",
         "Real-time consumption monitoring",
       ],
-      specifications: {
-        "Flow Range": "0.2-15 L/min",
-        "Savings": "Up to 50% agent reduction",
-        "Response Time": "< 2 seconds",
-        "Accuracy": "±5% of set value",
-      },
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     4: {
@@ -513,12 +464,6 @@ const CS750 = () => {
         "Quick profile switching",
         "Profile sharing across workstations",
       ],
-      specifications: {
-        "Profile Storage": "Unlimited custom profiles",
-        "Quick Access": "One-touch profile selection",
-        "Export/Import": "USB and network support",
-        "Categories": "Surgical, ICU, Pediatric, Neonatal",
-      },
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     5: {
@@ -532,12 +477,6 @@ const CS750 = () => {
         "PEEP titration guidance",
         "Pressure-volume loop monitoring",
       ],
-      specifications: {
-        "Recruitment Pressure": "Up to 60 cmH₂O",
-        "Hold Time": "Adjustable 0-60 seconds",
-        "PEEP Range": "0-30 cmH₂O",
-        "Monitoring": "Real-time compliance curves",
-      },
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     6: {
@@ -551,12 +490,6 @@ const CS750 = () => {
         "Comprehensive gas monitoring",
         "Integrated capnography",
       ],
-      specifications: {
-        "Monitoring": "Full ICU parameter set",
-        "Alarm System": "Multi-level priority alarms",
-        "Data Logging": "Continuous 24-hour recording",
-        "Connectivity": "HL7 and network integration",
-      },
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     7: {
@@ -570,12 +503,6 @@ const CS750 = () => {
         "Quick-connect components",
         "Integrated safety features",
       ],
-      specifications: {
-        "Dead Space": "< 50 ml",
-        "Compliance": "1.5 ml/mbar",
-        "Setup Time": "< 2 minutes",
-        "Weight": "Lightweight design",
-      },
       rotation: { azimuthal: -Math.PI / 3, polar: Math.PI / 2 },
     },
     8: {
@@ -589,12 +516,6 @@ const CS750 = () => {
         "Shadow-free illumination",
         "Energy-efficient LED technology",
       ],
-      specifications: {
-        "Brightness": "Adjustable 0-100%",
-        "Color Temperature": "3000-6500K",
-        "Coverage": "Wide-angle illumination",
-        "Power Consumption": "Low energy LED",
-      },
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     9: {
@@ -608,12 +529,6 @@ const CS750 = () => {
         "Precise agent delivery",
         "Real-time agent monitoring",
       ],
-      specifications: {
-        "Agents Supported": "Sevoflurane, Isoflurane, Desflurane",
-        "Delivery Accuracy": "±2% of set value",
-        "Agent Capacity": "410 ml per vaporizer",
-        "Monitoring": "Real-time agent concentration",
-      },
       rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
     10: {
@@ -627,12 +542,6 @@ const CS750 = () => {
         "Component verification",
         "Checkout report generation",
       ],
-      specifications: {
-        "Checkout Time": "< 3 minutes",
-        "Tests Performed": "20+ system checks",
-        "Report Format": "Digital and print",
-        "Compliance": "Meets regulatory standards",
-      },
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     11: {
@@ -646,12 +555,6 @@ const CS750 = () => {
         "Strain relief protection",
         "Easy access for maintenance",
       ],
-      specifications: {
-        "Cable Capacity": "Multiple cable support",
-        "Organization": "Color-coded routing",
-        "Access": "Tool-free access",
-        "Protection": "Strain relief built-in",
-      },
       rotation: { azimuthal: Math.PI /1.5, polar: Math.PI / 2 },
     },
     12: {
@@ -665,12 +568,6 @@ const CS750 = () => {
         "Locking mechanisms",
         "Smooth positioning",
       ],
-      specifications: {
-        "Range of Motion": "360° rotation",
-        "Load Capacity": "Up to 15 kg",
-        "Locking": "Multiple position locks",
-        "Materials": "Premium construction",
-      },
       rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
   };
@@ -794,7 +691,6 @@ const CS750 = () => {
       title: config.title,
       overview: config.overview,
       features: config.features,
-      specifications: config.specifications,
     });
 
     if (orbitControlsRef.current && config.rotation) {
@@ -979,7 +875,6 @@ const CS750 = () => {
         title={popupData?.title}
         overview={popupData?.overview}
         features={popupData?.features}
-        specifications={popupData?.specifications}
       />
 
       <ModelInteractionPopup

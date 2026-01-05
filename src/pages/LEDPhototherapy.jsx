@@ -142,7 +142,6 @@ const VideoPopup = ({
   title,
   overview,
   features,
-  specifications,
 }) => {
   const videoRef = useRef(null);
 
@@ -339,35 +338,6 @@ const VideoPopup = ({
                   </ul>
                 </div>
               )}
-              {specifications && (
-                <div>
-                  <h3
-                    style={{
-                      margin: "0 0 8px 0",
-                      fontSize: "18px",
-                      fontWeight: "600",
-                      color: "#6022A6",
-                    }}
-                  >
-                    Technical Specifications
-                  </h3>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(2, 1fr)",
-                      gap: "10px",
-                      fontSize: "14px",
-                      color: "#000000",
-                    }}
-                  >
-                    {Object.entries(specifications).map(([key, value]) => (
-                      <div key={key}>
-                        <strong>{key}:</strong> {value}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -424,12 +394,6 @@ const LEDPhototherapy = () => {
         "Long-lasting performance",
         "Energy-efficient design",
       ],
-      specifications: {
-        LEDs: "10 units",
-        Configuration: "Optimized array",
-        Performance: "High efficiency",
-        Design: "Advanced layout",
-      },
       rotation: {
         azimuthal: 0,
         polar: Math.PI / 2,
@@ -446,12 +410,6 @@ const LEDPhototherapy = () => {
         "Flexible power control",
         "Precise irradiance management",
       ],
-      specifications: {
-        Power1: "22 µW",
-        Power2: "45 µW",
-        Control: "Dual settings",
-        Precision: "Accurate output",
-      },
       rotation: {
         azimuthal: -Math.PI / 2,
         polar: Math.PI / 2,
@@ -468,12 +426,6 @@ const LEDPhototherapy = () => {
         "Precise wavelength control",
         "Effective treatment spectrum",
       ],
-      specifications: {
-        Wavelength: "458 nm",
-        Spectrum: "Narrow-band",
-        Effectiveness: "Optimized",
-        Control: "Precise tuning",
-      },
       rotation: {
         azimuthal: Math.PI / 2,
         polar: Math.PI / 2,
@@ -490,12 +442,6 @@ const LEDPhototherapy = () => {
         "Uniform ±10% irradiance across mattress",
         "50,000-hour LED lifespan",
       ],
-      specifications: {
-        Irradiance: "45 µW/cm²/nm",
-        Dimming: "5-step digital control",
-        Coverage: "40 × 60 cm",
-        HeatOutput: "< 2 °C surface rise",
-      },
       rotation: {
         azimuthal: Math.PI,
         polar: Math.PI / 2,
@@ -512,12 +458,6 @@ const LEDPhototherapy = () => {
         "Locking knob for transport",
         "Cable routing inside column",
       ],
-      specifications: {
-        Range: "30 cm vertical travel",
-        Mechanism: "Gas spring assist",
-        Locking: "Quarter-turn clamp",
-        Materials: "Anodized aluminum",
-      },
       rotation: {
         azimuthal: -Math.PI / 4,
         polar: Math.PI / 2,
@@ -534,12 +474,6 @@ const LEDPhototherapy = () => {
         "Irradiance status bar",
         "Data-ready USB interface",
       ],
-      specifications: {
-        Interface: "Capacitive touch",
-        Timer: "0–24 hr dual timer",
-        Alerts: "Audio + visual",
-        Connectivity: "USB-A / service port",
-      },
       rotation: {
         azimuthal: Math.PI / 4,
         polar: Math.PI / 2,
@@ -556,12 +490,6 @@ const LEDPhototherapy = () => {
         "360° locking castors",
         "Accessory rail integration",
       ],
-      specifications: {
-        LoadCapacity: "25 kg",
-        Mobility: "4× dual-wheel castors",
-        Finish: "Antimicrobial coating",
-        Accessories: "Rail + IV pole mounts",
-      },
       rotation: {
         azimuthal: Math.PI,
         polar: Math.PI / 2,
@@ -686,7 +614,6 @@ const LEDPhototherapy = () => {
       title: config.title,
       overview: config.overview,
       features: config.features,
-      specifications: config.specifications,
     });
 
     if (orbitControlsRef.current && config.rotation) {
@@ -871,7 +798,6 @@ const LEDPhototherapy = () => {
         title={popupData?.title}
         overview={popupData?.overview}
         features={popupData?.features}
-        specifications={popupData?.specifications}
       />
 
       <ModelInteractionPopup
