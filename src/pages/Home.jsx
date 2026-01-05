@@ -555,8 +555,9 @@ const Home = () => {
           className="main-content"
           style={{ 
             position: "relative",
-            maxWidth: "1400px",
-            margin: "0 auto", 
+            width: "100vw",
+            marginLeft: "calc(-50vw + 50%)",
+            marginRight: "calc(-50vw + 50%)",
           }}
         >
           <div
@@ -567,9 +568,9 @@ const Home = () => {
               backgroundSize: "auto, auto",
               backgroundColor: "#6022A6",
               marginBottom: isMobile ? "30px" : "40px",
-              maxWidth: "1400px",
-              marginLeft: "auto",
-              marginRight: "auto",
+              width: "100vw",
+              marginLeft: "calc(-50vw + 50%)",
+              marginRight: "calc(-50vw + 50%)",
               padding: isMobile ? "45px 15px" : "63px 27px",
               position: "relative",
             }}
