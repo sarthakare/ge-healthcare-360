@@ -402,13 +402,13 @@ const VideoPopup = ({
   };
 
   const hotspots = [
-    { id: 1, name: "Introduction to MAC 5", position: [1.75, 0.5, 0.5] },
+    // { id: 1, name: "Introduction to MAC 5", position: [1.75, 0.5, 0.5] },
     { id: 2, name: "Auto ECG Function", position: [2, -0.25, 0.75] },
     { id: 3, name: "Smart Lead Technology", position: [2, 0, -0.75] },
     { id: 4, name: "Enhanced Hook-Up Advisor", position: [2.5, -0.25, 0.75] },
     { id: 5, name: "Advanced ECG Filtering", position: [1.25, -0.25, 0.75] },
     { id: 6, name: "Critical Values Highlighting", position: [0.75, -0.25, 0.75] },
-    { id: 7, name: "High-Definition Pacemaker Detection", position: [1, -0.5, 0.5] },
+    // { id: 7, name: "High-Definition Pacemaker Detection", position: [1, -0.5, 0.5] },
     { id: 8, name: "Marquette™ 12SL Analysis Program", position: [1, 0, -0.75] },
     { id: 9, name: "Internal ECG Storage", position: [2.5, 0, 0] },
     { id: 10, name: "PDF & XML Data Transfer", position: [2.45, 0, -1.5] },

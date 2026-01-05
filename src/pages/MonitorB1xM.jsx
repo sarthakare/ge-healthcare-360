@@ -399,18 +399,18 @@ const MonitorB1xM = () => {
   };
 
   const hotspots = [
-    {
-      id: 1,
-      name: "Introduction to B1x5M Patient Monitors",
-      position: [-1.25, 1, 1.5],
-    },
+    // {
+    //   id: 1,
+    //   name: "Introduction to B1x5M Patient Monitors",
+    //   position: [-1.25, 1, 1.5],
+    // },
     {
       id: 2,
       name: "Scalable Across Care Areas",
       position: [-1.25, -0.15, 1.5],
     },
     { id: 3, name: "Intuitive User Experience", position: [-2.25, -0.15, 1.5] },
-    { id: 4, name: "Modular & Scalable Platform", position: [-2.25, 1, 1.5] },
+    // { id: 4, name: "Modular & Scalable Platform", position: [-2.25, 1, 1.5] },
     { id: 5, name: "DINAMAP™ Blood Pressure", position: [-0.25, 1, 1.5] },
     {
       id: 6,
