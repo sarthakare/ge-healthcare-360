@@ -854,6 +854,25 @@ const LEDPhototherapy = () => {
             filter: drop-shadow(0 0 15px rgba(65, 23, 113, 0.9));
           }
         }
+        .hotspot-menu-scroll {
+          scrollbar-width: thin;
+          scrollbar-color: #F37F63 rgba(255, 255, 255, 0.2);
+        }
+        .hotspot-menu-scroll::-webkit-scrollbar {
+          width: 10px;
+        }
+        .hotspot-menu-scroll::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.08);
+          border-radius: 10px;
+        }
+        .hotspot-menu-scroll::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg, #F37F63 0%, #6022A6 100%);
+          border-radius: 10px;
+          border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .hotspot-menu-scroll::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(180deg, #ff987f 0%, #7a35c4 100%);
+        }
       `}</style>
 
       <div
@@ -891,10 +910,14 @@ const LEDPhototherapy = () => {
         </button>
         {hotspotMenuOpen && (
           <div
+            className="hotspot-menu-scroll"
             style={{
               marginBottom: "-9px",
               minWidth: "240px",
               overflow: "hidden",
+              maxHeight: "60vh",
+              overflowY: "auto",
+              overscrollBehavior: "contain",
               display: "flex",
               flexDirection: "column",
               borderWidth: "2px",
