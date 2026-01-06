@@ -15,8 +15,7 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import MAC5Model from "../assets/mac-5/model/MAC 5.glb";
-// Video 1: Introduction to MAC 5 (placeholder - video file needs to be added)
-// import MAC5Video1 from "../assets/mac-5/videos/Mac_5_Introduction.mp4";
+import MAC5Video1 from "../assets/mac-5/videos/Mac_5_Introduction.mp4";
 import MAC5Video2 from "../assets/mac-5/videos/Mac_5_Autoecg_Function.mp4";
 import MAC5Video3 from "../assets/mac-5/videos/Mac_5_Smart_Lead_Technology.mp4";
 import MAC5Video4 from "../assets/mac-5/videos/Mac_5_Enhanced_Hook_Up_Advisor.mp4";
@@ -402,7 +401,7 @@ const VideoPopup = ({
   };
 
   const hotspots = [
-    // { id: 1, name: "Introduction to MAC 5", position: [1.75, 0.5, 0.5] },
+    { id: 1, name: "Introduction to MAC 5", position: [1.75, 0.5, 0.5] },
     { id: 2, name: "Auto ECG Function", position: [2, -0.25, 0.75] },
     { id: 3, name: "Smart Lead Technology", position: [2, 0, -0.75] },
     { id: 4, name: "Enhanced Hook-Up Advisor", position: [2.5, -0.25, 0.75] },
@@ -419,7 +418,7 @@ const VideoPopup = ({
 
   const hotspotsConfig = {
     1: {
-      videoSrc: null, // Placeholder - video file needs to be added: Mac_5_Introduction.mp4
+      videoSrc: MAC5Video1,
       title: "Introduction to MAC 5",
       overview:
         "The MAC 5 is a modern resting ECG system designed to simplify ECG acquisition while delivering high clinical accuracy in fast-paced care environments.",
