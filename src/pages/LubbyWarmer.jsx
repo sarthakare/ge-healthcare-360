@@ -15,14 +15,19 @@ import {
   } from "@react-three/drei";
   import * as THREE from "three";
   import WarmerModel from "../assets/lubby-warmer/model/Lullaby Warmer.glb";
-  import VideoHeaterHeadRotation from "../assets/lubby-warmer/videos/±90 Heater Head Rotation.mp4";
-  import VideoBabyModeManualMode from "../assets/lubby-warmer/videos/Baby Mode and Manual Mode.mp4";
-  import VideoCalrodFarInfraredHeater from "../assets/lubby-warmer/videos/Calrod Far-Infrared Heater.mp4";
-  import VideoIntuitiveControlPanel from "../assets/lubby-warmer/videos/Intuitive Control Panel.mp4";
-  import VideoSmoothBedTilting from "../assets/lubby-warmer/videos/Smooth bed tilting of ±15.mp4";
-  import VideoSpecializedReflectorHeating from "../assets/lubby-warmer/videos/Specialized Reflector & Heating Element.mp4";
-  import VideoWallsOfWarmth from "../assets/lubby-warmer/videos/Walls of Warmth.mp4";
-  import VideoXrayTray from "../assets/lubby-warmer/videos/X-ray tray with marks as a standard-.mp4";
+  import VideoOpening from "../assets/lubby-warmer/videos/Opening.mp4";
+  import VideoRapidUniformHeating from "../assets/lubby-warmer/videos/Rapid, Uniform Heating with Calrod Heater.mp4";
+  import VideoFarInfraredHeat from "../assets/lubby-warmer/videos/Far-Infrared Heat for Infant Safety.mp4";
+  import VideoWallsOfWarmth from "../assets/lubby-warmer/videos/Walls of Warmth\u2019 Technology.mp4";
+  import VideoHighIrradiance from "../assets/lubby-warmer/videos/High Irradiance at Lower Wattage.mp4";
+  import VideoPreciseHeatingControl from "../assets/lubby-warmer/videos/Precise Heating Control.mp4";
+  import VideoHeaterHeadRotation from "../assets/lubby-warmer/videos/90° Rotating Heater Head with Auto Shut-Off.mp4";
+  import VideoBioCompatiblePanels from "../assets/lubby-warmer/videos/Bio-Compatible Side Panels & Thermal Mattress.mp4";
+  import VideoBuiltForReliability from "../assets/lubby-warmer/videos/Built for Reliability & Longevity.mp4";
+  import VideoClearDisplay from "../assets/lubby-warmer/videos/Clear Display & Visual Alerts.mp4";
+  import VideoSmoothBedTilt from "../assets/lubby-warmer/videos/Smooth Bed Tilt for Clinical Flexibility.mp4";
+  import VideoXrayTray from "../assets/lubby-warmer/videos/In-Built X-Ray Tray-.mp4";
+  import VideoGlobalSafety from "../assets/lubby-warmer/videos/Global Safety & Quality Certifications.mp4";
   import ModelInteractionPopup from "../components/ModelInteractionPopup";
   
   const Model = ({ glbPath, onLoad }) => {
@@ -243,30 +248,32 @@ import {
               gap: "20px",
             }}
           >
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <video
-                ref={videoRef}
-                src={videoSrc}
-                controls
-                autoPlay
+            {videoSrc && (
+              <div
                 style={{
                   width: "100%",
-                  maxWidth: "500px",
-                  height: "auto",
-                  maxHeight: "300px",
-                  borderRadius: "8px",
-                  outline: "none",
+                  display: "flex",
+                  justifyContent: "center",
                 }}
               >
-                Your browser does not support the video tag.
-              </video>
-            </div>
+                <video
+                  ref={videoRef}
+                  src={videoSrc}
+                  controls
+                  autoPlay
+                  style={{
+                    width: "100%",
+                    maxWidth: "500px",
+                    height: "auto",
+                    maxHeight: "300px",
+                    borderRadius: "8px",
+                    outline: "none",
+                  }}
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            )}
             <div style={{ color: "#000000" }}>
               <h2
                 style={{
@@ -374,144 +381,177 @@ import {
     };
   
     const hotspots = [
-      { id: 1, name: "±90 Heater Head Rotation", position: [0, 1.65, -0.7] },
-      { id: 2, name: "Baby Mode and Manual Mode", position: [0, 0.75, -0.7] },
-      { id: 3, name: "Calrod Far-Infrared Heater", position: [0, 1.75, 0.6] },
-      { id: 4, name: "Intuitive Control Panel", position: [0, 1, -0.7] },
-      { id: 5, name: "Smooth Bed Tilting ±15°", position: [-0.5, -1, 0.1] },
-      { id: 6, name: "Specialized Reflector & Heating Element", position: [0, 0, 0] },
-      { id: 7, name: "Walls of Warmth", position: [0.5, -0.25, 0] },
-      { id: 8, name: "X-ray Tray with Marks", position: [0, -0.5, 0.8] },
+      { id: 1, name: "Opening", position: [0, 0, 0] },
+      { id: 2, name: "Rapid, Uniform Heating with Calrod Heater", position: [0, 1.8, 0] },
+      { id: 3, name: "Far-Infrared Heat for Infant Safety", position: [0, 1.8, 0.5] },
+      { id: 4, name: "Walls of Warmth Technology", position: [0, 0, 0] },
+      { id: 5, name: "High Irradiance at Lower Wattage", position: [0, 0, 0] },
+      { id: 6, name: "Precise Heating Control", position: [0, 0, 0] },
+      { id: 7, name: "90° Rotating Heater Head with Auto Shut-Off", position: [0, 0, 0] },
+      { id: 8, name: "Bio-Compatible Side Panels & Thermal Mattress", position: [0, 0, 0] },
+      { id: 9, name: "Built for Reliability & Longevity", position: [0, 0, 0] },
+      { id: 10, name: "Clear Display & Visual Alerts", position: [0, 0, 0] },
+      { id: 11, name: "Smooth Bed Tilt for Clinical Flexibility", position: [0, 0, 0] },
+      { id: 12, name: "In-Built X-Ray Tray", position: [0, 0, 0] },
+      { id: 13, name: "Global Safety & Quality Certifications", position: [0, 0, 0] },
     ];
   
+    const defaultRotation = { azimuthal: 0, polar: Math.PI / 2 };
     const hotspotsConfig = {
       1: {
-        videoSrc: VideoHeaterHeadRotation,
-        title: "±90 Heater Head Rotation",
+        videoSrc: VideoOpening,
+        title: "Opening",
         overview:
-          "The heater head can rotate up to ±90 degrees, providing flexible positioning to ensure optimal warmth distribution for the infant.",
+          "As you explore the Lullaby Warmer, you'll notice how every design choice is focused on delivering fast, gentle, and controlled thermal care — while keeping safety and workflow at the center.",
         features: [
-          "Smooth ±90 degree rotation range",
-          "Easy positioning adjustment",
-          "Lock mechanism for secure placement",
-          "Optimal heat distribution",
+          "Fast, gentle, controlled thermal care",
+          "Safety and workflow at the center",
         ],
-        rotation: {
-          azimuthal: 0,
-          polar: Math.PI / 2,
-        },
+        rotation: defaultRotation,
       },
       2: {
-        videoSrc: VideoBabyModeManualMode,
-        title: "Baby Mode and Manual Mode",
+        videoSrc: VideoRapidUniformHeating,
+        title: "Rapid, Uniform Heating with Calrod Heater",
         overview:
-          "Dual operating modes provide flexibility: Baby Mode for automatic temperature control and Manual Mode for precise clinician control.",
+          "The Calrod heater ensures uniform heat distribution and makes the bed ready within just 240 seconds — helping you respond quickly in critical moments.",
         features: [
-          "Automatic Baby Mode operation",
-          "Manual Mode for precise control",
-          "Easy mode switching",
-          "Temperature monitoring",
+          "Uniform heat distribution",
+          "Bed ready in 240 seconds",
+          "Quick response in critical moments",
         ],
-        rotation: {
-          azimuthal: 0,
-          polar: Math.PI / 2,
-        },
+        rotation: defaultRotation,
       },
       3: {
-        videoSrc: VideoCalrodFarInfraredHeater,
-        title: "Calrod Far-Infrared Heater",
+        videoSrc: VideoFarInfraredHeat,
+        title: "Far-Infrared Heat for Infant Safety",
         overview:
-          "Advanced Calrod far-infrared heating technology provides efficient and safe radiant warmth for neonatal care.",
+          "The Calrod heater uses far-infrared rays that are easily absorbed by the cornea, reducing the risk of retinal damage and supporting safer thermal therapy.",
         features: [
-          "Far-infrared heating technology",
-          "Efficient heat transfer",
-          "Safe radiant warmth",
-          "Energy efficient operation",
+          "Far-infrared rays",
+          "Reduced risk of retinal damage",
+          "Safer thermal therapy",
         ],
-        rotation: {
-          azimuthal: 0,
-          polar: Math.PI / 2,
-        },
+        rotation: defaultRotation,
       },
       4: {
-        videoSrc: VideoIntuitiveControlPanel,
-        title: "Intuitive Control Panel",
+        videoSrc: VideoWallsOfWarmth,
+        title: "Walls of Warmth Technology",
         overview:
-          "User-friendly control panel with clear displays and easy-to-use controls for temperature and mode management.",
+          "You'll see GE's unique Walls of Warmth technology with three distinct heating zones — designed to minimize conductive heat loss and maintain thermal stability.",
         features: [
-          "Clear digital display",
-          "Intuitive button controls",
-          "Temperature readout",
-          "Mode selection",
+          "Three distinct heating zones",
+          "Minimize conductive heat loss",
+          "Maintain thermal stability",
         ],
-        rotation: {
-          azimuthal: 0,
-          polar: Math.PI / 2,
-        },
+        rotation: defaultRotation,
       },
       5: {
-        videoSrc: VideoSmoothBedTilting,
-        title: "Smooth Bed Tilting ±15°",
+        videoSrc: VideoHighIrradiance,
+        title: "High Irradiance at Lower Wattage",
         overview:
-          "The bed can be smoothly tilted up to ±15 degrees to facilitate various clinical procedures and patient positioning.",
+          "A specially designed reflector and heating element allow the warmer to operate at just 540 watts, while achieving high irradiance of 26 µW/cm² — helping reduce insensible water loss and support better clinical outcomes.",
         features: [
-          "±15 degree tilting range",
-          "Smooth tilting mechanism",
-          "Easy adjustment",
-          "Secure positioning",
+          "540 watts operation",
+          "High irradiance 26 µW/cm²",
+          "Reduces insensible water loss",
         ],
-        rotation: {
-          azimuthal: -Math.PI / 2,
-          polar: Math.PI / 2,
-        },
+        rotation: defaultRotation,
       },
       6: {
-        videoSrc: VideoSpecializedReflectorHeating,
-        title: "Specialized Reflector & Heating Element",
+        videoSrc: VideoPreciseHeatingControl,
+        title: "Precise Heating Control",
         overview:
-          "Specialized reflector design optimizes heat distribution while the advanced heating element ensures consistent warmth.",
+          "You can fine-tune thermal support with precise heater power adjustments in 5% increments — giving you greater control over infant temperature management.",
         features: [
-          "Optimized reflector design",
-          "Efficient heat distribution",
-          "Advanced heating element",
-          "Consistent temperature",
+          "Heater power in 5% increments",
+          "Baby Mode and Manual Mode",
+          "Greater control over infant temperature",
         ],
-        rotation: {
-          azimuthal: 0,
-          polar: Math.PI / 2,
-        },
+        rotation: defaultRotation,
       },
       7: {
-        videoSrc: VideoWallsOfWarmth,
-        title: "Walls of Warmth",
+        videoSrc: VideoHeaterHeadRotation,
+        title: "90° Rotating Heater Head with Auto Shut-Off",
         overview:
-          "The innovative Walls of Warmth design creates a protective thermal environment around the infant for optimal care.",
+          "The heater head rotates 90 degrees on either side to facilitate X-ray procedures, and automatically shuts off when rotated — adding an important layer of safety.",
         features: [
-          "Protective thermal environment",
-          "Innovative design",
-          "Optimal warmth retention",
-          "Infant protection",
+          "±90° rotation for X-ray access",
+          "Auto shut-off when rotated",
+          "Enhanced safety",
         ],
-        rotation: {
-          azimuthal: Math.PI / 2,
-          polar: Math.PI / 2,
-        },
+        rotation: defaultRotation,
       },
       8: {
-        videoSrc: VideoXrayTray,
-        title: "X-ray Tray with Marks",
+        videoSrc: VideoBioCompatiblePanels,
+        title: "Bio-Compatible Side Panels & Thermal Mattress",
         overview:
-          "Integrated X-ray tray with positioning marks as standard, facilitating radiographic procedures without moving the infant.",
+          "Durable, bio-compatible foldable side panels and a thermal seal-locked mattress help retain warmth while ensuring infant comfort and protection.",
+        features: [
+          "Bio-compatible foldable side panels",
+          "Thermal seal-locked mattress",
+          "Infant comfort and protection",
+        ],
+        rotation: defaultRotation,
+      },
+      9: {
+        videoSrc: VideoBuiltForReliability,
+        title: "Built for Reliability & Longevity",
+        overview:
+          "With lower wattage operation, rugged temperature probes, and a Calrod heater backed by a 7-year lifetime warranty, the Lullaby Warmer is built for long-term performance.",
+        features: [
+          "Lower wattage operation",
+          "Rugged temperature probes",
+          "7-year lifetime warranty",
+        ],
+        rotation: defaultRotation,
+      },
+      10: {
+        videoSrc: VideoClearDisplay,
+        title: "Clear Display & Visual Alerts",
+        overview:
+          "A large display, color-coded alarms, visually coded controls, and well-positioned lights help you quickly interpret system status — even in busy care environments.",
+        features: [
+          "Large display",
+          "Color-coded alarms",
+          "Well-positioned lights for quick status",
+        ],
+        rotation: defaultRotation,
+      },
+      11: {
+        videoSrc: VideoSmoothBedTilt,
+        title: "Smooth Bed Tilt for Clinical Flexibility",
+        overview:
+          "The bed tilts smoothly up to ±15 degrees, allowing you to position the infant comfortably while supporting a wide range of clinical procedures.",
+        features: [
+          "±15° smooth tilt",
+          "Comfortable infant positioning",
+          "Wide range of clinical procedures",
+        ],
+        rotation: defaultRotation,
+      },
+      12: {
+        videoSrc: VideoXrayTray,
+        title: "In-Built X-Ray Tray",
+        overview:
+          "With the integrated X-ray tray, imaging can be performed without moving the baby — reducing handling and maintaining thermal stability.",
         features: [
           "Integrated X-ray tray",
-          "Positioning marks included",
-          "Standard feature",
-          "Radiographic compatibility",
+          "Imaging without moving the baby",
+          "Maintains thermal stability",
         ],
-        rotation: {
-          azimuthal: 0,
-          polar: Math.PI / 2,
-        },
+        rotation: defaultRotation,
+      },
+      13: {
+        videoSrc: VideoGlobalSafety,
+        title: "Global Safety & Quality Certifications",
+        overview:
+          "The Lullaby Warmer is US FDA and CE approved, meeting international standards for safety, quality, and performance.",
+        features: [
+          "US FDA approved",
+          "CE approved",
+          "International safety and quality standards",
+        ],
+        rotation: defaultRotation,
       },
     };
   

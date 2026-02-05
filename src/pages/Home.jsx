@@ -67,7 +67,7 @@ const Home = () => {
           name: "Lullaby Warmer – Infant warming system",
           path: "/lullaby-warmer",
           image: ImageWarmer,
-          intro: "Interact with the Lullaby Warmer and see how its simple controls and stable thermal environment support safer newborn care.",
+          intro: "As you explore the Lullaby Warmer, you'll notice how every design choice is focused on delivering fast, gentle, and controlled thermal care — while keeping safety and workflow at the center.",
         },
         {
           name: "Giraffe OmniBed Carestation – Incubator + warmer integrated neonatal carestation",
@@ -79,7 +79,7 @@ const Home = () => {
           name: "LED Phototherapy - Neonatal jaundice treatment system",
           path: "/led-phototherapy",
           image: ImageLEDPhototherapy,
-          intro: "Explore the Lullaby™ LED Phototherapy system in 3D and see how high-intensity, targeted LED light is delivered efficiently to treat neonatal jaundice. Designed for quiet operation, consistent irradiance and long LED life, the system supports faster bilirubin reduction while ensuring infant comfort and caregiver convenience in NICU and well-baby care settings.",
+          intro: "LED Phototherapy is designed to deliver effective and gentle treatment for neonatal jaundice. Using clinically optimized LED light technology, it supports safe bilirubin reduction while ensuring comfort and stability for newborns.",
         },
       ],
     },

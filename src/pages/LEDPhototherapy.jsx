@@ -15,13 +15,16 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import LEDPhototherapyModel from "../assets/led-phototherapy/model/LED Phototherapy.glb";
-import LEDPhototherapyVideo1 from "../assets/led-phototherapy/videos/10 LED.mp4";
-import LEDPhototherapyVideo2 from "../assets/led-phototherapy/videos/22 and 45 microwat.mp4";
-import LEDPhototherapyVideo3 from "../assets/led-phototherapy/videos/Optimal wavelength of 458 NM.mp4";
-import LEDPhototherapyVideo4 from "../assets/led-phototherapy/videos/4.mp4";
-import LEDPhototherapyVideo5 from "../assets/led-phototherapy/videos/5.mp4";
-import LEDPhototherapyVideo6 from "../assets/led-phototherapy/videos/6.mp4";
-import LEDPhototherapyVideo7 from "../assets/led-phototherapy/videos/7.mp4";
+import VideoIntroduction from "../assets/led-phototherapy/videos/Introduction To Led Phototherapy.mp4";
+import VideoOptimalWavelength from "../assets/led-phototherapy/videos/Optimal Therapeutic Wavelength.mp4";
+import VideoFasterBilirubin from "../assets/led-phototherapy/videos/Faster Bilirubin Breakdown 10 Led\u2019S.mp4";
+import VideoDualIrradiance from "../assets/led-phototherapy/videos/Dual Irradiance Levels 22 And 45 Microwat.mp4";
+import VideoUniformLight from "../assets/led-phototherapy/videos/Uniform Light Distribution.mp4";
+import VideoEasyManeuverability from "../assets/led-phototherapy/videos/Easy Maneuverability & Flexible Design.mp4";
+import VideoWhisperQuiet from "../assets/led-phototherapy/videos/Whisper-Quiet Operation.mp4";
+import VideoEnergyEfficient from "../assets/led-phototherapy/videos/Energy-Efficient Performance.mp4";
+import VideoLongLedLife from "../assets/led-phototherapy/videos/Long Led Life.mp4";
+import VideoGlobalSafety from "../assets/led-phototherapy/videos/Global Safety Certifications.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -373,127 +376,139 @@ const LEDPhototherapy = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "10 LED's", position: [0, 0, 0] },
-    { id: 2, name: "22 and 45 Microwatt", position: [0, 1, 0] },
-    { id: 3, name: "Optimal Wavelength 458 NM", position: [0, 2.3, 0.75] },
-    { id: 4, name: "Radiance Panel", position: [0, -1, 0] },
-    { id: 5, name: "Height Adjustment", position: [0, 0.5, 1] },
-    { id: 6, name: "Control Console", position: [0, 1.5, -0.5] },
-    { id: 7, name: "Stable Bassinet Platform", position: [0, -1.5, 0] },
+    { id: 1, name: "Introduction to LED Phototherapy", position: [0, 0, 0] },
+    { id: 2, name: "Optimal Therapeutic Wavelength", position: [0, 0, 0] },
+    { id: 3, name: "Faster Bilirubin Breakdown", position: [0, 0, 0] },
+    { id: 4, name: "Dual Irradiance Levels", position: [0, 0, 0] },
+    { id: 5, name: "Uniform Light Distribution", position: [0, 0, 0] },
+    { id: 6, name: "Easy Maneuverability & Flexible Design", position: [0, 0, 0] },
+    { id: 7, name: "Whisper-Quiet Operation", position: [0, 0, 0] },
+    { id: 8, name: "Energy-Efficient Performance", position: [0, 0, 0] },
+    { id: 9, name: "Long LED Life", position: [0, 0, 0] },
+    { id: 10, name: "Global Safety Certifications", position: [0, 0, 0] },
   ];
 
+  const defaultRotation = { azimuthal: 0, polar: Math.PI / 2 };
   const hotspotsConfig = {
     1: {
-      videoSrc: LEDPhototherapyVideo1,
-      title: "10 LED's",
+      videoSrc: VideoIntroduction,
+      title: "Introduction to LED Phototherapy",
       overview:
-        "Advanced LED array configuration featuring 10 high-performance LEDs designed for optimal phototherapy treatment.",
+        "LED Phototherapy is designed to deliver effective and gentle treatment for neonatal jaundice. Using clinically optimized LED light technology, it supports safe bilirubin reduction while ensuring comfort and stability for newborns.",
       features: [
-        "10 high-intensity LEDs",
-        "Uniform light distribution",
-        "Long-lasting performance",
-        "Energy-efficient design",
+        "Effective and gentle treatment for neonatal jaundice",
+        "Clinically optimized LED light technology",
+        "Safe bilirubin reduction with comfort and stability",
       ],
-      rotation: {
-        azimuthal: 0,
-        polar: Math.PI / 2,
-      },
+      rotation: defaultRotation,
     },
     2: {
-      videoSrc: LEDPhototherapyVideo2,
-      title: "22 and 45 Microwatt",
+      videoSrc: VideoOptimalWavelength,
+      title: "Optimal Therapeutic Wavelength",
       overview:
-        "Dual power output settings at 22 and 45 microwatts providing flexible irradiance control for different treatment requirements.",
+        "The system delivers light at an optimal wavelength of 458 nanometers, precisely within the therapeutic window of 450 to 465 nanometers. This bell-curve accuracy ensures reliable and effective phototherapy for neonatal jaundice treatment.",
       features: [
-        "22 µW power setting",
-        "45 µW power setting",
-        "Flexible power control",
-        "Precise irradiance management",
+        "458 nm optimal wavelength",
+        "Therapeutic window 450–465 nm",
+        "Bell-curve accuracy for reliable phototherapy",
       ],
-      rotation: {
-        azimuthal: -Math.PI / 2,
-        polar: Math.PI / 2,
-      },
+      rotation: defaultRotation,
     },
     3: {
-      videoSrc: LEDPhototherapyVideo3,
-      title: "Optimal Wavelength 458 NM",
+      videoSrc: VideoFasterBilirubin,
+      title: "Faster Bilirubin Breakdown",
       overview:
-        "Precisely tuned LED wavelength at 458 nanometers, optimized for effective bilirubin breakdown in neonatal phototherapy.",
+        "High-performance blue light generated by ten specialized LEDs enables up to twenty-eight percent faster bilirubin breakdown, supporting quicker clinical response and more efficient phototherapy.",
       features: [
-        "458 nm wavelength",
-        "Optimal bilirubin absorption",
-        "Precise wavelength control",
-        "Effective treatment spectrum",
+        "10 specialized LEDs",
+        "Up to 28% faster bilirubin breakdown",
+        "Quicker clinical response",
       ],
-      rotation: {
-        azimuthal: Math.PI / 2,
-        polar: Math.PI / 2,
-      },
+      rotation: defaultRotation,
     },
     4: {
-      videoSrc: LEDPhototherapyVideo4,
-      title: "Full-Spectrum Radiance Panel",
+      videoSrc: VideoDualIrradiance,
+      title: "Dual Irradiance Levels",
       overview:
-        "High-intensity blue LED array delivers uniform therapeutic irradiance with minimal heat transfer to the infant.",
+        "Two selectable irradiance levels — twenty-two and forty-five micro-watts per square centimeter per nanometer — allow therapy to be tailored to different patient needs and clinical conditions.",
       features: [
-        "450–470 nm narrow-band LEDs",
-        "Passive cooling for silent operation",
-        "Uniform ±10% irradiance across mattress",
-        "50,000-hour LED lifespan",
+        "22 µW/cm²/nm irradiance level",
+        "45 µW/cm²/nm irradiance level",
+        "Tailored to patient needs and clinical conditions",
       ],
-      rotation: {
-        azimuthal: Math.PI,
-        polar: Math.PI / 2,
-      },
+      rotation: defaultRotation,
     },
     5: {
-      videoSrc: LEDPhototherapyVideo5,
-      title: "Smooth Height Adjustment",
+      videoSrc: VideoUniformLight,
+      title: "Uniform Light Distribution",
       overview:
-        "Gas-spring assisted column provides one-handed height changes to maintain optimal therapy distance.",
+        "Optimized optical design ensures uniform light distribution across the treatment area, helping deliver consistent therapy and supporting improved clinical outcomes.",
       features: [
-        "Counterbalanced movement",
-        "Laser-etched height markers",
-        "Locking knob for transport",
-        "Cable routing inside column",
+        "Uniform light distribution",
+        "Consistent therapy",
+        "Improved clinical outcomes",
       ],
-      rotation: {
-        azimuthal: -Math.PI / 4,
-        polar: Math.PI / 2,
-      },
+      rotation: defaultRotation,
     },
     6: {
-      videoSrc: LEDPhototherapyVideo6,
-      title: "Intuitive Control Console",
+      videoSrc: VideoEasyManeuverability,
+      title: "Easy Maneuverability & Flexible Design",
       overview:
-        "Capacitive touch control surface with treatment timers, audio alarms, and LED life indicators.",
+        "The system is designed for everyday clinical ease, featuring a removable light head, adjustable height, and smooth omnidirectional wheels for effortless positioning and maneuverability.",
       features: [
-        "Backlit touch controls",
-        "Dual therapy timers",
-        "Irradiance status bar",
-        "Data-ready USB interface",
+        "Removable light head",
+        "Adjustable height",
+        "Smooth omnidirectional wheels",
       ],
-      rotation: {
-        azimuthal: Math.PI / 4,
-        polar: Math.PI / 2,
-      },
+      rotation: defaultRotation,
     },
     7: {
-      videoSrc: LEDPhototherapyVideo7,
-      title: "Stable Bassinet Platform",
+      videoSrc: VideoWhisperQuiet,
+      title: "Whisper-Quiet Operation",
       overview:
-        "Anti-vibration base with locking castors keeps the infant secure while permitting rapid relocation.",
+        "With no mechanical moving parts, the system operates quietly, creating a calm and stress-free environment that supports infant comfort and developmental care.",
       features: [
-        "Thermoformed easy-clean tray",
-        "Soft-edge mattress supports",
-        "360° locking castors",
-        "Accessory rail integration",
+        "No mechanical moving parts",
+        "Quiet operation",
+        "Calm, stress-free environment for infant comfort",
       ],
-      rotation: {
-        azimuthal: Math.PI,
-        polar: Math.PI / 2,
-      },
+      rotation: defaultRotation,
+    },
+    8: {
+      videoSrc: VideoEnergyEfficient,
+      title: "Energy-Efficient Performance",
+      overview:
+        "Operating at just twenty watts, the system delivers effective phototherapy while consuming up to eighty percent less power — supporting energy efficiency without compromising performance.",
+      features: [
+        "20-watt power consumption",
+        "Up to 80% less power",
+        "Effective phototherapy with energy efficiency",
+      ],
+      rotation: defaultRotation,
+    },
+    9: {
+      videoSrc: VideoLongLedLife,
+      title: "Long LED Life",
+      overview:
+        "High-quality LED technology provides up to fifty thousand hours, or approximately six years, of continuous operation — reducing maintenance needs and ensuring long-term reliability.",
+      features: [
+        "Up to 50,000 hours",
+        "Approximately 6 years of continuous operation",
+        "Reduced maintenance, long-term reliability",
+      ],
+      rotation: defaultRotation,
+    },
+    10: {
+      videoSrc: VideoGlobalSafety,
+      title: "Global Safety Certifications",
+      overview:
+        "The LED Phototherapy system is US FDA and European CE approved, meeting international standards for safety, quality, and clinical performance.",
+      features: [
+        "US FDA approved",
+        "European CE approved",
+        "International safety, quality, and clinical performance standards",
+      ],
+      rotation: defaultRotation,
     },
   };
 
