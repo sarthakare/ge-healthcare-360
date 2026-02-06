@@ -349,14 +349,14 @@ const LEDPhototherapy = () => {
 
   const hotspots = [
     { id: 1, name: "Introduction to LED Phototherapy", position: [0, 0, 0] },
-    { id: 2, name: "Optimal Therapeutic Wavelength", position: [0, 0, 0] },
-    { id: 3, name: "Faster Bilirubin Breakdown", position: [0, 0, 0] },
-    { id: 4, name: "Dual Irradiance Levels", position: [0, 0, 0] },
-    { id: 5, name: "Uniform Light Distribution", position: [0, 0, 0] },
-    { id: 6, name: "Easy Maneuverability & Flexible Design", position: [0, 0, 0] },
+    { id: 2, name: "Optimal Therapeutic Wavelength", position: [0, 2.25, 0.5] },
+    { id: 3, name: "Faster Bilirubin Breakdown", position: [-0.5, 2.45, 0.55] },
+    { id: 4, name: "Dual Irradiance Levels", position: [-0.15, 2.25, 0.25] },
+    { id: 5, name: "Uniform Light Distribution", position: [0, 2.5, 0.75] },
+    { id: 6, name: "Easy Maneuverability & Flexible Design", position: [0, 1, 0] },
     { id: 7, name: "Whisper-Quiet Operation", position: [0, 0, 0] },
-    { id: 8, name: "Energy-Efficient Performance", position: [0, 0, 0] },
-    { id: 9, name: "Long LED Life", position: [0, 0, 0] },
+    { id: 8, name: "Energy-Efficient Performance", position: [0, 2.25, 0.25] },
+    { id: 9, name: "Long LED Life", position: [0.5, 2.45, 0.55] },
     { id: 10, name: "Global Safety Certifications", position: [0, 0, 0] },
   ];
 
@@ -374,7 +374,7 @@ const LEDPhototherapy = () => {
       title: "Optimal Therapeutic Wavelength",
       overview:
         "The system delivers light at an optimal wavelength of 458 nanometers, precisely within the therapeutic window of 450 to 465 nanometers. This bell-curve accuracy ensures reliable and effective phototherapy for neonatal jaundice treatment.",
-      rotation: defaultRotation,
+      rotation: { azimuthal: -Math.PI / 4, polar: Math.PI / 2},
     },
     3: {
       videoSrc: VideoFasterBilirubin,
@@ -388,7 +388,7 @@ const LEDPhototherapy = () => {
       title: "Dual Irradiance Levels",
       overview:
         "Two selectable irradiance levels — twenty-two and forty-five micro-watts per square centimeter per nanometer — allow therapy to be tailored to different patient needs and clinical conditions.",
-      rotation: defaultRotation,
+      rotation: { azimuthal: -Math.PI / 1.5, polar: Math.PI / 2},
     },
     5: {
       videoSrc: VideoUniformLight,
@@ -416,7 +416,7 @@ const LEDPhototherapy = () => {
       title: "Energy-Efficient Performance",
       overview:
         "Operating at just twenty watts, the system delivers effective phototherapy while consuming up to eighty percent less power — supporting energy efficiency without compromising performance.",
-      rotation: defaultRotation,
+      rotation: { azimuthal: -Math.PI / 1.5, polar: Math.PI / 2},
     },
     9: {
       videoSrc: VideoLongLedLife,
