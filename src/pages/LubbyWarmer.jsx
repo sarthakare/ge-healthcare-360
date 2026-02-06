@@ -355,16 +355,16 @@ import {
     const hotspots = [
       { id: 1, name: "Opening", position: [0, 0, 0] },
       { id: 2, name: "Rapid, Uniform Heating with Calrod Heater", position: [0, 1.8, 0] },
-      { id: 3, name: "Far-Infrared Heat for Infant Safety", position: [0, 1.8, 0.5] },
-      { id: 4, name: "Walls of Warmth Technology", position: [0, 0, 0] },
-      { id: 5, name: "High Irradiance at Lower Wattage", position: [0, 0, 0] },
-      { id: 6, name: "Precise Heating Control", position: [0, 0, 0] },
-      { id: 7, name: "90° Rotating Heater Head with Auto Shut-Off", position: [0, 0, 0] },
-      { id: 8, name: "Bio-Compatible Side Panels & Thermal Mattress", position: [0, 0, 0] },
+      { id: 3, name: "Far-Infrared Heat for Infant Safety", position: [0, 1.8, 0.35] },
+      { id: 4, name: "Walls of Warmth Technology", position: [0, -0.25, 0.75] },
+      { id: 5, name: "High Irradiance at Lower Wattage", position:[0, 1.8, 0.75] },
+      { id: 6, name: "Precise Heating Control", position: [0, 0.75, -0.75] },
+      { id: 7, name: "90° Rotating Heater Head with Auto Shut-Off", position: [0, 1.75, -0.75] },
+      { id: 8, name: "Bio-Compatible Side Panels & Thermal Mattress", position: [-0.6, -0.25, 0] },
       { id: 9, name: "Built for Reliability & Longevity", position: [0, 0, 0] },
-      { id: 10, name: "Clear Display & Visual Alerts", position: [0, 0, 0] },
-      { id: 11, name: "Smooth Bed Tilt for Clinical Flexibility", position: [0, 0, 0] },
-      { id: 12, name: "In-Built X-Ray Tray", position: [0, 0, 0] },
+      { id: 10, name: "Clear Display & Visual Alerts", position: [-0.25, 1.1, -0.75] },
+      { id: 11, name: "Smooth Bed Tilt for Clinical Flexibility", position: [-0.6, -1, 0.15] },
+      { id: 12, name: "In-Built X-Ray Tray", position: [0, -0.5, 0.75] },
       { id: 13, name: "Global Safety & Quality Certifications", position: [0, 0, 0] },
     ];
   
@@ -424,7 +424,7 @@ import {
         title: "Bio-Compatible Side Panels & Thermal Mattress",
         overview:
           "Durable, bio-compatible foldable side panels and a thermal seal-locked mattress help retain warmth while ensuring infant comfort and protection.",
-        rotation: defaultRotation,
+        rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2},
       },
       9: {
         videoSrc: VideoBuiltForReliability,
@@ -445,7 +445,7 @@ import {
         title: "Smooth Bed Tilt for Clinical Flexibility",
         overview:
           "The bed tilts smoothly up to ±15 degrees, allowing you to position the infant comfortably while supporting a wide range of clinical procedures.",
-        rotation: defaultRotation,
+        rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2},
       },
       12: {
         videoSrc: VideoXrayTray,
