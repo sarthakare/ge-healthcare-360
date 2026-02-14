@@ -10,7 +10,16 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import GiraffeOmnibedCarestationModel from "../assets/giraffe-omnibed-carestation/model/Omnibed Giraffe.glb";
-import GiraffeOmnibedCarestationVideo from "../assets/giraffe-omnibed-carestation/videos/01-Modes_of_Ventilation.mp4";
+import GiraffeVideo1 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_One_Baby_One_Bed_Concept.mp4";
+import GiraffeVideo2 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_One_Touch_Incubator_To_Warmer_Conversion.mp4";
+import GiraffeVideo3 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_Cascade_Control_Temperature_Technology.mp4";
+import GiraffeVideo4 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_High_Humidity_Servo_Control.mp4";
+import GiraffeVideo5 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_Patented_Baby_Susan_Mattress.mp4";
+import GiraffeVideo6 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_Ultra_Low_Noise_Environment.mp4";
+import GiraffeVideo7 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_Double_Walled_Incubator_With_Air_Curtain.mp4";
+import GiraffeVideo8 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_Improved_Access_With_Uniform_Heat.mp4";
+import GiraffeVideo9 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_10_4_Inch_Color_Touchscreen_Interface.mp4";
+import GiraffeVideo10 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_In_Bed_Weighing_With_Trend_Tracking.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -58,7 +67,7 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
 
     const intersections = raycasterRef.current.intersectObjects(
       objectsToCheck,
-      false
+      false,
     );
 
     let isOccluded = false;
@@ -407,63 +416,154 @@ const GiraffeOmnibedCarestation = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "Touch Display", position: [0.5, 1.75, 0.05] },
-    { id: 2, name: "Breathing Circuit", position: [-1.4, 0.2, 0.3] },
-    { id: 3, name: "Ventilation Controls", position: [-0.3, 0.3, -1.2] },
+    { id: 1, name: "One Baby, One Bed", position: [0, 0.25, 1] },
+    {
+      id: 2,
+      name: "One-Touch Incubator to Warmer",
+      position: [-0.65, -1.5, 0],
+    },
+    { id: 3, name: "Cascade Control™ Temperature", position: [0, 1.5, -1.1] },
+    { id: 4, name: "High-Humidity Servo Control", position: [0, -0.2, 1.2] },
+    { id: 5, name: "Baby-Susan™ Mattress", position: [0.3, 0.5, 0.4] },
+    { id: 6, name: "Ultra-Low Noise", position: [-0.4, 0.8, -0.2] },
+    {
+      id: 7,
+      name: "Double-Walled Incubator & Air Curtain",
+      position: [0.4, 1.3, 0.0],
+    },
+    {
+      id: 8,
+      name: "Improved Access & Uniform Heat",
+      position: [-0.3, 0.6, 0.3],
+    },
+    { id: 9, name: '10.4" Color Touchscreen', position: [0.5, 1.6, 0.05] },
+    {
+      id: 10,
+      name: "In-Bed Weighing & Trend Tracking",
+      position: [0.2, 0.4, -0.2],
+    },
   ];
 
   const hotspotsConfig = {
     1: {
-      videoSrc: GiraffeOmnibedCarestationVideo,
-      title: "Touch Display – Guided Ventilation",
+      videoSrc: GiraffeVideo1,
+      title: "One Baby, One Bed Concept",
       overview:
-        "The Giraffe Omnibed Carestation 15-inch responsive touchscreen provides guided workflows, alarm management, and predictive ventilation analytics for OR teams.",
+        "The OmniBed is built around the 'One Baby, One Bed' philosophy — allowing the infant to remain in the same care environment throughout treatment, reducing unnecessary handling.",
       features: [
-        "Adaptive user interface with context-aware controls",
-        "Live real-time waveforms and gas readings",
-        "Integrated checklists for rapid case setup",
-        "Multi-language support with glove-friendly sensitivity",
+        "Single care environment from admission through discharge",
+        "Reduces unnecessary handling and transfers",
+        "Supports continuity of care for fragile neonates",
       ],
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     2: {
-      videoSrc: GiraffeOmnibedCarestationVideo,
-      title: "Breathing Circuit – Digital Flow Control",
+      videoSrc: GiraffeVideo2,
+      title: "One-Touch Incubator-To-Warmer Conversion",
       overview:
-        "Modular breathing circuit with integrated sensors ensures low resistance flow and precise agent delivery even during low-flow anesthesia.",
+        "With a single touch, you can convert from a closed incubator to an open warmer — giving you the combined benefits of both systems in one integrated carestation.",
       features: [
-        "Tool-free disassembly and auto-leak checks",
-        "Heated inspiratory limb to prevent condensation",
-        "Integrated flow and pressure monitoring",
-        "Color-coded pathways for quick troubleshooting",
+        "Single-touch conversion between modes",
+        "Combined benefits of incubator and warmer in one system",
+        "Integrated carestation design",
       ],
       rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
     3: {
-      videoSrc: GiraffeOmnibedCarestationVideo,
-      title: "Vaporizer Bank – Dual Agent Ready",
+      videoSrc: GiraffeVideo3,
+      title: "Cascade Control™ Temperature Technology",
       overview:
-        "Dual-lock vaporizer manifold supports side-by-side agent cartridges with automatic recognition and safety interlocks.",
+        "Cascade Control™ technology reduces temperature variability by up to 80 percent — helping minimize temperature swings and maintain a stable thermal environment.",
       features: [
-        "Auto-ID for Sevoflurane, Isoflurane, Desflurane",
-        "Hot-swap capability without power-down",
-        "Interlock prevents simultaneous activation",
-        "LED indicators for fill level and status",
+        "Up to 80% reduction in temperature variability",
+        "Minimizes temperature swings",
+        "Stable thermal environment for neonates",
+      ],
+      rotation: { azimuthal: Math.PI / 4, polar: Math.PI / 3 },
+    },
+    4: {
+      videoSrc: GiraffeVideo4,
+      title: "High-Humidity Servo Control",
+      overview:
+        "You can deliver sterile, servo-controlled humidity up to 95 percent — supporting skin integrity and reducing insensible water loss in fragile neonates.",
+      features: [
+        "Sterile, servo-controlled humidity up to 95%",
+        "Supports skin integrity",
+        "Reduces insensible water loss",
+      ],
+      rotation: { azimuthal: -Math.PI / 4, polar: Math.PI / 2 },
+    },
+    5: {
+      videoSrc: GiraffeVideo5,
+      title: "Patented Baby-Susan™ Mattress",
+      overview:
+        "The patented Baby-Susan™ mattress rotates 360 degrees and translates smoothly — allowing you to position the baby easily while evenly distributing pressure.",
+      features: [
+        "360-degree rotation and smooth translation",
+        "Easy infant positioning",
+        "Even pressure distribution",
+      ],
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    6: {
+      videoSrc: GiraffeVideo6,
+      title: "Ultra-Low Noise Environment",
+      overview:
+        "Specially designed fans and thoughtful alarm speaker placement keep noise levels as low as 41 decibels — helping create a calmer, developmentally supportive environment.",
+      features: [
+        "Noise levels as low as 41 decibels",
+        "Specially designed fans and alarm placement",
+        "Calmer, developmentally supportive environment",
+      ],
+      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
+    },
+    7: {
+      videoSrc: GiraffeVideo7,
+      title: "Double-Walled Incubator with Air Curtain",
+      overview:
+        "The double-walled incubator and Boost air curtain work together to protect the infant from heat loss while maintaining consistent thermal conditions.",
+      features: [
+        "Double-walled incubator design",
+        "Boost air curtain for heat loss protection",
+        "Consistent thermal conditions",
       ],
       rotation: { azimuthal: Math.PI / 2, polar: Math.PI / 2 },
     },
-    4: {
-      videoSrc: GiraffeOmnibedCarestationVideo,
-      title: "Ventilation Controls – Precision Tuning",
+    8: {
+      videoSrc: GiraffeVideo8,
+      title: "Improved Access with Uniform Heat",
       overview:
-        "Rotary encoders and context-lit keys give tactile redundancy for clinicians who prefer physical controls during critical events.",
+        "You have ample space for procedures and interventions — with uniform heat maintained regardless of infant position, supporting uninterrupted care.",
       features: [
-        "Tri-color feedback rings for parameter status",
-        "Haptic detents aligned with clinical increments",
-        "Dedicated quick-set knobs for tidal volume & rate",
-        "Programmable soft keys for custom workflows",
+        "Ample space for procedures and interventions",
+        "Uniform heat regardless of infant position",
+        "Supports uninterrupted care",
       ],
-      rotation: { azimuthal: -Math.PI, polar: Math.PI / 2 },
+      rotation: { azimuthal: -Math.PI * 0.75, polar: Math.PI / 2 },
+    },
+    9: {
+      videoSrc: GiraffeVideo9,
+      title: '10.4" Color Touchscreen Interface',
+      overview:
+        "You interact through a 10.4-inch color touchscreen with a touch-free alarm silence feature — enabling quick responses while maintaining sterility.",
+      features: [
+        "10.4-inch color touchscreen",
+        "Touch-free alarm silence feature",
+        "Quick responses with maintained sterility",
+      ],
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
+    10: {
+      videoSrc: GiraffeVideo10,
+      title: "In-Bed Weighing with Trend Tracking",
+      overview:
+        "You can weigh the baby directly in the bed and track weight trends over time — reducing handling and supporting accurate growth monitoring.",
+      features: [
+        "Weigh directly in the bed",
+        "Track weight trends over time",
+        "Accurate growth monitoring with reduced handling",
+      ],
+      rotation: { azimuthal: Math.PI / 2, polar: Math.PI / 2 },
     },
   };
 
@@ -527,55 +627,58 @@ const GiraffeOmnibedCarestation = () => {
 
       animationFrameRef.current = requestAnimationFrame(animate);
     },
-    [cartesianToSpherical]
+    [cartesianToSpherical],
   );
 
-  const animateYAxisRotation = useCallback((duration = 4000) => {
-    if (!orbitControlsRef.current) return;
+  const animateYAxisRotation = useCallback(
+    (duration = 4000) => {
+      if (!orbitControlsRef.current) return;
 
-    const controls = orbitControlsRef.current;
-    const camera = controls.object;
-    const target = controls.target;
+      const controls = orbitControlsRef.current;
+      const camera = controls.object;
+      const target = controls.target;
 
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-    }
-
-    const currentSpherical = cartesianToSpherical(camera.position, target);
-    const startAzimuthal = currentSpherical.azimuthal;
-    const startPolar = currentSpherical.polar;
-    const currentDistance = currentSpherical.radius;
-
-    const rotationRange = (20 * Math.PI) / 180;
-    const startTime = performance.now();
-
-    const animate = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const oscillation = Math.sin(progress * Math.PI * 2);
-
-      const currentAzimuthal = startAzimuthal + oscillation * rotationRange;
-      const currentPolar = startPolar;
-
-      const x =
-        currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
-      const y = currentDistance * Math.cos(currentPolar);
-      const z =
-        currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
-
-      camera.position.set(target.x + x, target.y + y, target.z + z);
-      camera.lookAt(target);
-      controls.update();
-
-      if (progress < 1) {
-        animationFrameRef.current = requestAnimationFrame(animate);
-      } else {
-        animationFrameRef.current = null;
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
       }
-    };
 
-    animationFrameRef.current = requestAnimationFrame(animate);
-  }, [cartesianToSpherical]);
+      const currentSpherical = cartesianToSpherical(camera.position, target);
+      const startAzimuthal = currentSpherical.azimuthal;
+      const startPolar = currentSpherical.polar;
+      const currentDistance = currentSpherical.radius;
+
+      const rotationRange = (20 * Math.PI) / 180;
+      const startTime = performance.now();
+
+      const animate = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const oscillation = Math.sin(progress * Math.PI * 2);
+
+        const currentAzimuthal = startAzimuthal + oscillation * rotationRange;
+        const currentPolar = startPolar;
+
+        const x =
+          currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
+        const y = currentDistance * Math.cos(currentPolar);
+        const z =
+          currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
+
+        camera.position.set(target.x + x, target.y + y, target.z + z);
+        camera.lookAt(target);
+        controls.update();
+
+        if (progress < 1) {
+          animationFrameRef.current = requestAnimationFrame(animate);
+        } else {
+          animationFrameRef.current = null;
+        }
+      };
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+    },
+    [cartesianToSpherical],
+  );
 
   const openHotspotPopup = (hotspotId) => {
     const config = hotspotsConfig[hotspotId] || hotspotsConfig[1];
@@ -634,12 +737,12 @@ const GiraffeOmnibedCarestation = () => {
     <div
       style={{
         height: "100vh",
-          position: "relative",
-          backgroundImage:
-  "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
-          backgroundRepeat: "no-repeat, no-repeat",
-          backgroundPosition: "bottom center, center",
-          backgroundSize: "auto, cover",
+        position: "relative",
+        backgroundImage:
+          "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
+        backgroundRepeat: "no-repeat, no-repeat",
+        backgroundPosition: "bottom center, center",
+        backgroundSize: "auto, cover",
       }}
     >
       <button
@@ -655,8 +758,8 @@ const GiraffeOmnibedCarestation = () => {
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -681,8 +784,8 @@ const GiraffeOmnibedCarestation = () => {
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -702,15 +805,13 @@ const GiraffeOmnibedCarestation = () => {
           right: "36%",
           zIndex: 10,
           padding: "10px 20px",
-          backgroundColor: hotspotsVisible
-            ? "#F37F63"
-            : "#F37F63",
+          backgroundColor: hotspotsVisible ? "#F37F63" : "#F37F63",
           color: "#000",
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
           fontSize: "15px",
-          fontWeight:"600",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = hotspotsVisible
@@ -796,7 +897,7 @@ const GiraffeOmnibedCarestation = () => {
           maxDistance={10}
           target={[0, 0, 0]}
         />
-        <Environment preset="city"  />
+        <Environment preset="city" />
         <Model
           glbPath={GiraffeOmnibedCarestationModel}
           onLoad={handleModelLoad}
@@ -852,7 +953,7 @@ const GiraffeOmnibedCarestation = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            fontWeight:"600",
+            fontWeight: "600",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.filter = "brightness(1.1)";
@@ -868,7 +969,7 @@ const GiraffeOmnibedCarestation = () => {
           <div
             className="hotspot-menu-scroll"
             style={{
-               marginBottom: "-9px",
+              marginBottom: "-9px",
               // background: "#ffffff",
               // boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
               minWidth: "240px",
@@ -880,9 +981,10 @@ const GiraffeOmnibedCarestation = () => {
               flexDirection: "column",
               borderWidth: "2px",
               borderStyle: "solid",
-              borderImage:"linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
-              borderRadius:"6px", 
-              padding:"0px 15px 10px",
+              borderImage:
+                "linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
+              borderRadius: "6px",
+              padding: "0px 15px 10px",
             }}
           >
             {hotspots.map((h, index) => (
@@ -904,7 +1006,7 @@ const GiraffeOmnibedCarestation = () => {
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.color = "#fff";
-                }}			  
+                }}
               >
                 {h.name}
               </div>
@@ -917,4 +1019,3 @@ const GiraffeOmnibedCarestation = () => {
 };
 
 export default GiraffeOmnibedCarestation;
-
