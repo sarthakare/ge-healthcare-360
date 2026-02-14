@@ -424,23 +424,23 @@ const GiraffeOmnibedCarestation = () => {
     },
     { id: 3, name: "Cascade Control™ Temperature", position: [0, 1.5, -1.1] },
     { id: 4, name: "High-Humidity Servo Control", position: [0, -0.2, 1.2] },
-    { id: 5, name: "Baby-Susan™ Mattress", position: [0.3, 0.5, 0.4] },
-    { id: 6, name: "Ultra-Low Noise", position: [-0.4, 0.8, -0.2] },
+    { id: 5, name: "Baby-Susan™ Mattress", position: [0, 1.25, 0] },
+    { id: 6, name: "Ultra-Low Noise", position:  [0, 1.25, -0.75] },
     {
       id: 7,
       name: "Double-Walled Incubator & Air Curtain",
-      position: [0.4, 1.3, 0.0],
+      position: [0.75, 0.5, 0.0],
     },
     {
       id: 8,
       name: "Improved Access & Uniform Heat",
-      position: [-0.3, 0.6, 0.3],
+      position: [0, 0.25, 1],
     },
-    { id: 9, name: '10.4" Color Touchscreen', position: [0.5, 1.6, 0.05] },
+    { id: 9, name: '10.4" Color Touchscreen', position: [0, 1.5, -1.1] },
     {
       id: 10,
       name: "In-Bed Weighing & Trend Tracking",
-      position: [0.2, 0.4, -0.2],
+      position: [0, 1.25, 0],
     },
   ];
 
@@ -503,7 +503,7 @@ const GiraffeOmnibedCarestation = () => {
         "Easy infant positioning",
         "Even pressure distribution",
       ],
-      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+      rotation: { azimuthal: 0, polar: 0 },
     },
     6: {
       videoSrc: GiraffeVideo6,
@@ -515,7 +515,7 @@ const GiraffeOmnibedCarestation = () => {
         "Specially designed fans and alarm placement",
         "Calmer, developmentally supportive environment",
       ],
-      rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
+      rotation: { azimuthal: 0, polar: 0 },
     },
     7: {
       videoSrc: GiraffeVideo7,
@@ -539,7 +539,7 @@ const GiraffeOmnibedCarestation = () => {
         "Uniform heat regardless of infant position",
         "Supports uninterrupted care",
       ],
-      rotation: { azimuthal: -Math.PI * 0.75, polar: Math.PI / 2 },
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     9: {
       videoSrc: GiraffeVideo9,
@@ -551,7 +551,7 @@ const GiraffeOmnibedCarestation = () => {
         "Touch-free alarm silence feature",
         "Quick responses with maintained sterility",
       ],
-      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+      rotation: { azimuthal: Math.PI / 4, polar: Math.PI / 3 },
     },
     10: {
       videoSrc: GiraffeVideo10,
@@ -563,7 +563,7 @@ const GiraffeOmnibedCarestation = () => {
         "Track weight trends over time",
         "Accurate growth monitoring with reduced handling",
       ],
-      rotation: { azimuthal: Math.PI / 2, polar: Math.PI / 2 },
+      rotation: { azimuthal: 0, polar: 0 },
     },
   };
 
