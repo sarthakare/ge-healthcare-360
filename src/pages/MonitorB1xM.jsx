@@ -261,8 +261,9 @@ const VideoPopup = ({
                 style={{
                   width: "100%",
                   maxWidth: "500px",
-                  height: "auto",
-                  maxHeight: "300px",
+                  aspectRatio: "16 / 9",
+                  objectFit: "contain",
+                  backgroundColor: "#000",
                   borderRadius: "8px",
                   outline: "none",
                 }}
@@ -274,19 +275,19 @@ const VideoPopup = ({
                 style={{
                   width: "100%",
                   maxWidth: "500px",
-                  height: "200px",
+                  aspectRatio: "16 / 9",
+                  borderRadius: "8px",
+                  backgroundColor: "#f0f0f0",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: "#f5f5f5",
-                  borderRadius: "8px",
-                  border: "2px dashed #ccc",
                   color: "#666",
-                  fontSize: "16px",
-                  fontWeight: "500",
+                  fontSize: "14px",
+                  textAlign: "center",
+                  padding: "20px",
                 }}
               >
-                No video is available
+                Video file not available. Please add the video file to the assets folder.
               </div>
             )}
           </div>

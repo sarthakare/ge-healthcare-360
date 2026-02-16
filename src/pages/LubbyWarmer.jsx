@@ -247,14 +247,14 @@ import {
               gap: "20px",
             }}
           >
-            {videoSrc && (
-              <div
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              {videoSrc ? (
                 <video
                   ref={videoRef}
                   src={videoSrc}
@@ -263,16 +263,36 @@ import {
                   style={{
                     width: "100%",
                     maxWidth: "500px",
-                    height: "auto",
-                    maxHeight: "300px",
+                    aspectRatio: "16 / 9",
+                    objectFit: "contain",
+                    backgroundColor: "#000",
                     borderRadius: "8px",
                     outline: "none",
                   }}
                 >
                   Your browser does not support the video tag.
                 </video>
-              </div>
-            )}
+              ) : (
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "500px",
+                    aspectRatio: "16 / 9",
+                    borderRadius: "8px",
+                    backgroundColor: "#f0f0f0",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#666",
+                    fontSize: "14px",
+                    textAlign: "center",
+                    padding: "20px",
+                  }}
+                >
+                  Video file not available. Please add the video file to the assets folder.
+                </div>
+              )}
+            </div>
             <div style={{ color: "#000000" }}>
               <h2
                 style={{

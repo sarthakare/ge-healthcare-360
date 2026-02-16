@@ -259,8 +259,9 @@ const VideoPopup = ({
                 style={{
                   width: "100%",
                   maxWidth: "500px",
-                  height: "auto",
-                  maxHeight: "300px",
+                  aspectRatio: "16 / 9",
+                  objectFit: "contain",
+                  backgroundColor: "#000",
                   borderRadius: "8px",
                   outline: "none",
                 }}
@@ -272,7 +273,7 @@ const VideoPopup = ({
                 style={{
                   width: "100%",
                   maxWidth: "500px",
-                  height: "200px",
+                  aspectRatio: "16 / 9",
                   borderRadius: "8px",
                   backgroundColor: "#f0f0f0",
                   display: "flex",
