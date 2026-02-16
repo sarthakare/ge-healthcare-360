@@ -464,11 +464,11 @@ const GiraffeOmnibedCarestation = () => {
       name: "Weighing",
       position: [0, 1.25, 0],
     },
-    {
-      id: 11,
-      name: "Servo Oxygen",
-      position: [0.65, -1.5, 0],
-    },
+    // {
+    //   id: 11,
+    //   name: "Servo Oxygen (Optional)",
+    //   position: [0.65, -1.5, 0],
+    // },
   ];
 
   const hotspotsConfig = {

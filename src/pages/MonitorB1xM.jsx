@@ -400,7 +400,7 @@ const MonitorB1xM = () => {
   };
 
   const hotspots = [
-    // {
+    // { Removed this hotspot as per request from the suresh
     //   id: 1,
     //   name: "Introduction to B1x5M Patient Monitors",
     //   position: [-1.25, 1, 1.5],
