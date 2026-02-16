@@ -404,10 +404,10 @@ const LEDPhototherapy = () => {
     { id: 4, name: "Dual Irradiance", position: [-0.15, 2.25, 0.25] },
     { id: 5, name: "Uniform Light", position: [0, 2.5, 0.75] },
     { id: 6, name: "Maneuverability", position: [0, 1, 0] },
-    { id: 7, name: "Quiet", position: [0, 0, 0] },
+    { id: 7, name: "Quiet", position: [0, 0.5, 0] },
     { id: 8, name: "Energy Efficient", position: [0, 2.25, 0.25] },
     { id: 9, name: "LED Life", position: [0.5, 2.45, 0.55] },
-    { id: 10, name: "Certifications", position: [0, 0, 0] },
+    { id: 10, name: "Certifications", position: [0, -1, 0] },
   ];
 
   const defaultRotation = { azimuthal: 0, polar: Math.PI / 2 };
