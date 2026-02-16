@@ -147,6 +147,7 @@ import {
     videoSrc,
     title,
     overview,
+    features,
   }) => {
     const videoRef = useRef(null);
   
@@ -338,6 +339,33 @@ import {
                     </p>
                   </div>
                 )}
+                {features && features.length > 0 && (
+                  <div>
+                    <h3
+                      style={{
+                        margin: "0 0 8px 0",
+                        fontSize: "18px",
+                        fontWeight: "600",
+                        color: "#6022A6",
+                      }}
+                    >
+                      Key Features
+                    </h3>
+                    <ul
+                      style={{
+                        margin: 0,
+                        paddingLeft: "20px",
+                        fontSize: "14px",
+                        lineHeight: "1.8",
+                        color: "#000000",
+                      }}
+                    >
+                      {features.map((feature, index) => (
+                        <li key={index}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -373,112 +401,129 @@ import {
     };
   
     const hotspots = [
-      { id: 1, name: "Opening", position: [0, 0, 0] },
-      { id: 2, name: "Rapid, Uniform Heating with Calrod Heater", position: [0, 1.8, 0] },
-      { id: 3, name: "Far-Infrared Heat for Infant Safety", position: [0, 1.8, 0.35] },
-      { id: 4, name: "Walls of Warmth Technology", position: [0, -0.25, 0.75] },
-      { id: 5, name: "High Irradiance at Lower Wattage", position:[0, 1.8, 0.75] },
-      { id: 6, name: "Precise Heating Control", position: [0, 0.75, -0.75] },
-      { id: 7, name: "90° Rotating Heater Head with Auto Shut-Off", position: [0, 1.75, -0.75] },
-      { id: 8, name: "Bio-Compatible Side Panels & Thermal Mattress", position: [-0.6, -0.25, 0] },
-      { id: 9, name: "Built for Reliability & Longevity", position: [0, 0, 0] },
-      { id: 10, name: "Clear Display & Visual Alerts", position: [-0.25, 1.1, -0.75] },
-      { id: 11, name: "Smooth Bed Tilt for Clinical Flexibility", position: [-0.6, -1, 0.15] },
-      { id: 12, name: "In-Built X-Ray Tray", position: [0, -0.5, 0.75] },
-      { id: 13, name: "Global Safety & Quality Certifications", position: [0, 0, 0] },
+      { id: 1, name: "Introduction", position: [0, 0, 0] },
+      { id: 2, name: "Calrod Heater", position: [0, 1.8, 0] },
+      { id: 3, name: "Far-Infrared Safety", position: [0, 1.8, 0.35] },
+      { id: 4, name: "Walls of Warmth", position: [0, -0.25, 0.75] },
+      { id: 5, name: "High Irradiance", position:[0, 1.8, 0.75] },
+      { id: 6, name: "Precise Control", position: [0, 0.75, -0.75] },
+      { id: 7, name: "Rotating Head", position: [0, 1.75, -0.75] },
+      { id: 8, name: "Panels & Mattress", position: [-0.6, -0.25, 0] },
+      { id: 9, name: "Durability", position: [0, 0, 0] },
+      { id: 10, name: "Display & Alarms", position: [-0.25, 1.1, -0.75] },
+      { id: 11, name: "Bed Tilt", position: [-0.6, -1, 0.15] },
+      { id: 12, name: "X-ray Tray", position: [0, -0.5, 0.75] },
+      { id: 13, name: "Certifications", position: [0, 0, 0] },
     ];
   
     const defaultRotation = { azimuthal: 0, polar: Math.PI / 2 };
     const hotspotsConfig = {
       1: {
         videoSrc: VideoOpening,
-        title: "Opening",
+        title: "Introduction",
         overview:
-          "As you explore the Lullaby Warmer, you'll notice how every design choice is focused on delivering fast, gentle, and controlled thermal care — while keeping safety and workflow at the center.",
+          "The Lullaby Warmer is designed to provide fast, gentle, and controlled thermal care for newborns, supporting safety and comfort from the very first moments of life.",
+        features: [
+          "Infant warming system",
+          "Gentle thermal care",
+          "NICU & L&D ready",
+        ],
         rotation: defaultRotation,
       },
       2: {
         videoSrc: VideoRapidUniformHeating,
-        title: "Rapid, Uniform Heating with Calrod Heater",
+        title: "Calrod Heater",
         overview:
-          "The Calrod heater ensures uniform heat distribution and makes the bed ready within just 240 seconds — helping you respond quickly in critical moments.",
+          "The Calrod heater delivers uniform heat distribution and prepares the bed within 240 seconds for rapid response.",
+        features: ["Uniform heat", "Ready in 240 seconds", "Rapid response"],
         rotation: defaultRotation,
       },
       3: {
         videoSrc: VideoFarInfraredHeat,
-        title: "Far-Infrared Heat for Infant Safety",
+        title: "Far-Infrared Safety",
         overview:
-          "The Calrod heater uses far-infrared rays that are easily absorbed by the cornea, reducing the risk of retinal damage and supporting safer thermal therapy.",
+          "Far-infrared heat supports safe warming while reducing retinal risk.",
+        features: ["Far-infrared", "Eye safety", "Gentle warmth"],
         rotation: defaultRotation,
       },
       4: {
         videoSrc: VideoWallsOfWarmth,
-        title: "Walls of Warmth Technology",
+        title: "Walls of Warmth",
         overview:
-          "You'll see GE's unique Walls of Warmth technology with three distinct heating zones — designed to minimize conductive heat loss and maintain thermal stability.",
+          "Three heating zones minimize heat loss and maintain stability.",
+        features: ["Three zones", "Reduced loss", "Stable warmth"],
         rotation: defaultRotation,
       },
       5: {
         videoSrc: VideoHighIrradiance,
-        title: "High Irradiance at Lower Wattage",
+        title: "High Irradiance",
         overview:
-          "A specially designed reflector and heating element allow the warmer to operate at just 540 watts, while achieving high irradiance of 26 µW/cm² — helping reduce insensible water loss and support better clinical outcomes.",
+          "High irradiance at lower wattage helps reduce insensible water loss.",
+        features: ["540W", "High irradiance", "Reduced water loss"],
         rotation: defaultRotation,
       },
       6: {
         videoSrc: VideoPreciseHeatingControl,
-        title: "Precise Heating Control",
+        title: "Precise Control",
         overview:
-          "You can fine-tune thermal support with precise heater power adjustments in 5% increments — giving you greater control over infant temperature management.",
+          "Heater power adjusts in 5% increments for accuracy.",
+        features: ["5% steps", "Accurate control", "Better management"],
         rotation: defaultRotation,
       },
       7: {
         videoSrc: VideoHeaterHeadRotation,
-        title: "90° Rotating Heater Head with Auto Shut-Off",
+        title: "Rotating Head",
         overview:
-          "The heater head rotates 90 degrees on either side to facilitate X-ray procedures, and automatically shuts off when rotated — adding an important layer of safety.",
+          "90° rotation enables X-ray access with auto shut-off safety.",
+        features: ["90° rotation", "Auto shut-off", "X-ray friendly"],
         rotation: defaultRotation,
       },
       8: {
         videoSrc: VideoBioCompatiblePanels,
-        title: "Bio-Compatible Side Panels & Thermal Mattress",
+        title: "Panels & Mattress",
         overview:
-          "Durable, bio-compatible foldable side panels and a thermal seal-locked mattress help retain warmth while ensuring infant comfort and protection.",
+          "Bio-compatible panels and thermal mattress retain warmth.",
+        features: ["Safe materials", "Thermal mattress", "Heat retention"],
         rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2},
       },
       9: {
         videoSrc: VideoBuiltForReliability,
-        title: "Built for Reliability & Longevity",
+        title: "Durability",
         overview:
-          "With lower wattage operation, rugged temperature probes, and a Calrod heater backed by a 7-year lifetime warranty, the Lullaby Warmer is built for long-term performance.",
+          "Built for reliability with rugged probes and long heater life.",
+        features: ["Rugged probes", "7-year heater", "Reliable"],
         rotation: defaultRotation,
       },
       10: {
         videoSrc: VideoClearDisplay,
-        title: "Clear Display & Visual Alerts",
+        title: "Display & Alarms",
         overview:
-          "A large display, color-coded alarms, visually coded controls, and well-positioned lights help you quickly interpret system status — even in busy care environments.",
+          "Large display and color alarms improve awareness.",
+        features: ["Large screen", "Color alarms", "Clear status"],
         rotation: defaultRotation,
       },
       11: {
         videoSrc: VideoSmoothBedTilt,
-        title: "Smooth Bed Tilt for Clinical Flexibility",
+        title: "Bed Tilt",
         overview:
-          "The bed tilts smoothly up to ±15 degrees, allowing you to position the infant comfortably while supporting a wide range of clinical procedures.",
+          "±15° tilt supports procedures.",
+        features: ["±15°", "Flexible care", "Comfort"],
         rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2},
       },
       12: {
         videoSrc: VideoXrayTray,
-        title: "In-Built X-Ray Tray",
+        title: "X-ray Tray",
         overview:
-          "With the integrated X-ray tray, imaging can be performed without moving the baby — reducing handling and maintaining thermal stability.",
+          "Integrated tray enables imaging without moving the baby.",
+        features: ["Built-in tray", "No movement", "Thermal stability"],
         rotation: defaultRotation,
       },
       13: {
         videoSrc: VideoGlobalSafety,
-        title: "Global Safety & Quality Certifications",
+        title: "Certifications",
         overview:
-          "The Lullaby Warmer is US FDA and CE approved, meeting international standards for safety, quality, and performance.",
+          "Meets international safety standards.",
+        features: ["FDA", "CE", "Global safety"],
         rotation: defaultRotation,
       },
     };
@@ -596,6 +641,7 @@ import {
         videoSrc: config.videoSrc,
         title: config.title,
         overview: config.overview,
+        features: config.features,
       });
   
       if (orbitControlsRef.current && config.rotation) {
@@ -779,6 +825,7 @@ import {
           videoSrc={popupData?.videoSrc}
           title={popupData?.title}
           overview={popupData?.overview}
+        features={popupData?.features}
         />
   
         <ModelInteractionPopup
@@ -879,7 +926,7 @@ import {
             cursor: "pointer",
             fontSize: "15px",
             boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
-            width: "316px",
+            width: "240px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",

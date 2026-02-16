@@ -438,154 +438,116 @@ const GiraffeOmnibedCarestation = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "One Baby, One Bed", position: [0, 0.25, 1] },
+    { id: 1, name: "Introduction", position: [0, 0.25, 1] },
     {
       id: 2,
-      name: "One-Touch Incubator to Warmer",
+      name: "Conversion",
       position: [-0.65, -1.5, 0],
     },
-    { id: 3, name: "Cascade Control™ Temperature", position: [0, 1.5, -1.1] },
-    { id: 4, name: "High-Humidity Servo Control", position: [0, -0.2, 1.2] },
-    { id: 5, name: "Baby-Susan™ Mattress", position: [0, 1.25, 0] },
-    { id: 6, name: "Ultra-Low Noise", position:  [0, 1.25, -0.75] },
+    { id: 3, name: "Cascade Control", position: [0, 1.5, -1.1] },
+    { id: 4, name: "Servo Humidity", position: [0, -0.2, 1.2] },
+    { id: 5, name: "Baby-Susan", position: [0, 1.25, 0] },
+    { id: 6, name: "Low Noise", position: [0, 1.25, -0.75] },
     {
       id: 7,
-      name: "Double-Walled Incubator & Air Curtain",
+      name: "Double Wall",
       position: [0.75, 0.5, 0.0],
     },
     {
       id: 8,
-      name: "Improved Access & Uniform Heat",
+      name: "Access",
       position: [0, 0.25, 1],
     },
-    { id: 9, name: '10.4" Color Touchscreen', position: [0, 1.5, -1.1] },
+    { id: 9, name: "Touchscreen", position: [0, 1.5, -1.1] },
     {
       id: 10,
-      name: "In-Bed Weighing & Trend Tracking",
+      name: "Weighing",
       position: [0, 1.25, 0],
+    },
+    {
+      id: 11,
+      name: "Servo Oxygen",
+      position: [0.65, -1.5, 0],
     },
   ];
 
   const hotspotsConfig = {
     1: {
       videoSrc: GiraffeVideo1,
-      title: "One Baby, One Bed Concept",
-      overview:
-        "The OmniBed is built around the 'One Baby, One Bed' philosophy — allowing the infant to remain in the same care environment throughout treatment, reducing unnecessary handling.",
-      features: [
-        "Single care environment from admission through discharge",
-        "Reduces unnecessary handling and transfers",
-        "Supports continuity of care for fragile neonates",
-      ],
+      title: "Introduction",
+      overview: "Built on the One Baby, One Bed philosophy.",
+      features: ["Continuity", "Less handling", "Integrated care"],
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     2: {
       videoSrc: GiraffeVideo2,
-      title: "One-Touch Incubator-To-Warmer Conversion",
-      overview:
-        "With a single touch, you can convert from a closed incubator to an open warmer — giving you the combined benefits of both systems in one integrated carestation.",
-      features: [
-        "Single-touch conversion between modes",
-        "Combined benefits of incubator and warmer in one system",
-        "Integrated carestation design",
-      ],
+      title: "Conversion",
+      overview: "One-touch incubator-to-warmer conversion.",
+      features: ["One-touch", "Dual mode", "Efficient"],
       rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2 },
     },
     3: {
       videoSrc: GiraffeVideo3,
-      title: "Cascade Control™ Temperature Technology",
-      overview:
-        "Cascade Control™ technology reduces temperature variability by up to 80 percent — helping minimize temperature swings and maintain a stable thermal environment.",
-      features: [
-        "Up to 80% reduction in temperature variability",
-        "Minimizes temperature swings",
-        "Stable thermal environment for neonates",
-      ],
+      title: "Cascade Control",
+      overview: "Reduces temp variability by 80%.",
+      features: ["80% stability", "Consistent", "Reliable"],
       rotation: { azimuthal: Math.PI / 4, polar: Math.PI / 3 },
     },
     4: {
       videoSrc: GiraffeVideo4,
-      title: "High-Humidity Servo Control",
-      overview:
-        "You can deliver sterile, servo-controlled humidity up to 95 percent — supporting skin integrity and reducing insensible water loss in fragile neonates.",
-      features: [
-        "Sterile, servo-controlled humidity up to 95%",
-        "Supports skin integrity",
-        "Reduces insensible water loss",
-      ],
+      title: "Servo Humidity",
+      overview: "Up to 95% humidity supports skin care.",
+      features: ["95%", "Servo", "Skin support"],
       rotation: { azimuthal: -Math.PI / 4, polar: Math.PI / 2 },
     },
     5: {
       videoSrc: GiraffeVideo5,
-      title: "Patented Baby-Susan™ Mattress",
-      overview:
-        "The patented Baby-Susan™ mattress rotates 360 degrees and translates smoothly — allowing you to position the baby easily while evenly distributing pressure.",
-      features: [
-        "360-degree rotation and smooth translation",
-        "Easy infant positioning",
-        "Even pressure distribution",
-      ],
+      title: "Baby-Susan",
+      overview: "360° rotating mattress improves access.",
+      features: ["360°", "Pressure relief", "Easy care"],
       rotation: { azimuthal: 0, polar: 0 },
     },
     6: {
       videoSrc: GiraffeVideo6,
-      title: "Ultra-Low Noise Environment",
-      overview:
-        "Specially designed fans and thoughtful alarm speaker placement keep noise levels as low as 41 decibels — helping create a calmer, developmentally supportive environment.",
-      features: [
-        "Noise levels as low as 41 decibels",
-        "Specially designed fans and alarm placement",
-        "Calmer, developmentally supportive environment",
-      ],
+      title: "Low Noise",
+      overview: "Operates at 41 dB.",
+      features: ["41 dB", "Quiet", "Calm"],
       rotation: { azimuthal: 0, polar: 0 },
     },
     7: {
       videoSrc: GiraffeVideo7,
-      title: "Double-Walled Incubator with Air Curtain",
-      overview:
-        "The double-walled incubator and Boost air curtain work together to protect the infant from heat loss while maintaining consistent thermal conditions.",
-      features: [
-        "Double-walled incubator design",
-        "Boost air curtain for heat loss protection",
-        "Consistent thermal conditions",
-      ],
+      title: "Double Wall",
+      overview: "Air curtain reduces heat loss.",
+      features: ["Double wall", "Air curtain", "Warmth"],
       rotation: { azimuthal: Math.PI / 2, polar: Math.PI / 2 },
     },
     8: {
       videoSrc: GiraffeVideo8,
-      title: "Improved Access with Uniform Heat",
-      overview:
-        "You have ample space for procedures and interventions — with uniform heat maintained regardless of infant position, supporting uninterrupted care.",
-      features: [
-        "Ample space for procedures and interventions",
-        "Uniform heat regardless of infant position",
-        "Supports uninterrupted care",
-      ],
+      title: "Access",
+      overview: "Easy caregiver access with uniform heat.",
+      features: ["Better access", "Uniform heat", "Procedure friendly"],
       rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
     9: {
       videoSrc: GiraffeVideo9,
-      title: '10.4" Color Touchscreen Interface',
-      overview:
-        "You interact through a 10.4-inch color touchscreen with a touch-free alarm silence feature — enabling quick responses while maintaining sterility.",
-      features: [
-        "10.4-inch color touchscreen",
-        "Touch-free alarm silence feature",
-        "Quick responses with maintained sterility",
-      ],
+      title: "Touchscreen",
+      overview: '10.4" display with touch-free silence.',
+      features: ['10.4"', "Touch-free", "Sterile friendly"],
       rotation: { azimuthal: Math.PI / 4, polar: Math.PI / 3 },
     },
     10: {
       videoSrc: GiraffeVideo10,
-      title: "In-Bed Weighing with Trend Tracking",
-      overview:
-        "You can weigh the baby directly in the bed and track weight trends over time — reducing handling and supporting accurate growth monitoring.",
-      features: [
-        "Weigh directly in the bed",
-        "Track weight trends over time",
-        "Accurate growth monitoring with reduced handling",
-      ],
+      title: "Weighing",
+      overview: "In-bed weighing with trends.",
+      features: ["In-bed", "Trend tracking", "Less handling"],
       rotation: { azimuthal: 0, polar: 0 },
+    },
+    11: {
+      videoSrc: null,
+      title: "Servo Oxygen",
+      overview: "Optional automatic oxygen control.",
+      features: ["Auto oxygen", "Optional", "Precise"],
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
     },
   };
 
