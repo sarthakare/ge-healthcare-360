@@ -442,7 +442,7 @@ const Model9100NXT = () => {
   const hotspots = [
     { id: 1, name: "Introduction to 9100NXT", position: [0, 1.25, 0] },
     { id: 2, name: "Autoclavable Breathing System", position: [-1.4, 0, 0.5] },
-    { id: 3, name: "CO₂ Bypass System", position: [-1.5, -0.5, 0.4] },
+    { id: 3, name: "CO₂ Bypass System", position: [-1.5, -0.75, 0.4] },
     { id: 4, name: "Flow-Valve Technology", position: [0.75, 1.5, 0.05] },
     { id: 5, name: "Hypoxia Guard & Apnea Backup", position: [-0.5, 1, 0.15] },
     { id: 6, name: "Integrated Auxiliary Common Gas Outlet", position: [-0.35, -0.05, 1] },
