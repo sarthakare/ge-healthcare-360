@@ -10,6 +10,7 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import CS750Model from "../assets/cs750/model/CS750.glb";
+import CS750Video0 from "../assets/cs750/videos/cs750_Introduction.mp4";
 import CS750Video1 from "../assets/cs750/videos/cs750_Modes_Of_Ventilation.mp4";
 import CS750Video2 from "../assets/cs750/videos/cs750_EcoFlow.mp4";
 import CS750Video3 from "../assets/cs750/videos/cs750_Recruitment_Maneuver.mp4";
@@ -440,8 +441,7 @@ const CS750 = () => {
   };
 
   const hotspots = [
-    // Video 1 – Introduction to Carestation 750 (commented: no video available yet)
-    // { id: 0, name: "Introduction to Carestation 750", position: [-1.5, 2.5, 0.65] },
+    { id: 0, name: "Introduction to Carestation 750", position: [0.5, 2.25, 0.5] },
     { id: 1, name: "Modes of Ventilation", position: [-1.5, 1.75, 0.65] },
     { id: 2, name: "Flow Rates & FiO₂ Control", position: [-1.825, 2, 0.65] },
     { id: 3, name: "ecoFLOW", position: [-1.825, 1.75, 0.65] },
@@ -457,20 +457,19 @@ const CS750 = () => {
   ];
 
   const hotspotsConfig = {
-    // Video 1 – Introduction to Carestation 750 (commented: no video available yet)
-    // 0: {
-    //   videoSrc: null,
-    //   title: "Introduction to Carestation 750",
-    //   overview:
-    //     "The Carestation 750 is an advanced anesthesia delivery system designed to provide precise ventilation, optimized gas delivery, and intuitive clinical control across a wide range of surgical settings.",
-    //   features: [
-    //     "Advanced anesthesia workstation",
-    //     "Precision ventilation & gas delivery",
-    //     "Designed for modern OR workflows",
-    //     "Trusted GE HealthCare platform",
-    //   ],
-    //   rotation: { azimuthal: 0, polar: Math.PI / 2 },
-    // },
+    0: {
+      videoSrc: CS750Video0,
+      title: "Introduction to Carestation 750",
+      overview:
+        "The Carestation 750 is an advanced anesthesia delivery system designed to provide precise ventilation, optimized gas delivery, and intuitive clinical control across a wide range of surgical settings.",
+      features: [
+        "Advanced anesthesia workstation",
+        "Precision ventilation & gas delivery",
+        "Designed for modern OR workflows",
+        "Trusted GE HealthCare platform",
+      ],
+      rotation: { azimuthal: 0, polar: Math.PI / 2 },
+    },
     1: {
       videoSrc: CS750Video1,
       title: "Modes of Ventilation",
