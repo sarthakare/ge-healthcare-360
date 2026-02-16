@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Model9100NXT from './pages/Model9100NXT';
 import ECGHolter from './pages/ECGHolter';
@@ -11,9 +12,34 @@ import CS750 from './pages/CS750';
 import GiraffeOmnibedCarestation from './pages/GiraffeOmnibedCarestation';
 import './App.css';
 
+const PAGE_TITLES = {
+  '/': 'Home',
+  '/9100c-nxt': '9100C NXT',
+  '/ecg-holter': 'ECG Holter',
+  '/led-phototherapy': 'LED Phototherapy',
+  '/mac-5': 'MAC 5',
+  '/sle6000': 'SLE6000',
+  '/b1x5m-patient-monitors': 'B1x5M Patient Monitors',
+  '/lullaby-warmer': 'Lullaby Warmer',
+  '/carestation-750': 'Carestation 750',
+  '/giraffe-omnibed-carestation': 'Giraffe Omnibed Carestation',
+};
+
+function PageTitleUpdater() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const pageName = PAGE_TITLES[location.pathname] || 'GE HealthCare 360';
+    document.title = `GE HealthCare - ${pageName}`;
+  }, [location.pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <BrowserRouter>
+      <PageTitleUpdater />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/9100c-nxt" element={<Model9100NXT />} />
