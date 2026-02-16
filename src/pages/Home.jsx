@@ -1590,7 +1590,7 @@ const Home = () => {
                               style={{
                                 width: isMobile ? "100%" : "100%", 
                                 height: isMobile ? "90px" : "90px", 
-                                background:"rgb(60, 61, 64)", 
+                                background:"#000",
                                 transition: "transform 0.3s ease",
                               }} 
                             >
