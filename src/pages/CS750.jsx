@@ -10,18 +10,18 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import CS750Model from "../assets/cs750/model/CS750.glb";
-import CS750Video1 from "../assets/cs750/videos/01-Modes_of_Ventilation.mp4";
-import CS750Video2 from "../assets/cs750/videos/02-EcoFlow.mp4";
-import CS750Video3 from "../assets/cs750/videos/03-Lung_Recruitment_Procedures.mp4";
-import CS750Video4 from "../assets/cs750/videos/04-Customisable_Case_profiles.mp4";
-import CS750Video5 from "../assets/cs750/videos/05-ICU_Quality_Ventilation.mp4";
-import CS750Video6 from "../assets/cs750/videos/06-Compact_Breathing_System.mp4";
-import CS750Video7 from "../assets/cs750/videos/07-Intelligent_Lighting.mp4";
-import CS750Video8 from "../assets/cs750/videos/08-Integrated_Anaesthesia_Gas.mp4";
-import CS750Video9 from "../assets/cs750/videos/09-checkout.mp4";
-import CS750Video10 from "../assets/cs750/videos/10-Cable_Management.mp4";
-import CS750Video11 from "../assets/cs750/videos/11-Premium_Arm.mp4";
-import CS750Video12 from "../assets/cs750/videos/12-Flow_rates_Fio2.mp4";
+import CS750Video1 from "../assets/cs750/videos/cs750_Modes_Of_Ventilation.mp4";
+import CS750Video2 from "../assets/cs750/videos/cs750_EcoFlow.mp4";
+import CS750Video3 from "../assets/cs750/videos/cs750_Recruitment_Maneuver.mp4";
+import CS750Video4 from "../assets/cs750/videos/cs750_Customizable_Case_Profiles.mp4";
+import CS750Video5 from "../assets/cs750/videos/cs750_ICU_Quality_Ventilation.mp4";
+import CS750Video6 from "../assets/cs750/videos/cs750_Compact_Breathing_System.mp4";
+import CS750Video7 from "../assets/cs750/videos/cs750_Intelligent_Lighting.mp4";
+import CS750Video8 from "../assets/cs750/videos/cs750_Integrated_Gas_Module.mp4";
+import CS750Video9 from "../assets/cs750/videos/cs750_Checkout.mp4";
+import CS750Video10 from "../assets/cs750/videos/cs750_Cable_Management.mp4";
+import CS750Video11 from "../assets/cs750/videos/cs750_360_Arm.mp4";
+import CS750Video12 from "../assets/cs750/videos/cs750_Flow_Rates_Fio2.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
