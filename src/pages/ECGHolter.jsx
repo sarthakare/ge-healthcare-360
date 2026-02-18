@@ -1,9 +1,4 @@
-import {
-  useState,
-  useCallback,
-  useRef,
-  useEffect,
-} from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
@@ -15,7 +10,9 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import ECGHolterModel from "../assets/ecg-holter/model/ECG Holter Combined.glb";
-import ECGHolterVideo from "../assets/ecg-holter/videos/01-Modes_of_Ventilation.mp4";
+import CardioSoftPlatformOverviewVideo from "../assets/ecg-holter/videos/Cardiosoft_on laptop screen.mp4";
+import CC14AcquisitionModuleVideo from "../assets/ecg-holter/videos/Cc14 Module_on patient.mp4";
+import T1000TreadmillIntegrationVideo from "../assets/ecg-holter/videos/T1000 Treadmill_on treadmill.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 
 const Model = ({ glbPath, onLoad }) => {
@@ -61,7 +58,7 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
 
     const intersections = raycasterRef.current.intersectObjects(
       objectsToCheck,
-      false
+      false,
     );
 
     let isOccluded = false;
@@ -278,7 +275,8 @@ const VideoPopup = ({
                   padding: "20px",
                 }}
               >
-                Video file not available. Please add the video file to the assets folder.
+                Video file not available. Please add the video file to the
+                assets folder.
               </div>
             )}
           </div>
@@ -313,7 +311,7 @@ const VideoPopup = ({
                       color: "#6022A6",
                     }}
                   >
-                    Overview
+                    Short Description
                   </h3>
                   <p
                     style={{
@@ -337,7 +335,7 @@ const VideoPopup = ({
                       color: "#6022A6",
                     }}
                   >
-                    Key Features
+                    Key Highlights
                   </h3>
                   <ul
                     style={{
@@ -389,57 +387,57 @@ const ECGHolter = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "Device Display", position: [0, -1.5, 2.3] },
-    { id: 2, name: "Patient Leads", position: [-1, -1.5, 0] },
-    { id: 3, name: "Battery Compartment", position: [1, -1.5, 0] },
+    { id: 1, name: "CardioSoft Platform Overview", position: [2.75, 1, -0.4] },
+    { id: 2, name: "CC14 Acquisition Module", position: [0.45, 0.5, 0] },
+    { id: 3, name: "T1000 Treadmill Integration", position: [0, -1, 2] },
   ];
 
   const hotspotsConfig = {
     1: {
-      videoSrc: ECGHolterVideo,
-      title: "High-Resolution ECG Display",
+      videoSrc: CardioSoftPlatformOverviewVideo,
+      title: "CardioSoft Platform Overview",
       overview:
-        "Review ECG waveforms and patient vitals on an easy-to-read OLED interface that supports quick diagnostics in ambulatory settings.",
+        "CardioSoft is a comprehensive diagnostic cardiology platform that brings together ECG acquisition, stress testing, and data management in one connected system.",
       features: [
-        "Multi-lead waveform visualization",
-        "Touch-enabled gesture controls",
-        "Real-time arrhythmia alerts",
-        "Night-friendly low-power mode",
+        "Diagnostic cardiology platform",
+        "Integrated ECG & stress testing",
+        "Centralized data management",
+        "Designed for clinical efficiency",
       ],
       rotation: {
-        azimuthal: 0,
+        azimuthal: Math.PI,
         polar: Math.PI / 2,
       },
     },
     2: {
-      videoSrc: ECGHolterVideo,
-      title: "Lead Management & Connectivity",
+      videoSrc: CC14AcquisitionModuleVideo,
+      title: "CC14 Acquisition Module",
       overview:
-        "Secure lead connectors ensure artifact-free data capture in mobile use cases.",
+        "The CC14 module enables high-quality ECG signal acquisition, ensuring accurate and reliable cardiac data collection during diagnostic procedures.",
       features: [
-        "Color-coded snap adapters",
-        "Tug-resistant strain relief",
-        "Cable organizer clips",
-        "Moisture-sealed contacts",
+        "High-quality ECG acquisition",
+        "Reliable signal capture",
+        "Supports diagnostic accuracy",
+        "Designed for clinical use",
       ],
       rotation: {
-        azimuthal: -Math.PI / 2,
+        azimuthal: Math.PI / 3,
         polar: Math.PI / 2,
       },
     },
     3: {
-      videoSrc: ECGHolterVideo,
-      title: "Smart Battery Module",
+      videoSrc: T1000TreadmillIntegrationVideo,
+      title: "T1000 Treadmill Integration",
       overview:
-        "Field-swappable lithium-ion battery with LED health indicators and fast charge support.",
+        "The T1000 treadmill works in sync with CardioSoft to provide smooth, controlled exercise testing with accurate speed and incline adjustments.",
       features: [
-        "Hot-swap ready design",
-        "Magnetic safety latch",
-        "USB-C PD fast charging",
-        "Integrated charge diagnostics",
+        "Medical-grade treadmill",
+        "Controlled speed & incline",
+        "Smooth operation",
+        "Designed for stress testing",
       ],
       rotation: {
-        azimuthal: Math.PI,
+        azimuthal: 0,
         polar: Math.PI / 2,
       },
     },
@@ -472,7 +470,10 @@ const ECGHolter = () => {
       while (azimuthalDelta > Math.PI) azimuthalDelta -= 2 * Math.PI;
       while (azimuthalDelta < -Math.PI) azimuthalDelta += 2 * Math.PI;
       if (Math.abs(azimuthalDelta) > Math.PI / 2) {
-        azimuthalDelta = azimuthalDelta > 0 ? azimuthalDelta - 2 * Math.PI : azimuthalDelta + 2 * Math.PI;
+        azimuthalDelta =
+          azimuthalDelta > 0
+            ? azimuthalDelta - 2 * Math.PI
+            : azimuthalDelta + 2 * Math.PI;
       }
 
       const startTime = performance.now();
@@ -482,12 +483,16 @@ const ECGHolter = () => {
         const progress = Math.min(elapsed / duration, 1);
         const easedProgress = 1 - Math.pow(1 - progress, 3);
 
-        const currentAzimuthal = startAzimuthal + azimuthalDelta * easedProgress;
-        const currentPolar = startPolar + (targetPolar - startPolar) * easedProgress;
+        const currentAzimuthal =
+          startAzimuthal + azimuthalDelta * easedProgress;
+        const currentPolar =
+          startPolar + (targetPolar - startPolar) * easedProgress;
 
-        const x = currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
+        const x =
+          currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
         const y = currentDistance * Math.cos(currentPolar);
-        const z = currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
+        const z =
+          currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
 
         camera.position.set(target.x + x, target.y + y, target.z + z);
         camera.lookAt(target);
@@ -502,7 +507,7 @@ const ECGHolter = () => {
 
       animationFrameRef.current = requestAnimationFrame(animate);
     },
-    [cartesianToSpherical]
+    [cartesianToSpherical],
   );
 
   const animateYAxisRotation = useCallback(
@@ -531,9 +536,11 @@ const ECGHolter = () => {
         const currentAzimuthal = startAzimuthal + oscillation * rotationRange;
         const currentPolar = startPolar;
 
-        const x = currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
+        const x =
+          currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
         const y = currentDistance * Math.cos(currentPolar);
-        const z = currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
+        const z =
+          currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
 
         camera.position.set(target.x + x, target.y + y, target.z + z);
         camera.lookAt(target);
@@ -548,7 +555,7 @@ const ECGHolter = () => {
 
       animationFrameRef.current = requestAnimationFrame(animate);
     },
-    [cartesianToSpherical]
+    [cartesianToSpherical],
   );
 
   const openHotspotPopup = (hotspotId) => {
@@ -607,12 +614,12 @@ const ECGHolter = () => {
     <div
       style={{
         height: "100vh",
-          position: "relative",
-          backgroundImage:
-  "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
-          backgroundRepeat: "no-repeat, no-repeat",
-          backgroundPosition: "bottom center, center",
-          backgroundSize: "auto, cover",
+        position: "relative",
+        backgroundImage:
+          "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
+        backgroundRepeat: "no-repeat, no-repeat",
+        backgroundPosition: "bottom center, center",
+        backgroundSize: "auto, cover",
       }}
     >
       <button
@@ -628,8 +635,8 @@ const ECGHolter = () => {
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -654,8 +661,8 @@ const ECGHolter = () => {
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -675,15 +682,13 @@ const ECGHolter = () => {
           right: "36%",
           zIndex: 10,
           padding: "10px 20px",
-          backgroundColor: hotspotsVisible
-            ? "#F37F63"
-            : "#F37F63",
+          backgroundColor: hotspotsVisible ? "#F37F63" : "#F37F63",
           color: "#000",
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
           fontSize: "15px",
-          fontWeight:"600",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = hotspotsVisible
@@ -770,10 +775,7 @@ const ECGHolter = () => {
           target={[0, 0, 0]}
         />
         <Environment preset="apartment" />
-        <Model
-          glbPath={ECGHolterModel}
-          onLoad={handleModelLoad}
-        />
+        <Model glbPath={ECGHolterModel} onLoad={handleModelLoad} />
         {hotspotsVisible &&
           hotspots.map((h) => (
             <Hotspot
@@ -781,7 +783,9 @@ const ECGHolter = () => {
               position={h.position}
               annotation={h.name}
               onHotspotClick={() => handleHotspotClick(h.id)}
-              isVideoPlaying={popupData !== null && popupData.hotspotId === h.id}
+              isVideoPlaying={
+                popupData !== null && popupData.hotspotId === h.id
+              }
             />
           ))}
       </Canvas>
@@ -847,7 +851,7 @@ const ECGHolter = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            fontWeight:"600",
+            fontWeight: "600",
           }}
           // onMouseEnter={(e) => {
           //   e.currentTarget.style.filter = "brightness(1.1)";
@@ -875,9 +879,10 @@ const ECGHolter = () => {
               flexDirection: "column",
               borderWidth: "2px",
               borderStyle: "solid",
-              borderImage:"linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
-              borderRadius:"6px", 
-              padding:"0px 15px 10px",
+              borderImage:
+                "linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
+              borderRadius: "6px",
+              padding: "0px 15px 10px",
             }}
           >
             {hotspots.map((h, index) => (
@@ -912,4 +917,3 @@ const ECGHolter = () => {
 };
 
 export default ECGHolter;
-
