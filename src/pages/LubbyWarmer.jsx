@@ -402,18 +402,18 @@ import {
   
     const hotspots = [
       { id: 1, name: "Introduction", position: [0, 0, 0] },
-      { id: 2, name: "Calrod Heater", position: [0, 1.8, 0] },
-      { id: 3, name: "Far-Infrared Safety", position: [0, 1.8, 0.35] },
+      { id: 2, name: "Calrod Heater – Rapid & Uniform Heating", position: [0, 1.8, 0] },
+      { id: 3, name: "Far-Infrared Heat Safety", position: [0, 1.8, 0.35] },
       { id: 4, name: "Walls of Warmth", position: [0, -0.25, 0.75] },
       { id: 5, name: "High Irradiance", position:[0, 1.8, 0.75] },
-      { id: 6, name: "Precise Control", position: [0, 0.75, -0.75] },
-      { id: 7, name: "Rotating Head", position: [0, 1.75, -0.75] },
-      { id: 8, name: "Panels & Mattress", position: [-0.6, -0.25, 0] },
-      { id: 9, name: "Durability", position: [0, 0, 0] },
-      { id: 10, name: "Display & Alarms", position: [-0.25, 1.1, -0.75] },
-      { id: 11, name: "Bed Tilt", position: [-0.6, -1, 0.15] },
+      { id: 6, name: "Precise Heater Control", position: [0, 0.75, -0.75] },
+      { id: 7, name: "Rotating Heater Head", position: [0, 1.75, -0.75] },
+      { id: 8, name: "Bio-Compatible Panels & Mattress", position: [-0.6, -0.25, 0] },
+      { id: 9, name: "Durability & Reliability", position: [0, 0, 0] },
+      { id: 10, name: "Display & Visual Alerts", position: [-0.25, 1.1, -0.75] },
+      { id: 11, name: "Bed Tilting", position: [-0.6, -1, 0.15] },
       { id: 12, name: "X-ray Tray", position: [0, -0.5, 0.75] },
-      { id: 13, name: "Certifications", position: [0, 0, 0] },
+      { id: 13, name: "Safety Certifications", position: [0, 0, 0] },
     ];
   
     const defaultRotation = { azimuthal: 0, polar: Math.PI / 2 };
@@ -427,103 +427,124 @@ import {
           "Infant warming system",
           "Gentle thermal care",
           "NICU & L&D ready",
+          "Clinically trusted design",
         ],
         rotation: defaultRotation,
       },
       2: {
         videoSrc: VideoRapidUniformHeating,
-        title: "Calrod Heater",
+        title: "Calrod Heater - Rapid & Uniform Heating",
         overview:
-          "The Calrod heater delivers uniform heat distribution and prepares the bed within 240 seconds for rapid response.",
-        features: ["Uniform heat", "Ready in 240 seconds", "Rapid response"],
+          "The Calrod heater delivers uniform heat distribution and prepares the bed within 240 seconds, enabling quick response in critical situations.",
+        features: [
+          "Uniform heat distribution",
+          "Bed ready in 240 seconds",
+          "Rapid thermal response",
+        ],
         rotation: defaultRotation,
       },
       3: {
         videoSrc: VideoFarInfraredHeat,
-        title: "Far-Infrared Safety",
+        title: "Far-Infrared Heat Safety",
         overview:
-          "Far-infrared heat supports safe warming while reducing retinal risk.",
-        features: ["Far-infrared", "Eye safety", "Gentle warmth"],
+          "Far-infrared heat is easily absorbed by the cornea, helping reduce the risk of retinal damage while providing safe warming.",
+        features: [
+          "Far-infrared technology",
+          "Supports eye safety",
+          "Gentle heat delivery",
+        ],
         rotation: defaultRotation,
       },
       4: {
         videoSrc: VideoWallsOfWarmth,
-        title: "Walls of Warmth",
+        title: "Walls of Warmth Technology",
         overview:
-          "Three heating zones minimize heat loss and maintain stability.",
-        features: ["Three zones", "Reduced loss", "Stable warmth"],
+          "Three heating zones help minimize conductive heat loss and maintain a stable thermal environment.",
+        features: [
+          "Three heating zones",
+          "Reduced heat loss",
+          "Thermal stability",
+        ],
         rotation: defaultRotation,
       },
       5: {
         videoSrc: VideoHighIrradiance,
-        title: "High Irradiance",
+        title: "High Irradiance at Lower Wattage",
         overview:
-          "High irradiance at lower wattage helps reduce insensible water loss.",
-        features: ["540W", "High irradiance", "Reduced water loss"],
+          "Operating at 540 watts, the warmer achieves high irradiance while helping reduce insensible water loss.",
+        features: ["540W operation", "High irradiance", "Reduced water loss"],
         rotation: defaultRotation,
       },
       6: {
         videoSrc: VideoPreciseHeatingControl,
-        title: "Precise Control",
+        title: "Precise Heater Control",
         overview:
-          "Heater power adjusts in 5% increments for accuracy.",
-        features: ["5% steps", "Accurate control", "Better management"],
+          "Heater power can be adjusted in 5% increments for precise temperature management.",
+        features: ["5% increments", "Accurate control", "Improved management"],
         rotation: defaultRotation,
       },
       7: {
         videoSrc: VideoHeaterHeadRotation,
-        title: "Rotating Head",
+        title: "Rotating Heater Head",
         overview:
-          "90° rotation enables X-ray access with auto shut-off safety.",
+          "A 90° rotating heater head allows bedside X-rays and automatically shuts off for safety.",
         features: ["90° rotation", "Auto shut-off", "X-ray friendly"],
         rotation: defaultRotation,
       },
       8: {
         videoSrc: VideoBioCompatiblePanels,
-        title: "Panels & Mattress",
+        title: "Bio-Compatible Panels & Mattress",
         overview:
-          "Bio-compatible panels and thermal mattress retain warmth.",
-        features: ["Safe materials", "Thermal mattress", "Heat retention"],
+          "Foldable bio-compatible panels and a thermal mattress help retain warmth and ensure comfort.",
+        features: [
+          "Bio-compatible panels",
+          "Thermal mattress",
+          "Heat retention",
+        ],
         rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2},
       },
       9: {
         videoSrc: VideoBuiltForReliability,
-        title: "Durability",
+        title: "Durability & Reliability",
         overview:
-          "Built for reliability with rugged probes and long heater life.",
-        features: ["Rugged probes", "7-year heater", "Reliable"],
+          "Lower power use, rugged probes, and a 7-year heater warranty support long-term reliability.",
+        features: [
+          "Lower power use",
+          "Rugged probes",
+          "7-year heater warranty",
+        ],
         rotation: defaultRotation,
       },
       10: {
         videoSrc: VideoClearDisplay,
-        title: "Display & Alarms",
+        title: "Display & Visual Alerts",
         overview:
-          "Large display and color alarms improve awareness.",
-        features: ["Large screen", "Color alarms", "Clear status"],
+          "A large display and color-coded alarms provide quick system status visibility.",
+        features: ["Large display", "Color-coded alarms", "Clear indicators"],
         rotation: defaultRotation,
       },
       11: {
         videoSrc: VideoSmoothBedTilt,
-        title: "Bed Tilt",
+        title: "Bed Tilting",
         overview:
-          "±15° tilt supports procedures.",
-        features: ["±15°", "Flexible care", "Comfort"],
+          "Smooth ±15° tilt allows flexible positioning during care.",
+        features: ["±15° tilt", "Clinical flexibility", "Caregiver comfort"],
         rotation: { azimuthal: -Math.PI / 2, polar: Math.PI / 2},
       },
       12: {
         videoSrc: VideoXrayTray,
-        title: "X-ray Tray",
+        title: "In-Built X-Ray Tray",
         overview:
           "Integrated tray enables imaging without moving the baby.",
-        features: ["Built-in tray", "No movement", "Thermal stability"],
+        features: ["Integrated tray", "No repositioning", "Maintains warmth"],
         rotation: defaultRotation,
       },
       13: {
         videoSrc: VideoGlobalSafety,
-        title: "Certifications",
+        title: "Safety Certifications",
         overview:
-          "Meets international safety standards.",
-        features: ["FDA", "CE", "Global safety"],
+          "US FDA and CE approvals reflect global safety and quality standards.",
+        features: ["US FDA approved", "CE certified", "Global compliance"],
         rotation: defaultRotation,
       },
     };
