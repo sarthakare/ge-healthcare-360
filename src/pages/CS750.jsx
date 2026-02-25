@@ -24,6 +24,7 @@ import CS750Video10 from "../assets/cs750/videos/cs750_Cable_Management.mp4";
 import CS750Video11 from "../assets/cs750/videos/cs750_360_Arm.mp4";
 import CS750Video12 from "../assets/cs750/videos/cs750_Flow_Rates_Fio2.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
+import DisclaimerButton from "../components/DisclaimerButton";
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -70,7 +71,7 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
 
     const intersections = raycasterRef.current.intersectObjects(
       objectsToCheck,
-      false
+      false,
     );
 
     let isOccluded = false;
@@ -319,7 +320,8 @@ const VideoPopup = ({
                   padding: "20px",
                 }}
               >
-                Video file not available. Please add the video file to the assets folder.
+                Video file not available. Please add the video file to the
+                assets folder.
               </div>
             )}
           </div>
@@ -441,11 +443,19 @@ const CS750 = () => {
   };
 
   const hotspots = [
-    { id: 0, name: "Introduction to Carestation 750", position: [0.5, 2.25, 0.5] },
+    {
+      id: 0,
+      name: "Introduction to Carestation 750",
+      position: [0.5, 2.25, 0.5],
+    },
     { id: 1, name: "Modes of Ventilation", position: [-1.5, 1.75, 0.65] },
     { id: 2, name: "Flow Rates & FiO₂ Control", position: [-1.825, 2, 0.65] },
     { id: 3, name: "ecoFLOW", position: [-1.825, 1.75, 0.65] },
-    { id: 4, name: "Customisable Case Profiles", position: [-1.825, 2.25, 0.65] },
+    {
+      id: 4,
+      name: "Customisable Case Profiles",
+      position: [-1.825, 2.25, 0.65],
+    },
     { id: 5, name: "Recruitment Manoeuvre", position: [-0.9, 2.05, 0.65] },
     { id: 6, name: "ICU Quality Ventilation", position: [0, 0.95, 0.75] },
     { id: 7, name: "Compact Breathing System", position: [-1.15, 0.6, 1.1] },
@@ -688,55 +698,58 @@ const CS750 = () => {
 
       animationFrameRef.current = requestAnimationFrame(animate);
     },
-    [cartesianToSpherical]
+    [cartesianToSpherical],
   );
 
-  const animateYAxisRotation = useCallback((duration = 4000) => {
-    if (!orbitControlsRef.current) return;
+  const animateYAxisRotation = useCallback(
+    (duration = 4000) => {
+      if (!orbitControlsRef.current) return;
 
-    const controls = orbitControlsRef.current;
-    const camera = controls.object;
-    const target = controls.target;
+      const controls = orbitControlsRef.current;
+      const camera = controls.object;
+      const target = controls.target;
 
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-    }
-
-    const currentSpherical = cartesianToSpherical(camera.position, target);
-    const startAzimuthal = currentSpherical.azimuthal;
-    const startPolar = currentSpherical.polar;
-    const currentDistance = currentSpherical.radius;
-
-    const rotationRange = (20 * Math.PI) / 180;
-    const startTime = performance.now();
-
-    const animate = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const oscillation = Math.sin(progress * Math.PI * 2);
-
-      const currentAzimuthal = startAzimuthal + oscillation * rotationRange;
-      const currentPolar = startPolar;
-
-      const x =
-        currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
-      const y = currentDistance * Math.cos(currentPolar);
-      const z =
-        currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
-
-      camera.position.set(target.x + x, target.y + y, target.z + z);
-      camera.lookAt(target);
-      controls.update();
-
-      if (progress < 1) {
-        animationFrameRef.current = requestAnimationFrame(animate);
-      } else {
-        animationFrameRef.current = null;
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
       }
-    };
 
-    animationFrameRef.current = requestAnimationFrame(animate);
-  }, [cartesianToSpherical]);
+      const currentSpherical = cartesianToSpherical(camera.position, target);
+      const startAzimuthal = currentSpherical.azimuthal;
+      const startPolar = currentSpherical.polar;
+      const currentDistance = currentSpherical.radius;
+
+      const rotationRange = (20 * Math.PI) / 180;
+      const startTime = performance.now();
+
+      const animate = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const oscillation = Math.sin(progress * Math.PI * 2);
+
+        const currentAzimuthal = startAzimuthal + oscillation * rotationRange;
+        const currentPolar = startPolar;
+
+        const x =
+          currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
+        const y = currentDistance * Math.cos(currentPolar);
+        const z =
+          currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
+
+        camera.position.set(target.x + x, target.y + y, target.z + z);
+        camera.lookAt(target);
+        controls.update();
+
+        if (progress < 1) {
+          animationFrameRef.current = requestAnimationFrame(animate);
+        } else {
+          animationFrameRef.current = null;
+        }
+      };
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+    },
+    [cartesianToSpherical],
+  );
 
   const openHotspotPopup = (hotspotId) => {
     const config = hotspotsConfig[hotspotId] || hotspotsConfig[1];
@@ -795,12 +808,12 @@ const CS750 = () => {
     <div
       style={{
         height: "100vh",
-          position: "relative",
-          backgroundImage:
-  "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
-          backgroundRepeat: "no-repeat, no-repeat",
-          backgroundPosition: "bottom center, center",
-          backgroundSize: "auto, cover",
+        position: "relative",
+        backgroundImage:
+          "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
+        backgroundRepeat: "no-repeat, no-repeat",
+        backgroundPosition: "bottom center, center",
+        backgroundSize: "auto, cover",
       }}
     >
       <button
@@ -816,8 +829,8 @@ const CS750 = () => {
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -832,7 +845,7 @@ const CS750 = () => {
       <button
         onClick={handleReset}
         style={{
-           position: "absolute",
+          position: "absolute",
           top: "20px",
           right: "47.8%",
           zIndex: 10,
@@ -842,8 +855,8 @@ const CS750 = () => {
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -863,15 +876,13 @@ const CS750 = () => {
           right: "36%",
           zIndex: 10,
           padding: "10px 20px",
-          backgroundColor: hotspotsVisible
-            ? "#F37F63"
-            : "#F37F63",
+          backgroundColor: hotspotsVisible ? "#F37F63" : "#F37F63",
           color: "#000",
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
           fontSize: "15px",
-          fontWeight:"600",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = hotspotsVisible
@@ -958,10 +969,7 @@ const CS750 = () => {
           target={[0, 0, 0]}
         />
         <Environment preset="apartment" />
-        <Model
-          glbPath={CS750Model}
-          onLoad={handleModelLoad}
-        />
+        <Model glbPath={CS750Model} onLoad={handleModelLoad} />
         {hotspotsVisible && (
           <>
             {hotspots.map((h) => (
@@ -985,6 +993,8 @@ const CS750 = () => {
           100% { transform: rotate(360deg); }
         }
       `}</style>
+
+      <DisclaimerButton disclaimerText="The official names of the product is Carestation™ 750,  authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The anesthesia delivery system is intended for use by trained healthcare professionals familiar with anesthesia workflows and ventilatory management. For safe and effective operation, users must verify system calibration, ensure correct gas supply connections, and confirm ventilator and agent settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout the procedure. These systems must not be used in environments containing explosive gases or on patients with contraindications to general anesthesia. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request" />
 
       <div
         style={{
@@ -1013,7 +1023,7 @@ const CS750 = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            fontWeight:"600",
+            fontWeight: "600",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.filter = "brightness(1.1)";
@@ -1041,9 +1051,10 @@ const CS750 = () => {
               flexDirection: "column",
               borderWidth: "2px",
               borderStyle: "solid",
-              borderImage:"linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
-              borderRadius:"6px", 
-              padding:"0px 15px 10px",
+              borderImage:
+                "linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
+              borderRadius: "6px",
+              padding: "0px 15px 10px",
             }}
           >
             {hotspots.map((h, index) => (
@@ -1078,5 +1089,3 @@ const CS750 = () => {
 };
 
 export default CS750;
-
-

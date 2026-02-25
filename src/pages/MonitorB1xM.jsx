@@ -21,6 +21,7 @@ import MonitorPortsVideo from "../assets/monitors-b1xm/videos/09 Multiple Monito
 import EntropyVideo from "../assets/monitors-b1xm/videos/10 Entropy™ Monitoring.mp4";
 import ConnectedVideo from "../assets/monitors-b1xm/videos/11 Advanced Connectivity.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
+import DisclaimerButton from "../components/DisclaimerButton";
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -65,7 +66,7 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
 
     const intersections = raycasterRef.current.intersectObjects(
       objectsToCheck,
-      false
+      false,
     );
 
     let isOccluded = false;
@@ -287,7 +288,8 @@ const VideoPopup = ({
                   padding: "20px",
                 }}
               >
-                Video file not available. Please add the video file to the assets folder.
+                Video file not available. Please add the video file to the
+                assets folder.
               </div>
             )}
           </div>
@@ -674,7 +676,7 @@ const MonitorB1xM = () => {
 
       animationFrameRef.current = requestAnimationFrame(animate);
     },
-    [cartesianToSpherical]
+    [cartesianToSpherical],
   );
 
   const animateYAxisRotation = useCallback(
@@ -722,7 +724,7 @@ const MonitorB1xM = () => {
 
       animationFrameRef.current = requestAnimationFrame(animate);
     },
-    [cartesianToSpherical]
+    [cartesianToSpherical],
   );
 
   const openHotspotPopup = (hotspotId) => {
@@ -990,6 +992,8 @@ const MonitorB1xM = () => {
           background: linear-gradient(180deg, #ff987f 0%, #7a35c4 100%);
         }
       `}</style>
+
+      <DisclaimerButton disclaimerText="The official name of the product is B1X5 Patient Monitors, authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with relevant clinical workflows and equipment operation. For safe and effective operation, users must verify system calibration, ensure correct supply and connectivity, and confirm settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on patients with contraindications to its intended clinical use. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request." />
 
       <div
         style={{

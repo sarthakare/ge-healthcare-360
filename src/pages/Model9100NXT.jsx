@@ -23,6 +23,7 @@ import VideoPSVProAlgorithm from "../assets/9100nxt/videos/9100nxt_PSVPro_Algori
 import VideoThreeGasCapability from "../assets/9100nxt/videos/9100nxt_Three_Gas_Capability.mp4";
 import VideoTwoFlowSensors from "../assets/9100nxt/videos/9100nxt_Dual_Flow_Sensors.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
+import DisclaimerButton from "../components/DisclaimerButton";
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -69,7 +70,7 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
 
     const intersections = raycasterRef.current.intersectObjects(
       objectsToCheck,
-      false
+      false,
     );
 
     let isOccluded = false;
@@ -318,7 +319,8 @@ const VideoPopup = ({
                   padding: "20px",
                 }}
               >
-                Video file not available. Please add the video file to the assets folder.
+                Video file not available. Please add the video file to the
+                assets folder.
               </div>
             )}
           </div>
@@ -445,8 +447,16 @@ const Model9100NXT = () => {
     { id: 3, name: "CO₂ Bypass System", position: [-1.5, -0.75, 0.4] },
     { id: 4, name: "Flow-Valve Technology", position: [0.75, 1.5, 0.05] },
     { id: 5, name: "Hypoxia Guard & Apnea Backup", position: [-0.5, 1, 0.15] },
-    { id: 6, name: "Integrated Auxiliary Common Gas Outlet", position: [-0.35, -0.05, 1] },
-    { id: 7, name: "One Device for the Whole Hospital", position: [0, -0.5, 1] },  
+    {
+      id: 6,
+      name: "Integrated Auxiliary Common Gas Outlet",
+      position: [-0.35, -0.05, 1],
+    },
+    {
+      id: 7,
+      name: "One Device for the Whole Hospital",
+      position: [0, -0.5, 1],
+    },
     { id: 8, name: "Pre-Use Guided System Check", position: [0.5, 1.75, 0.05] },
     { id: 9, name: "PSVPro™ Algorithm", position: [-1.75, 0.5, -0.25] },
     { id: 10, name: "Three-Gas Capability", position: [-0.5, 1.25, 0.15] },
@@ -664,55 +674,58 @@ const Model9100NXT = () => {
 
       animationFrameRef.current = requestAnimationFrame(animate);
     },
-    [cartesianToSpherical]
+    [cartesianToSpherical],
   );
 
-  const animateYAxisRotation = useCallback((duration = 4000) => {
-    if (!orbitControlsRef.current) return;
+  const animateYAxisRotation = useCallback(
+    (duration = 4000) => {
+      if (!orbitControlsRef.current) return;
 
-    const controls = orbitControlsRef.current;
-    const camera = controls.object;
-    const target = controls.target;
+      const controls = orbitControlsRef.current;
+      const camera = controls.object;
+      const target = controls.target;
 
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-    }
-
-    const currentSpherical = cartesianToSpherical(camera.position, target);
-    const startAzimuthal = currentSpherical.azimuthal;
-    const startPolar = currentSpherical.polar;
-    const currentDistance = currentSpherical.radius;
-
-    const rotationRange = (20 * Math.PI) / 180;
-    const startTime = performance.now();
-
-    const animate = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const oscillation = Math.sin(progress * Math.PI * 2);
-
-      const currentAzimuthal = startAzimuthal + oscillation * rotationRange;
-      const currentPolar = startPolar;
-
-      const x =
-        currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
-      const y = currentDistance * Math.cos(currentPolar);
-      const z =
-        currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
-
-      camera.position.set(target.x + x, target.y + y, target.z + z);
-      camera.lookAt(target);
-      controls.update();
-
-      if (progress < 1) {
-        animationFrameRef.current = requestAnimationFrame(animate);
-      } else {
-        animationFrameRef.current = null;
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
       }
-    };
 
-    animationFrameRef.current = requestAnimationFrame(animate);
-  }, [cartesianToSpherical]);
+      const currentSpherical = cartesianToSpherical(camera.position, target);
+      const startAzimuthal = currentSpherical.azimuthal;
+      const startPolar = currentSpherical.polar;
+      const currentDistance = currentSpherical.radius;
+
+      const rotationRange = (20 * Math.PI) / 180;
+      const startTime = performance.now();
+
+      const animate = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const oscillation = Math.sin(progress * Math.PI * 2);
+
+        const currentAzimuthal = startAzimuthal + oscillation * rotationRange;
+        const currentPolar = startPolar;
+
+        const x =
+          currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
+        const y = currentDistance * Math.cos(currentPolar);
+        const z =
+          currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
+
+        camera.position.set(target.x + x, target.y + y, target.z + z);
+        camera.lookAt(target);
+        controls.update();
+
+        if (progress < 1) {
+          animationFrameRef.current = requestAnimationFrame(animate);
+        } else {
+          animationFrameRef.current = null;
+        }
+      };
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+    },
+    [cartesianToSpherical],
+  );
 
   const openHotspotPopup = (hotspotId) => {
     const config = hotspotsConfig[hotspotId] || hotspotsConfig[1];
@@ -771,12 +784,12 @@ const Model9100NXT = () => {
     <div
       style={{
         height: "100vh",
-          position: "relative",
-          backgroundImage:
-  "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
-          backgroundRepeat: "no-repeat, no-repeat",
-          backgroundPosition: "bottom center, center",
-          backgroundSize: "auto, cover",
+        position: "relative",
+        backgroundImage:
+          "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
+        backgroundRepeat: "no-repeat, no-repeat",
+        backgroundPosition: "bottom center, center",
+        backgroundSize: "auto, cover",
       }}
     >
       <button
@@ -792,8 +805,8 @@ const Model9100NXT = () => {
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -818,8 +831,8 @@ const Model9100NXT = () => {
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -839,15 +852,13 @@ const Model9100NXT = () => {
           right: "36%",
           zIndex: 10,
           padding: "10px 20px",
-          backgroundColor: hotspotsVisible
-            ? "#F37F63"
-            : "#F37F63",
+          backgroundColor: hotspotsVisible ? "#F37F63" : "#F37F63",
           color: "#000",
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
           fontSize: "15px",
-          fontWeight:"600",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = hotspotsVisible
@@ -934,10 +945,7 @@ const Model9100NXT = () => {
           target={[0, 0, 0]}
         />
         <Environment preset="apartment" />
-        <Model
-          glbPath={Model9100NXTModel}
-          onLoad={handleModelLoad}
-        />
+        <Model glbPath={Model9100NXTModel} onLoad={handleModelLoad} />
         {hotspotsVisible && (
           <>
             {hotspots.map((h) => (
@@ -961,6 +969,8 @@ const Model9100NXT = () => {
           100% { transform: rotate(360deg); }
         }
       `}</style>
+
+      <DisclaimerButton disclaimerText="The official name of the product is 9100c NXT, authorized by Wipro GE HealthCare Pvt. Ltd., located at No. 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with anesthesia workflows and ventilatory management. For safe and effective operation, users must verify system calibration, ensure correct gas supply connections, and confirm ventilator and agent settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout the procedure. This system must not be used in environments containing explosive gases or on patients with contraindications to general anesthesia. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22 December 2025, and additional product and safety information is available upon request." />
 
       <div
         style={{
@@ -989,7 +999,7 @@ const Model9100NXT = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            fontWeight:"600",
+            fontWeight: "600",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.filter = "brightness(1.1)";
@@ -1017,9 +1027,10 @@ const Model9100NXT = () => {
               flexDirection: "column",
               borderWidth: "2px",
               borderStyle: "solid",
-              borderImage:"linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
-              borderRadius:"6px", 
-              padding:"0px 15px 10px",
+              borderImage:
+                "linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
+              borderRadius: "6px",
+              padding: "0px 15px 10px",
             }}
           >
             {hotspots.map((h, index) => (
@@ -1054,4 +1065,3 @@ const Model9100NXT = () => {
 };
 
 export default Model9100NXT;
-

@@ -21,6 +21,7 @@ import GiraffeVideo8 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_
 import GiraffeVideo9 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_10_4_Inch_Color_Touchscreen_Interface.mp4";
 import GiraffeVideo10 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_In_Bed_Weighing_With_Trend_Tracking.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
+import DisclaimerButton from "../components/DisclaimerButton";
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -975,6 +976,8 @@ const GiraffeOmnibedCarestation = () => {
           100% { transform: rotate(360deg); }
         }
       `}</style>
+
+      <DisclaimerButton disclaimerText="The official name of the product is Giraffe™ Omnibed Carestation, authorized by Wipro GE HealthCare Pvt. Ltd., located at No. 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with neonatal care workflows and thermoregulation management. For safe and effective operation, users must verify system calibration, ensure proper probe placement and temperature settings, and confirm alarm and monitoring parameters appropriate to the infant’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on infants with contraindications to thermal support. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was reviewed on 22 December 2025, and additional information is available upon request." />
 
       <div
         style={{

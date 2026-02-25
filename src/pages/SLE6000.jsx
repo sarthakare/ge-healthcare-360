@@ -24,6 +24,7 @@ import SLE6000Video11 from "../assets/sle6000/videos/Sle_6000_Clear_Top_Mounted_
 import SLE6000Video12 from "../assets/sle6000/videos/Sle_6000_Real_Time_Lung_Mechanics_Monitoring.mp4";
 import SLE6000Video13 from "../assets/sle6000/videos/Sle_6000_Intuitive_Mode_Panel_Interface.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
+import DisclaimerButton from "../components/DisclaimerButton";
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -999,6 +1000,8 @@ const SLE6000 = () => {
           background: linear-gradient(180deg, #ff987f 0%, #7a35c4 100%);
         }
       `}</style>
+
+      <DisclaimerButton disclaimerText="The official name of the product is SLE 6000 H, authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with relevant clinical workflows and equipment operation. For safe and effective operation, users must verify system calibration, ensure correct supply and connectivity, and confirm settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on patients with contraindications to its intended clinical use. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request." />
 
       <div
         style={{

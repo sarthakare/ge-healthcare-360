@@ -1,9 +1,4 @@
-import {
-  useState,
-  useCallback,
-  useRef,
-  useEffect,
-} from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
@@ -26,6 +21,7 @@ import VideoEnergyEfficient from "../assets/led-phototherapy/videos/Led_Photothe
 import VideoLongLedLife from "../assets/led-phototherapy/videos/Led_Phototherapy_Long_Led_Life.mp4";
 import VideoGlobalSafety from "../assets/led-phototherapy/videos/Led_Phototherapy_Global_Safety_Certifications.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
+import DisclaimerButton from "../components/DisclaimerButton";
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -70,7 +66,7 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
 
     const intersections = raycasterRef.current.intersectObjects(
       objectsToCheck,
-      false
+      false,
     );
 
     let isOccluded = false;
@@ -287,7 +283,8 @@ const VideoPopup = ({
                   padding: "20px",
                 }}
               >
-                Video file not available. Please add the video file to the assets folder.
+                Video file not available. Please add the video file to the
+                assets folder.
               </div>
             )}
           </div>
@@ -430,18 +427,14 @@ const LEDPhototherapy = () => {
       overview:
         "Delivers light at 458 nm within a 450-465 nm therapeutic window for accurate therapy.",
       features: ["458 nm target", "450-465 nm range", "Accurate delivery"],
-      rotation: { azimuthal: -Math.PI / 4, polar: Math.PI / 2},
+      rotation: { azimuthal: -Math.PI / 4, polar: Math.PI / 2 },
     },
     3: {
       videoSrc: VideoFasterBilirubin,
       title: "Faster Bilirubin Breakdown",
       overview:
         "Ten blue LEDs enable up to 28% faster bilirubin reduction for quicker response.",
-      features: [
-        "10 blue LEDs",
-        "28% faster reduction",
-        "Efficient therapy",
-      ],
+      features: ["10 blue LEDs", "28% faster reduction", "Efficient therapy"],
       rotation: defaultRotation,
     },
     4: {
@@ -449,12 +442,8 @@ const LEDPhototherapy = () => {
       title: "Dual Irradiance Levels",
       overview:
         "Two irradiance settings allow therapy customization based on patient needs.",
-      features: [
-        "22 µW/cm²/nm",
-        "45 µW/cm²/nm",
-        "Patient-specific care",
-      ],
-      rotation: { azimuthal: -Math.PI / 1.5, polar: Math.PI / 2},
+      features: ["22 µW/cm²/nm", "45 µW/cm²/nm", "Patient-specific care"],
+      rotation: { azimuthal: -Math.PI / 1.5, polar: Math.PI / 2 },
     },
     5: {
       videoSrc: VideoUniformLight,
@@ -484,7 +473,7 @@ const LEDPhototherapy = () => {
       title: "Energy Efficiency",
       overview: "Consumes just 20 watts, saving up to 80% energy.",
       features: ["20W power", "80% energy savings", "Efficient design"],
-      rotation: { azimuthal: -Math.PI / 1.5, polar: Math.PI / 2},
+      rotation: { azimuthal: -Math.PI / 1.5, polar: Math.PI / 2 },
     },
     9: {
       videoSrc: VideoLongLedLife,
@@ -530,7 +519,9 @@ const LEDPhototherapy = () => {
       while (azimuthalDelta < -Math.PI) azimuthalDelta += 2 * Math.PI;
       if (Math.abs(azimuthalDelta) > Math.PI / 2) {
         azimuthalDelta =
-          azimuthalDelta > 0 ? azimuthalDelta - 2 * Math.PI : azimuthalDelta + 2 * Math.PI;
+          azimuthalDelta > 0
+            ? azimuthalDelta - 2 * Math.PI
+            : azimuthalDelta + 2 * Math.PI;
       }
 
       const startTime = performance.now();
@@ -540,13 +531,16 @@ const LEDPhototherapy = () => {
         const progress = Math.min(elapsed / duration, 1);
         const easedProgress = 1 - Math.pow(1 - progress, 3);
 
-        const currentAzimuthal = startAzimuthal + azimuthalDelta * easedProgress;
+        const currentAzimuthal =
+          startAzimuthal + azimuthalDelta * easedProgress;
         const currentPolar =
           startPolar + (targetPolar - startPolar) * easedProgress;
 
-        const x = currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
+        const x =
+          currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
         const y = currentDistance * Math.cos(currentPolar);
-        const z = currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
+        const z =
+          currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
 
         camera.position.set(target.x + x, target.y + y, target.z + z);
         camera.lookAt(target);
@@ -561,7 +555,7 @@ const LEDPhototherapy = () => {
 
       animationFrameRef.current = requestAnimationFrame(animate);
     },
-    [cartesianToSpherical]
+    [cartesianToSpherical],
   );
 
   const animateYAxisRotation = useCallback(
@@ -591,9 +585,11 @@ const LEDPhototherapy = () => {
 
         const currentPolar = startPolar;
 
-        const x = currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
+        const x =
+          currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
         const y = currentDistance * Math.cos(currentPolar);
-        const z = currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
+        const z =
+          currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
 
         camera.position.set(target.x + x, target.y + y, target.z + z);
         camera.lookAt(target);
@@ -608,7 +604,7 @@ const LEDPhototherapy = () => {
 
       animationFrameRef.current = requestAnimationFrame(animate);
     },
-    [cartesianToSpherical]
+    [cartesianToSpherical],
   );
 
   const openHotspotPopup = (hotspotId) => {
@@ -735,9 +731,7 @@ const LEDPhototherapy = () => {
           right: "36%",
           zIndex: 10,
           padding: "10px 20px",
-          backgroundColor: hotspotsVisible
-            ? "#F37F63"
-            : "#F37F63",
+          backgroundColor: hotspotsVisible ? "#F37F63" : "#F37F63",
           color: "#000",
           border: "none",
           borderRadius: "6px",
@@ -830,10 +824,7 @@ const LEDPhototherapy = () => {
           target={[0, 0, 0]}
         />
         <Environment preset="apartment" />
-        <Model
-          glbPath={LEDPhototherapyModel}
-          onLoad={handleModelLoad}
-        />
+        <Model glbPath={LEDPhototherapyModel} onLoad={handleModelLoad} />
         {hotspotsVisible &&
           hotspots.map((h) => (
             <Hotspot
@@ -841,7 +832,9 @@ const LEDPhototherapy = () => {
               position={h.position}
               annotation={h.name}
               onHotspotClick={() => handleHotspotClick(h.id)}
-              isVideoPlaying={popupData !== null && popupData.hotspotId === h.id}
+              isVideoPlaying={
+                popupData !== null && popupData.hotspotId === h.id
+              }
             />
           ))}
       </Canvas>
@@ -879,6 +872,8 @@ const LEDPhototherapy = () => {
           background: linear-gradient(180deg, #ff987f 0%, #7a35c4 100%);
         }
       `}</style>
+
+      <DisclaimerButton disclaimerText="The official name of the product is Lullaby LED PT, authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with relevant clinical workflows and equipment operation. For safe and effective operation, users must verify system calibration, ensure correct supply and connectivity, and confirm settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on patients with contraindications to its intended clinical use. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request." />
 
       <div
         style={{
@@ -927,7 +922,8 @@ const LEDPhototherapy = () => {
               flexDirection: "column",
               borderWidth: "2px",
               borderStyle: "solid",
-              borderImage: "linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
+              borderImage:
+                "linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
               borderRadius: "6px",
               padding: "0px 15px 10px",
             }}
@@ -963,4 +959,3 @@ const LEDPhototherapy = () => {
 };
 
 export default LEDPhototherapy;
-
