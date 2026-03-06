@@ -36,6 +36,20 @@ const Home = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login", { replace: true });
+    setIsMenuOpen(false);
+  };
+
+  const userJson = localStorage.getItem("user");
+  let user = null;
+  try {
+    user = userJson ? JSON.parse(userJson) : null;
+  } catch (_) {}
+  const isAdmin = user?.role === "admin";
+
   const categories = [
     {
       name: "Diagnostic Cardiology",
@@ -332,6 +346,35 @@ const Home = () => {
 
 <div className="nav-menu"> 
   <ul>
+    {isAdmin && (
+      <li>
+        <button
+          type="button"
+          onClick={() => navigate("/admin/users")}
+          style={{
+            padding: "10px 18px",
+            backgroundColor: "transparent",
+            color: "#6022A6",
+            border: "1px solid #6022A6",
+            borderRadius: "6px",
+            fontSize: "15px",
+            fontWeight: "600",
+            cursor: "pointer",
+            fontFamily: "inherit",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "#6022A6";
+            e.currentTarget.style.color = "#fff";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "transparent";
+            e.currentTarget.style.color = "#6022A6";
+          }}
+        >
+          Manage users
+        </button>
+      </li>
+    )}
     <li>
       <a 
         href="#" 
@@ -343,6 +386,34 @@ const Home = () => {
       >
         Contact Us
       </a>
+    </li>
+    <li>
+      <button
+        type="button"
+        onClick={handleLogout}
+        style={{
+          marginLeft: "12px",
+          padding: "10px 18px",
+          backgroundColor: "transparent",
+          color: "#6022A6",
+          border: "1px solid #6022A6",
+          borderRadius: "6px",
+          fontSize: "15px",
+          fontWeight: "600",
+          cursor: "pointer",
+          fontFamily: "inherit",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = "#6022A6";
+          e.currentTarget.style.color = "#fff";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = "transparent";
+          e.currentTarget.style.color = "#6022A6";
+        }}
+      >
+        Sign out
+      </button>
     </li>
   </ul>
 </div>
@@ -472,6 +543,7 @@ const Home = () => {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
+                  navigate("/");
                   setIsMenuOpen(false);
                 }}
                 style={{
@@ -483,6 +555,28 @@ const Home = () => {
               >
                 Home
               </a>
+              {isAdmin && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigate("/admin/users");
+                    setIsMenuOpen(false);
+                  }}
+                  style={{
+                    padding: "10px 18px",
+                    backgroundColor: "transparent",
+                    color: "#6022A6",
+                    border: "1px solid #6022A6",
+                    borderRadius: "6px",
+                    fontSize: "15px",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                    fontFamily: "inherit",
+                  }}
+                >
+                  Manage users
+                </button>
+              )}
               <a
                 href="#"
                 onClick={(e) => {
@@ -545,7 +639,26 @@ const Home = () => {
               >
                 Monitoring
               </a>
- 
+              <button
+                type="button"
+                onClick={handleLogout}
+                style={{
+                  marginTop: "8px",
+                  padding: "12px 16px",
+                  backgroundColor: "transparent",
+                  color: "#6022A6",
+                  border: "1px solid #6022A6",
+                  borderRadius: "8px",
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  cursor: "pointer",
+                  fontFamily: "inherit",
+                  width: "100%",
+                  textAlign: "left",
+                }}
+              >
+                Sign out
+              </button>
             </nav>
           </div>
         </div>
