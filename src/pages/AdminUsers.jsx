@@ -1,6 +1,5 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import ContactUsModal from "../components/ContactUsModal";
 import "../App.css";
 
 const API_BASE = import.meta.env.VITE_API_URL || "";
@@ -15,7 +14,6 @@ function AdminUsers() {
   const [createLoading, setCreateLoading] = useState(false);
   const [createError, setCreateError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [form, setForm] = useState({ email: "", password: "", name: "" });
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -28,8 +26,19 @@ function AdminUsers() {
   const [editError, setEditError] = useState("");
   const [deleteConfirmUser, setDeleteConfirmUser] = useState(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isCompactMenu, setIsCompactMenu] = useState(window.innerWidth <= 1024);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const settingsRef = useRef(null);
 
   const token = localStorage.getItem("token");
+  const userJson = localStorage.getItem("user");
+  let user = null;
+  try {
+    user = userJson ? JSON.parse(userJson) : null;
+  } catch {
+    user = null;
+  }
 
   const filteredUsers = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
@@ -79,6 +88,29 @@ function AdminUsers() {
     fetchUsers();
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      const compact = window.innerWidth <= 1024;
+      setIsCompactMenu(compact);
+      if (!compact) {
+        setIsMenuOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+        setIsSettingsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
+
   const handleCreateUser = async (e) => {
     e.preventDefault();
     setCreateError("");
@@ -115,6 +147,8 @@ function AdminUsers() {
   };
 
   const handleLogout = () => {
+    setIsSettingsOpen(false);
+    setIsMenuOpen(false);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     navigate("/login", { replace: true });
@@ -207,6 +241,23 @@ function AdminUsers() {
         background: "linear-gradient(180deg, #f8f7fc 0%, #f0eef8 50%, #fff 100%)",
       }}
     >
+      <style>{`
+        .admin-mobile-menu-button {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 8px;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .admin-mobile-menu-button span {
+          width: 24px;
+          height: 2px;
+          background: #6022A6;
+          transition: all 0.3s;
+        }
+      `}</style>
       <header
         style={{
           backgroundColor: "#fff",
@@ -242,80 +293,278 @@ function AdminUsers() {
               style={{ height: "40px", width: "auto", objectFit: "contain" }}
             />
           </div>
-          <div className="nav-menu">
-            <ul>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => navigate("/")}
-                  style={{
-                    marginLeft: "12px",
-                    padding: "10px 18px",
-                    backgroundColor: "transparent",
-                    color: "#6022A6",
-                    border: "1px solid #6022A6",
-                    borderRadius: "6px",
-                    fontSize: "15px",
-                    fontWeight: "600",
-                    cursor: "pointer",
-                    fontFamily: "inherit",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "#6022A6";
-                    e.currentTarget.style.color = "#fff";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "transparent";
-                    e.currentTarget.style.color = "#6022A6";
-                  }}
-                >
-                  Home
-                </button>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="btn-primary"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsContactModalOpen(true);
-                  }}
-                >
-                  Contact Us
-                </a>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  style={{
-                    marginLeft: "12px",
-                    padding: "10px 18px",
-                    backgroundColor: "transparent",
-                    color: "#6022A6",
-                    border: "1px solid #6022A6",
-                    borderRadius: "6px",
-                    fontSize: "15px",
-                    fontWeight: "600",
-                    cursor: "pointer",
-                    fontFamily: "inherit",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "#6022A6";
-                    e.currentTarget.style.color = "#fff";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "transparent";
-                    e.currentTarget.style.color = "#6022A6";
-                  }}
-                >
-                  Sign out
-                </button>
-              </li>
-            </ul>
-          </div>
+          {!isCompactMenu ? (
+            <div className="nav-menu">
+              <ul>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => navigate("/")}
+                    style={{
+                      marginLeft: "12px",
+                      padding: "10px 18px",
+                      backgroundColor: "transparent",
+                      color: "#6022A6",
+                      border: "1px solid #6022A6",
+                      borderRadius: "6px",
+                      fontSize: "15px",
+                      fontWeight: "600",
+                      cursor: "pointer",
+                      fontFamily: "inherit",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = "#6022A6";
+                      e.currentTarget.style.color = "#fff";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "transparent";
+                      e.currentTarget.style.color = "#6022A6";
+                    }}
+                  >
+                    Home
+                  </button>
+                </li>
+                <li ref={settingsRef} style={{ position: "relative" }}>
+                  <button
+                    type="button"
+                    aria-label="Settings"
+                    onClick={() => setIsSettingsOpen((prev) => !prev)}
+                    style={{
+                      width: "38px",
+                      height: "38px",
+                      borderRadius: "8px",
+                      border: "1px solid #e5e7eb",
+                      background: "#fff",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer",
+                      color: "#6022A6",
+                    }}
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="3" />
+                      <path d="M19.4 15a1.7 1.7 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.2V21a2 2 0 1 1-4 0v-.08a1.7 1.7 0 0 0-.4-1.2 1.7 1.7 0 0 0-1-.6 1.7 1.7 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.2-.4H2.72a2 2 0 1 1 0-4h.08a1.7 1.7 0 0 0 1.2-.4 1.7 1.7 0 0 0 .6-1 1.7 1.7 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.2V2.72a2 2 0 1 1 4 0v.08a1.7 1.7 0 0 0 .4 1.2 1.7 1.7 0 0 0 1 .6 1.7 1.7 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9c0 .38.22.74.6 1 .34.24.75.38 1.2.4h.08a2 2 0 1 1 0 4h-.08a1.7 1.7 0 0 0-1.2.4 1.7 1.7 0 0 0-.6 1z" />
+                    </svg>
+                  </button>
+                  {isSettingsOpen && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "calc(100% + 8px)",
+                        right: 0,
+                        minWidth: "240px",
+                        backgroundColor: "#fff",
+                        border: "1px solid #e5e7eb",
+                        borderRadius: "8px",
+                        boxShadow: "0 10px 20px rgba(0, 0, 0, 0.12)",
+                        zIndex: 120,
+                        overflow: "hidden",
+                      }}
+                    >
+                      <div
+                        style={{
+                          padding: "10px 12px",
+                          borderBottom: "1px solid #e5e7eb",
+                          fontSize: "13px",
+                          color: "#475569",
+                          backgroundColor: "#f8fafc",
+                          width: "100%",
+                          overflowWrap: "anywhere",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                        }}
+                      >
+                        {user?.photoURL || user?.avatar ? (
+                          <img
+                            src={user?.photoURL || user?.avatar}
+                            alt="Profile"
+                            style={{
+                              width: "28px",
+                              height: "28px",
+                              borderRadius: "50%",
+                              objectFit: "cover",
+                              border: "1px solid #d1d5db",
+                              flexShrink: 0,
+                            }}
+                          />
+                        ) : (
+                          <div
+                            style={{
+                              width: "28px",
+                              height: "28px",
+                              borderRadius: "50%",
+                              backgroundColor: "#e2e8f0",
+                              color: "#334155",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              fontSize: "12px",
+                              fontWeight: "600",
+                              flexShrink: 0,
+                            }}
+                          >
+                            {(user?.email?.[0] || "U").toUpperCase()}
+                          </div>
+                        )}
+                        <span>{user?.email || "No email"}</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleLogout}
+                        style={{
+                          width: "100%",
+                          textAlign: "left",
+                          padding: "10px 12px",
+                          background: "transparent",
+                          border: "none",
+                          cursor: "pointer",
+                          color: "red",
+                          fontSize: "14px",
+                          fontFamily: "inherit",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                        }}
+                      >
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                          <polyline points="16 17 21 12 16 7" />
+                          <line x1="21" y1="12" x2="9" y2="12" />
+                        </svg>
+                        <span>Logout</span>
+                      </button>
+                    </div>
+                  )}
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <button
+              className="admin-mobile-menu-button"
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+              aria-label="Toggle menu"
+            >
+              <span
+                style={{
+                  transform: isMenuOpen ? "rotate(45deg) translate(5px, 5px)" : "none",
+                }}
+              />
+              <span
+                style={{
+                  opacity: isMenuOpen ? 0 : 1,
+                }}
+              />
+              <span
+                style={{
+                  transform: isMenuOpen ? "rotate(-45deg) translate(7px, -6px)" : "none",
+                }}
+              />
+            </button>
+          )}
         </div>
       </header>
+      {isCompactMenu && (
+        <>
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: "rgba(0, 0, 0, 0.5)",
+              zIndex: 99,
+              opacity: isMenuOpen ? 1 : 0,
+              visibility: isMenuOpen ? "visible" : "hidden",
+              transition: "opacity 0.3s, visibility 0.3s",
+            }}
+            onClick={() => setIsMenuOpen(false)}
+          />
+          <div
+            style={{
+              position: "fixed",
+              top: "73px",
+              right: isMenuOpen ? 0 : "-100%",
+              width: "280px",
+              height: "calc(100vh - 73px)",
+              background: "#ffffff",
+              zIndex: 101,
+              transition: "right 0.3s",
+              boxShadow: "-2px 0 8px rgba(0, 0, 0, 0.1)",
+              padding: "24px",
+              overflowY: "auto",
+            }}
+          >
+            <nav
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "18px",
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  navigate("/");
+                  setIsMenuOpen(false);
+                }}
+                style={{
+                  padding: "0",
+                  backgroundColor: "transparent",
+                  color: "#6022A6",
+                  border: "none",
+                  fontSize: "18px",
+                  fontWeight: "500",
+                  cursor: "pointer",
+                  fontFamily: "inherit",
+                  width: "fit-content",
+                  textAlign: "left",
+                }}
+              >
+                Home
+              </button>
+              <button
+                type="button"
+                onClick={handleLogout}
+                style={{
+                  padding: "0",
+                  backgroundColor: "transparent",
+                  color: "red",
+                  border: "none",
+                  fontSize: "18px",
+                  fontWeight: "500",
+                  cursor: "pointer",
+                  fontFamily: "inherit",
+                  width: "fit-content",
+                  textAlign: "left",
+                }}
+              >
+                Logout
+              </button>
+            </nav>
+          </div>
+        </>
+      )}
       <main
         style={{
           maxWidth: "1200px",
@@ -1151,10 +1400,6 @@ function AdminUsers() {
         </div>
       )}
 
-      <ContactUsModal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
-      />
     </div>
   );
 }

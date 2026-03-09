@@ -3,6 +3,9 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 
 const ContactUsModal = ({ isOpen, onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(
+    typeof window !== "undefined" ? window.innerWidth <= 768 : false
+  );
   const [showPhoneNumbers, setShowPhoneNumbers] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Price Quote");
   const [message, setMessage] = useState("");
@@ -51,6 +54,14 @@ const ContactUsModal = ({ isOpen, onClose }) => {
     // You can add API call here
     // handleClose(); // Close modal after submission if needed
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -134,13 +145,15 @@ const ContactUsModal = ({ isOpen, onClose }) => {
         width: "100%",
         height: "100%",
         display: "flex",
-        alignItems: "center",
+        alignItems: isMobileView ? "flex-start" : "center",
         justifyContent: "center",
         zIndex: 2000,
         backgroundColor: "rgba(0, 0, 0, 0.5)",
         backdropFilter: "blur(4px)",
         opacity: isVisible ? 1 : 0,
         transition: "opacity 0.2s ease",
+        padding: isMobileView ? "12px" : "0",
+        boxSizing: "border-box",
       }}
       onClick={(e) => {
         if (e.target === e.currentTarget) {
@@ -152,10 +165,10 @@ const ContactUsModal = ({ isOpen, onClose }) => {
         style={{
           backgroundColor: "#ffffff",
           borderRadius: "8px",
-          padding: "60px",
+          padding: isMobileView ? "20px 16px" : "60px",
           maxWidth: "900px",
-          width: "90%",
-          maxHeight: "90vh",
+          width: isMobileView ? "100%" : "90%",
+          maxHeight: isMobileView ? "calc(100vh - 24px)" : "90vh",
           overflowY: "auto",
           boxSizing: "border-box",
           position: "relative",
@@ -200,7 +213,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
         {/* Title */}
         <p
           style={{
-            fontSize: "32px",
+            fontSize: isMobileView ? "26px" : "32px",
             color: "#333",
             lineHeight: "1.5",
             margin: "0 0 20px 0",
@@ -213,7 +226,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
         {/* Main Message */}
         <p
           style={{
-            fontSize: "32px",
+            fontSize: isMobileView ? "24px" : "32px",
             color: "#333",
             margin: "0 0 24px 0",
             lineHeight: "1.5",
@@ -348,7 +361,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
             <div
               style={{
                 display: "flex",
-                flexWrap: "nowrap",
+                flexWrap: isMobileView ? "wrap" : "nowrap",
                 border: "1px solid #d6d6d6",
                 borderRadius: "6px",
                 overflow: "hidden",
@@ -361,7 +374,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                   key={option}
                   onClick={() => handleOptionClick(option)}
                   style={{
-                    flex: "1",
+                    flex: isMobileView ? "1 1 100%" : "1",
                     padding: "14px 16px",
                     backgroundColor:
                       selectedOption === option ? "#6022A6" : "#fff",
@@ -376,7 +389,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
                     cursor: "pointer",
                     fontFamily: "'Source Sans Pro', sans-serif",
                     transition: "all 0.2s",
-                    whiteSpace: "nowrap",
+                    whiteSpace: isMobileView ? "normal" : "nowrap",
                     outline: "none",
                   }}
                   onMouseEnter={(e) => {
@@ -485,7 +498,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                gridTemplateColumns: isMobileView ? "1fr" : "1fr 1fr",
                 gap: "16px",
                 marginBottom: "16px",
               }}
@@ -554,7 +567,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                gridTemplateColumns: isMobileView ? "1fr" : "1fr 1fr",
                 gap: "16px",
               }}
             >
@@ -646,7 +659,7 @@ const ContactUsModal = ({ isOpen, onClose }) => {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                gridTemplateColumns: isMobileView ? "1fr" : "1fr 1fr",
                 gap: "16px",
               }}
             >

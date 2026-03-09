@@ -18,7 +18,6 @@ const Home = () => {
   const [openAccordion, setOpenAccordion] = useState("DiagnosticCardiology");
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [isMobileSettingsOpen, setIsMobileSettingsOpen] = useState(false);
   const settingsRef = useRef(null);
 
   useEffect(() => {
@@ -44,12 +43,6 @@ const Home = () => {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
-  useEffect(() => {
-    if (!isMenuOpen) {
-      setIsMobileSettingsOpen(false);
-    }
-  }, [isMenuOpen]);
-
   const handleCardClick = (path) => {
     if (path) {
       navigate(path);
@@ -58,7 +51,6 @@ const Home = () => {
 
   const handleLogout = () => {
     setIsSettingsOpen(false);
-    setIsMobileSettingsOpen(false);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     navigate("/login", { replace: true });
@@ -193,9 +185,6 @@ const Home = () => {
 
         }
         @media (min-width: 768px) and (max-width: 1024px) {
-          .cards-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
           .main-heading {
             font-size: 42px !important;
           }
@@ -734,119 +723,49 @@ const Home = () => {
               >
                 Contact Us
               </button>
-              <button
-                type="button"
-                onClick={() => setIsMobileSettingsOpen((prev) => !prev)}
-                style={{
-                  marginTop: "8px",
-                  padding: "12px 16px",
-                  backgroundColor: "transparent",
-                  color: "#6022A6",
-                  border: "1px solid #6022A6",
-                  borderRadius: "8px",
-                  fontSize: "16px",
-                  fontWeight: "600",
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  width: "100%",
-                  textAlign: "left",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                Settings
-                <span style={{ fontSize: "14px" }}>
-                  {isMobileSettingsOpen ? "▲" : "▼"}
-                </span>
-              </button>
-              {isMobileSettingsOpen && (
-                <div
+              {isAdmin && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigate("/admin/users");
+                    setIsMenuOpen(false);
+                  }}
                   style={{
-                    marginTop: "-12px",
-                    border: "1px solid #e5e7eb",
-                    borderRadius: "8px",
-                    overflow: "hidden",
+                    marginTop: "4px",
+                    padding: "0",
+                    backgroundColor: "transparent",
+                    color: "#6022A6",
+                    border: "none",
+                    fontSize: "18px",
+                    fontWeight: "500",
+                    cursor: "pointer",
+                    fontFamily: "inherit",
+                    width: "fit-content",
+                    textAlign: "left",
                   }}
                 >
-                  {isAdmin && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        navigate("/admin/users");
-                        setIsMenuOpen(false);
-                        setIsMobileSettingsOpen(false);
-                      }}
-                      style={{
-                        width: "100%",
-                        textAlign: "left",
-                        padding: "12px 14px",
-                        background: "#fff",
-                        border: "none",
-                        borderBottom: "1px solid #e5e7eb",
-                        color: "#222",
-                        fontSize: "15px",
-                        fontFamily: "inherit",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "8px",
-                      }}
-                    >
-                      <svg
-                        width="15"
-                        height="15"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                        <circle cx="8.5" cy="7" r="4" />
-                        <path d="M20 8v6" />
-                        <path d="M23 11h-6" />
-                      </svg>
-                      <span>Manager User</span>
-                    </button>
-                  )}
-                  <button
-                    type="button"
-                    onClick={handleLogout}
-                    style={{
-                      width: "100%",
-                      textAlign: "left",
-                      padding: "12px 14px",
-                      background: "#fff",
-                      border: "none",
-                      color: "red",
-                      fontSize: "15px",
-                      fontFamily: "inherit",
-                      cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                    }}
-                  >
-                    <svg
-                      width="15"
-                      height="15"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                      <polyline points="16 17 21 12 16 7" />
-                      <line x1="21" y1="12" x2="9" y2="12" />
-                    </svg>
-                    <span>Logout</span>
-                  </button>
-                </div>
+                  Manager User
+                </button>
               )}
+              <button
+                type="button"
+                onClick={handleLogout}
+                style={{
+                  marginTop: "4px",
+                  padding: "0",
+                  backgroundColor: "transparent",
+                  color: "red",
+                  border: "none",
+                  fontSize: "18px",
+                  fontWeight: "500",
+                  cursor: "pointer",
+                  fontFamily: "inherit",
+                  width: "fit-content",
+                  textAlign: "left",
+                }}
+              >
+                Logout
+              </button>
             </nav>
           </div>
         </div>
