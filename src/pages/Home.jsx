@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image9100NXT from "../assets/9100nxt/images/9100nxt.png";
 import ImageCS750 from "../assets/cs750/images/cs750.png";
 import ImageSLE6000 from "../assets/sle6000/images/sle6000.png";
@@ -17,6 +17,9 @@ const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openAccordion, setOpenAccordion] = useState("DiagnosticCardiology");
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isMobileSettingsOpen, setIsMobileSettingsOpen] = useState(false);
+  const settingsRef = useRef(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,6 +33,23 @@ const Home = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+        setIsSettingsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      setIsMobileSettingsOpen(false);
+    }
+  }, [isMenuOpen]);
+
   const handleCardClick = (path) => {
     if (path) {
       navigate(path);
@@ -37,6 +57,8 @@ const Home = () => {
   };
 
   const handleLogout = () => {
+    setIsSettingsOpen(false);
+    setIsMobileSettingsOpen(false);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     navigate("/login", { replace: true });
@@ -47,7 +69,9 @@ const Home = () => {
   let user = null;
   try {
     user = userJson ? JSON.parse(userJson) : null;
-  } catch (_) {}
+  } catch {
+    user = null;
+  }
   const isAdmin = user?.role === "admin";
 
   const categories = [
@@ -328,95 +352,228 @@ const Home = () => {
               style={{
                 display: "flex",
                 alignItems: "center",
-                cursor: "pointer",
-                gap: isMobile ? "8px" : "10px",
+                gap: isMobile ? "8px" : "12px",
               }}
-              onClick={() => navigate("/")}
             >
-              <img
-                src="/logo_GE.png"
-                alt="GE HealthCare Logo"
+              <div
                 style={{
-                  height: isMobile ? "32px" : "40px",
-                  width: "auto",
-                  objectFit: "contain",
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
+                  gap: isMobile ? "8px" : "10px",
                 }}
-              />
+                onClick={() => navigate("/")}
+              >
+                <img
+                  src="/logo_GE.png"
+                  alt="GE HealthCare Logo"
+                  style={{
+                    height: isMobile ? "32px" : "40px",
+                    width: "auto",
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
             </div>
 
-<div className="nav-menu"> 
-  <ul>
-    {isAdmin && (
-      <li>
-        <button
-          type="button"
-          onClick={() => navigate("/admin/users")}
-          style={{
-            padding: "10px 18px",
-            backgroundColor: "transparent",
-            color: "#6022A6",
-            border: "1px solid #6022A6",
-            borderRadius: "6px",
-            fontSize: "15px",
-            fontWeight: "600",
-            cursor: "pointer",
-            fontFamily: "inherit",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = "#6022A6";
-            e.currentTarget.style.color = "#fff";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = "transparent";
-            e.currentTarget.style.color = "#6022A6";
-          }}
-        >
-          Manage users
-        </button>
-      </li>
-    )}
-    <li>
-      <a 
-        href="#" 
-        className="btn-primary"
-        onClick={(e) => {
-          e.preventDefault();
-          setIsContactModalOpen(true);
-        }}
-      >
-        Contact Us
-      </a>
-    </li>
-    <li>
-      <button
-        type="button"
-        onClick={handleLogout}
-        style={{
-          marginLeft: "12px",
-          padding: "10px 18px",
-          backgroundColor: "transparent",
-          color: "#6022A6",
-          border: "1px solid #6022A6",
-          borderRadius: "6px",
-          fontSize: "15px",
-          fontWeight: "600",
-          cursor: "pointer",
-          fontFamily: "inherit",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = "#6022A6";
-          e.currentTarget.style.color = "#fff";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = "transparent";
-          e.currentTarget.style.color = "#6022A6";
-        }}
-      >
-        Sign out
-      </button>
-    </li>
-  </ul>
-</div>
+            {!isMobile && (
+              <div className="nav-menu">
+                <ul>
+                  <li>
+                    <a
+                      href="#"
+                      className="btn-primary"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setIsContactModalOpen(true);
+                      }}
+                      style={{
+                        height: "38px",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "0 16px",
+                      }}
+                    >
+                      Contact Us
+                    </a>
+                  </li>
+                  <li ref={settingsRef} style={{ position: "relative" }}>
+                    <button
+                      type="button"
+                      aria-label="Settings"
+                      onClick={() => setIsSettingsOpen((prev) => !prev)}
+                      style={{
+                        width: "38px",
+                        height: "38px",
+                        borderRadius: "8px",
+                        border: "1px solid #e5e7eb",
+                        background: "#fff",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        color: "#6022A6",
+                      }}
+                    >
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="3" />
+                        <path d="M19.4 15a1.7 1.7 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.2V21a2 2 0 1 1-4 0v-.08a1.7 1.7 0 0 0-.4-1.2 1.7 1.7 0 0 0-1-.6 1.7 1.7 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.2-.4H2.72a2 2 0 1 1 0-4h.08a1.7 1.7 0 0 0 1.2-.4 1.7 1.7 0 0 0 .6-1 1.7 1.7 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.2V2.72a2 2 0 1 1 4 0v.08a1.7 1.7 0 0 0 .4 1.2 1.7 1.7 0 0 0 1 .6 1.7 1.7 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9c0 .38.22.74.6 1 .34.24.75.38 1.2.4h.08a2 2 0 1 1 0 4h-.08a1.7 1.7 0 0 0-1.2.4 1.7 1.7 0 0 0-.6 1z" />
+                      </svg>
+                    </button>
+
+                    {isSettingsOpen && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "calc(100% + 8px)",
+                          right: 0,
+                          minWidth: "240px",
+                          backgroundColor: "#fff",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: "8px",
+                          boxShadow: "0 10px 20px rgba(0, 0, 0, 0.12)",
+                          zIndex: 120,
+                          overflow: "hidden",
+                        }}
+                      >
+                        <div
+                          style={{
+                            padding: "10px 12px",
+                            borderBottom: "1px solid #e5e7eb",
+                            fontSize: "13px",
+                            color: "#475569",
+                            backgroundColor: "#f8fafc",
+                            width: "100%",
+                            overflowWrap: "anywhere",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "8px",
+                          }}
+                        >
+                          {user?.photoURL || user?.avatar ? (
+                            <img
+                              src={user?.photoURL || user?.avatar}
+                              alt="Profile"
+                              style={{
+                                width: "28px",
+                                height: "28px",
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                                border: "1px solid #d1d5db",
+                                flexShrink: 0,
+                              }}
+                            />
+                          ) : (
+                            <div
+                              style={{
+                                width: "28px",
+                                height: "28px",
+                                borderRadius: "50%",
+                                backgroundColor: "#e2e8f0",
+                                color: "#334155",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                fontSize: "12px",
+                                fontWeight: "600",
+                                flexShrink: 0,
+                              }}
+                            >
+                              {(user?.email?.[0] || "U").toUpperCase()}
+                            </div>
+                          )}
+                          <span>{user?.email || "No email"}</span>
+                        </div>
+                        {isAdmin && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              navigate("/admin/users");
+                              setIsSettingsOpen(false);
+                            }}
+                            style={{
+                              width: "100%",
+                              textAlign: "left",
+                              padding: "10px 12px",
+                              background: "transparent",
+                              border: "none",
+                              cursor: "pointer",
+                              color: "#222",
+                              fontSize: "14px",
+                              fontFamily: "inherit",
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "8px",
+                            }}
+                          >
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                              <circle cx="8.5" cy="7" r="4" />
+                              <path d="M20 8v6" />
+                              <path d="M23 11h-6" />
+                            </svg>
+                            <span>Manager User</span>
+                          </button>
+                        )}
+                        <button
+                          type="button"
+                          onClick={handleLogout}
+                          style={{
+                            width: "100%",
+                            textAlign: "left",
+                            padding: "10px 12px",
+                            background: "transparent",
+                            border: "none",
+                            cursor: "pointer",
+                            color: "red",
+                            fontSize: "14px",
+                            fontFamily: "inherit",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "8px",
+                          }}
+                        >
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                            <polyline points="16 17 21 12 16 7" />
+                            <line x1="21" y1="12" x2="9" y2="12" />
+                          </svg>
+                          <span>Logout</span>
+                        </button>
+                      </div>
+                    )}
+                  </li>
+                </ul>
+              </div>
+            )}
 
             <button
               className="mobile-menu-button"
@@ -555,93 +712,31 @@ const Home = () => {
               >
                 Home
               </a>
-              {isAdmin && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    navigate("/admin/users");
-                    setIsMenuOpen(false);
-                  }}
-                  style={{
-                    padding: "10px 18px",
-                    backgroundColor: "transparent",
-                    color: "#6022A6",
-                    border: "1px solid #6022A6",
-                    borderRadius: "6px",
-                    fontSize: "15px",
-                    fontWeight: "600",
-                    cursor: "pointer",
-                    fontFamily: "inherit",
-                  }}
-                >
-                  Manage users
-                </button>
-              )}
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMenuOpen(false);
-                }}
-                style={{
-                  color: "#222222",
-                  textDecoration: "none",
-                  fontSize: "18px",
-                  fontWeight: "400",
-                }}
-              >
-                Diagnostic Cardiology
-              </a>
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMenuOpen(false);
-                }}
-                style={{
-                  color: "#222222",
-                  textDecoration: "none",
-                  fontSize: "18px",
-                  fontWeight: "400",
-                }}
-              >
-                Maternal & Infant Care
-              </a>
-
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMenuOpen(false);
-                }}
-                style={{
-                  color: "#222222",
-                  textDecoration: "none",
-                  fontSize: "18px",
-                  fontWeight: "400",
-                }}
-              >
-                Anesthesia
-              </a>
-
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMenuOpen(false);
-                }}
-                style={{
-                  color: "#222222",
-                  textDecoration: "none",
-                  fontSize: "18px",
-                  fontWeight: "400",
-                }}
-              >
-                Monitoring
-              </a>
               <button
                 type="button"
-                onClick={handleLogout}
+                onClick={() => {
+                  setIsContactModalOpen(true);
+                  setIsMenuOpen(false);
+                }}
+                style={{
+                  marginTop: "4px",
+                  padding: "0",
+                  backgroundColor: "transparent",
+                  color: "#6022A6",
+                  border: "none",
+                  fontSize: "18px",
+                  fontWeight: "500",
+                  cursor: "pointer",
+                  fontFamily: "inherit",
+                  width: "fit-content",
+                  textAlign: "left",
+                }}
+              >
+                Contact Us
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsMobileSettingsOpen((prev) => !prev)}
                 style={{
                   marginTop: "8px",
                   padding: "12px 16px",
@@ -655,10 +750,103 @@ const Home = () => {
                   fontFamily: "inherit",
                   width: "100%",
                   textAlign: "left",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
                 }}
               >
-                Sign out
+                Settings
+                <span style={{ fontSize: "14px" }}>
+                  {isMobileSettingsOpen ? "▲" : "▼"}
+                </span>
               </button>
+              {isMobileSettingsOpen && (
+                <div
+                  style={{
+                    marginTop: "-12px",
+                    border: "1px solid #e5e7eb",
+                    borderRadius: "8px",
+                    overflow: "hidden",
+                  }}
+                >
+                  {isAdmin && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigate("/admin/users");
+                        setIsMenuOpen(false);
+                        setIsMobileSettingsOpen(false);
+                      }}
+                      style={{
+                        width: "100%",
+                        textAlign: "left",
+                        padding: "12px 14px",
+                        background: "#fff",
+                        border: "none",
+                        borderBottom: "1px solid #e5e7eb",
+                        color: "#222",
+                        fontSize: "15px",
+                        fontFamily: "inherit",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "8px",
+                      }}
+                    >
+                      <svg
+                        width="15"
+                        height="15"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="8.5" cy="7" r="4" />
+                        <path d="M20 8v6" />
+                        <path d="M23 11h-6" />
+                      </svg>
+                      <span>Manager User</span>
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    style={{
+                      width: "100%",
+                      textAlign: "left",
+                      padding: "12px 14px",
+                      background: "#fff",
+                      border: "none",
+                      color: "red",
+                      fontSize: "15px",
+                      fontFamily: "inherit",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                      <polyline points="16 17 21 12 16 7" />
+                      <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    <span>Logout</span>
+                  </button>
+                </div>
+              )}
             </nav>
           </div>
         </div>

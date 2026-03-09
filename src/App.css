@@ -174,11 +174,14 @@
   }
   
   .nav-menu ul{
-      display: block;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
   }
   
   .nav-menu ul li{
-      display: inline-block;
+      display: flex;
+      align-items: center;
       margin: 0 7px;
   }
   
