@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-const DisclaimerButton = ({ disclaimerText = "" }) => {
+const DisclaimerButton = ({ disclaimerText = "", left = "clamp(12px, 2.5vw, 20px)" }) => {
   const [showPopup, setShowPopup] = useState(false);
   const ref = useRef(null);
 
@@ -56,7 +56,7 @@ const DisclaimerButton = ({ disclaimerText = "" }) => {
         style={{
           position: "absolute",
           bottom: "clamp(12px, 2.5vw, 20px)",
-          left: "clamp(12px, 2.5vw, 20px)",
+          left,
           zIndex: 15,
         }}
       >

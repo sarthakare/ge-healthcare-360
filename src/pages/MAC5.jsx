@@ -1,9 +1,4 @@
-import {
-  useState,
-  useCallback,
-  useRef,
-  useEffect,
-} from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
@@ -31,6 +26,7 @@ import MAC5Video12 from "../assets/mac-5/videos/Mac_5_8-9_Capacitive_Touchscreen
 import MAC5Video13 from "../assets/mac-5/videos/Mac_5_Secure_&_Connected_Workflow.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 import DisclaimerButton from "../components/DisclaimerButton";
+import ContactUsModal from "../components/ContactUsModal";
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -44,7 +40,13 @@ const Model = ({ glbPath, onLoad }) => {
   return <primitive object={scene} position={[1, -3, 0]} scale={1.5} />;
 };
 
-const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
+const Hotspot = ({
+  position,
+  annotation,
+  hotspotNumber,
+  onHotspotClick,
+  isVideoPlaying,
+}) => {
   const { camera, scene } = useThree();
   const [isVisible, setIsVisible] = useState(false);
   const [showAnnotation, setShowAnnotation] = useState(false);
@@ -75,7 +77,7 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
 
     const intersections = raycasterRef.current.intersectObjects(
       objectsToCheck,
-      false
+      false,
     );
 
     let isOccluded = false;
@@ -109,14 +111,31 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
         onMouseEnter={() => setShowAnnotation(true)}
         onMouseLeave={() => setShowAnnotation(false)}
       >
-        <img
-          src="/hotspot.svg"
-          alt="hotspot"
-          style={{
-            width: "30px",
-            height: "30px",
-          }}
-        />
+        <svg
+          width="44"
+          height="56"
+          viewBox="0 0 44 56"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ width: "26px", height: "33px" }}
+        >
+          <path
+            d="M22 2C11.5 2 3 10.5 3 21c0 14 19 33 19 33s19-19 19-33C41 10.5 32.5 2 22 2z"
+            fill="#F37F63"
+            stroke="#FFFFFF"
+            strokeWidth="2"
+          />
+          <circle cx="22" cy="21" r="11" fill="#6022A6" />
+          <text
+            x="22"
+            y="25"
+            textAnchor="middle"
+            fontSize="12"
+            fontWeight="700"
+            fill="#FFFFFF"
+          >
+            {hotspotNumber}
+          </text>
+        </svg>
         <div
           style={{
             position: "absolute",
@@ -292,7 +311,8 @@ const VideoPopup = ({
                   padding: "20px",
                 }}
               >
-                Video file not available. Please add the video file to the assets folder.
+                Video file not available. Please add the video file to the
+                assets folder.
               </div>
             )}
           </div>
@@ -376,7 +396,7 @@ const VideoPopup = ({
   );
 };
 
-  const MAC5 = () => {
+const MAC5 = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const orbitControlsRef = useRef();
@@ -385,6 +405,7 @@ const VideoPopup = ({
   const [hotspotsVisible, setHotspotsVisible] = useState(true);
   const [popupData, setPopupData] = useState(null);
   const [hotspotMenuOpen, setHotspotMenuOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const hotspotMenuRef = useRef(null);
   const animationFrameRef = useRef(null);
 
@@ -408,13 +429,21 @@ const VideoPopup = ({
     { id: 3, name: "Smart Lead Technology", position: [2, 0, -0.75] },
     { id: 4, name: "Enhanced Hook-Up Advisor", position: [2.5, -0.25, 0.75] },
     { id: 5, name: "Advanced ECG Filtering", position: [1.25, -0.25, 0.75] },
-    { id: 6, name: "Critical Values Highlighting", position: [0.75, -0.25, 0.75] },
+    {
+      id: 6,
+      name: "Critical Values Highlighting",
+      position: [0.75, -0.25, 0.75],
+    },
     // { id: 7, name: "High-Definition Pacemaker Detection", position: [1, -0.5, 0.5] },
-    { id: 8, name: "Marquette™ 12SL Analysis Program", position: [1, 0, -0.75] },
+    {
+      id: 8,
+      name: "Marquette™ 12SL Analysis Program",
+      position: [1, 0, -0.75],
+    },
     { id: 9, name: "Internal ECG Storage", position: [2.5, 0, 0] },
     { id: 10, name: "PDF & XML Data Transfer", position: [2.45, 0, -1.5] },
     { id: 11, name: "Print Preview", position: [-0.75, -0.25, 0] },
-    { id: 12, name: "8.9\" Capacitive Touchscreen", position: [1.5, 0, 0] },
+    { id: 12, name: '8.9" Capacitive Touchscreen', position: [1.5, 0, 0] },
     { id: 13, name: "Secure & Connected Workflow", position: [1.5, 0, -0.75] },
   ];
 
@@ -597,7 +626,7 @@ const VideoPopup = ({
     },
     12: {
       videoSrc: MAC5Video12,
-      title: "8.9\" Capacitive Touchscreen",
+      title: '8.9" Capacitive Touchscreen',
       overview:
         "The large 8.9-inch capacitive touchscreen remains responsive even with gloves, enabling fast and intuitive navigation in clinical environments.",
       features: [
@@ -657,7 +686,9 @@ const VideoPopup = ({
       while (azimuthalDelta < -Math.PI) azimuthalDelta += 2 * Math.PI;
       if (Math.abs(azimuthalDelta) > Math.PI / 2) {
         azimuthalDelta =
-          azimuthalDelta > 0 ? azimuthalDelta - 2 * Math.PI : azimuthalDelta + 2 * Math.PI;
+          azimuthalDelta > 0
+            ? azimuthalDelta - 2 * Math.PI
+            : azimuthalDelta + 2 * Math.PI;
       }
 
       const startTime = performance.now();
@@ -667,13 +698,16 @@ const VideoPopup = ({
         const progress = Math.min(elapsed / duration, 1);
         const easedProgress = 1 - Math.pow(1 - progress, 3);
 
-        const currentAzimuthal = startAzimuthal + azimuthalDelta * easedProgress;
+        const currentAzimuthal =
+          startAzimuthal + azimuthalDelta * easedProgress;
         const currentPolar =
           startPolar + (targetPolar - startPolar) * easedProgress;
 
-        const x = currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
+        const x =
+          currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
         const y = currentDistance * Math.cos(currentPolar);
-        const z = currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
+        const z =
+          currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
 
         camera.position.set(target.x + x, target.y + y, target.z + z);
         camera.lookAt(target);
@@ -688,7 +722,7 @@ const VideoPopup = ({
 
       animationFrameRef.current = requestAnimationFrame(animate);
     },
-    [cartesianToSpherical]
+    [cartesianToSpherical],
   );
 
   const animateYAxisRotation = useCallback(
@@ -717,9 +751,11 @@ const VideoPopup = ({
         const currentAzimuthal = startAzimuthal + oscillation * rotationRange;
         const currentPolar = startPolar;
 
-        const x = currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
+        const x =
+          currentDistance * Math.sin(currentPolar) * Math.sin(currentAzimuthal);
         const y = currentDistance * Math.cos(currentPolar);
-        const z = currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
+        const z =
+          currentDistance * Math.sin(currentPolar) * Math.cos(currentAzimuthal);
 
         camera.position.set(target.x + x, target.y + y, target.z + z);
         camera.lookAt(target);
@@ -734,7 +770,7 @@ const VideoPopup = ({
 
       animationFrameRef.current = requestAnimationFrame(animate);
     },
-    [cartesianToSpherical]
+    [cartesianToSpherical],
   );
 
   const openHotspotPopup = (hotspotId) => {
@@ -792,14 +828,14 @@ const VideoPopup = ({
   return (
     <div
       style={{
-          height: "100vh",
-          position: "relative",
-          backgroundImage:
-  "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
-          backgroundRepeat: "no-repeat, no-repeat",
-          backgroundPosition: "bottom center, center",
-          backgroundSize: "auto, cover",
-        }}
+        height: "100vh",
+        position: "relative",
+        backgroundImage:
+          "url('./img-tiles.png'), radial-gradient(ellipse at center, #6022a6 0%, #40146b 72%)",
+        backgroundRepeat: "no-repeat, no-repeat",
+        backgroundPosition: "bottom center, center",
+        backgroundSize: "auto, cover",
+      }}
     >
       <button
         onClick={() => navigate("/")}
@@ -814,8 +850,8 @@ const VideoPopup = ({
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -840,8 +876,8 @@ const VideoPopup = ({
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
-          fontSize: "15px", 
-          fontWeight:"600",
+          fontSize: "15px",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = "#F37F63";
@@ -861,15 +897,13 @@ const VideoPopup = ({
           right: "36%",
           zIndex: 10,
           padding: "10px 20px",
-          backgroundColor: hotspotsVisible
-            ? "#F37F63"
-            : "#F37F63",
+          backgroundColor: hotspotsVisible ? "#F37F63" : "#F37F63",
           color: "#000",
           border: "none",
           borderRadius: "6px",
           cursor: "pointer",
           fontSize: "15px",
-          fontWeight:"600",
+          fontWeight: "600",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = hotspotsVisible
@@ -956,18 +990,18 @@ const VideoPopup = ({
           target={[0, 0, 0]}
         />
         {/* <Environment preset="apartment" /> */}
-        <Model
-          glbPath={MAC5Model}
-          onLoad={handleModelLoad}
-        />
+        <Model glbPath={MAC5Model} onLoad={handleModelLoad} />
         {hotspotsVisible &&
           hotspots.map((h) => (
             <Hotspot
               key={h.id}
               position={h.position}
               annotation={h.name}
+              hotspotNumber={h.id}
               onHotspotClick={() => handleHotspotClick(h.id)}
-              isVideoPlaying={popupData !== null && popupData.hotspotId === h.id}
+              isVideoPlaying={
+                popupData !== null && popupData.hotspotId === h.id
+              }
             />
           ))}
       </Canvas>
@@ -1006,7 +1040,41 @@ const VideoPopup = ({
         }
       `}</style>
 
-      <DisclaimerButton disclaimerText="The official name of the product is MAC 5, authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with relevant clinical workflows and equipment operation. For safe and effective operation, users must verify system calibration, ensure correct supply and connectivity, and confirm settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on patients with contraindications to its intended clinical use. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request." />
+      <button
+        onClick={() => setIsContactModalOpen(true)}
+        style={{
+          position: "absolute",
+          bottom: "20px",
+          left: "20px",
+          zIndex: 16,
+          padding: "10px 16px",
+          backgroundColor: "#F37F63",
+          color: "#000",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontSize: "14px",
+          fontWeight: "600",
+          boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.filter = "brightness(1.1)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.filter = "brightness(1)";
+        }}
+      >
+        Contact Us
+      </button>
+      <ContactUsModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
+
+      <DisclaimerButton
+        left="150px"
+        disclaimerText="The official name of the product is MAC 5, authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with relevant clinical workflows and equipment operation. For safe and effective operation, users must verify system calibration, ensure correct supply and connectivity, and confirm settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on patients with contraindications to its intended clinical use. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request."
+      />
 
       <div
         style={{
@@ -1035,7 +1103,7 @@ const VideoPopup = ({
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            fontWeight:"600",
+            fontWeight: "600",
           }}
           // onMouseEnter={(e) => {
           //   e.currentTarget.style.filter = "brightness(1.1)";
@@ -1063,9 +1131,10 @@ const VideoPopup = ({
               flexDirection: "column",
               borderWidth: "2px",
               borderStyle: "solid",
-              borderImage:"linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
-              borderRadius:"6px", 
-              padding:"0px 15px 10px",
+              borderImage:
+                "linear-gradient( to top, #F37F63, rgba(0, 0, 0, 0)) 1 100%",
+              borderRadius: "6px",
+              padding: "0px 15px 10px",
             }}
           >
             {hotspots.map((h, index) => (
@@ -1100,4 +1169,3 @@ const VideoPopup = ({
 };
 
 export default MAC5;
-
