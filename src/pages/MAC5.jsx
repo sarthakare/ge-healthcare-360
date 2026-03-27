@@ -424,7 +424,7 @@ const MAC5 = () => {
   };
 
   const hotspots = [
-    { id: 1, name: "Introduction to MAC 5", position: [1.75, 0.5, 0.5] },
+    { id: 1, name: "Introduction to MAC 5", position: [1.75, -0.25, 0.5] },
     { id: 2, name: "Auto ECG Function", position: [2, -0.25, 0.75] },
     { id: 3, name: "Smart Lead Technology", position: [2, 0, -0.75] },
     { id: 4, name: "Enhanced Hook-Up Advisor", position: [2.5, -0.25, 0.75] },
