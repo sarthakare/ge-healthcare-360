@@ -25,6 +25,7 @@ import CS750Video11 from "../assets/cs750/videos/cs750_360_Arm.mp4";
 import CS750Video12 from "../assets/cs750/videos/cs750_Flow_Rates_Fio2.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 import DisclaimerButton from "../components/DisclaimerButton";
+import ContactUsModal from "../components/ContactUsModal";
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -445,6 +446,7 @@ const CS750 = () => {
   const [hotspotsVisible, setHotspotsVisible] = useState(true);
   const [popupData, setPopupData] = useState(null);
   const [hotspotMenuOpen, setHotspotMenuOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const hotspotMenuRef = useRef(null);
   const animationFrameRef = useRef(null);
 
@@ -1027,7 +1029,41 @@ const CS750 = () => {
         }
       `}</style>
 
-      <DisclaimerButton disclaimerText="The official names of the product is Carestation™ 750,  authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The anesthesia delivery system is intended for use by trained healthcare professionals familiar with anesthesia workflows and ventilatory management. For safe and effective operation, users must verify system calibration, ensure correct gas supply connections, and confirm ventilator and agent settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout the procedure. These systems must not be used in environments containing explosive gases or on patients with contraindications to general anesthesia. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request" />
+      <button
+        onClick={() => setIsContactModalOpen(true)}
+        style={{
+          position: "absolute",
+          bottom: "20px",
+          left: "20px",
+          zIndex: 16,
+          padding: "10px 16px",
+          backgroundColor: "#F37F63",
+          color: "#000",
+          border: "none",
+          borderRadius: "8px",
+          cursor: "pointer",
+          fontSize: "14px",
+          fontWeight: "600",
+          boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.filter = "brightness(1.1)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.filter = "brightness(1)";
+        }}
+      >
+        Contact Us
+      </button>
+      <ContactUsModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
+
+      <DisclaimerButton
+        left="150px"
+        disclaimerText="The official names of the product is Carestation™ 750,  authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The anesthesia delivery system is intended for use by trained healthcare professionals familiar with anesthesia workflows and ventilatory management. For safe and effective operation, users must verify system calibration, ensure correct gas supply connections, and confirm ventilator and agent settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout the procedure. These systems must not be used in environments containing explosive gases or on patients with contraindications to general anesthesia. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request"
+      />
 
       <div
         style={{
