@@ -43,7 +43,14 @@ import DisclaimerButton from "../components/DisclaimerButton";
     return <primitive object={scene} position={[0, -3, 0]} scale={1} />;
   };
   
-  const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
+  const Hotspot = ({
+    position,
+    annotation,
+    hotspotNumber,
+    onHotspotClick,
+    isVideoPlaying,
+    isSelected,
+  }) => {
     const { camera, scene } = useThree();
     const [isVisible, setIsVisible] = useState(false);
     const [showAnnotation, setShowAnnotation] = useState(false);
@@ -108,14 +115,31 @@ import DisclaimerButton from "../components/DisclaimerButton";
           onMouseEnter={() => setShowAnnotation(true)}
           onMouseLeave={() => setShowAnnotation(false)}
         >
-          <img
-            src="/hotspot.svg"
-            alt="hotspot"
-            style={{
-              width: "30px",
-              height: "30px",
-            }}
-          />
+          <svg
+            width="44"
+            height="56"
+            viewBox="0 0 44 56"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ width: "26px", height: "33px" }}
+          >
+            <path
+              d="M22 2C11.5 2 3 10.5 3 21c0 14 19 33 19 33s19-19 19-33C41 10.5 32.5 2 22 2z"
+              fill="#F37F63"
+              stroke={isSelected ? "#FFE082" : "#FFFFFF"}
+              strokeWidth={isSelected ? "3" : "2"}
+            />
+            <circle cx="22" cy="21" r="11" fill="#6022A6" />
+            <text
+              x="22"
+              y="25"
+              textAnchor="middle"
+              fontSize="12"
+              fontWeight="700"
+              fill="#FFFFFF"
+            >
+              {hotspotNumber}
+            </text>
+          </svg>
           <div
             style={{
               position: "absolute",
@@ -146,6 +170,7 @@ import DisclaimerButton from "../components/DisclaimerButton";
     isOpen,
     onClose,
     videoSrc,
+    displayNumber,
     title,
     overview,
     features,
@@ -306,7 +331,7 @@ import DisclaimerButton from "../components/DisclaimerButton";
                   paddingRight: "0px",
                 }}
               >
-                {title}
+                {displayNumber ? `${displayNumber}. ${title}` : title}
               </h2>
   
               <div
@@ -415,7 +440,10 @@ import DisclaimerButton from "../components/DisclaimerButton";
       { id: 11, name: "Bed Tilting", position: [-0.6, -1, 0.15] },
       { id: 12, name: "X-ray Tray", position: [0, -0.5, 0.75] },
       { id: 13, name: "Safety Certifications", position: [0, 0, 0] },
-    ];
+    ].map((hotspot, index) => ({
+      ...hotspot,
+      displayNumber: index + 1,
+    }));
   
     const defaultRotation = { azimuthal: 0, polar: Math.PI / 2 };
     const hotspotsConfig = {
@@ -658,8 +686,10 @@ import DisclaimerButton from "../components/DisclaimerButton";
   
     const openHotspotPopup = (hotspotId) => {
       const config = hotspotsConfig[hotspotId] || hotspotsConfig[1];
+      const selectedHotspot = hotspots.find((h) => h.id === hotspotId);
       setPopupData({
         hotspotId,
+        displayNumber: selectedHotspot?.displayNumber,
         videoSrc: config.videoSrc,
         title: config.title,
         overview: config.overview,
@@ -845,6 +875,7 @@ import DisclaimerButton from "../components/DisclaimerButton";
           isOpen={popupData !== null}
           onClose={handleClosePopup}
           videoSrc={popupData?.videoSrc}
+          displayNumber={popupData?.displayNumber}
           title={popupData?.title}
           overview={popupData?.overview}
         features={popupData?.features}
@@ -885,8 +916,10 @@ import DisclaimerButton from "../components/DisclaimerButton";
                 key={h.id}
                 position={h.position}
                 annotation={h.name}
+                hotspotNumber={h.displayNumber}
                 onHotspotClick={() => handleHotspotClick(h.id)}
                 isVideoPlaying={popupData !== null && popupData.hotspotId === h.id}
+                isSelected={popupData?.hotspotId === h.id}
               />
             ))}
         </Canvas>
@@ -995,9 +1028,14 @@ import DisclaimerButton from "../components/DisclaimerButton";
                     padding: "12px 16px",
                   cursor: "pointer",
                   fontSize: "15px",
-                  color: "#fff",
+                  color: popupData?.hotspotId === h.id ? "#F37F63" : "#fff",
                   borderBottom:
                     index < hotspots.length - 1 ? "1px solid #f1f5f9" : "none",
+                  border:
+                    popupData?.hotspotId === h.id
+                      ? "2px solid #F37F63"
+                      : "2px solid transparent",
+                  borderRadius: "8px",
                   // background: "#ffffff",
                   transition: "background-color 0.01s ease",
                 }}
@@ -1005,10 +1043,11 @@ import DisclaimerButton from "../components/DisclaimerButton";
                   e.currentTarget.style.color = "#F37F63";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = "#fff";
+                  e.currentTarget.style.color =
+                    popupData?.hotspotId === h.id ? "#F37F63" : "#fff";
                 }}			  
                 >
-                  {h.name}
+                  {h.displayNumber}. {h.name}
                 </div>
               ))}
             </div>

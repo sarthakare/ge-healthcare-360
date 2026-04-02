@@ -28,7 +28,14 @@ const Model = ({ glbPath, onLoad }) => {
   return <primitive object={scene} position={[0, -2, 0]} scale={1} />;
 };
 
-const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
+const Hotspot = ({
+  position,
+  annotation,
+  hotspotNumber,
+  onHotspotClick,
+  isVideoPlaying,
+  isSelected,
+}) => {
   const { camera, scene } = useThree();
   const [isVisible, setIsVisible] = useState(false);
   const [showAnnotation, setShowAnnotation] = useState(false);
@@ -93,14 +100,31 @@ const Hotspot = ({ position, annotation, onHotspotClick, isVideoPlaying }) => {
         onMouseEnter={() => setShowAnnotation(true)}
         onMouseLeave={() => setShowAnnotation(false)}
       >
-        <img
-          src="/hotspot.svg"
-          alt="hotspot"
-          style={{
-            width: "30px",
-            height: "30px",
-          }}
-        />
+        <svg
+          width="44"
+          height="56"
+          viewBox="0 0 44 56"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ width: "26px", height: "33px" }}
+        >
+          <path
+            d="M22 2C11.5 2 3 10.5 3 21c0 14 19 33 19 33s19-19 19-33C41 10.5 32.5 2 22 2z"
+            fill="#F37F63"
+            stroke={isSelected ? "#FFE082" : "#FFFFFF"}
+            strokeWidth={isSelected ? "3" : "2"}
+          />
+          <circle cx="22" cy="21" r="11" fill="#6022A6" />
+          <text
+            x="22"
+            y="25"
+            textAnchor="middle"
+            fontSize="12"
+            fontWeight="700"
+            fill="#FFFFFF"
+          >
+            {hotspotNumber}
+          </text>
+        </svg>
         <div
           style={{
             position: "absolute",
@@ -131,6 +155,7 @@ const VideoPopup = ({
   isOpen,
   onClose,
   videoSrc,
+  displayNumber,
   title,
   overview,
   features,
@@ -292,7 +317,7 @@ const VideoPopup = ({
                 paddingRight: "0px",
               }}
             >
-              {title}
+              {displayNumber ? `${displayNumber}. ${title}` : title}
             </h2>
 
             <div
@@ -391,7 +416,10 @@ const ECGHolter = () => {
     { id: 1, name: "CardioSoft Platform Overview", position: [2.75, 1, -0.4] },
     { id: 2, name: "CC14 Acquisition Module", position: [0.45, 0.5, 0] },
     { id: 3, name: "T1000 Treadmill Integration", position: [0, -1, 2] },
-  ];
+  ].map((hotspot, index) => ({
+    ...hotspot,
+    displayNumber: index + 1,
+  }));
 
   const hotspotsConfig = {
     1: {
@@ -561,8 +589,10 @@ const ECGHolter = () => {
 
   const openHotspotPopup = (hotspotId) => {
     const config = hotspotsConfig[hotspotId] || hotspotsConfig[1];
+    const selectedHotspot = hotspots.find((h) => h.id === hotspotId);
     setPopupData({
       hotspotId,
+      displayNumber: selectedHotspot?.displayNumber,
       videoSrc: config.videoSrc,
       title: config.title,
       overview: config.overview,
@@ -746,6 +776,7 @@ const ECGHolter = () => {
         isOpen={popupData !== null}
         onClose={handleClosePopup}
         videoSrc={popupData?.videoSrc}
+        displayNumber={popupData?.displayNumber}
         title={popupData?.title}
         overview={popupData?.overview}
         features={popupData?.features}
@@ -783,10 +814,12 @@ const ECGHolter = () => {
               key={h.id}
               position={h.position}
               annotation={h.name}
+              hotspotNumber={h.displayNumber}
               onHotspotClick={() => handleHotspotClick(h.id)}
               isVideoPlaying={
                 popupData !== null && popupData.hotspotId === h.id
               }
+              isSelected={popupData?.hotspotId === h.id}
             />
           ))}
       </Canvas>
@@ -896,9 +929,14 @@ const ECGHolter = () => {
                   padding: "12px 16px",
                   cursor: "pointer",
                   fontSize: "15px",
-                  color: "#fff",
+                  color: popupData?.hotspotId === h.id ? "#F37F63" : "#fff",
                   borderBottom:
                     index < hotspots.length - 1 ? "1px solid #f1f5f9" : "none",
+                  border:
+                    popupData?.hotspotId === h.id
+                      ? "2px solid #F37F63"
+                      : "2px solid transparent",
+                  borderRadius: "8px",
                   // background: "#ffffff",
                   transition: "background-color 0.01s ease",
                 }}
@@ -906,10 +944,11 @@ const ECGHolter = () => {
                   e.currentTarget.style.color = "#F37F63";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = "#fff";
+                  e.currentTarget.style.color =
+                    popupData?.hotspotId === h.id ? "#F37F63" : "#fff";
                 }}
               >
-                {h.name}
+                {h.displayNumber}. {h.name}
               </div>
             ))}
           </div>
