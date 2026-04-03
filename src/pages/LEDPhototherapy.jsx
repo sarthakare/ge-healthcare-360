@@ -22,7 +22,7 @@ import VideoLongLedLife from "../assets/led-phototherapy/videos/Led_Phototherapy
 import VideoGlobalSafety from "../assets/led-phototherapy/videos/Led_Phototherapy_Global_Safety_Certifications.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 import DisclaimerButton from "../components/DisclaimerButton";
-import ContactUsModal from "../components/ContactUsModal";
+import ProductContactUsModal from "../components/ProductContactUsModal";
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -934,9 +934,11 @@ const LEDPhototherapy = () => {
       >
         Contact Us
       </button>
-      <ContactUsModal
+      <ProductContactUsModal
         isOpen={isContactModalOpen}
         onClose={() => setIsContactModalOpen(false)}
+        productCategory="Neonatal Care"
+        productName="LED Phototherapy"
       />
 
       <DisclaimerButton

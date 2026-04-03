@@ -25,7 +25,7 @@ import SLE6000Video12 from "../assets/sle6000/videos/Sle_6000_Real_Time_Lung_Mec
 import SLE6000Video13 from "../assets/sle6000/videos/Sle_6000_Intuitive_Mode_Panel_Interface.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 import DisclaimerButton from "../components/DisclaimerButton";
-import ContactUsModal from "../components/ContactUsModal";
+import ProductContactUsModal from "../components/ProductContactUsModal";
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -1062,9 +1062,11 @@ const SLE6000 = () => {
       >
         Contact Us
       </button>
-      <ContactUsModal
+      <ProductContactUsModal
         isOpen={isContactModalOpen}
         onClose={() => setIsContactModalOpen(false)}
+        productCategory="Neonatal Ventilation"
+        productName="SLE 6000"
       />
 
       <DisclaimerButton

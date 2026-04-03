@@ -22,7 +22,7 @@ import GiraffeVideo9 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_
 import GiraffeVideo10 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_In_Bed_Weighing_With_Trend_Tracking.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 import DisclaimerButton from "../components/DisclaimerButton";
-import ContactUsModal from "../components/ContactUsModal";
+import ProductContactUsModal from "../components/ProductContactUsModal";
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -1038,9 +1038,11 @@ const GiraffeOmnibedCarestation = () => {
       >
         Contact Us
       </button>
-      <ContactUsModal
+      <ProductContactUsModal
         isOpen={isContactModalOpen}
         onClose={() => setIsContactModalOpen(false)}
+        productCategory="Neonatal Care"
+        productName="Giraffe Omnibed Carestation"
       />
 
       <DisclaimerButton

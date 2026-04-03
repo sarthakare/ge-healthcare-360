@@ -22,7 +22,7 @@ import EntropyVideo from "../assets/monitors-b1xm/videos/10 Entropy™ Monitorin
 import ConnectedVideo from "../assets/monitors-b1xm/videos/11 Advanced Connectivity.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 import DisclaimerButton from "../components/DisclaimerButton";
-import ContactUsModal from "../components/ContactUsModal";
+import ProductContactUsModal from "../components/ProductContactUsModal";
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -1054,9 +1054,11 @@ const MonitorB1xM = () => {
       >
         Contact Us
       </button>
-      <ContactUsModal
+      <ProductContactUsModal
         isOpen={isContactModalOpen}
         onClose={() => setIsContactModalOpen(false)}
+        productCategory="Patient Monitoring"
+        productName="B1xM Patient Monitor"
       />
 
       <DisclaimerButton

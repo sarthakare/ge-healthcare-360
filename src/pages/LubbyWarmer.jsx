@@ -30,7 +30,7 @@ import {
   import VideoGlobalSafety from "../assets/lubby-warmer/videos/Lubby_Warmer_Global_Safety_And_Quality_Certifications.mp4";
   import ModelInteractionPopup from "../components/ModelInteractionPopup";
 import DisclaimerButton from "../components/DisclaimerButton";
-import ContactUsModal from "../components/ContactUsModal";
+import ProductContactUsModal from "../components/ProductContactUsModal";
   
   const Model = ({ glbPath, onLoad }) => {
     const { scene } = useGLTF(glbPath);
@@ -986,9 +986,11 @@ import ContactUsModal from "../components/ContactUsModal";
         >
           Contact Us
         </button>
-        <ContactUsModal
+        <ProductContactUsModal
           isOpen={isContactModalOpen}
           onClose={() => setIsContactModalOpen(false)}
+          productCategory="Neonatal Care"
+          productName="Lubby Warmer"
         />
 
         <DisclaimerButton

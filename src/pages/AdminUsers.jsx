@@ -4,6 +4,38 @@ import "../App.css";
 
 const API_BASE = import.meta.env.VITE_API_URL || "";
 const ROWS_PER_PAGE_OPTIONS = [5, 10, 25, 50, 100];
+const DEFAULT_CREATE_USER_FORM = {
+  name: "",
+  email: "",
+  password: "",
+  role: "customer",
+  hospitalOrOrganizationName: "",
+  contactNumber: "",
+  designation: "",
+  cityOrLocation: "",
+  employeeId: "",
+  employeeContactNumber: "",
+  employeeDesignation: "",
+  regionOrTeam: "",
+};
+const DEFAULT_EDIT_USER_FORM = {
+  name: "",
+  email: "",
+  password: "",
+  role: "customer",
+  hospitalOrOrganizationName: "",
+  contactNumber: "",
+  designation: "",
+  cityOrLocation: "",
+  employeeId: "",
+  employeeContactNumber: "",
+  employeeDesignation: "",
+  regionOrTeam: "",
+};
+const ROLE_LABELS = {
+  customer: "Customer",
+  sales_representative_application_specialist: "Sales Representative / Application Specialist",
+};
 
 function AdminUsers() {
   const navigate = useNavigate();
@@ -14,14 +46,14 @@ function AdminUsers() {
   const [createLoading, setCreateLoading] = useState(false);
   const [createError, setCreateError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [form, setForm] = useState({ email: "", password: "", name: "" });
+  const [form, setForm] = useState(DEFAULT_CREATE_USER_FORM);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const [editModalUser, setEditModalUser] = useState(null);
-  const [editForm, setEditForm] = useState({ name: "", password: "" });
+  const [editForm, setEditForm] = useState(DEFAULT_EDIT_USER_FORM);
   const [editLoading, setEditLoading] = useState(false);
   const [editError, setEditError] = useState("");
   const [deleteConfirmUser, setDeleteConfirmUser] = useState(null);
@@ -46,7 +78,11 @@ function AdminUsers() {
     return users.filter(
       (u) =>
         (u.email && u.email.toLowerCase().includes(q)) ||
-        (u.name && String(u.name).toLowerCase().includes(q))
+        (u.name && String(u.name).toLowerCase().includes(q)) ||
+        (u.role && ROLE_LABELS[u.role]?.toLowerCase().includes(q)) ||
+        (u.hospitalOrOrganizationName &&
+          String(u.hospitalOrOrganizationName).toLowerCase().includes(q)) ||
+        (u.employeeId && String(u.employeeId).toLowerCase().includes(q))
     );
   }, [users, searchQuery]);
 
@@ -114,19 +150,39 @@ function AdminUsers() {
   const handleCreateUser = async (e) => {
     e.preventDefault();
     setCreateError("");
+    const trimmedName = form.name.trim();
+    if (!trimmedName) {
+      setCreateError("Name is required.");
+      return;
+    }
     setCreateLoading(true);
     try {
+      const payload = {
+        email: form.email.trim(),
+        password: form.password,
+        name: trimmedName,
+        role: form.role,
+      };
+
+      if (form.role === "customer") {
+        payload.hospitalOrOrganizationName = form.hospitalOrOrganizationName.trim();
+        payload.contactNumber = form.contactNumber.trim();
+        payload.designation = form.designation.trim();
+        payload.cityOrLocation = form.cityOrLocation.trim();
+      } else {
+        payload.employeeId = form.employeeId.trim();
+        payload.employeeContactNumber = form.employeeContactNumber.trim();
+        payload.employeeDesignation = form.employeeDesignation.trim();
+        payload.regionOrTeam = form.regionOrTeam.trim();
+      }
+
       const res = await fetch(`${API_BASE}/api/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          email: form.email.trim(),
-          password: form.password,
-          name: form.name.trim() || undefined,
-        }),
+        body: JSON.stringify(payload),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -134,7 +190,7 @@ function AdminUsers() {
         setCreateLoading(false);
         return;
       }
-      setForm({ email: "", password: "", name: "" });
+      setForm(DEFAULT_CREATE_USER_FORM);
       setModalOpen(false);
       setSuccessMessage("User created successfully.");
       setTimeout(() => setSuccessMessage(""), 3000);
@@ -172,10 +228,29 @@ function AdminUsers() {
     if (!editModalUser) return;
     const id = editModalUser._id || editModalUser.id;
     setEditError("");
+    const trimmedName = editForm.name.trim();
+    if (!trimmedName) {
+      setEditError("Name is required.");
+      return;
+    }
     setEditLoading(true);
     try {
-      const body = { name: editForm.name.trim() || "" };
+      const body = {
+        name: trimmedName,
+        role: editForm.role,
+      };
       if (editForm.password.trim().length >= 6) body.password = editForm.password;
+      if (editForm.role === "customer") {
+        body.hospitalOrOrganizationName = editForm.hospitalOrOrganizationName.trim();
+        body.contactNumber = editForm.contactNumber.trim();
+        body.designation = editForm.designation.trim();
+        body.cityOrLocation = editForm.cityOrLocation.trim();
+      } else {
+        body.employeeId = editForm.employeeId.trim();
+        body.employeeContactNumber = editForm.employeeContactNumber.trim();
+        body.employeeDesignation = editForm.employeeDesignation.trim();
+        body.regionOrTeam = editForm.regionOrTeam.trim();
+      }
       const res = await fetch(`${API_BASE}/api/users/${id}`, {
         method: "PATCH",
         headers: {
@@ -191,7 +266,7 @@ function AdminUsers() {
         return;
       }
       setEditModalUser(null);
-      setEditForm({ name: "", password: "" });
+      setEditForm(DEFAULT_EDIT_USER_FORM);
       setSuccessMessage("User updated successfully.");
       setTimeout(() => setSuccessMessage(""), 3000);
       fetchUsers();
@@ -230,7 +305,20 @@ function AdminUsers() {
 
   const openEditModal = (u) => {
     setEditModalUser(u);
-    setEditForm({ name: u.name || "", password: "" });
+    setEditForm({
+      name: u.name || "",
+      email: u.email || "",
+      password: "",
+      role: u.role || "customer",
+      hospitalOrOrganizationName: u.hospitalOrOrganizationName || "",
+      contactNumber: u.contactNumber || "",
+      designation: u.designation || "",
+      cityOrLocation: u.cityOrLocation || "",
+      employeeId: u.employeeId || "",
+      employeeContactNumber: u.employeeContactNumber || "",
+      employeeDesignation: u.employeeDesignation || "",
+      regionOrTeam: u.regionOrTeam || "",
+    });
     setEditError("");
   };
 
@@ -606,7 +694,7 @@ function AdminUsers() {
             type="button"
             onClick={() => {
               setCreateError("");
-              setForm({ email: "", password: "", name: "" });
+              setForm(DEFAULT_CREATE_USER_FORM);
               setModalOpen(true);
             }}
             style={{
@@ -763,11 +851,11 @@ function AdminUsers() {
               style={{
                 border: "1px solid rgba(96,34,166,0.15)",
                 borderRadius: "12px",
-                overflow: "hidden",
+                overflowX: "auto",
                 background: "#fff",
               }}
             >
-              <table style={{ width: "100%", borderCollapse: "collapse" }}>
+              <table style={{ width: "100%", minWidth: "980px", borderCollapse: "collapse" }}>
                 <thead>
                   <tr
                     style={{
@@ -814,6 +902,26 @@ function AdminUsers() {
                         fontWeight: "600",
                       }}
                     >
+                      Role
+                    </th>
+                    <th
+                      style={{
+                        padding: "14px 16px",
+                        textAlign: "left",
+                        fontSize: "13px",
+                        fontWeight: "600",
+                      }}
+                    >
+                      Profile Details
+                    </th>
+                    <th
+                      style={{
+                        padding: "14px 16px",
+                        textAlign: "left",
+                        fontSize: "13px",
+                        fontWeight: "600",
+                      }}
+                    >
                       Created
                     </th>
                     <th
@@ -833,6 +941,25 @@ function AdminUsers() {
                 <tbody>
                   {paginatedUsers.map((u, idx) => {
                     const srNo = (currentPage - 1) * rowsPerPage + idx + 1;
+                    const roleLabel = ROLE_LABELS[u.role] || "—";
+                    const profileDetails =
+                      u.role === "customer"
+                        ? [
+                            u.hospitalOrOrganizationName,
+                            u.contactNumber,
+                            u.designation,
+                            u.cityOrLocation,
+                          ]
+                            .filter(Boolean)
+                            .join(" | ")
+                        : [
+                            u.employeeId,
+                            u.employeeContactNumber,
+                            u.employeeDesignation,
+                            u.regionOrTeam,
+                          ]
+                            .filter(Boolean)
+                            .join(" | ");
                     return (
                       <tr
                         key={u._id || u.id}
@@ -867,6 +994,26 @@ function AdminUsers() {
                           }}
                         >
                           {u.email}
+                        </td>
+                        <td
+                          style={{
+                            padding: "14px 16px",
+                            fontSize: "14px",
+                            color: "#334155",
+                            maxWidth: "220px",
+                          }}
+                        >
+                          {roleLabel}
+                        </td>
+                        <td
+                          style={{
+                            padding: "14px 16px",
+                            fontSize: "14px",
+                            color: "#64748b",
+                            maxWidth: "320px",
+                          }}
+                        >
+                          {profileDetails || "—"}
                         </td>
                         <td
                           style={{
@@ -1017,10 +1164,11 @@ function AdminUsers() {
           <div
             style={{
               backgroundColor: "#fff",
-              borderRadius: "12px",
-              padding: "28px",
-              width: "100%",
-              maxWidth: "420px",
+              borderRadius: "16px",
+              padding: "clamp(16px, 3vw, 28px)",
+              width: "min(95vw, 920px)",
+              maxHeight: "90vh",
+              overflowY: "auto",
               boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 16px rgba(96,34,166,0.12)",
               border: "1px solid rgba(96,34,166,0.15)",
             }}
@@ -1056,94 +1204,485 @@ function AdminUsers() {
                   {createError}
                 </p>
               )}
-              <label
+              <div
                 style={{
-                  display: "block",
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  color: "#222",
-                  marginBottom: "6px",
+                  marginBottom: "0",
+                  fontSize: "13px",
+                  fontWeight: "700",
+                  color: "#6022A6",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.04em",
+                  background: "#f8f5ff",
+                  border: "1px solid #e9d5ff",
+                  borderRadius: "10px 10px 0 0",
+                  padding: "10px 14px",
                 }}
               >
-                Email *
-              </label>
-              <input
-                type="email"
-                required
-                value={form.email}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, email: e.target.value }))
-                }
+                Account Details
+              </div>
+              <div
                 style={{
-                  width: "100%",
-                  padding: "10px 12px",
-                  fontSize: "15px",
-                  border: "1px solid #e5e7eb",
-                  borderRadius: "8px",
-                  marginBottom: "16px",
-                  fontFamily: "inherit",
-                  boxSizing: "border-box",
-                }}
-              />
-              <label
-                style={{
-                  display: "block",
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  color: "#222",
-                  marginBottom: "6px",
+                  display: "grid",
+                  gridTemplateColumns: isCompactMenu ? "1fr" : "repeat(2, minmax(0, 1fr))",
+                  gap: "16px",
+                  marginBottom: "20px",
+                  padding: "14px",
+                  border: "1px solid #e9d5ff",
+                  borderTop: "none",
+                  borderRadius: "0 0 10px 10px",
+                  background: "#fcfbff",
                 }}
               >
-                Password *
-              </label>
-              <input
-                type="password"
-                required
-                minLength={6}
-                value={form.password}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, password: e.target.value }))
-                }
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: "14px",
+                      fontWeight: "600",
+                      color: "#222",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    Name <span style={{ color: "#dc2626" }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, name: e.target.value }))
+                    }
+                    style={{
+                      width: "100%",
+                      padding: "10px 12px",
+                      fontSize: "15px",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: "8px",
+                      fontFamily: "inherit",
+                      boxSizing: "border-box",
+                    }}
+                  />
+                </div>
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: "14px",
+                      fontWeight: "600",
+                      color: "#222",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    Email <span style={{ color: "#dc2626" }}>*</span>
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, email: e.target.value }))
+                    }
+                    style={{
+                      width: "100%",
+                      padding: "10px 12px",
+                      fontSize: "15px",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: "8px",
+                      fontFamily: "inherit",
+                      boxSizing: "border-box",
+                    }}
+                  />
+                </div>
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: "14px",
+                      fontWeight: "600",
+                      color: "#222",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    Password <span style={{ color: "#dc2626" }}>*</span>
+                  </label>
+                  <input
+                    type="password"
+                    required
+                    minLength={6}
+                    value={form.password}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, password: e.target.value }))
+                    }
+                    style={{
+                      width: "100%",
+                      padding: "10px 12px",
+                      fontSize: "15px",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: "8px",
+                      fontFamily: "inherit",
+                      boxSizing: "border-box",
+                    }}
+                  />
+                </div>
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: "14px",
+                      fontWeight: "600",
+                      color: "#222",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    Role <span style={{ color: "#dc2626" }}>*</span>
+                  </label>
+                  <select
+                    required
+                    value={form.role}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        role: e.target.value,
+                        hospitalOrOrganizationName: "",
+                        contactNumber: "",
+                        designation: "",
+                        cityOrLocation: "",
+                        employeeId: "",
+                        employeeContactNumber: "",
+                        employeeDesignation: "",
+                        regionOrTeam: "",
+                      }))
+                    }
+                    style={{
+                      width: "100%",
+                      padding: "10px 12px",
+                      fontSize: "15px",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: "8px",
+                      fontFamily: "inherit",
+                      boxSizing: "border-box",
+                    }}
+                  >
+                    <option value="customer">Customer</option>
+                    <option value="sales_representative_application_specialist">
+                      Sales Representative / Application Specialist
+                    </option>
+                  </select>
+                </div>
+              </div>
+              {form.role === "customer" ? (
+                <>
+                  <div
+                    style={{
+                      marginBottom: "0",
+                      fontSize: "13px",
+                      fontWeight: "700",
+                      color: "#6022A6",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.04em",
+                      background: "#f8f5ff",
+                      border: "1px solid #e9d5ff",
+                      borderRadius: "10px 10px 0 0",
+                      padding: "10px 14px",
+                    }}
+                  >
+                    Customer Details
+                  </div>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: isCompactMenu ? "1fr" : "repeat(2, minmax(0, 1fr))",
+                      gap: "16px",
+                      marginBottom: "20px",
+                      padding: "14px",
+                      border: "1px solid #e9d5ff",
+                      borderTop: "none",
+                      borderRadius: "0 0 10px 10px",
+                      background: "#fcfbff",
+                    }}
+                  >
+                    <div>
+                      <label
+                        style={{
+                          display: "block",
+                          fontSize: "14px",
+                          fontWeight: "600",
+                          color: "#222",
+                          marginBottom: "6px",
+                        }}
+                      >
+                        Hospital / Organization Name (optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={form.hospitalOrOrganizationName}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, hospitalOrOrganizationName: e.target.value }))
+                        }
+                        style={{
+                          width: "100%",
+                          padding: "10px 12px",
+                          fontSize: "15px",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: "8px",
+                          fontFamily: "inherit",
+                          boxSizing: "border-box",
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        style={{
+                          display: "block",
+                          fontSize: "14px",
+                          fontWeight: "600",
+                          color: "#222",
+                          marginBottom: "6px",
+                        }}
+                      >
+                        Contact number (optional)
+                      </label>
+                      <input
+                        type="number"
+                        value={form.contactNumber}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, contactNumber: e.target.value }))
+                        }
+                        style={{
+                          width: "100%",
+                          padding: "10px 12px",
+                          fontSize: "15px",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: "8px",
+                          fontFamily: "inherit",
+                          boxSizing: "border-box",
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        style={{
+                          display: "block",
+                          fontSize: "14px",
+                          fontWeight: "600",
+                          color: "#222",
+                          marginBottom: "6px",
+                        }}
+                      >
+                        Designation (optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={form.designation}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, designation: e.target.value }))
+                        }
+                        style={{
+                          width: "100%",
+                          padding: "10px 12px",
+                          fontSize: "15px",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: "8px",
+                          fontFamily: "inherit",
+                          boxSizing: "border-box",
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        style={{
+                          display: "block",
+                          fontSize: "14px",
+                          fontWeight: "600",
+                          color: "#222",
+                          marginBottom: "6px",
+                        }}
+                      >
+                        City / Location (optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={form.cityOrLocation}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, cityOrLocation: e.target.value }))
+                        }
+                        style={{
+                          width: "100%",
+                          padding: "10px 12px",
+                          fontSize: "15px",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: "8px",
+                          fontFamily: "inherit",
+                          boxSizing: "border-box",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div
+                    style={{
+                      marginBottom: "0",
+                      fontSize: "13px",
+                      fontWeight: "700",
+                      color: "#6022A6",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.04em",
+                      background: "#f8f5ff",
+                      border: "1px solid #e9d5ff",
+                      borderRadius: "10px 10px 0 0",
+                      padding: "10px 14px",
+                    }}
+                  >
+                    Sales Representative / Application Specialist Details
+                  </div>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: isCompactMenu ? "1fr" : "repeat(2, minmax(0, 1fr))",
+                      gap: "16px",
+                      marginBottom: "20px",
+                      padding: "14px",
+                      border: "1px solid #e9d5ff",
+                      borderTop: "none",
+                      borderRadius: "0 0 10px 10px",
+                      background: "#fcfbff",
+                    }}
+                  >
+                    <div>
+                      <label
+                        style={{
+                          display: "block",
+                          fontSize: "14px",
+                          fontWeight: "600",
+                          color: "#222",
+                          marginBottom: "6px",
+                        }}
+                      >
+                        Employee ID (optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={form.employeeId}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, employeeId: e.target.value }))
+                        }
+                        style={{
+                          width: "100%",
+                          padding: "10px 12px",
+                          fontSize: "15px",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: "8px",
+                          fontFamily: "inherit",
+                          boxSizing: "border-box",
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        style={{
+                          display: "block",
+                          fontSize: "14px",
+                          fontWeight: "600",
+                          color: "#222",
+                          marginBottom: "6px",
+                        }}
+                      >
+                        Employee contact number (optional)
+                      </label>
+                      <input
+                        type="number"
+                        value={form.employeeContactNumber}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, employeeContactNumber: e.target.value }))
+                        }
+                        style={{
+                          width: "100%",
+                          padding: "10px 12px",
+                          fontSize: "15px",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: "8px",
+                          fontFamily: "inherit",
+                          boxSizing: "border-box",
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        style={{
+                          display: "block",
+                          fontSize: "14px",
+                          fontWeight: "600",
+                          color: "#222",
+                          marginBottom: "6px",
+                        }}
+                      >
+                        Employee designation (optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={form.employeeDesignation}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, employeeDesignation: e.target.value }))
+                        }
+                        style={{
+                          width: "100%",
+                          padding: "10px 12px",
+                          fontSize: "15px",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: "8px",
+                          fontFamily: "inherit",
+                          boxSizing: "border-box",
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label
+                        style={{
+                          display: "block",
+                          fontSize: "14px",
+                          fontWeight: "600",
+                          color: "#222",
+                          marginBottom: "6px",
+                        }}
+                      >
+                        Region / Team (optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={form.regionOrTeam}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, regionOrTeam: e.target.value }))
+                        }
+                        style={{
+                          width: "100%",
+                          padding: "10px 12px",
+                          fontSize: "15px",
+                          border: "1px solid #e5e7eb",
+                          borderRadius: "8px",
+                          fontFamily: "inherit",
+                          boxSizing: "border-box",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+              <div
                 style={{
-                  width: "100%",
-                  padding: "10px 12px",
-                  fontSize: "15px",
-                  border: "1px solid #e5e7eb",
-                  borderRadius: "8px",
-                  marginBottom: "16px",
-                  fontFamily: "inherit",
-                  boxSizing: "border-box",
-                }}
-              />
-              <label
-                style={{
-                  display: "block",
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  color: "#222",
-                  marginBottom: "6px",
+                  position: "sticky",
+                  bottom: "-28px",
+                  marginInline: "calc(clamp(16px, 3vw, 28px) * -1)",
+                  padding: "14px clamp(16px, 3vw, 28px)",
+                  display: "flex",
+                  gap: "12px",
+                  justifyContent: "flex-end",
+                  background: "rgba(255,255,255,0.98)",
+                  borderTop: "1px solid #e5e7eb",
+                  backdropFilter: "blur(2px)",
                 }}
               >
-                Name (optional)
-              </label>
-              <input
-                type="text"
-                value={form.name}
-                onChange={(e) =>
-                  setForm((f) => ({ ...f, name: e.target.value }))
-                }
-                style={{
-                  width: "100%",
-                  padding: "10px 12px",
-                  fontSize: "15px",
-                  border: "1px solid #e5e7eb",
-                  borderRadius: "8px",
-                  marginBottom: "24px",
-                  fontFamily: "inherit",
-                  boxSizing: "border-box",
-                }}
-              />
-              <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end" }}>
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
@@ -1201,10 +1740,11 @@ function AdminUsers() {
           <div
             style={{
               backgroundColor: "#fff",
-              borderRadius: "12px",
-              padding: "28px",
-              width: "100%",
-              maxWidth: "420px",
+              borderRadius: "16px",
+              padding: "clamp(16px, 3vw, 28px)",
+              width: "min(95vw, 920px)",
+              maxHeight: "90vh",
+              overflowY: "auto",
               boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 16px rgba(96,34,166,0.12)",
               border: "1px solid rgba(96,34,166,0.15)",
             }}
@@ -1230,61 +1770,336 @@ function AdminUsers() {
                   {editError}
                 </p>
               )}
-              <label
+              <div
                 style={{
-                  display: "block",
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  color: "#222",
-                  marginBottom: "6px",
+                  marginBottom: "0",
+                  fontSize: "13px",
+                  fontWeight: "700",
+                  color: "#6022A6",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.04em",
+                  background: "#f8f5ff",
+                  border: "1px solid #e9d5ff",
+                  borderRadius: "10px 10px 0 0",
+                  padding: "10px 14px",
                 }}
               >
-                Name
-              </label>
-              <input
-                type="text"
-                value={editForm.name}
-                onChange={(e) => setEditForm((f) => ({ ...f, name: e.target.value }))}
+                Account Details
+              </div>
+              <div
                 style={{
-                  width: "100%",
-                  padding: "10px 12px",
-                  fontSize: "15px",
-                  border: "1px solid #e5e7eb",
-                  borderRadius: "8px",
-                  marginBottom: "16px",
-                  fontFamily: "inherit",
-                  boxSizing: "border-box",
-                }}
-              />
-              <label
-                style={{
-                  display: "block",
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  color: "#222",
-                  marginBottom: "6px",
+                  display: "grid",
+                  gridTemplateColumns: isCompactMenu ? "1fr" : "repeat(2, minmax(0, 1fr))",
+                  gap: "16px",
+                  marginBottom: "20px",
+                  padding: "14px",
+                  border: "1px solid #e9d5ff",
+                  borderTop: "none",
+                  borderRadius: "0 0 10px 10px",
+                  background: "#fcfbff",
                 }}
               >
-                New password (leave blank to keep current)
-              </label>
-              <input
-                type="password"
-                minLength={6}
-                placeholder="Optional"
-                value={editForm.password}
-                onChange={(e) => setEditForm((f) => ({ ...f, password: e.target.value }))}
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: "14px",
+                      fontWeight: "600",
+                      color: "#222",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    Name <span style={{ color: "#dc2626" }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={editForm.name}
+                    onChange={(e) => setEditForm((f) => ({ ...f, name: e.target.value }))}
+                    style={{
+                      width: "100%",
+                      padding: "10px 12px",
+                      fontSize: "15px",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: "8px",
+                      fontFamily: "inherit",
+                      boxSizing: "border-box",
+                    }}
+                  />
+                </div>
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: "14px",
+                      fontWeight: "600",
+                      color: "#222",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    disabled
+                    value={editForm.email}
+                    style={{
+                      width: "100%",
+                      padding: "10px 12px",
+                      fontSize: "15px",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: "8px",
+                      backgroundColor: "#f8fafc",
+                      color: "#64748b",
+                      fontFamily: "inherit",
+                      boxSizing: "border-box",
+                    }}
+                  />
+                </div>
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: "14px",
+                      fontWeight: "600",
+                      color: "#222",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    Role <span style={{ color: "#dc2626" }}>*</span>
+                  </label>
+                  <select
+                    required
+                    value={editForm.role}
+                    onChange={(e) =>
+                      setEditForm((f) => ({
+                        ...f,
+                        role: e.target.value,
+                        hospitalOrOrganizationName: "",
+                        contactNumber: "",
+                        designation: "",
+                        cityOrLocation: "",
+                        employeeId: "",
+                        employeeContactNumber: "",
+                        employeeDesignation: "",
+                        regionOrTeam: "",
+                      }))
+                    }
+                    style={{
+                      width: "100%",
+                      padding: "10px 12px",
+                      fontSize: "15px",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: "8px",
+                      fontFamily: "inherit",
+                      boxSizing: "border-box",
+                    }}
+                  >
+                    <option value="customer">Customer</option>
+                    <option value="sales_representative_application_specialist">
+                      Sales Representative / Application Specialist
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: "14px",
+                      fontWeight: "600",
+                      color: "#222",
+                      marginBottom: "6px",
+                    }}
+                  >
+                    New password (leave blank to keep current)
+                  </label>
+                  <input
+                    type="password"
+                    minLength={6}
+                    placeholder="Optional"
+                    value={editForm.password}
+                    onChange={(e) => setEditForm((f) => ({ ...f, password: e.target.value }))}
+                    style={{
+                      width: "100%",
+                      padding: "10px 12px",
+                      fontSize: "15px",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: "8px",
+                      fontFamily: "inherit",
+                      boxSizing: "border-box",
+                    }}
+                  />
+                </div>
+              </div>
+              {editForm.role === "customer" ? (
+                <>
+                  <div
+                    style={{
+                      marginBottom: "0",
+                      fontSize: "13px",
+                      fontWeight: "700",
+                      color: "#6022A6",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.04em",
+                      background: "#f8f5ff",
+                      border: "1px solid #e9d5ff",
+                      borderRadius: "10px 10px 0 0",
+                      padding: "10px 14px",
+                    }}
+                  >
+                    Customer Details
+                  </div>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: isCompactMenu ? "1fr" : "repeat(2, minmax(0, 1fr))",
+                      gap: "16px",
+                      marginBottom: "20px",
+                      padding: "14px",
+                      border: "1px solid #e9d5ff",
+                      borderTop: "none",
+                      borderRadius: "0 0 10px 10px",
+                      background: "#fcfbff",
+                    }}
+                  >
+                    <div>
+                      <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#222", marginBottom: "6px" }}>
+                        Hospital / Organization Name (optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={editForm.hospitalOrOrganizationName}
+                        onChange={(e) => setEditForm((f) => ({ ...f, hospitalOrOrganizationName: e.target.value }))}
+                        style={{ width: "100%", padding: "10px 12px", fontSize: "15px", border: "1px solid #e5e7eb", borderRadius: "8px", fontFamily: "inherit", boxSizing: "border-box" }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#222", marginBottom: "6px" }}>
+                        Contact number (optional)
+                      </label>
+                      <input
+                        type="number"
+                        value={editForm.contactNumber}
+                        onChange={(e) => setEditForm((f) => ({ ...f, contactNumber: e.target.value }))}
+                        style={{ width: "100%", padding: "10px 12px", fontSize: "15px", border: "1px solid #e5e7eb", borderRadius: "8px", fontFamily: "inherit", boxSizing: "border-box" }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#222", marginBottom: "6px" }}>
+                        Designation (optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={editForm.designation}
+                        onChange={(e) => setEditForm((f) => ({ ...f, designation: e.target.value }))}
+                        style={{ width: "100%", padding: "10px 12px", fontSize: "15px", border: "1px solid #e5e7eb", borderRadius: "8px", fontFamily: "inherit", boxSizing: "border-box" }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#222", marginBottom: "6px" }}>
+                        City / Location (optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={editForm.cityOrLocation}
+                        onChange={(e) => setEditForm((f) => ({ ...f, cityOrLocation: e.target.value }))}
+                        style={{ width: "100%", padding: "10px 12px", fontSize: "15px", border: "1px solid #e5e7eb", borderRadius: "8px", fontFamily: "inherit", boxSizing: "border-box" }}
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div
+                    style={{
+                      marginBottom: "0",
+                      fontSize: "13px",
+                      fontWeight: "700",
+                      color: "#6022A6",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.04em",
+                      background: "#f8f5ff",
+                      border: "1px solid #e9d5ff",
+                      borderRadius: "10px 10px 0 0",
+                      padding: "10px 14px",
+                    }}
+                  >
+                    Sales Representative / Application Specialist Details
+                  </div>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: isCompactMenu ? "1fr" : "repeat(2, minmax(0, 1fr))",
+                      gap: "16px",
+                      marginBottom: "20px",
+                      padding: "14px",
+                      border: "1px solid #e9d5ff",
+                      borderTop: "none",
+                      borderRadius: "0 0 10px 10px",
+                      background: "#fcfbff",
+                    }}
+                  >
+                    <div>
+                      <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#222", marginBottom: "6px" }}>
+                        Employee ID (optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={editForm.employeeId}
+                        onChange={(e) => setEditForm((f) => ({ ...f, employeeId: e.target.value }))}
+                        style={{ width: "100%", padding: "10px 12px", fontSize: "15px", border: "1px solid #e5e7eb", borderRadius: "8px", fontFamily: "inherit", boxSizing: "border-box" }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#222", marginBottom: "6px" }}>
+                        Employee contact number (optional)
+                      </label>
+                      <input
+                        type="number"
+                        value={editForm.employeeContactNumber}
+                        onChange={(e) => setEditForm((f) => ({ ...f, employeeContactNumber: e.target.value }))}
+                        style={{ width: "100%", padding: "10px 12px", fontSize: "15px", border: "1px solid #e5e7eb", borderRadius: "8px", fontFamily: "inherit", boxSizing: "border-box" }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#222", marginBottom: "6px" }}>
+                        Employee designation (optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={editForm.employeeDesignation}
+                        onChange={(e) => setEditForm((f) => ({ ...f, employeeDesignation: e.target.value }))}
+                        style={{ width: "100%", padding: "10px 12px", fontSize: "15px", border: "1px solid #e5e7eb", borderRadius: "8px", fontFamily: "inherit", boxSizing: "border-box" }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#222", marginBottom: "6px" }}>
+                        Region / Team (optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={editForm.regionOrTeam}
+                        onChange={(e) => setEditForm((f) => ({ ...f, regionOrTeam: e.target.value }))}
+                        style={{ width: "100%", padding: "10px 12px", fontSize: "15px", border: "1px solid #e5e7eb", borderRadius: "8px", fontFamily: "inherit", boxSizing: "border-box" }}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+              <div
                 style={{
-                  width: "100%",
-                  padding: "10px 12px",
-                  fontSize: "15px",
-                  border: "1px solid #e5e7eb",
-                  borderRadius: "8px",
-                  marginBottom: "24px",
-                  fontFamily: "inherit",
-                  boxSizing: "border-box",
+                  position: "sticky",
+                  bottom: "-28px",
+                  marginInline: "calc(clamp(16px, 3vw, 28px) * -1)",
+                  padding: "14px clamp(16px, 3vw, 28px)",
+                  display: "flex",
+                  gap: "12px",
+                  justifyContent: "flex-end",
+                  background: "rgba(255,255,255,0.98)",
+                  borderTop: "1px solid #e5e7eb",
+                  backdropFilter: "blur(2px)",
                 }}
-              />
-              <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end" }}>
+              >
                 <button
                   type="button"
                   onClick={() => setEditModalUser(null)}

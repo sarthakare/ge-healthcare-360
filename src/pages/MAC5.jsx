@@ -26,7 +26,7 @@ import MAC5Video12 from "../assets/mac-5/videos/Mac_5_8-9_Capacitive_Touchscreen
 import MAC5Video13 from "../assets/mac-5/videos/Mac_5_Secure_&_Connected_Workflow.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 import DisclaimerButton from "../components/DisclaimerButton";
-import ContactUsModal from "../components/ContactUsModal";
+import ProductContactUsModal from "../components/ProductContactUsModal";
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -1075,9 +1075,11 @@ const MAC5 = () => {
       >
         Contact Us
       </button>
-      <ContactUsModal
+      <ProductContactUsModal
         isOpen={isContactModalOpen}
         onClose={() => setIsContactModalOpen(false)}
+        productCategory="Cardiology"
+        productName="MAC 5"
       />
 
       <DisclaimerButton
