@@ -22,7 +22,21 @@ import EntropyVideo from "../assets/monitors-b1xm/videos/10 Entropy™ Monitorin
 import ConnectedVideo from "../assets/monitors-b1xm/videos/11 Advanced Connectivity.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 import DisclaimerButton from "../components/DisclaimerButton";
+import WhyButton from "../components/WhyButton";
 import ProductContactUsModal from "../components/ProductContactUsModal";
+
+const b1x5mWhyDetails = {
+  title: "Why B1 x5M Patient Monitors?",
+  intro:
+    "Because monitoring must adapt to patient acuity — and GE’s platform scales without changing systems.",
+  subheading: "Key differentiators:",
+  bullets: [
+    "Same UI across acuity levels (reduces training burden)",
+    "DINAMAP™ for consistent NIBP accuracy",
+    "EK-Pro algorithm for advanced arrhythmia detection",
+    "Modular architecture for parameter expansion",
+  ],
+};
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -979,6 +993,7 @@ const MonitorB1xM = () => {
         <Environment preset="apartment" />
         <Model glbPath={MonitorB1xMModel} onLoad={handleModelLoad} />
         {hotspotsVisible &&
+          !isContactModalOpen &&
           hotspots.map((h) => (
             <Hotspot
               key={h.id}
@@ -1028,43 +1043,60 @@ const MonitorB1xM = () => {
         }
       `}</style>
 
-      <button
-        onClick={() => setIsContactModalOpen(true)}
+      <div
         style={{
           position: "absolute",
           bottom: "20px",
           left: "20px",
           zIndex: 16,
-          padding: "10px 16px",
-          backgroundColor: "#F37F63",
-          color: "#000",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-          fontSize: "14px",
-          fontWeight: "600",
-          boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.filter = "brightness(1.1)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.filter = "brightness(1)";
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "10px",
+          flexWrap: "wrap",
         }}
       >
-        Contact Us
-      </button>
-      <ProductContactUsModal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
-        productCategory="Patient Monitoring"
-        productName="B1xM Patient Monitor"
-      />
+        <button
+          onClick={() => setIsContactModalOpen(true)}
+          style={{
+            padding: "10px 16px",
+            backgroundColor: "#F37F63",
+            color: "#000",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontSize: "14px",
+            fontWeight: "600",
+            boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.filter = "brightness(1.1)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.filter = "brightness(1)";
+          }}
+        >
+          Contact Us
+        </button>
+        <ProductContactUsModal
+          isOpen={isContactModalOpen}
+          onClose={() => setIsContactModalOpen(false)}
+          productCategory="Patient Monitoring"
+          productName="B1xM Patient Monitor"
+        />
 
-      <DisclaimerButton
-        left="150px"
-        disclaimerText="The official name of the product is B1X5 Patient Monitors, authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with relevant clinical workflows and equipment operation. For safe and effective operation, users must verify system calibration, ensure correct supply and connectivity, and confirm settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on patients with contraindications to its intended clinical use. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request."
-      />
+        <WhyButton
+          details={b1x5mWhyDetails}
+          label="Why B1 x5M Patient Monitors?"
+          inline
+        />
+
+        <DisclaimerButton
+          inline
+          disclaimerText="The official name of the product is B1X5 Patient Monitors, authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with relevant clinical workflows and equipment operation. For safe and effective operation, users must verify system calibration, ensure correct supply and connectivity, and confirm settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on patients with contraindications to its intended clinical use. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request."
+          vivaId="JB03226IN"
+        />
+      </div>
 
       <div
         style={{

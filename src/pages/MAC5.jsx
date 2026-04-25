@@ -26,7 +26,21 @@ import MAC5Video12 from "../assets/mac-5/videos/Mac_5_8-9_Capacitive_Touchscreen
 import MAC5Video13 from "../assets/mac-5/videos/Mac_5_Secure_&_Connected_Workflow.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 import DisclaimerButton from "../components/DisclaimerButton";
+import WhyButton from "../components/WhyButton";
 import ProductContactUsModal from "../components/ProductContactUsModal";
+
+const mac5WhyDetails = {
+  title: "Why MAC 5?",
+  intro:
+    "Because accuracy and workflow speed in ECG diagnostics directly impact clinical decisions — and GE HealthCare has built both into the MAC 5.",
+  subheading: "Key differentiators:",
+  bullets: [
+    "Marquette™ 12SL with gender-specific STEMI detection",
+    "Smart Lead Technology reduces patient mismatch risk",
+    "Auto-ECG acquisition removes manual dependency",
+    "512,000 samples/sec for high-fidelity signal capture",
+  ],
+};
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -1000,6 +1014,7 @@ const MAC5 = () => {
         {/* <Environment preset="apartment" /> */}
         <Model glbPath={MAC5Model} onLoad={handleModelLoad} />
         {hotspotsVisible &&
+          !isContactModalOpen &&
           hotspots.map((h) => (
             <Hotspot
               key={h.id}
@@ -1049,43 +1064,57 @@ const MAC5 = () => {
         }
       `}</style>
 
-      <button
-        onClick={() => setIsContactModalOpen(true)}
+      <div
         style={{
           position: "absolute",
           bottom: "20px",
           left: "20px",
-          zIndex: 16,
-          padding: "10px 16px",
-          backgroundColor: "#F37F63",
-          color: "#000",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-          fontSize: "14px",
-          fontWeight: "600",
-          boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.filter = "brightness(1.1)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.filter = "brightness(1)";
+          zIndex: 15,
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "10px",
+          flexWrap: "wrap",
         }}
       >
-        Contact Us
-      </button>
-      <ProductContactUsModal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
-        productCategory="Cardiology"
-        productName="MAC 5"
-      />
+        <button
+          onClick={() => setIsContactModalOpen(true)}
+          style={{
+            padding: "10px 16px",
+            backgroundColor: "#F37F63",
+            color: "#000",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontSize: "14px",
+            fontWeight: "600",
+            boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.filter = "brightness(1.1)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.filter = "brightness(1)";
+          }}
+        >
+          Contact Us
+        </button>
 
-      <DisclaimerButton
-        left="150px"
-        disclaimerText="The official name of the product is MAC 5, authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with relevant clinical workflows and equipment operation. For safe and effective operation, users must verify system calibration, ensure correct supply and connectivity, and confirm settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on patients with contraindications to its intended clinical use. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request."
-      />
+        <ProductContactUsModal
+          isOpen={isContactModalOpen}
+          onClose={() => setIsContactModalOpen(false)}
+          productCategory="Cardiology"
+          productName="MAC 5"
+        />
+
+        <WhyButton details={mac5WhyDetails} label="Why MAC 5?" inline />
+
+        <DisclaimerButton
+          inline
+          disclaimerText="The official name of the product is MAC 5, authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with relevant clinical workflows and equipment operation. For safe and effective operation, users must verify system calibration, ensure correct supply and connectivity, and confirm settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on patients with contraindications to its intended clinical use. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request."
+          vivaId="JB03233IN"
+        />
+      </div>
 
       <div
         style={{

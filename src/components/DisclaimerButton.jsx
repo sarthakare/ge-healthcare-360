@@ -1,6 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 
-const DisclaimerButton = ({ disclaimerText = "", left = "clamp(12px, 2.5vw, 20px)" }) => {
+const DisclaimerButton = ({
+  disclaimerText = "",
+  vivaId = "",
+  inline = false,
+}) => {
   const [showPopup, setShowPopup] = useState(false);
   const ref = useRef(null);
 
@@ -54,9 +58,8 @@ const DisclaimerButton = ({ disclaimerText = "", left = "clamp(12px, 2.5vw, 20px
         onMouseEnter={() => setShowPopup(true)}
         onMouseLeave={() => setShowPopup(false)}
         style={{
-          position: "absolute",
-          bottom: "clamp(12px, 2.5vw, 20px)",
-          left,
+          position: inline ? "relative" : "absolute",
+          bottom: inline ? "auto" : "clamp(12px, 2.5vw, 20px)",
           zIndex: 15,
         }}
       >
@@ -64,7 +67,15 @@ const DisclaimerButton = ({ disclaimerText = "", left = "clamp(12px, 2.5vw, 20px
           className="disclaimer-btn"
           onClick={() => setShowPopup((v) => !v)}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <circle cx="12" cy="12" r="10" />
             <line x1="12" y1="16" x2="12" y2="12" />
             <line x1="12" y1="8" x2="12.01" y2="8" />
@@ -98,6 +109,16 @@ const DisclaimerButton = ({ disclaimerText = "", left = "clamp(12px, 2.5vw, 20px
               }}
             >
               {disclaimerText}
+            </p>
+            <p
+              style={{
+                margin: 0,
+                fontSize: "clamp(10px, 1.8vw, 12px)",
+                lineHeight: "1.6",
+                color: "rgba(255, 255, 255, 0.9)",
+              }}
+            >
+              Viva ID: {vivaId}
             </p>
           </div>
         )}

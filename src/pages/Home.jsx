@@ -825,7 +825,7 @@ const Home = () => {
                 maxWidth: "700px", 
               }}
             >
-              Step into GE HealthCare's interactive 3D Experience Centre
+              Step into GE HealthCare's Experience 360°, 3D digital demo
             </h1>
             
             <p

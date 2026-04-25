@@ -22,7 +22,21 @@ import GiraffeVideo9 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_
 import GiraffeVideo10 from "../assets/giraffe-omnibed-carestation/videos/Giraffe_Omnibed_In_Bed_Weighing_With_Trend_Tracking.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 import DisclaimerButton from "../components/DisclaimerButton";
+import WhyButton from "../components/WhyButton";
 import ProductContactUsModal from "../components/ProductContactUsModal";
+
+const giraffeOmnibedWhyDetails = {
+  title: "Why Giraffe Omnibed Carestation?",
+  intro:
+    "Because minimizing infant handling improves outcomes — and the OmniBed is designed to deliver complete care without disruption.",
+  subheading: "Key differentiators:",
+  bullets: [
+    "One-touch incubator-to-warmer conversion",
+    "Cascade Control™ reduces temp variability by ~80%",
+    "Servo humidity up to 95% for skin protection",
+    "“Baby Susan” 360° rotating mattress for access",
+  ],
+};
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -986,7 +1000,7 @@ const GiraffeOmnibedCarestation = () => {
           glbPath={GiraffeOmnibedCarestationModel}
           onLoad={handleModelLoad}
         />
-        {hotspotsVisible && (
+        {hotspotsVisible && !isContactModalOpen && (
           <>
             {hotspots.map((h) => (
               <Hotspot
@@ -1012,43 +1026,60 @@ const GiraffeOmnibedCarestation = () => {
         }
       `}</style>
 
-      <button
-        onClick={() => setIsContactModalOpen(true)}
+      <div
         style={{
           position: "absolute",
           bottom: "20px",
           left: "20px",
           zIndex: 16,
-          padding: "10px 16px",
-          backgroundColor: "#F37F63",
-          color: "#000",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-          fontSize: "14px",
-          fontWeight: "600",
-          boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.filter = "brightness(1.1)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.filter = "brightness(1)";
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "10px",
+          flexWrap: "wrap",
         }}
       >
-        Contact Us
-      </button>
-      <ProductContactUsModal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
-        productCategory="Neonatal Care"
-        productName="Giraffe Omnibed Carestation"
-      />
+        <button
+          onClick={() => setIsContactModalOpen(true)}
+          style={{
+            padding: "10px 16px",
+            backgroundColor: "#F37F63",
+            color: "#000",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontSize: "14px",
+            fontWeight: "600",
+            boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.filter = "brightness(1.1)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.filter = "brightness(1)";
+          }}
+        >
+          Contact Us
+        </button>
+        <ProductContactUsModal
+          isOpen={isContactModalOpen}
+          onClose={() => setIsContactModalOpen(false)}
+          productCategory="Neonatal Care"
+          productName="Giraffe Omnibed Carestation"
+        />
 
-      <DisclaimerButton
-        left="150px"
-        disclaimerText="The official name of the product is Giraffe™ Omnibed Carestation, authorized by Wipro GE HealthCare Pvt. Ltd., located at No. 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with neonatal care workflows and thermoregulation management. For safe and effective operation, users must verify system calibration, ensure proper probe placement and temperature settings, and confirm alarm and monitoring parameters appropriate to the infant’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on infants with contraindications to thermal support. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was reviewed on 22 December 2025, and additional information is available upon request."
-      />
+        <WhyButton
+          details={giraffeOmnibedWhyDetails}
+          label="Why Giraffe Omnibed Carestation?"
+          inline
+        />
+
+        <DisclaimerButton
+          inline
+          disclaimerText="The official name of the product is Giraffe™ Omnibed Carestation, authorized by Wipro GE HealthCare Pvt. Ltd., located at No. 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with neonatal care workflows and thermoregulation management. For safe and effective operation, users must verify system calibration, ensure proper probe placement and temperature settings, and confirm alarm and monitoring parameters appropriate to the infant’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on infants with contraindications to thermal support. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was reviewed on 22 December 2025, and additional information is available upon request."
+          vivaId="JB03230IN"
+        />
+      </div>
 
       <div
         style={{

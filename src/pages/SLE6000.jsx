@@ -25,7 +25,21 @@ import SLE6000Video12 from "../assets/sle6000/videos/Sle_6000_Real_Time_Lung_Mec
 import SLE6000Video13 from "../assets/sle6000/videos/Sle_6000_Intuitive_Mode_Panel_Interface.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 import DisclaimerButton from "../components/DisclaimerButton";
+import WhyButton from "../components/WhyButton";
 import ProductContactUsModal from "../components/ProductContactUsModal";
+
+const sle6000WhyDetails = {
+  title: "Why SLE 6000?",
+  intro:
+    "Because neonatal lungs require precision without compromise — and the SLE 6000 is engineered to deliver powerful ventilation while remaining exceptionally gentle.",
+  subheading: "Key differentiators:",
+  bullets: [
+    "Delta-P up to 180 mbar for effective HFO",
+    "True neonatal NIV with leak compensation",
+    "No circuit change between HFO & conventional modes",
+    "Patented valve-less design reduces work of breathing",
+  ],
+};
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -987,6 +1001,7 @@ const SLE6000 = () => {
         <Environment preset="apartment" />
         <Model glbPath={SLE6000Model} onLoad={handleModelLoad} />
         {hotspotsVisible &&
+          !isContactModalOpen &&
           hotspots.map((h) => (
             <Hotspot
               key={h.id}
@@ -1036,43 +1051,56 @@ const SLE6000 = () => {
         }
       `}</style>
 
-      <button
-        onClick={() => setIsContactModalOpen(true)}
+      <div
         style={{
           position: "absolute",
           bottom: "20px",
           left: "20px",
           zIndex: 16,
-          padding: "10px 16px",
-          backgroundColor: "#F37F63",
-          color: "#000",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-          fontSize: "14px",
-          fontWeight: "600",
-          boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.filter = "brightness(1.1)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.filter = "brightness(1)";
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "10px",
+          flexWrap: "wrap",
         }}
       >
-        Contact Us
-      </button>
-      <ProductContactUsModal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
-        productCategory="Neonatal Ventilation"
-        productName="SLE 6000"
-      />
+        <button
+          onClick={() => setIsContactModalOpen(true)}
+          style={{
+            padding: "10px 16px",
+            backgroundColor: "#F37F63",
+            color: "#000",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontSize: "14px",
+            fontWeight: "600",
+            boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.filter = "brightness(1.1)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.filter = "brightness(1)";
+          }}
+        >
+          Contact Us
+        </button>
+        <ProductContactUsModal
+          isOpen={isContactModalOpen}
+          onClose={() => setIsContactModalOpen(false)}
+          productCategory="Neonatal Ventilation"
+          productName="SLE 6000"
+        />
 
-      <DisclaimerButton
-        left="150px"
-        disclaimerText="The official name of the product is SLE 6000 H, authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with relevant clinical workflows and equipment operation. For safe and effective operation, users must verify system calibration, ensure correct supply and connectivity, and confirm settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on patients with contraindications to its intended clinical use. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request."
-      />
+        <WhyButton details={sle6000WhyDetails} label="Why SLE 6000?" inline />
+
+        <DisclaimerButton
+          inline
+          disclaimerText="The official name of the product is SLE 6000 H, authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with relevant clinical workflows and equipment operation. For safe and effective operation, users must verify system calibration, ensure correct supply and connectivity, and confirm settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on patients with contraindications to its intended clinical use. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request."
+          vivaId="JB03234IN"
+        />
+      </div>
 
       <div
         style={{

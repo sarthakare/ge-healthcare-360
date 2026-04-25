@@ -15,7 +15,21 @@ import CC14AcquisitionModuleVideo from "../assets/ecg-holter/videos/Cc14 Module_
 import T1000TreadmillIntegrationVideo from "../assets/ecg-holter/videos/T1000 Treadmill_on treadmill.mp4";
 import ModelInteractionPopup from "../components/ModelInteractionPopup";
 import DisclaimerButton from "../components/DisclaimerButton";
+import WhyButton from "../components/WhyButton";
 import ProductContactUsModal from "../components/ProductContactUsModal";
+
+const cardioSoftWhyDetails = {
+  title: "Why CardioSoft?",
+  intro:
+    "Because cardiology workflows need to be connected — not fragmented — and CardioSoft brings diagnostics, stress testing, and reporting into one ecosystem.",
+  subheading: "Key differentiators:",
+  bullets: [
+    "Single platform for ECG + stress + reporting",
+    "Tight integration with GE MUSE cardiology systems",
+    "Real-time stress test data capture and review",
+    "Designed for multi-site scalability",
+  ],
+};
 
 const Model = ({ glbPath, onLoad }) => {
   const { scene } = useGLTF(glbPath);
@@ -811,6 +825,7 @@ const ECGHolter = () => {
         <Environment preset="apartment" />
         <Model glbPath={ECGHolterModel} onLoad={handleModelLoad} />
         {hotspotsVisible &&
+          !isContactModalOpen &&
           hotspots.map((h) => (
             <Hotspot
               key={h.id}
@@ -860,43 +875,56 @@ const ECGHolter = () => {
         }
       `}</style>
 
-      <button
-        onClick={() => setIsContactModalOpen(true)}
+      <div
         style={{
           position: "absolute",
           bottom: "20px",
           left: "20px",
           zIndex: 16,
-          padding: "10px 16px",
-          backgroundColor: "#F37F63",
-          color: "#000",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-          fontSize: "14px",
-          fontWeight: "600",
-          boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.filter = "brightness(1.1)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.filter = "brightness(1)";
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "10px",
+          flexWrap: "wrap",
         }}
       >
-        Contact Us
-      </button>
-      <ProductContactUsModal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
-        productCategory="Cardiology"
-        productName="ECG Holter Solution"
-      />
+        <button
+          onClick={() => setIsContactModalOpen(true)}
+          style={{
+            padding: "10px 16px",
+            backgroundColor: "#F37F63",
+            color: "#000",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontSize: "14px",
+            fontWeight: "600",
+            boxShadow: "0 6px 16px rgba(0,0,0,0.25)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.filter = "brightness(1.1)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.filter = "brightness(1)";
+          }}
+        >
+          Contact Us
+        </button>
+        <ProductContactUsModal
+          isOpen={isContactModalOpen}
+          onClose={() => setIsContactModalOpen(false)}
+          productCategory="Cardiology"
+          productName="ECG Holter Solution"
+        />
 
-      <DisclaimerButton
-        left="150px"
-        disclaimerText="The official name of the product is Cardiosoft, authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with relevant clinical workflows and equipment operation. For safe and effective operation, users must verify system calibration, ensure correct supply and connectivity, and confirm settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on patients with contraindications to its intended clinical use. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request."
-      />
+        <WhyButton details={cardioSoftWhyDetails} label="Why CardioSoft?" inline />
+
+        <DisclaimerButton
+          inline
+          disclaimerText="The official name of the product is Cardiosoft, authorized by Wipro GE HealthCare Pvt. Ltd., located at No 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with relevant clinical workflows and equipment operation. For safe and effective operation, users must verify system calibration, ensure correct supply and connectivity, and confirm settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on patients with contraindications to its intended clinical use. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22nd December 2025, and additional product and safety information is available upon request."
+          vivaId="JB03227IN"
+        />
+      </div>
 
       <div
         style={{
