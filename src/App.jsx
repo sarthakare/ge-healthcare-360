@@ -11,6 +11,8 @@ import LubbyWarmer from './pages/LubbyWarmer';
 import CS750 from './pages/CS750';
 import GiraffeOmnibedCarestation from './pages/GiraffeOmnibedCarestation';
 import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import AdminUsers from './pages/AdminUsers';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
@@ -19,6 +21,8 @@ import './App.css';
 const PAGE_TITLES = {
   '/': 'Home',
   '/login': 'Sign in',
+  '/forgot-password': 'Forgot password',
+  '/reset-password': 'Reset password',
   '/admin/users': 'Manage users',
   '/9100c-nxt': '9100C NXT',
   '/ecg-holter': 'ECG Holter',
@@ -48,6 +52,8 @@ function App() {
       <PageTitleUpdater />
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route element={<ProtectedRoute><Outlet /></ProtectedRoute>}>
           <Route path="/" element={<Home />} />
           <Route
