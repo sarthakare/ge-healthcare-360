@@ -31,6 +31,7 @@ function ProductContactUsModal({
   const [form, setForm] = useState(INITIAL_FORM);
   const [error, setError] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentUserRole, setCurrentUserRole] = useState("");
 
   const normalizedProductCategory = useMemo(
@@ -44,63 +45,17 @@ function ProductContactUsModal({
 
   useEffect(() => {
     if (!isOpen) return;
-
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
-    let cancelled = false;
-
-    const fetchCurrentUserDetails = async () => {
-      try {
-        const res = await fetch(`${API_BASE}/api/me/details`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (!res.ok) return;
-        const data = await res.json().catch(() => ({}));
-        const user = data?.user;
-        if (!user || cancelled) return;
-
-        setCurrentUserRole(user.role || "");
-
-        if (user.role === "customer") {
-          setForm((prev) => ({
-            ...prev,
-            fullName: user.name || prev.fullName || "",
-            organizationName:
-              user.hospitalOrOrganizationName || prev.organizationName || "",
-            email: user.email || prev.email || "",
-            contactNumber: user.contactNumber || prev.contactNumber || "",
-            designation: user.designation || prev.designation || "",
-            cityOrLocation: user.cityOrLocation || prev.cityOrLocation || "",
-            representativeName: "",
-            regionOrTeam: "",
-          }));
-          return;
-        }
-
-        if (user.role === "sales_representative_application_specialist") {
-          setForm((prev) => ({
-            ...prev,
-            fullName: "",
-            organizationName: "",
-            email: "",
-            contactNumber: "",
-            designation: "",
-            cityOrLocation: "",
-            representativeName: user.name || prev.representativeName || "",
-            regionOrTeam: user.regionOrTeam || prev.regionOrTeam || "",
-            demoGivenBy: "sales_representative",
-          }));
-        }
-      } catch {
-        // Keep popup usable even if profile prefill fails.
-      }
-    };
-
-    fetchCurrentUserDetails();
-    return () => {
-      cancelled = true;
-    };
+    setForm(INITIAL_FORM);
+    setError("");
+    setSubmitted(false);
+    setIsSubmitting(false);
+    try {
+      const raw = localStorage.getItem("user");
+      const u = raw ? JSON.parse(raw) : null;
+      setCurrentUserRole(typeof u?.role === "string" ? u.role : "");
+    } catch {
+      setCurrentUserRole("");
+    }
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -109,10 +64,15 @@ function ProductContactUsModal({
     setForm(INITIAL_FORM);
     setError("");
     setSubmitted(false);
+    setIsSubmitting(false);
     onClose();
   };
 
-  const handleSubmit = (e) => {
+  const isCustomerUser = currentUserRole === "customer";
+  const isSalesOrAppSpecialist =
+    currentUserRole === "sales_representative_application_specialist";
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     if (
@@ -125,7 +85,38 @@ function ProductContactUsModal({
       setError("Please fill all required fields.");
       return;
     }
-    setSubmitted(true);
+    setIsSubmitting(true);
+    try {
+      const res = await fetch(`${API_BASE}/api/product-contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: form.fullName.trim(),
+          organizationName: form.organizationName.trim(),
+          email: form.email.trim(),
+          contactNumber: form.contactNumber.trim(),
+          designation: form.designation.trim(),
+          cityOrLocation: form.cityOrLocation.trim(),
+          productCategory: normalizedProductCategory,
+          productName: normalizedProductName,
+          intent: form.intent,
+          demoGivenBy: form.demoGivenBy,
+          representativeName: form.representativeName.trim(),
+          regionOrTeam: form.regionOrTeam.trim(),
+          showDemoDetails: !isCustomerUser,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setError(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError("Unable to connect. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const sectionTitleStyle = {
@@ -134,10 +125,6 @@ function ProductContactUsModal({
     fontSize: "16px",
     fontWeight: "700",
   };
-
-  const isCustomerUser = currentUserRole === "customer";
-  const isSalesOrAppSpecialist =
-    currentUserRole === "sales_representative_application_specialist";
 
   const sectionStyle = {
     padding: "0",
@@ -235,9 +222,10 @@ function ProductContactUsModal({
                 textAlign: "center",
               }}
             >
-              <h2 style={{ margin: "0 0 10px", color: "#111827" }}>Thank You</h2>
-              <p style={{ margin: "0 0 20px", color: "#475569" }}>
-                Our team will connect with you shortly.
+              <h2 style={{ margin: "0 0 10px", color: "#111827" }}>Thank you</h2>
+              <p style={{ margin: "0 0 12px", color: "#475569", lineHeight: 1.5 }}>
+                We’ve emailed you a copy of your submission. Our team will review your request and get
+                in touch shortly.
               </p>
               <button
                 type="button"
@@ -407,18 +395,19 @@ function ProductContactUsModal({
               <div style={{ textAlign: "center", padding: "6px 2px 2px" }}>
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   style={{
                     border: "none",
-                    backgroundColor: "#6022A6",
+                    backgroundColor: isSubmitting ? "#9ca3af" : "#6022A6",
                     color: "#fff",
                     borderRadius: "8px",
                     padding: "12px 22px",
-                    cursor: "pointer",
+                    cursor: isSubmitting ? "not-allowed" : "pointer",
                     fontSize: "15px",
                     fontWeight: "700",
                   }}
                 >
-                  Submit & Connect
+                  {isSubmitting ? "Sending…" : "Submit & Connect"}
                 </button>
                 <p style={{ margin: "10px 0 0", fontSize: "13px", color: "#64748b" }}>
                   Our team will get in touch with you shortly.

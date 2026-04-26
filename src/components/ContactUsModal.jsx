@@ -1,6 +1,16 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
+const DEFAULT_FORM_DATA = {
+  name: "",
+  surname: "",
+  email: "",
+  phoneNumber: "",
+  country: "India",
+  zipCode: "",
+  keepUpdated: false,
+};
+
 const ContactUsModal = ({ isOpen, onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(
@@ -11,31 +21,20 @@ const ContactUsModal = ({ isOpen, onClose }) => {
   const [message, setMessage] = useState("");
   const [isCountryOpen, setIsCountryOpen] = useState(false);
   const countryDropdownRef = useRef(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
-    email: "",
-    phoneNumber: "",
-    country: "India",
-    zipCode: "",
-    keepUpdated: false,
-  });
+  const [formData, setFormData] = useState(() => ({ ...DEFAULT_FORM_DATA }));
+  const [submitError, setSubmitError] = useState("");
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleClose = useCallback(() => {
     setIsVisible(false);
     setTimeout(() => {
       onClose();
       setShowPhoneNumbers(false);
-      // Reset form data
-      setFormData({
-        name: "",
-        surname: "",
-        email: "",
-        phoneNumber: "",
-        country: "India",
-        zipCode: "",
-        keepUpdated: false,
-      });
+      setFormData({ ...DEFAULT_FORM_DATA });
+      setSubmitError("");
+      setSubmitSuccess(false);
+      setIsSubmitting(false);
     }, 200);
   }, [onClose]);
 
@@ -47,12 +46,40 @@ const ContactUsModal = ({ isOpen, onClose }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", { ...formData, message, selectedOption });
-    // You can add API call here
-    // handleClose(); // Close modal after submission if needed
+    setSubmitError("");
+    setSubmitSuccess(false);
+    setIsSubmitting(true);
+    const baseUrl = import.meta.env.VITE_API_URL || "";
+    try {
+      const res = await fetch(`${baseUrl}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          topic: selectedOption,
+          name: formData.name,
+          surname: formData.surname,
+          email: formData.email,
+          phoneNumber: formData.phoneNumber,
+          country: formData.country,
+          zipCode: formData.zipCode,
+          keepUpdated: formData.keepUpdated,
+          message,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setSubmitError(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+      setSubmitSuccess(true);
+      setTimeout(() => handleClose(), 2800);
+    } catch {
+      setSubmitError("Unable to connect. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -66,13 +93,16 @@ const ContactUsModal = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (isOpen) {
       setIsVisible(true);
-      setMessage(`I'd like a ${selectedOption} on null`);
+      setFormData({ ...DEFAULT_FORM_DATA });
+      setSubmitError("");
+      setSubmitSuccess(false);
     }
-  }, [isOpen, selectedOption]);
+  }, [isOpen]);
 
   useEffect(() => {
+    if (!isOpen) return;
     setMessage(`I'd like a ${selectedOption} on null`);
-  }, [selectedOption]);
+  }, [isOpen, selectedOption]);
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -822,32 +852,74 @@ const ContactUsModal = ({ isOpen, onClose }) => {
             </label>
           </div>
 
+          {submitSuccess && (
+            <div
+              role="status"
+              style={{
+                marginBottom: "20px",
+                padding: "14px 16px",
+                backgroundColor: "#ecfdf5",
+                border: "1px solid #6ee7b7",
+                borderRadius: "6px",
+                fontSize: "15px",
+                color: "#065f46",
+                fontFamily: "'Source Sans Pro', sans-serif",
+                lineHeight: 1.5,
+              }}
+            >
+              Thank you. We’ve emailed you a copy of your request and notified our team. This window will
+              close shortly.
+            </div>
+          )}
+
+          {submitError && (
+            <div
+              role="alert"
+              style={{
+                marginBottom: "20px",
+                padding: "14px 16px",
+                backgroundColor: "#fef2f2",
+                border: "1px solid #fecaca",
+                borderRadius: "6px",
+                fontSize: "15px",
+                color: "#991b1b",
+                fontFamily: "'Source Sans Pro', sans-serif",
+                lineHeight: 1.5,
+              }}
+            >
+              {submitError}
+            </div>
+          )}
+
           {/* Submit Button */}
           <button
             type="submit"
+            disabled={isSubmitting || submitSuccess}
             style={{
               width: "100%",
               padding: "14px 24px",
-              backgroundColor: "#6022A6",
+              backgroundColor: isSubmitting || submitSuccess ? "#9ca3af" : "#6022A6",
               color: "#fff",
               border: "none",
               borderRadius: "4px",
               fontSize: "16px",
               fontWeight: "600",
-              cursor: "pointer",
+              cursor: isSubmitting || submitSuccess ? "not-allowed" : "pointer",
               fontFamily: "'Source Sans Pro', sans-serif",
               transition: "background-color 0.2s, transform 0.2s",
             }}
             onMouseEnter={(e) => {
+              if (isSubmitting || submitSuccess) return;
               e.currentTarget.style.backgroundColor = "#4a1a85";
               e.currentTarget.style.transform = "translateY(-1px)";
             }}
             onMouseLeave={(e) => {
+              if (isSubmitting || submitSuccess) return;
               e.currentTarget.style.backgroundColor = "#6022A6";
               e.currentTarget.style.transform = "translateY(0)";
             }}
           >
-            Submit
+            {isSubmitting ? "Sending…" : submitSuccess ? "Sent" : "Submit"}
           </button>
         </form>
       </div>
