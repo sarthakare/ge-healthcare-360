@@ -810,11 +810,7 @@ const Home = () => {
               className="main-heading"
               style={{
                 fontSize: isMobile ? "32px" : "52px",
-                // background: "linear-gradient(135deg, #1e293b 0%, #334155 50%, #6022A6 100%)",
-                // WebkitBackgroundClip: "text",
-                // WebkitTextFillColor: "transparent",
-                // backgroundClip: "text",
-                color:"#fff",
+                color: "#fff",
                 marginBottom: "28px",
                 fontWeight: "600",
                 fontStyle: "normal",
@@ -822,35 +818,38 @@ const Home = () => {
                 letterSpacing: "-1.5px",
                 lineHeight: "1.15",
                 padding: isMobile ? "0 8px" : "0",
-                maxWidth: "700px", 
+                maxWidth: "700px",
               }}
             >
-              Step into GE HealthCare's Experience 360°, 3D digital demo
+              Experience 360°
+              <span
+                style={{
+                  display: "block",
+                  marginTop: "0.2em",
+                  fontSize: isMobile ? "0.78em" : "0.75em",
+                  fontWeight: "600",
+                  letterSpacing: "-0.5px",
+                  lineHeight: "1.2",
+                }}
+              >
+                3D product views. Smarter decisions.
+              </span>
             </h1>
-            
+
             <p
               style={{
                 fontSize: isMobile ? "17px" : "20px",
                 color: "#fff",
                 lineHeight: "1.75",
-                margin: 0, 
+                margin: 0,
                 fontWeight: "400",
-                maxWidth: "700px", 
+                maxWidth: "700px",
               }}
             >
-              {/* <span
-                style={{
-                  fontSize: isMobile ? "24px" : "28px",
-                  color: "#6022A6",
-                  fontWeight: "600",
-                  marginRight: "8px",
-                  lineHeight: "1",
-                  verticalAlign: "middle",
-                }}
-              >
-                —
-              </span> */}
-              A digital space where you can explore our clinical technologies as if they were right in front of you. Navigate through <strong style={{ color: "#fff", fontWeight: "600" }}>Diagnostic Cardiology</strong>, <strong style={{ color: "#fff", fontWeight: "600" }}>Maternal & Infant Care</strong>, <strong style={{ color: "#fff", fontWeight: "600" }}>Anesthesia</strong> and <strong style={{ color: "#fff", fontWeight: "600" }}>Patient Monitoring</strong>, and dive into detailed 3D models, feature callouts, and guided walkthroughs. Each product has been brought to life to help clinicians, biomedical teams and decision-makers understand its capabilities, workflow advantages and real-world clinical impact.
+              An interactive digital platform designed to help you explore GE
+              HealthCare products in 3D — making it easier to understand features,
+              evaluate options, and support faster purchase decisions without
+              relying on physical demos.
             </p>
           </div>
 
