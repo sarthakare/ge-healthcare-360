@@ -1066,7 +1066,7 @@ const Model9100NXT = () => {
         <DisclaimerButton
           inline
           disclaimerText="The official name of the product is 9100c NXT, authorized by Wipro GE HealthCare Pvt. Ltd., located at No. 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with anesthesia workflows and ventilatory management. For safe and effective operation, users must verify system calibration, ensure correct gas supply connections, and confirm ventilator and agent settings appropriate to the patient’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout the procedure. This system must not be used in environments containing explosive gases or on patients with contraindications to general anesthesia. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was created and reviewed on 22 December 2025, and additional product and safety information is available upon request."
-          vivaId="JB03228IN"
+          veevaId="JB03228IN"
         />
       </div>
 

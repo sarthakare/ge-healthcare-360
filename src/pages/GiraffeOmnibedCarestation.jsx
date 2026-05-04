@@ -1077,7 +1077,7 @@ const GiraffeOmnibedCarestation = () => {
         <DisclaimerButton
           inline
           disclaimerText="The official name of the product is Giraffe™ Omnibed Carestation, authorized by Wipro GE HealthCare Pvt. Ltd., located at No. 4, Kadugodi Industrial Area, Whitefield, Bangalore, Karnataka – 560067. The system is intended for use by trained healthcare professionals familiar with neonatal care workflows and thermoregulation management. For safe and effective operation, users must verify system calibration, ensure proper probe placement and temperature settings, and confirm alarm and monitoring parameters appropriate to the infant’s clinical condition. Continuous monitoring of patient vitals and system performance is essential throughout use. This system must not be used in environments containing explosive gases or on infants with contraindications to thermal support. Operators must follow all institutional protocols, manufacturer instructions, and established clinical guidelines. This material was reviewed on 22 December 2025, and additional information is available upon request."
-          vivaId="JB03230IN"
+          veevaId="JB03230IN"
         />
       </div>
 

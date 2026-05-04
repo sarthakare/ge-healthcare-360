@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 
 const DisclaimerButton = ({
   disclaimerText = "",
-  vivaId = "",
+  veevaId = "",
   inline = false,
 }) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -118,7 +118,7 @@ const DisclaimerButton = ({
                 color: "rgba(255, 255, 255, 0.9)",
               }}
             >
-              Viva ID: {vivaId}
+              VEEVA ID: {veevaId}
             </p>
           </div>
         )}
