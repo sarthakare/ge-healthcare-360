@@ -1087,7 +1087,7 @@ const MonitorB1xM = () => {
 
         <WhyButton
           details={b1x5mWhyDetails}
-          label="Why B1 x5M Patient Monitors?"
+          label="Why B1x5M Patient Monitors?"
           inline
         />
 
