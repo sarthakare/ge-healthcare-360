@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import AuthPageLayout from "../components/AuthPageLayout";
 import { useAuthPageContact } from "../context/AuthPageContactContext";
+import { clearAuthSession, isTokenExpired } from "../utils/auth";
 import "../App.css";
 
 function LoginForm() {
@@ -16,7 +17,15 @@ function LoginForm() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    if (isTokenExpired(token)) {
+      clearAuthSession();
+      return;
+    }
+
+    if (token) {
       navigate(location.state?.from?.pathname || "/", { replace: true });
     }
   }, [navigate, location.state?.from?.pathname]);

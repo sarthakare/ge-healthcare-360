@@ -16,6 +16,7 @@ import ResetPassword from './pages/ResetPassword';
 import AdminUsers from './pages/AdminUsers';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
+import { clearAuthSession, getTokenRemainingMs, isTokenExpired } from './utils/auth';
 import './App.css';
 
 const PAGE_TITLES = {
@@ -46,10 +47,40 @@ function PageTitleUpdater() {
   return null;
 }
 
+function SessionExpiryWatcher() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    if (isTokenExpired(token)) {
+      clearAuthSession();
+      return;
+    }
+
+    const remainingMs = getTokenRemainingMs(token);
+    if (remainingMs === null) {
+      clearAuthSession();
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      clearAuthSession();
+      window.location.replace('/login');
+    }, remainingMs);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [location.pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <BrowserRouter>
       <PageTitleUpdater />
+      <SessionExpiryWatcher />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
